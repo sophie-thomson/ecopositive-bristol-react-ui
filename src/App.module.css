@@ -5,6 +5,10 @@
     min-height: 100vh;
 }
 
+.Main {
+    padding-top: 15px;
+}
+
 .bg {
     background-image: url(./assets/bgimage.png);
     width: 100%;
@@ -26,7 +30,7 @@ a:hover {
 }
   
 a:hover i {
-    color: #50ad82;
+    color: #f7c743;
     transition: color ease-in-out 0.3s;
 }
 
@@ -35,4 +39,10 @@ i {
     /* font-size: 1.2rem; */
     padding: 7px;
     vertical-align: middle;
+}
+
+i:hover {
+    cursor: pointer;
+    transition: color ease-in-out 0.3s;
+    color: #f7c743;
 }
