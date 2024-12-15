@@ -23,7 +23,7 @@ const AddCompany = () => {
     );
 
     return (
-        <Navbar className={styles.AddCompanyBar} expand="md" sticky="top">
+        <Navbar className={styles.AddCompanyBar} expand="md" >
             <Container>
             <Navbar.Text className={styles.AddCompanyText}>
             Are you an ecoPositive company or business owner?
