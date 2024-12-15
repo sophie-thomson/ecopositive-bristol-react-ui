@@ -9,6 +9,7 @@ import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
 import CompanyCreateForm from './pages/companies/CompanyCreateForm';
 import CompanyPage from './pages/companies/CompanyPage';
+import CompanyEditForm from './pages/companies/CompanyEditForm';
 
 
 function App() {
@@ -28,6 +29,11 @@ function App() {
                                     exact
                                     path="/companies/create"
                                     render={() => <CompanyCreateForm />} 
+                                />
+                                <Route
+                                    exact
+                                    path="/companies/:id/edit"
+                                    render={() => <CompanyEditForm />} 
                                 />
                                 <Route
                                     exact
