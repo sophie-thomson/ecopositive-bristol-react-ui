@@ -25,7 +25,7 @@ const AddCompany = () => {
     return (
         <Navbar className={styles.AddCompanyBar} expand="md" >
             <Container>
-            <Navbar.Text className={styles.AddCompanyText}>
+            <Navbar.Text className="text-light d-none d-md-inline">
             Are you an ecoPositive company or business owner?
             </Navbar.Text>
             <>{currentUser && addCompanyIcon}</>
@@ -34,4 +34,4 @@ const AddCompany = () => {
     );
 };
 
-export default AddCompany
+export default AddCompany;

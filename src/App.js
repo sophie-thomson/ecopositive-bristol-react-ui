@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import AddCompany from './components/AddCompany';
 import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
+import CompanyCreateForm from './pages/companies/CompanyCreateForm';
 
 
 function App() {
@@ -19,9 +20,14 @@ function App() {
                         <AddCompany />
                         <Container className={styles.Main}>
                             <Switch>
+                                <Route exact path="/" render={() => <h1>Directory</h1>} />
                                 <Route exact path="/signin" render={() => <SignInForm />} />
                                 <Route exact path="/signup" render={() => <SignUpForm />} />
-                                <Route exact path="/" render={() => <h1>Directory</h1>} />
+                                <Route
+                                    exact
+                                    path="/companies/create"
+                                    render={() => <CompanyCreateForm />} 
+                                />
                                 <Route render={() => <p>Page not Found!</p>} />
                             </Switch>
                         </Container>

@@ -42,16 +42,16 @@
   .GreenOutline,
   .Green:hover {
     /* border: 1px solid #2142b2; */
-    background-color: #b7ecd2;
-    color: #1d1c1a;
+    background-color: #286d1f;
+    color: #ffffff;
   }
   
   .Green,
   .GreenOutline:hover {
     /* background-color: #242a3d;
     color: white; */
-    background-color: #286d1f;
-    color: #ffffff;
+    background-color: #b7ecd2;
+    color: #1d1c1a;
   }
   
   .Black:hover,

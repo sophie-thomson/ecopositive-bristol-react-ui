@@ -1,0 +1,28 @@
+.Row {
+    height: calc(100vh - 81px);
+}
+
+.Container {
+    min-height: 343px;
+  }
+
+.Input {
+    background: #d8eee4;
+    border: 1px solid #f0f9f7;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: #195829;
+    text-align: center;
+    padding: 10px;
+}
+
+.Header {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #195829;
+}
