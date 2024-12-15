@@ -8,6 +8,7 @@ import AddCompany from './components/AddCompany';
 import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
 import CompanyCreateForm from './pages/companies/CompanyCreateForm';
+import CompanyPage from './pages/companies/CompanyPage';
 
 
 function App() {
@@ -27,6 +28,11 @@ function App() {
                                     exact
                                     path="/companies/create"
                                     render={() => <CompanyCreateForm />} 
+                                />
+                                <Route
+                                    exact
+                                    path="/companies/:id"
+                                    render={() => <CompanyPage />}
                                 />
                                 <Route render={() => <p>Page not Found!</p>} />
                             </Switch>
