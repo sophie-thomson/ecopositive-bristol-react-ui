@@ -4,6 +4,7 @@ import './api/axiosDefaults'
 
 import styles from './App.module.css';
 import NavBar from './components/NavBar';
+import AddCompany from './components/AddCompany';
 import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
 
@@ -15,6 +16,7 @@ function App() {
                 <div className={styles.App}>
                     <div className={`fluid ${styles.bg}`}>
                         <NavBar />
+                        <AddCompany />
                         <Container className={styles.Main}>
                             <Switch>
                                 <Route exact path="/signin" render={() => <SignInForm />} />

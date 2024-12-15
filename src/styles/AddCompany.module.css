@@ -1,0 +1,25 @@
+.AddCompanyBar {
+    background-color:#595a5a;
+    border-bottom: 1px solid #afafaf;
+    
+}
+
+.NavBar.Text {
+    color: #fafafa;
+}
+
+.NavLink {
+    padding: 2px;
+    color: #fafafa;
+    font-size: 0.9em;
+}
+
+a:hover,
+a:hover i {
+    color: #fde661;
+    transition: color ease-in-out 0.3s;
+}
+
+.Active i {
+    color: #fde661;
+}

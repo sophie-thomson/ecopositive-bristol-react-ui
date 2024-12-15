@@ -12,6 +12,8 @@ import { useCurrentUser } from '../contexts/CurrentUserContext';
 const NavBar = () => {
     const currentUser = useCurrentUser;
 
+    
+
     const loggedInIcons = <>{currentUser?.username}</>
 
     const loggedOutIcons = (
@@ -61,7 +63,10 @@ const NavBar = () => {
                     </Nav>
                     
                 </Navbar.Collapse>
+                
+                
             </Container>
+            
         </Navbar>
     );
 };
