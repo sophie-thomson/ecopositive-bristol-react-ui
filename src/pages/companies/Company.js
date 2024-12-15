@@ -5,7 +5,7 @@ import { Card, Media } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
-// import { MoreDropdown } from "../../components/MoreDropdown";
+import { DotsDropdown } from "../../components/DotsDropdown";
 import CompanyPage from "./CompanyPage";
 
 const Company = (props) => {
@@ -36,16 +36,16 @@ const Company = (props) => {
   const history = useHistory();
 
   const handleEdit = () => {
-    history.push(`/companies/${id}/edit`);
+      history.push(`/companies/${id}/edit`);
   };
 
   const handleDelete = async () => {
-    try {
-      await axiosRes.delete(`/companies/${id}/`);
-      history.goBack();
-    } catch (err) {
-      console.log(err);
-    }
+      try {
+        await axiosRes.delete(`/companies/${id}/`);
+        history.goBack();
+      } catch (err) {
+        console.log(err);
+      }
   };
 
 //   const handleLike = async () => {
@@ -90,12 +90,12 @@ const Company = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_on}</span>
-            {/* {is_owner && CompanyPage && (
-              <MoreDropdown
+            {is_owner && CompanyPage && (
+              <DotsDropdown
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}
               />
-            )} */}
+            )}
           </div>
         </Media>
       </Card.Body>
