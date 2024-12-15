@@ -28,6 +28,7 @@ function CompanyCreateForm() {
     const [companyData, setCompanyData] = useState({
         name: "",
         logo: "",
+        website_url: "",
         excerpt: "",
         description: "",
         // credentials: 0,
@@ -40,6 +41,7 @@ function CompanyCreateForm() {
     const {
         name,
         logo,
+        website_url,
         excerpt,
         description,
         // credentials,
@@ -51,7 +53,7 @@ function CompanyCreateForm() {
 
     const imageInput = useRef(null);
 
-    const history = useHistory
+    const history = useHistory();
 
     const handleChange = (event) => {
         setCompanyData({
@@ -77,6 +79,7 @@ function CompanyCreateForm() {
     
         formData.append("name", name);
         formData.append("logo", imageInput.current.files[0]);
+        formData.append("website_url", website_url);
         formData.append("excerpt", excerpt);
         formData.append("description", description);
         // formData.append("credentials", credentials);
@@ -86,13 +89,15 @@ function CompanyCreateForm() {
         formData.append("role", role);
     
         try {
-          const { data } = await axiosReq.post("/companies/", formData);
-          history.push(`/companies/${data.id}`);
+            const { data } = await axiosReq.post("/companies/", formData);
+            history.push(`/companies/${data.id}`);
+            console.log(data);
         } catch (err) {
-          console.log(err);
-          if (err.response?.status !== 401) {
-            setErrors(err.response?.data);
-          }
+            console.log(err);
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data);
+            }
+            
         }
       };
 
@@ -108,6 +113,21 @@ function CompanyCreateForm() {
                 />
             </Form.Group>
             {errors?.name?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                {message}
+                </Alert>
+            ))}
+
+            <Form.Group>
+                <Form.Label>Company Website</Form.Label>
+                <Form.Control
+                type="URL"
+                name="website_url"
+                value={website_url}
+                onChange={handleChange}
+                />
+            </Form.Group>
+            {errors?.website_url?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                 {message}
                 </Alert>
@@ -223,7 +243,7 @@ function CompanyCreateForm() {
             
             <Button
                 className={`${btnStyles.Button} ${btnStyles.Bright}`}
-                onClick={() => { }}
+                onClick={() => history.goBack()}
             >
                 cancel
             </Button>
