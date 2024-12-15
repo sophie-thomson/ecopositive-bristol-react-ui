@@ -8,7 +8,7 @@ import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import orchard from '../../assets/orchard.png'
 
-import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
+import { Form, Button, Col, Row, Container, Alert } from "react-bootstrap";
 import axios from "axios";
 
 const SignUpForm = () => {
@@ -53,7 +53,7 @@ const SignUpForm = () => {
                         <Form.Control
                             className={styles.Input}
                             type="text"
-                            placeholder="Create Username"
+                            placeholder="Create username"
                             name="username"
                             value={username}
                             onChange={handleChange}
@@ -120,13 +120,7 @@ const SignUpForm = () => {
             md={6}
             className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
         >
-        <img className='mr-3' src={orchard} alt='apple orchard' height='300' />
-        {/* <Image
-          className={`${appStyles.FillerImage}`}
-          src={
-            "https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero2.jpg"
-          }
-        /> */}
+        <img className='mr-3 mt-2' src={orchard} alt='apple orchard' height='280' />
         </Col>
     </Row>
     );
