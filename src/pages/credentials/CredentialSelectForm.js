@@ -5,8 +5,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { axiosReq, axiosRes } from "../../api/axiosDefaults";
+import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -18,10 +17,6 @@ import axios from "axios";
 
 
 function CredentialSelectForm({ company, currentCredentials, setCredentials }) {
-    // const {
-    //     company,
-    //     setCredentialsData,
-    // } = props;
     
     useRedirect("loggedOut");
 
@@ -30,8 +25,6 @@ function CredentialSelectForm({ company, currentCredentials, setCredentials }) {
     const [credentialsOptions, setCredentialsOptions] = useState({ results: [] });
     // sets the state of selected credentials data
     const [credentialsData, setCredentialsData] = useState("");
-
-    const history = useHistory();
 
     useEffect(() => {
         const fetchCredentials = async () => {
@@ -87,16 +80,7 @@ function CredentialSelectForm({ company, currentCredentials, setCredentials }) {
                     >
                         <Form.Group>
                             <Form.Label>Eco-Credentials</Form.Label>
-                            {/* <>
-                                {credentials.results.length 
-                                    ? credentials.results.map((credential) => (
-                                        <credential key={credential.id} {...credential}>
-                                            {credential.name}
-                                        </credential>
-                                        ))
-                                    : console.log("show no results")}
-                            </> */}
-                            <p>{credentialsData}</p>
+                            {/* <p>{credentialsData}</p> */}
                             <Form.Control
                                 as="select"
                                 multiple
