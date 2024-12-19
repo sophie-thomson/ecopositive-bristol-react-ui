@@ -14,17 +14,24 @@ import Alert from "react-bootstrap/Alert";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { useEffect } from "react";
-import Company from "../companies/Company";
+import axios from "axios";
 
 
-function CredentialSelectForm() {
+function CredentialSelectForm({ company }) {
+    // const {
+    //     company,
+    //     setCredentialsData,
+    // } = props;
+    
     useRedirect("loggedOut");
 
     const [errors, setErrors] = useState({});
     // sets the state of items to fetch from credentials api
     const [credentialsOptions, setCredentialsOptions] = useState({ results: [] });
     // sets the state of selected credentials data
-    const [credentialsData, setCredentialsData] = useState([]);
+    const [credentialsData, setCredentialsData] = useState("");
+
+    const history = useHistory();
 
     useEffect(() => {
         const fetchCredentials = async () => {
@@ -48,21 +55,22 @@ function CredentialSelectForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const formData = new FormData();
-        // const { data } = await axiosRes.post("/credentials/");
-
-        // CHECK THIS IF ERROR - might need to have [] instead?
-        formData.append("credentials", credentialsData);
-
         try {
-            const { data } = await axiosReq.post("/companies/", formData);
-            // history.push(`/companies/${data.id}`);
-            console.log(data);
+            const response = await axios.patch(`/companies/${company}/`, {
+                credentials: [credentialsData],
+            });
+            setCredentialsData((prevCredentialsData) => [
+                ...prevCredentialsData,
+                response.data.credentials[0]
+            ]);
+            setCredentialsData(null);
+
         } catch (err) {
             console.log(err);
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
-            }           
+            }    
+            
         }
     };
 

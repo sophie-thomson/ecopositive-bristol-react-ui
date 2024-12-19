@@ -11,6 +11,9 @@ import appStyles from "../../App.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosReq } from "../../api/axiosDefaults";
 import Company from "./Company";
+import CredentialSelectForm from "../credentials/CredentialSelectForm";
+import Credentials from "../credentials/Credentials";
+
 
 function CompanyPage() {
     const { id } = useParams();
@@ -39,6 +42,11 @@ function CompanyPage() {
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <p>Popular profiles for mobile</p>
         <Company {...company.results[0]} setCompany={setCompany} companyPage />
+        <CredentialSelectForm
+              company={id}
+              setCompany={setCompany}
+              // setCredentialsData={setCredentialsData}
+            />
         <Container className={appStyles.Content}>
           Comments
         </Container>
