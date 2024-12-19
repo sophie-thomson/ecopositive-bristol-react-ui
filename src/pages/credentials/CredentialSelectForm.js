@@ -13,41 +13,50 @@ import Row from "react-bootstrap/Row";
 import Alert from "react-bootstrap/Alert";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
+import { useEffect } from "react";
+import Company from "../companies/Company";
 
 
 function CredentialSelectForm() {
     useRedirect("loggedOut");
-    
+
     const [errors, setErrors] = useState({});
+    // sets the state of items to fetch from credentials api
+    const [credentialsOptions, setCredentialsOptions] = useState({ results: [] });
+    // sets the state of selected credentials data
+    const [credentialsData, setCredentialsData] = useState([]);
 
-    const [credentialsData, setCredentialsData] = useState({
-            credentials: [],
-    });
-
-    const {
-        credentials,
-    } = credentialsData;
-
-    const history = useHistory();
+    useEffect(() => {
+        const fetchCredentials = async () => {
+            try {
+                const { data } = await axiosReq.get(`/credentials/`);
+                setCredentialsOptions(data);
+                console.log(data)
+            } catch (err) {
+                console.log(err);
+            }
+            
+        };
+        fetchCredentials();
+    }, []);
 
     const handleChange = (event) => {
-        setCredentialsData({
-            ...credentialsData,
-            [event.target.name]: event.target.value,
-        });
+        console.log(event.target.value)
+        setCredentialsData(event.target.value);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const formData = new FormData();
+        // const { data } = await axiosRes.post("/credentials/");
 
         // CHECK THIS IF ERROR - might need to have [] instead?
-        formData.append("credentials", credentials);
+        formData.append("credentials", credentialsData);
 
         try {
             const { data } = await axiosReq.post("/companies/", formData);
-            history.push(`/companies/${data.id}`);
+            // history.push(`/companies/${data.id}`);
             console.log(data);
         } catch (err) {
             console.log(err);
@@ -56,32 +65,6 @@ function CredentialSelectForm() {
             }           
         }
     };
-
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-    //     try {
-    //       const { data } = await axiosRes.post("/credentials/", {
-    //         credentials,
-    //         company,
-    //       });
-    //       setComments((prevComments) => ({
-    //         ...prevComments,
-    //         results: [data, ...prevComments.results],
-    //       }));
-    //       setPost((prevPost) => ({
-    //         results: [
-    //           {
-    //             ...prevPost.results[0],
-    //             comments_count: prevPost.results[0].comments_count + 1,
-    //           },
-    //         ],
-    //       }));
-    //       setContent("");
-    //     } catch (err) {
-    //       console.log(err);
-    //     }
-    //   };
-
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -92,12 +75,33 @@ function CredentialSelectForm() {
                     >
                         <Form.Group>
                             <Form.Label>Eco-Credentials</Form.Label>
+                            {/* <>
+                                {credentials.results.length 
+                                    ? credentials.results.map((credential) => (
+                                        <credential key={credential.id} {...credential}>
+                                            {credential.name}
+                                        </credential>
+                                        ))
+                                    : console.log("show no results")}
+                            </> */}
+                            <p>{credentialsData}</p>
                             <Form.Control
                                 as="select"
+                                multiple
                                 name="credentials"
-                                value={credentials}
-                                onChange={handleChange}
-                            />
+                                aria-placeholder="Select credentials"
+                                value={credentialsOptions.results}
+                                onChange={handleChange}>
+                                    {credentialsOptions.results.map((credential, value) => (
+                                        <option
+                                            value={credential.id}
+                                            key={credential.id}
+                                            {...credential}
+                                        >
+                                            {credential.name}
+                                        </option>
+                                    ))}
+                            </Form.Control>
                         </Form.Group>
                         {errors?.credentials?.map((message, idx) => (
                             <Alert variant="warning" key={idx}>
@@ -106,12 +110,12 @@ function CredentialSelectForm() {
                         ))}
                         <Button
                             className={`${btnStyles.Button} ${btnStyles.Bright}`}
-                            onClick={() => history.goBack()}
+                            // onClick={() => history.goBack()}
                         >
                             cancel
                         </Button>
                         <Button className={`${btnStyles.Button} ${btnStyles.Green}`} type="submit">
-                            create
+                            Submit Credentials
                         </Button>
                     </Container>
                 </Col>

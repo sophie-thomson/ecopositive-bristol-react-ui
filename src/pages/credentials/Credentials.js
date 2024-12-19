@@ -16,33 +16,33 @@ const Credentials = (props) => {
  } = props;
 
     const currentUser = useCurrentUser();
-    const is_owner = currentUser?.username === owner;
+    // const is_owner = currentUser?.username === owner;
     const history = useHistory();
  
-    const handleEdit = () => {
-        history.push(`/companies/${id}/credentials/edit`);
-    };
+    // const handleEdit = () => {
+    //     history.push(`/companies/${id}/credentials/edit`);
+    // };
  
-    const handleDelete = async () => {
-        try {
-            await axiosRes.delete(`/companies/${id}/credentials`);
-            history.goBack();
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    // const handleDelete = async () => {
+    //     try {
+    //         await axiosRes.delete(`/companies/${id}/credentials`);
+    //         history.goBack();
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // };
 
     return (
         <Container>
             <Col>
             <div className="d-flex align-items-center">
             {/* <span>{updated_on}</span> */}
-            {is_owner && CompanyPage && (
+            {/* {is_owner && CompanyPage && (
               <DotsDropdown
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}
               />
-            )}
+            )} */}
           </div>
                 <Card className={styles.Company}>
                     <Card.Body>

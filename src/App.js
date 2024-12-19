@@ -10,6 +10,7 @@ import SignInForm from './pages/auth/SignInForm';
 import CompanyCreateForm from './pages/companies/CompanyCreateForm';
 import CompanyPage from './pages/companies/CompanyPage';
 import CompanyEditForm from './pages/companies/CompanyEditForm';
+import CredentialSelectForm from './pages/credentials/CredentialSelectForm';
 
 
 function App() {
@@ -39,6 +40,11 @@ function App() {
                                     exact
                                     path="/companies/:id"
                                     render={() => <CompanyPage />}
+                                />
+                                <Route
+                                    exact
+                                    path="/credentials/"
+                                    render={() => <CredentialSelectForm />}
                                 />
                                 <Route render={() => <p>Page not Found!</p>} />
                             </Switch>
