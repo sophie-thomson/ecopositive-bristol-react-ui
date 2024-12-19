@@ -13,11 +13,13 @@ import { axiosReq } from "../../api/axiosDefaults";
 import Company from "./Company";
 import CredentialSelectForm from "../credentials/CredentialSelectForm";
 import Credentials from "../credentials/Credentials";
+// import { data } from "msw/lib/types/context";
 
 
 function CompanyPage() {
     const { id } = useParams();
     const [company, setCompany] = useState({ results: [] });
+    const [currentCredentials, setCurrentCredentials] = useState ([]);
   
     const currentUser = useCurrentUser();
     const profile_image = currentUser?.profile_image;
@@ -29,6 +31,7 @@ function CompanyPage() {
                     axiosReq.get(`/companies/${id}`),
                 ]);
                 setCompany({ results: [company] });
+                setCurrentCredentials(company.credentials);
                 console.log(company)
             } catch (err) {
                 console.log(err);
@@ -44,8 +47,8 @@ function CompanyPage() {
         <Company {...company.results[0]} setCompany={setCompany} companyPage />
         <CredentialSelectForm
               company={id}
-              setCompany={setCompany}
-              // setCredentialsData={setCredentialsData}
+              currentCredentials={currentCredentials}
+              setCredentials={setCurrentCredentials}
             />
         <Container className={appStyles.Content}>
           Comments

@@ -17,7 +17,7 @@ import { useEffect } from "react";
 import axios from "axios";
 
 
-function CredentialSelectForm({ company }) {
+function CredentialSelectForm({ company, currentCredentials, setCredentials }) {
     // const {
     //     company,
     //     setCredentialsData,
@@ -48,7 +48,6 @@ function CredentialSelectForm({ company }) {
     }, []);
 
     const handleChange = (event) => {
-        console.log(event.target.value)
         setCredentialsData(event.target.value);
     };
 
@@ -56,8 +55,13 @@ function CredentialSelectForm({ company }) {
         event.preventDefault();
 
         try {
+            // creates array to get the current credentials and append new credentials
+            const selectedCredentials = [
+                ...currentCredentials,
+                credentialsData
+            ]
             const response = await axios.patch(`/companies/${company}/`, {
-                credentials: [credentialsData],
+                credentials: selectedCredentials,
             });
             setCredentialsData((prevCredentialsData) => [
                 ...prevCredentialsData,
