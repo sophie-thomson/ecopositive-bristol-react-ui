@@ -122,22 +122,6 @@ function CompanyCreateForm() {
             ))}
 
             <Form.Group>
-                <Form.Label className={`${styles.Field}`}>Contact Email</Form.Label>
-                <Form.Control
-                className={`${styles.Input}`}
-                type="email"
-                name="contact_email"
-                value={contact_email}
-                onChange={handleChange}
-                />
-            </Form.Group>
-            {errors?.contact_email?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                {message}
-                </Alert>
-            ))}
-
-            <Form.Group>
                 <Form.Label className={`${styles.Field}`}>Role in Company</Form.Label>
                 <Form.Control
                 className={`${styles.Input}`}
@@ -148,6 +132,26 @@ function CompanyCreateForm() {
                 />
             </Form.Group>
             {errors?.role?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                {message}
+                </Alert>
+            ))}
+
+            <Form.Group>
+                <Form.Label className={`${styles.Field}`}>Contact Email</Form.Label>
+                <Form.Control
+                className={`${styles.Input}`}
+                type="email"
+                name="contact_email"
+                value={contact_email}
+                onChange={handleChange}
+                placeholder="contact@companyname.com"
+                />
+                <Form.Text className="text-muted text-center">
+                    Company contact will be emailed for verification evidence
+                </Form.Text>
+            </Form.Group>
+            {errors?.contact_email?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                 {message}
                 </Alert>
