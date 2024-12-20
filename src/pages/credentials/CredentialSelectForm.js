@@ -16,7 +16,7 @@ import { useEffect } from "react";
 import axios from "axios";
 
 
-function CredentialSelectForm({ company, currentCredentials, setCredentials }) {
+function CredentialSelectForm({ company, currentCredentials }) {
     
     useRedirect("loggedOut");
 
@@ -34,8 +34,7 @@ function CredentialSelectForm({ company, currentCredentials, setCredentials }) {
                 console.log(data)
             } catch (err) {
                 console.log(err);
-            }
-            
+            }   
         };
         fetchCredentials();
     }, []);
