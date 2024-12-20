@@ -31,7 +31,6 @@ function CompanyEditForm() {
         website_url: "",
         excerpt: "",
         description: "",
-        // credentials: 0,
         key_words: "",
         contact_name: "",
         contact_email: "",
@@ -44,7 +43,6 @@ function CompanyEditForm() {
         website_url,
         excerpt,
         description,
-        // credentials,
         key_words,
         contact_name,
         contact_email,
@@ -82,7 +80,6 @@ function CompanyEditForm() {
         formData.append("website_url", website_url);
         formData.append("excerpt", excerpt);
         formData.append("description", description);
-        // formData.append("credentials", credentials);
         formData.append("key_words", key_words);
         formData.append("contact_name", contact_name);
         formData.append("contact_email", contact_email);
@@ -101,104 +98,17 @@ function CompanyEditForm() {
         }
       };
 
-    const textFields = (
+      const textFields = (
         <div className="text-center">
+            <p className={`${styles.Header}`}>
+                <i className="fa-regular fa-pen-to-square"></i>
+                Contact Details
+            </p>
+            <hr className={`${styles.Rule}`} />
             <Form.Group>
-                <Form.Label>Company Name</Form.Label>
+                <Form.Label className={`${styles.Field}`}>Company Contact Name</Form.Label>
                 <Form.Control
-                type="text"
-                name="name"
-                value={name}
-                onChange={handleChange}
-                />
-            </Form.Group>
-            {errors?.name?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                {message}
-                </Alert>
-            ))}
-
-            <Form.Group>
-                <Form.Label>Company Website</Form.Label>
-                <Form.Control
-                type="URL"
-                name="website_url"
-                value={website_url}
-                onChange={handleChange}
-                />
-            </Form.Group>
-            {errors?.website_url?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                {message}
-                </Alert>
-            ))}
-            
-            <Form.Group>
-                <Form.Label>Brief Description</Form.Label>
-                <Form.Control
-                as="textarea"
-                rows={3}
-                name="excerpt"
-                value={excerpt}
-                onChange={handleChange}
-                />
-            </Form.Group>
-            {errors?.excerpt?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                {message}
-                </Alert>
-            ))}
-
-            <Form.Group>
-                <Form.Label>Further Information</Form.Label>
-                <Form.Control
-                as="textarea"
-                rows={6}
-                name="description"
-                value={description}
-                onChange={handleChange}
-                />
-            </Form.Group>
-            {errors?.description?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                {message}
-                </Alert>
-            ))}
-
-            {/* <Form.Group>
-                <Form.Label>Eco-Credentials</Form.Label>
-                <Form.Control
-                as="select"
-                name="credentials"
-                value={credentials}
-                onChange={handleChange}
-                />
-            </Form.Group>
-            {errors?.credentials?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                {message}
-                </Alert>
-            ))} */}
-
-            <Form.Group>
-                <Form.Label>Key Words</Form.Label>
-                <Form.Control
-                as="textarea"
-                rows={3}
-                name="key_words"
-                value={key_words}
-                onChange={handleChange}
-                />
-            </Form.Group>
-            {errors?.key_words?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                {message}
-                </Alert>
-            ))}
-            
-            <Form.Group>
-                <Form.Label>Company Contact Name</Form.Label>
-                <Form.Control
+                className={`${styles.Input}`}
                 type="text"
                 name="contact_name"
                 value={contact_name}
@@ -212,23 +122,9 @@ function CompanyEditForm() {
             ))}
 
             <Form.Group>
-                <Form.Label>Contact Email</Form.Label>
+                <Form.Label className={`${styles.Field}`}>Role in Company</Form.Label>
                 <Form.Control
-                type="email"
-                name="contact_email"
-                value={contact_email}
-                onChange={handleChange}
-                />
-            </Form.Group>
-            {errors?.contact_email?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                {message}
-                </Alert>
-            ))}
-
-            <Form.Group>
-                <Form.Label>Role in Company</Form.Label>
-                <Form.Control
+                className={`${styles.Input}`}
                 type="text"
                 name="role"
                 value={role}
@@ -240,15 +136,35 @@ function CompanyEditForm() {
                 {message}
                 </Alert>
             ))}
+
+            <Form.Group>
+                <Form.Label className={`${styles.Field}`}>Contact Email</Form.Label>
+                <Form.Control
+                className={`${styles.Input}`}
+                type="email"
+                name="contact_email"
+                value={contact_email}
+                onChange={handleChange}
+                placeholder="contact@companyname.com"
+                />
+                <Form.Text className="text-muted text-center">
+                    Company contact will be emailed for verification evidence
+                </Form.Text>
+            </Form.Group>
+            {errors?.contact_email?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                {message}
+                </Alert>
+            ))}
             
             <Button
                 className={`${btnStyles.Button} ${btnStyles.Bright}`}
                 onClick={() => history.goBack()}
             >
-                cancel
+                X Cancel
             </Button>
             <Button className={`${btnStyles.Button} ${btnStyles.Green}`} type="submit">
-                create
+                Submit Changes
             </Button>
         </div>
     );
@@ -260,7 +176,36 @@ function CompanyEditForm() {
                     <Container
                         className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
                     >
-                        <Form.Group className="text-center">
+                        
+                        <p className={`${styles.Header}`}>
+                            <i className="fa-regular fa-pen-to-square"></i>
+                            Company Details
+                        </p>
+                        <hr className={`${styles.Rule}`} />
+                        
+                        <Form.Group>
+                            
+                            <Form.Label className={`${styles.Field}`}>Company Name</Form.Label>
+                            <Form.Control
+                            className={`${styles.Input}`}
+                            type="text"
+                            name="name"
+                            value={name}
+                            onChange={handleChange}
+                            // placeholder="Add your company name"
+                            />
+                        </Form.Group>
+                        {errors?.name?.map((message, idx) => (
+                            <Alert variant="warning" key={idx}>
+                            {message}
+                            </Alert>
+                        ))}
+
+                        <Form.Label className={`${styles.Field}`}>
+                            Logo / Branding Image
+                        </Form.Label>
+                        <Form.Group className={`${styles.Logo}`}>
+                            
                             {logo ? (
                                 <>
                                 <figure>
@@ -297,12 +242,93 @@ function CompanyEditForm() {
                                 onChange={handleChangeImage}
                                 ref={imageInput}
                             />
+                            <Form.Text className="text-muted text-center">
+                                max size 800 x 800 pixels
+                            </Form.Text>
                             </Form.Group>
                             {errors?.image?.map((message, idx) => (
                                 <Alert variant="warning" key={idx}>
                                     {message}
                                 </Alert>
                             ))}
+
+
+
+                        <Form.Group>
+                            <Form.Label className={`${styles.Field}`}>
+                                Company Website
+                            </Form.Label>
+                            <Form.Control
+                            className={`${styles.Input}`}
+                            type="URL"
+                            name="website_url"
+                            value={website_url}
+                            onChange={handleChange}
+                            placeholder="https://"
+                            />
+                        </Form.Group>
+                        {errors?.website_url?.map((message, idx) => (
+                            <Alert variant="warning" key={idx}>
+                            {message}
+                            </Alert>
+                        ))}
+                        
+                        <Form.Group>
+                            <Form.Label className={`${styles.Field}`}>Brief Description</Form.Label>
+                            <Form.Control
+                            className={`${styles.Input}`}
+                            as="textarea"
+                            rows={3}
+                            name="excerpt"
+                            value={excerpt}
+                            onChange={handleChange}
+                            placeholder="What does your company or business do in a nutshell?"
+                            />
+                        </Form.Group>
+                        {errors?.excerpt?.map((message, idx) => (
+                            <Alert variant="warning" key={idx}>
+                            {message}
+                            </Alert>
+                        ))}
+
+                        <Form.Group>
+                            <Form.Label className={`${styles.Field}`}>Further Information</Form.Label>
+                            <Form.Control
+                            className={`${styles.Input}`}
+                            as="textarea"
+                            rows={6}
+                            name="description"
+                            value={description}
+                            onChange={handleChange}
+                            placeholder="Tell people a bit more about your company and your ethos / vision."
+                            />
+                        </Form.Group>
+                        {errors?.description?.map((message, idx) => (
+                            <Alert variant="warning" key={idx}>
+                            {message}
+                            </Alert>
+                        ))}
+
+                        <Form.Group>
+                            <Form.Label className={`${styles.Field}`}>Key Words</Form.Label>
+                            <Form.Control
+                            className={`${styles.Input}`}
+                            as="textarea"
+                            rows={3}
+                            name="key_words"
+                            value={key_words}
+                            onChange={handleChange}
+                            placeholder="Words associated with your main activities."
+                            />
+                            <Form.Text className="text-muted text-center">
+                                Separate each word with a comma
+                            </Form.Text>
+                        </Form.Group>
+                        {errors?.key_words?.map((message, idx) => (
+                            <Alert variant="warning" key={idx}>
+                            {message}
+                            </Alert>
+                        ))}
                         <div className="d-md-none">{textFields}</div>
                     </Container>
                 </Col>
