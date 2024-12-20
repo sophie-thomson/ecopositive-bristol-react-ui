@@ -4,16 +4,20 @@
 
 .Container {
     min-height: 343px;
+    text-align: center;
   }
 
 .Input {
-    background: #d8eee4;
-    border: 1px solid #f0f9f7;
+    background: #f8fffc;
+    border: 1px solid #b7ecd2;
     box-sizing: border-box;
-    border-radius: 5px;
+    border-radius: 8px;
+    padding: 10px;
     color: #195829;
     text-align: center;
-    padding: 10px;
+    /* text-transform: uppercase; */
+    font-weight: light;
+    font-size: 0.9em;
 }
 
 .Header {
@@ -25,4 +29,28 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #195829;
+    margin-top: 15px;
+    /* margin-bottom: 0px; */
+}
+
+.Field {
+    color: #195829;
+    text-align: center;
+    /* text-transform: uppercase; */
+    font-weight: light;
+    font-size: 0.9em;
+    margin-top: 3px;
+}
+
+.Logo {
+    border: 1px solid #b7ecd2;
+    border-radius: 8px;
+    background: #f8fffc;
+}
+
+.Rule {
+    border-color: #d69303;
+    width: 150px;
+    padding: 2px;
+    margin-top: 0;
 }
