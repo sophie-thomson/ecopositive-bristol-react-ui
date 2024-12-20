@@ -1,24 +1,63 @@
+.Container {
+  background-color: #fafafa;
+}
+
 .Company {
-    background-color: #ffffff;
-    border: 1px solid #dadadf;
+    background-color: #fafafa;
+    border: 1px solid #dadfdc;
     border-radius: 2px;
     margin-bottom: 16px;
     text-align: center;
-  }
+}
   
-  .Company figure,
+.Company figure,
   h5 {
     margin: 0 0;
-  }
+}
   
-  .Heart {
+.Heart {
     color: #8f272c;
-  }
+}
   
-  .Heart:hover {
+.Heart:hover {
     color: #facedd;
-  }
+}
   
-  .HeartOutline:hover {
+.HeartOutline:hover {
     color: #8f272c;
-  }
+}
+
+.Logo {
+    max-width:200px;
+    height: auto;
+}
+
+.Endorse {
+    margin-left: auto;
+}
+
+.Endorse i {
+    font-size: 1.2em;
+    color: #0ab904;
+}
+
+.Endorse p {
+    font-size: 0.9em;
+}
+
+.Header {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+    color: #195829;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.Rule {
+    border-color: #d69303;
+    width: 150px;
+    padding: 2px;
+    margin-top: 0;
+}

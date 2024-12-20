@@ -1,15 +1,16 @@
 import React from "react";
 import styles from "../../styles/Company.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Card, Media } from "react-bootstrap";
+import { Button, Card, Form, Media } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 import { DotsDropdown } from "../../components/DotsDropdown";
 import CompanyPage from "./CompanyPage";
+import btnStyles from "../../styles/Button.module.css";
 
 const Company = (props) => {
-  const {
+    const {
         id,
         owner,
         owner_profile_id,
@@ -19,34 +20,30 @@ const Company = (props) => {
         // website_url,
         // excerpt,
         description,
-        // key_words,
-        // contact_name,
-        // contact_email,
-        // role,
         // created_on,
         updated_on,
         // credentials,
         // endorsing_users,
-        // endorsements_count,
+        endorsements_count,
         comments_count,
-  } = props;
+    } = props;
 
-  const currentUser = useCurrentUser();
-  const is_owner = currentUser?.username === owner;
-  const history = useHistory();
+    const currentUser = useCurrentUser();
+    const is_owner = currentUser?.username === owner;
+    const history = useHistory();
 
-  const handleEdit = () => {
-      history.push(`/companies/${id}/edit`);
-  };
+    const handleEdit = () => {
+        history.push(`/companies/${id}/edit`);
+    };
 
-  const handleDelete = async () => {
-      try {
-        await axiosRes.delete(`/companies/${id}/`);
-        history.goBack();
-      } catch (err) {
-        console.log(err);
-      }
-  };
+    const handleDelete = async () => {
+        try {
+          await axiosRes.delete(`/companies/${id}/`);
+          history.goBack();
+        } catch (err) {
+          console.log(err);
+        }
+    };
 
 //   const handleLike = async () => {
 //     try {
@@ -80,32 +77,51 @@ const Company = (props) => {
 //     }
 //   };
 
-  return (
-    <Card className={styles.Company}>
-      <Card.Body>
-        <Media className="align-items-center justify-content-between">
-          <Link to={`/profiles/${owner_profile_id}`}>
-            <Avatar src={owner_profile_image} height={55} />
-            {owner}
-          </Link>
-          <div className="d-flex align-items-center">
-            <span>{updated_on}</span>
-            {is_owner && CompanyPage && (
-              <DotsDropdown
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-              />
-            )}
-          </div>
-        </Media>
-      </Card.Body>
-      <Link to={`/companies/${id}`}>
-        <Card.Img src={logo} alt={name} />
-      </Link>
-      <Card.Body>
-        {name && <Card.Title className="text-center">{name}</Card.Title>}
+    return (
+        <Card className={styles.Company}>
+            <Card.Body>
+              
+              
+              <div className="d-flex align-items-center">
+                      {/* <span>{updated_on}</span> */}
+                      <Button className={`${btnStyles.Button} ${btnStyles.Green} d-flex ml-auto`} type="submit">
+                            Endorse This Company
+                      </Button>
+                      {is_owner && CompanyPage && (
+                        <DotsDropdown
+                          handleEdit={handleEdit}
+                          handleDelete={handleDelete}
+                        />
+                      )}
+                    </div>
+              
+                <Media className="align-items-center">                   
+                    {name && <Card.Title className={`${styles.Header} m-auto py-4`}>{name}</Card.Title>}
+                </Media>
+                <hr className={`${styles.Rule}`} />
+                <div className={`${styles.Endorse} d-flex align-items-center flex-wrap`}>
+                    <p><i className="fa-solid fa-award"></i>
+                        {endorsements_count} people have endorsed this company.
+                    </p>
+                    {/* <Form> */}
+                        {/* <Button className={`${btnStyles.Button} ${btnStyles.Green} ml-auto`} type="submit">
+                            Endorse This Company
+                        </Button> */}
+                    {/* </Form> */}
+                </div>
+            </Card.Body>
+            
+            <Card.Body>
+            <Link to={`/companies/${id}`}>
+              <Card.Img className={`${styles.Logo}`} src={logo} alt={name} />
+            </Link>
+        
         {description && <Card.Text>{description}</Card.Text>}
         <div className={styles.PostBar}>
+          {/* <Link to={`/profiles/${owner_profile_id}`}>
+                      <Avatar src={owner_profile_image} height={55} />
+                      {owner}
+                    </Link> */}
           {/* {is_owner ? (
             <OverlayTrigger
               placement="top"
