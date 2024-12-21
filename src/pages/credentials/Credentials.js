@@ -97,7 +97,8 @@ function Credentials({ company }) {
                 group={credential.group}
                 className="list-unstyled"
             >
-                <i className="fa-brands fa-envira" />{credential.name}
+                <i className="fa-brands fa-envira" />
+                {credential.name}
             </li>
         );
 
@@ -112,41 +113,35 @@ function Credentials({ company }) {
             <Col className="py-2 p-0 p-md-2" >
                 <div className="d-flex justify-content-around flex-wrap mb-3">
                 <Card className={`${styles.List}`}>
-                    <Card.Body>
-                        <Card.Title className={`${styles.ListTitle}`}>
+                    <Card.Body className="pb-1 pt-4">
+                        <Card.Title className={`${styles.ListTitle} px-1`}>
                             Eco-Conscious Approach
                         </Card.Title>
-                        <Card.Text className={`${styles.ListText} text-left`}><ul>{companyEcoList}</ul></Card.Text>
+                        <Card.Text className={`${styles.ListText} ml-auto`}><ul className="pl-0">{companyEcoList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
-            {/* </Col>
-            <Col> */}
                 <Card className={`${styles.List}`}>
-                    <Card.Body>
+                    <Card.Body className="pb-1 pt-4 mx-auto">
                         <Card.Title className={`${styles.ListTitle}`}>
                             Membership / Accreditation
                         </Card.Title>
-                        <Card.Text><ul>{companyMemberList}</ul></Card.Text>
+                        <Card.Text className={`${styles.ListText}`}><ul className="pl-0">{companyMemberList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
-            {/* </Col>
-            <Col> */}
                 <Card className={`${styles.List}`}>
-                    <Card.Body>
+                    <Card.Body className="pb-1 pt-4">
                         <Card.Title className={`${styles.ListTitle}`}>
                             Socially Responsible
                         </Card.Title>
-                        <Card.Text><ul>{companySocialList}</ul></Card.Text>
+                        <Card.Text className={`${styles.ListText}`}><ul className="pl-0">{companySocialList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
-            {/* </Col>
-            <Col> */}
                 <Card className={`${styles.List}`}>
-                    <Card.Body>
-                        <Card.Title className={`${styles.ListTitle}`}>
+                    <Card.Body className="pb-1 pt-4 mx-auto">
+                        <Card.Title className={`${styles.ListTitle} px-2`}>
                             Sustainable Production / Materials
                         </Card.Title>
-                        <Card.Text><ul>{companySustainableList}</ul></Card.Text>
+                        <Card.Text className={`${styles.ListText}`}><ul className="pl-0">{companySustainableList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
                 </div>
