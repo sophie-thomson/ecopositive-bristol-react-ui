@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../styles/Company.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Button, Card, Form, Media } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 // import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
@@ -17,11 +17,11 @@ const Company = (props) => {
         // owner_profile_image,
         name,
         logo,
-        // website_url,
+        website_url,
         excerpt,
         description,
         // created_on,
-        updated_on,
+        // updated_on,
         // credentials,
         // endorsing_users,
         endorsements_count,
@@ -91,24 +91,35 @@ const Company = (props) => {
                             />
                         )}
                 </div>
-                <Card.Text className="align-items-center">                   
-                    {name && <Card.Title className={`${styles.Header} m-auto py-4`}>{name}</Card.Title>}
+                <Card.Text className="align-items-center">
+                    <a 
+                        href={website_url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        aria-label={`Visit ${name} website`}
+                    > 
+                    {name && <Card.Title className={`${styles.Header} m-auto py-4`}>{name}</Card.Title>}</a>
                 </Card.Text>
                 <hr className={`${styles.Rule}`} />
                 <div className={`${styles.Endorse} text-muted d-flex align-items-center justify-content-between`}>
-                    <p><i className="fa-solid fa-award" />
+                    <div><i className="fa-solid fa-award" />
                         {endorsements_count}
                         <span className="d-none d-sm-inline"> endorsements</span>
-                    </p>
+                    </div>
                     <Link to={`/companies/${id}`} className={` ${styles.Comment} mr-2 text-muted`}>
                         <i className="far fa-comments" />
                         {comments_count}
                     </Link>
                 </div>
-              <div className="d-flex justify-content-center justify-content-md-start">
-                <Link to={`/companies/${id}`}>
-                    <Card.Img className={`${styles.Logo}`} src={logo} alt={name} />
-                </Link>
+                <div className="d-flex justify-content-center justify-content-md-start">
+                    <a 
+                        href={website_url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        aria-label={`Visit ${name} website`}
+                    > 
+                        <Card.Img className={`${styles.Logo}`} src={logo} alt={name} />
+                    </a>
                 <span className="d-none d-md-inline mx-3 mt-2 text-left">
                     {excerpt && <Card.Text>{excerpt}</Card.Text>}
                     {description && <Card.Text>{description}</Card.Text>}
@@ -154,7 +165,7 @@ const Company = (props) => {
           </Link> */}
           
         
-        <span className="text-muted text-small">Last updated: {updated_on}</span>
+        {/* <span className="text-muted text-small">Last updated: {updated_on}</span> */}
       </Card.Body>
     </Card>
   );

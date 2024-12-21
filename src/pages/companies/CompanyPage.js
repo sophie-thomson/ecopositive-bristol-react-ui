@@ -13,15 +13,17 @@ import styles from "../../styles/CompanyPage.module.css"
 import { axiosReq } from "../../api/axiosDefaults";
 import Company from "./Company";
 import CredentialSelectForm from "../credentials/CredentialSelectForm";
+import Credentials from "../credentials/Credentials";
+
 
 
 function CompanyPage() {
     const { id } = useParams();
     const [company, setCompany] = useState({ results: [] });
-    const [currentCredentials, setCurrentCredentials] = useState ([]);
   
     // const currentUser = useCurrentUser();
     // const profile_image = currentUser?.profile_image;
+
 
     useEffect(() => {
         const handleMount = async () => {
@@ -30,29 +32,29 @@ function CompanyPage() {
                     axiosReq.get(`/companies/${id}`),
                 ]);
                 setCompany({ results: [company] });
-                setCurrentCredentials(company.credentials);
-                console.log(company)
             } catch (err) {
                 console.log(err);
             }
         };
         handleMount();
     }, [id]);
+
     
     return (
         <Container>
             <Row className="h-100">
                 
                 <Col className="py-2 p-0 p-lg-2" lg={8}>
-                    <p>Popular profiles for mobile</p>
+                    Popular profiles for mobile
                     <div className={`${styles.Main}`}>
                     <Company {...company.results[0]} setCompany={setCompany} companyPage />
+                    <Credentials
+                        company={id}
+                    />
                     {/* ADD VERIFICATION HERE TO CHECK IF OWNER */}
                     <div className="mx-3">
                     <CredentialSelectForm
-                    company={id}
-                    currentCredentials={currentCredentials}
-                    setCredentials={setCurrentCredentials}
+                        company={id}
                     />
                     </div>
                     <Container className={appStyles.Content}>

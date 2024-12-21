@@ -1,34 +1,68 @@
 import React from "react";
-import styles from "../../styles/CredentialSelectForm.module.css";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { useHistory } from "react-router-dom";
+import styles from "../../styles/Credentials.module.css";
+// import { useCurrentUser } from "../../contexts/CurrentUserContext";
+// import { useHistory } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 
+// import axios from "axios";
+import { useEffect } from "react";
+import { axiosReq } from "../../api/axiosDefaults";
+import { useState } from "react";
 
-const Credentials = (props) => {
-    const {
-        credentials,
- } = props;
 
-    const currentUser = useCurrentUser();
-    // const is_owner = currentUser?.username === owner;
-    const history = useHistory();
+function Credentials({ company }) {
+
+    const [errors, setErrors] = useState({});
+    const [companyCredentials, setCompanyCredentials] = useState ([]);
+    const [credentials, setCredentials] = useState ([]);
+    const [credentialsList, setCredentialsList] = useState ([]);
+    
+
+        useEffect(() => {
+            const fetchCredentials = async () => {
+                try {
+                    const { data } = await axiosReq.get(`/credentials/`);
+                    const companyData = await axiosReq.get(`/companies/${company}/`);
+                    const companyCredentials = (companyData.data.credentials);
+                    setCompanyCredentials(companyCredentials);
+                    setCredentials(data.results);
+                    console.log(companyCredentials);
+                    console.log(data.results);
+    
+                    const credentialsList = companyCredentials.map(id => {
+                        return data.results.find(credential => credential.id === id);    
+                    });
+                    setCredentialsList(credentialsList);
+                    console.log(credentialsList);
+                        
+                } catch (err) {
+                    console.log(err);
+                }   
+            };
+        
+            fetchCredentials();
+        }, [company]);
+
+        const ecoList = credentialsList.map((credential) =>
+            <li>{credential.name}</li>
+        );
 
     return (
         <Container>
             <Col>
             <div className="d-flex align-items-center">
-            {/* <span>{updated_on}</span> */}
-            
-          </div>
+                <p className={`${styles.Header} mx-auto`}>Eco-Credentials</p>    
+            </div>
+            <hr className={`${styles.Rule}`} />
+                <ul>{ecoList}</ul>
                 <Card className={styles.Company}>
                     <Card.Body>
                         <Card.Title className="text-center">
                             Eco-Conscious Approach
                         </Card.Title>
-                        {credentials && <Card.Text>{credentials}</Card.Text>}
+                        {/* {credentials && <Card.Text>{credentials}</Card.Text>} */}
                     </Card.Body>
                 </Card>
             </Col>
@@ -38,7 +72,7 @@ const Credentials = (props) => {
                         <Card.Title className="text-center">
                             Membership / Accreditation
                         </Card.Title>
-                        {credentials && <Card.Text>{credentials}</Card.Text>}
+                        {/* {credentials && <Card.Text>{credentials}</Card.Text>} */}
                     </Card.Body>
                 </Card>
             </Col>
@@ -48,7 +82,7 @@ const Credentials = (props) => {
                         <Card.Title className="text-center">
                             Socially Responsible
                         </Card.Title>
-                        {credentials && <Card.Text>{credentials}</Card.Text>}  
+                        {/* {credentials && <Card.Text>{credentials}</Card.Text>}   */}
                     </Card.Body>
                 </Card>
             </Col>
@@ -58,7 +92,7 @@ const Credentials = (props) => {
                         <Card.Title className="text-center">
                             Sustainable Production / Materials
                         </Card.Title>
-                        {credentials && <Card.Text>{credentials}</Card.Text>}
+                        {/* {credentials && <Card.Text>{credentials}</Card.Text>} */}
                     </Card.Body>
                 </Card>
             </Col>
@@ -66,4 +100,4 @@ const Credentials = (props) => {
     );
 };
 
-export default Credentials;
+export default Credentials

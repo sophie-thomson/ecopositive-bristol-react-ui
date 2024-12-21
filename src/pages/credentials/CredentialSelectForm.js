@@ -31,16 +31,11 @@ function CredentialSelectForm({ company, currentCredentials }) {
             try {
                 const { data } = await axiosReq.get(`/credentials/`);
                 setCredentialsOptions(data);
-                console.log(data)
             } catch (err) {
                 console.log(err);
             }   
         };
         fetchCredentials();
-
-        return () => {
-            clearTimeout();
-        }
     }, []);
 
     const handleChange = (event) => {
