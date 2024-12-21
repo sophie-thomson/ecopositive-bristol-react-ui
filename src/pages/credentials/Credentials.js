@@ -53,8 +53,9 @@ function Credentials({ company }) {
             <li 
                 key={credential.id}
                 group={credential.group}
+                className="list-unstyled"
             >
-                {credential.name}
+                <i className="fa-brands fa-envira" />{credential.name}
             </li>
         );
 
@@ -66,8 +67,9 @@ function Credentials({ company }) {
             <li 
                 key={credential.id}
                 group={credential.group}
+                className="list-unstyled"
             >
-                {credential.name}
+                <i className="fa-brands fa-envira" />{credential.name}
             </li>
         );
 
@@ -79,8 +81,9 @@ function Credentials({ company }) {
             <li 
                 key={credential.id}
                 group={credential.group}
+                className="list-unstyled"
             >
-                {credential.name}
+                <i className="fa-brands fa-envira" />{credential.name}
             </li>
         );
 
@@ -92,57 +95,61 @@ function Credentials({ company }) {
             <li 
                 key={credential.id}
                 group={credential.group}
+                className="list-unstyled"
             >
-                {credential.name}
+                <i className="fa-brands fa-envira" />{credential.name}
             </li>
         );
 
 
     return (
         <Container>
-            <Col>
+            
             <div className="d-flex align-items-center">
                 <p className={`${styles.Header} mx-auto`}>Eco-Credentials</p>    
             </div>
             <hr className={`${styles.Rule}`} />
-                <Card className={styles.Company}>
+            <Col className="py-2 p-0 p-md-2" >
+                <div className="d-flex justify-content-around flex-wrap mb-3">
+                <Card className={`${styles.List}`}>
                     <Card.Body>
-                        <Card.Title className="text-center">
+                        <Card.Title className={`${styles.ListTitle}`}>
                             Eco-Conscious Approach
                         </Card.Title>
-                        <Card.Text><ul>{companyEcoList}</ul></Card.Text>
+                        <Card.Text className={`${styles.ListText} text-left`}><ul>{companyEcoList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
-            </Col>
-            <Col>
-                <Card className={styles.Company}>
+            {/* </Col>
+            <Col> */}
+                <Card className={`${styles.List}`}>
                     <Card.Body>
-                        <Card.Title className="text-center">
+                        <Card.Title className={`${styles.ListTitle}`}>
                             Membership / Accreditation
                         </Card.Title>
                         <Card.Text><ul>{companyMemberList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
-            </Col>
-            <Col>
-                <Card className={styles.Company}>
+            {/* </Col>
+            <Col> */}
+                <Card className={`${styles.List}`}>
                     <Card.Body>
-                        <Card.Title className="text-center">
+                        <Card.Title className={`${styles.ListTitle}`}>
                             Socially Responsible
                         </Card.Title>
                         <Card.Text><ul>{companySocialList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
-            </Col>
-            <Col>
-                <Card className={styles.Company}>
+            {/* </Col>
+            <Col> */}
+                <Card className={`${styles.List}`}>
                     <Card.Body>
-                        <Card.Title className="text-center">
+                        <Card.Title className={`${styles.ListTitle}`}>
                             Sustainable Production / Materials
                         </Card.Title>
                         <Card.Text><ul>{companySustainableList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
+                </div>
             </Col>
         </Container>
     );
