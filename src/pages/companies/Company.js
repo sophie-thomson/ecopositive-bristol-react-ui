@@ -81,8 +81,9 @@ const Company = (props) => {
         <Card className={styles.Company}>
             <Card.Body>
                 <div className="d-flex align-items-center"> 
-                    <Button className={`${btnStyles.Button} ${btnStyles.Green} d-flex ml-auto`} type="submit">
-                        Endorse This Company
+                    <Button className={`${btnStyles.Button} ${btnStyles.Green} ${styles.Endorse} ml-auto`} type="submit">
+                    <i className="fa-solid fa-award" />
+                    Endorse This Company
                     </Button>
                         {is_owner && CompanyPage && (
                             <DotsDropdown
