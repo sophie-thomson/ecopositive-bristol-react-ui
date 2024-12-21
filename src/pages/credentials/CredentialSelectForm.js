@@ -37,6 +37,10 @@ function CredentialSelectForm({ company, currentCredentials }) {
             }   
         };
         fetchCredentials();
+
+        return () => {
+            clearTimeout();
+        }
     }, []);
 
     const handleChange = (event) => {

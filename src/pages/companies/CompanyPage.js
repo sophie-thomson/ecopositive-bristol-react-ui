@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
 import appStyles from "../../App.module.css";
+import styles from "../../styles/CompanyPage.module.css"
 // import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosReq } from "../../api/axiosDefaults";
 import Company from "./Company";
@@ -39,20 +40,25 @@ function CompanyPage() {
     }, [id]);
     
     return (
-        <Container className={`${StyleSheet.Container}`}>
+        <Container>
             <Row className="h-100">
+                
                 <Col className="py-2 p-0 p-lg-2" lg={8}>
                     <p>Popular profiles for mobile</p>
+                    <div className={`${styles.Main}`}>
                     <Company {...company.results[0]} setCompany={setCompany} companyPage />
                     {/* ADD VERIFICATION HERE TO CHECK IF OWNER */}
+                    <div className="mx-3">
                     <CredentialSelectForm
                     company={id}
                     currentCredentials={currentCredentials}
                     setCredentials={setCurrentCredentials}
                     />
+                    </div>
                     <Container className={appStyles.Content}>
                         Comments
                     </Container>
+                    </div>
                 </Col>
                 <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
                     Popular profiles for desktop

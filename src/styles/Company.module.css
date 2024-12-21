@@ -1,11 +1,6 @@
-.Container {
-  background-color: #fafafa;
-}
-
 .Company {
     background-color: #fafafa;
-    border: 1px solid #dadfdc;
-    border-radius: 2px;
+    border: none;
     margin-bottom: 16px;
     text-align: center;
 }
@@ -30,20 +25,22 @@
 .Logo {
     max-width:200px;
     height: auto;
+    align-self: flex-start;
 }
 
 .Endorse {
     margin-left: auto;
+    font-size: 0.9em;
 }
 
 .Endorse i {
-    font-size: 1.2em;
-    color: #0ab904;
+    font-size: 1.5em;
+    color: #d69303;
 }
 
-.Endorse p {
+/* .Endorse p {
     font-size: 0.9em;
-}
+} */
 
 .Header {
     font-style: normal;
@@ -60,4 +57,9 @@
     width: 150px;
     padding: 2px;
     margin-top: 0;
+}
+
+.Comment i {
+    color: #679cb1;
+    font-size:1.3em;
 }

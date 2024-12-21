@@ -3,7 +3,7 @@ import styles from "../../styles/Company.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Button, Card, Form, Media } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import Avatar from "../../components/Avatar";
+// import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 import { DotsDropdown } from "../../components/DotsDropdown";
 import CompanyPage from "./CompanyPage";
@@ -13,12 +13,12 @@ const Company = (props) => {
     const {
         id,
         owner,
-        owner_profile_id,
-        owner_profile_image,
+        // owner_profile_id,
+        // owner_profile_image,
         name,
         logo,
         // website_url,
-        // excerpt,
+        excerpt,
         description,
         // created_on,
         updated_on,
@@ -80,44 +80,45 @@ const Company = (props) => {
     return (
         <Card className={styles.Company}>
             <Card.Body>
-              
-              
-              <div className="d-flex align-items-center">
-                      {/* <span>{updated_on}</span> */}
-                      <Button className={`${btnStyles.Button} ${btnStyles.Green} d-flex ml-auto`} type="submit">
-                            Endorse This Company
-                      </Button>
-                      {is_owner && CompanyPage && (
-                        <DotsDropdown
-                          handleEdit={handleEdit}
-                          handleDelete={handleDelete}
-                        />
-                      )}
-                    </div>
-              
-                <Media className="align-items-center">                   
-                    {name && <Card.Title className={`${styles.Header} m-auto py-4`}>{name}</Card.Title>}
-                </Media>
-                <hr className={`${styles.Rule}`} />
-                <div className={`${styles.Endorse} d-flex align-items-center flex-wrap`}>
-                    <p><i className="fa-solid fa-award"></i>
-                        {endorsements_count} people have endorsed this company.
-                    </p>
-                    {/* <Form> */}
-                        {/* <Button className={`${btnStyles.Button} ${btnStyles.Green} ml-auto`} type="submit">
-                            Endorse This Company
-                        </Button> */}
-                    {/* </Form> */}
+                <div className="d-flex align-items-center"> 
+                    <Button className={`${btnStyles.Button} ${btnStyles.Green} d-flex ml-auto`} type="submit">
+                        Endorse This Company
+                    </Button>
+                        {is_owner && CompanyPage && (
+                            <DotsDropdown
+                                handleEdit={handleEdit}
+                                handleDelete={handleDelete}
+                            />
+                        )}
                 </div>
-            </Card.Body>
-            
-            <Card.Body>
-            <Link to={`/companies/${id}`}>
-              <Card.Img className={`${styles.Logo}`} src={logo} alt={name} />
-            </Link>
-        
-        {description && <Card.Text>{description}</Card.Text>}
-        <div className={styles.PostBar}>
+                <Card.Text className="align-items-center">                   
+                    {name && <Card.Title className={`${styles.Header} m-auto py-4`}>{name}</Card.Title>}
+                </Card.Text>
+                <hr className={`${styles.Rule}`} />
+                <div className={`${styles.Endorse} text-muted d-flex align-items-center justify-content-between`}>
+                    <p><i className="fa-solid fa-award" />
+                        {endorsements_count}
+                        <span className="d-none d-sm-inline"> endorsements</span>
+                    </p>
+                    <Link to={`/companies/${id}`} className={` ${styles.Comment} mr-2 text-muted`}>
+                        <i className="far fa-comments" />
+                        {comments_count}
+                    </Link>
+                </div>
+              <div className="d-flex justify-content-center justify-content-md-start">
+                <Link to={`/companies/${id}`}>
+                    <Card.Img className={`${styles.Logo}`} src={logo} alt={name} />
+                </Link>
+                <span className="d-none d-md-inline mx-3 mt-2 text-left">
+                    {excerpt && <Card.Text>{excerpt}</Card.Text>}
+                    {description && <Card.Text>{description}</Card.Text>}
+                </span>
+                
+              </div>
+              <div className="d-md-none my-3 text-left">
+                  {excerpt && <Card.Text>{excerpt}</Card.Text>}
+                  {description && <Card.Text>{description}</Card.Text>}
+              </div>
           {/* <Link to={`/profiles/${owner_profile_id}`}>
                       <Avatar src={owner_profile_image} height={55} />
                       {owner}
@@ -146,11 +147,14 @@ const Company = (props) => {
             </OverlayTrigger>
           )}
           {likes_count} */}
-          <Link to={`/companies/${id}`}>
+          
+          {/* <Link to={`/companies/${id}`}>
             <i className="far fa-comments" />
-          </Link>
-          {comments_count}
-        </div>
+            {comments_count}
+          </Link> */}
+          
+        
+        <span className="text-muted text-small">Last updated: {updated_on}</span>
       </Card.Body>
     </Card>
   );
