@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../../styles/Credentials.module.css";
+import { DotsDropdown } from "../../components/DotsDropdown";
 // import { useCurrentUser } from "../../contexts/CurrentUserContext";
 // import { useHistory } from "react-router-dom";
 import { Card } from "react-bootstrap";
@@ -102,7 +103,6 @@ function Credentials({ company }) {
             </li>
         );
 
-
     return (
         <Container>
             
@@ -117,11 +117,11 @@ function Credentials({ company }) {
                         <Card.Title className={`${styles.ListTitle} px-1`}>
                             Eco-Conscious Approach
                         </Card.Title>
-                        <Card.Text className={`${styles.ListText} ml-auto`}><ul className="pl-0">{companyEcoList}</ul></Card.Text>
+                        <Card.Text className={`${styles.ListText}`}><ul className="pl-0">{companyEcoList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
                 <Card className={`${styles.List}`}>
-                    <Card.Body className="pb-1 pt-4 mx-auto">
+                    <Card.Body className="pb-1 pt-4">
                         <Card.Title className={`${styles.ListTitle}`}>
                             Membership / Accreditation
                         </Card.Title>
@@ -137,7 +137,7 @@ function Credentials({ company }) {
                     </Card.Body>
                 </Card>
                 <Card className={`${styles.List}`}>
-                    <Card.Body className="pb-1 pt-4 mx-auto">
+                    <Card.Body className="pb-1 pt-4">
                         <Card.Title className={`${styles.ListTitle} px-2`}>
                             Sustainable Production / Materials
                         </Card.Title>
