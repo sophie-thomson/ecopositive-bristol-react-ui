@@ -45,9 +45,58 @@ function Credentials({ company }) {
             fetchCredentials();
         }, [company]);
 
-        const ecoList = credentialsList.map((credential) =>
-            <li>{credential.name}</li>
+        const ecoList = credentialsList.filter(credential =>
+            credential.group === "Eco-Conscious Approach"
         );
+
+        const companyEcoList = ecoList.map((credential) =>
+            <li 
+                key={credential.id}
+                group={credential.group}
+            >
+                {credential.name}
+            </li>
+        );
+
+        const memberList = credentialsList.filter(credential =>
+            credential.group === "Membership / Accreditation"
+        );
+        
+        const companyMemberList = memberList.map((credential) =>
+            <li 
+                key={credential.id}
+                group={credential.group}
+            >
+                {credential.name}
+            </li>
+        );
+
+        const socialList = credentialsList.filter(credential =>
+            credential.group === "Socially Responsible"
+        );
+        
+        const companySocialList = socialList.map((credential) =>
+            <li 
+                key={credential.id}
+                group={credential.group}
+            >
+                {credential.name}
+            </li>
+        );
+
+        const sustainableList = credentialsList.filter(credential =>
+            credential.group === "Sustainable Production / Materials"
+        );
+        
+        const companySustainableList = sustainableList.map((credential) =>
+            <li 
+                key={credential.id}
+                group={credential.group}
+            >
+                {credential.name}
+            </li>
+        );
+
 
     return (
         <Container>
@@ -56,13 +105,12 @@ function Credentials({ company }) {
                 <p className={`${styles.Header} mx-auto`}>Eco-Credentials</p>    
             </div>
             <hr className={`${styles.Rule}`} />
-                <ul>{ecoList}</ul>
                 <Card className={styles.Company}>
                     <Card.Body>
                         <Card.Title className="text-center">
                             Eco-Conscious Approach
                         </Card.Title>
-                        {/* {credentials && <Card.Text>{credentials}</Card.Text>} */}
+                        <Card.Text><ul>{companyEcoList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
             </Col>
@@ -72,7 +120,7 @@ function Credentials({ company }) {
                         <Card.Title className="text-center">
                             Membership / Accreditation
                         </Card.Title>
-                        {/* {credentials && <Card.Text>{credentials}</Card.Text>} */}
+                        <Card.Text><ul>{companyMemberList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
             </Col>
@@ -82,7 +130,7 @@ function Credentials({ company }) {
                         <Card.Title className="text-center">
                             Socially Responsible
                         </Card.Title>
-                        {/* {credentials && <Card.Text>{credentials}</Card.Text>}   */}
+                        <Card.Text><ul>{companySocialList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
             </Col>
@@ -92,7 +140,7 @@ function Credentials({ company }) {
                         <Card.Title className="text-center">
                             Sustainable Production / Materials
                         </Card.Title>
-                        {/* {credentials && <Card.Text>{credentials}</Card.Text>} */}
+                        <Card.Text><ul>{companySustainableList}</ul></Card.Text>
                     </Card.Body>
                 </Card>
             </Col>
