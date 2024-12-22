@@ -22,7 +22,6 @@ const Company = (props) => {
         description,
         // created_on,
         // updated_on,
-        // credentials,
         // endorsing_users,
         endorsements_count,
         comments_count,
@@ -80,33 +79,44 @@ const Company = (props) => {
     return (
         <Card className={styles.Company}>
             <Card.Body>
-                <div className="d-flex align-items-center"> 
-                    <Button className={`${btnStyles.Button} ${btnStyles.Green} ${styles.Endorse} ml-auto`} type="submit">
-                    <i className="fa-solid fa-award" />
-                    Endorse This Company
-                    </Button>
-                        {is_owner && CompanyPage && (
-                            <DotsDropdown
-                                handleEdit={handleEdit}
-                                handleDelete={handleDelete}
-                            />
-                        )}
+                <div className={`${styles.Endorse} d-flex align-items-center`}>
+                <div><i className="fa-solid fa-award" />
+                        {endorsements_count}
+                        <span className="d-none d-sm-inline text-muted"> endorsements</span>
+                    </div>
+                    {is_owner ? (
+                        null
+                    ) : (
+                        <Button 
+                            className={`${btnStyles.Button} ${btnStyles.Green} ${styles.Endorse} ml-auto`} 
+                            type="submit"
+                        >
+                            <i className="fa-solid fa-award" />
+                            Endorse <span className="d-none d-sm-inline">This Company</span>
+                        </Button>)}
                 </div>
-                <Card.Text className="align-items-center">
+                <Card.Text className="d-flex align-items-center justify-content-center">
                     <a 
                         href={website_url} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         aria-label={`Visit ${name} website`}
                     > 
-                    {name && <Card.Title className={`${styles.Header} m-auto py-4`}>{name}</Card.Title>}</a>
+                        {name && <Card.Title className={`${styles.Header} m-auto py-4`}>
+                            {name}
+                        </Card.Title>}
+                    </a>
+                    {is_owner && CompanyPage && (
+                            <DotsDropdown
+                                handleEdit={handleEdit}
+                                handleDelete={handleDelete}
+                            />
+                    )}
                 </Card.Text>
                 <hr className={`${styles.Rule}`} />
-                <div className={`${styles.Endorse} text-muted d-flex align-items-center justify-content-between`}>
-                    <div><i className="fa-solid fa-award" />
-                        {endorsements_count}
-                        <span className="d-none d-sm-inline"> endorsements</span>
-                    </div>
+                <div 
+                    className={`${styles.Endorse} text-muted d-flex align-items-center justify-content-end`}
+                >
                     <Link to={`/companies/${id}`} className={` ${styles.Comment} mr-2 text-muted`}>
                         <i className="far fa-comments" />
                         {comments_count}
