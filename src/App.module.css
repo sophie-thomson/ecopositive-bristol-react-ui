@@ -69,6 +69,14 @@ figure {
     display: inline-block;
 }
 
+.Rule {
+    border-color: #d69303;
+    width: 150px;
+    padding: 2px;
+    margin-top: 0;
+}
+
+
 /* scrollbar */
 *::-webkit-scrollbar {
     width: 5px;

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../../styles/Credentials.module.css";
+import appStyles from "../../App.module.css";
 import { DotsDropdown } from "../../components/DotsDropdown";
 // import { useCurrentUser } from "../../contexts/CurrentUserContext";
 // import { useHistory } from "react-router-dom";
@@ -109,7 +110,7 @@ function Credentials({ company }) {
             <div className="d-flex align-items-center">
                 <p className={`${styles.Header} mx-auto`}>Eco-Credentials</p>    
             </div>
-            <hr className={`${styles.Rule}`} />
+            <hr className={`${appStyles.Rule}`} />
             <Col className="py-2 p-0 p-md-2" >
                 <div className="d-flex justify-content-around flex-wrap mb-3">
                 <Card className={`${styles.List}`}>

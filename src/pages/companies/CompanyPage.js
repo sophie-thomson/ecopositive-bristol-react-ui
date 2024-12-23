@@ -3,26 +3,42 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 
+
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
 import appStyles from "../../App.module.css";
 import styles from "../../styles/CompanyPage.module.css"
-// import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import btnStyles from "../../styles/Button.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import Company from "./Company";
 import CredentialSelectForm from "../credentials/CredentialSelectForm";
 import Credentials from "../credentials/Credentials";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 
 
-function CompanyPage() {
+
+function CompanyPage(props) {
+    const {
+        owner,
+    } = props;
     const { id } = useParams();
     const [company, setCompany] = useState({ results: [] });
+    const [showForm, setShowForm] = useState(false);
   
+    const currentUser = useCurrentUser();
+    const is_owner = currentUser?.id === company.owner;
     // const currentUser = useCurrentUser();
     // const profile_image = currentUser?.profile_image;
+
+     // Code adapted from Stack Overflow thread
+    const displayForm = (event) => {
+        event.preventDefault();
+        setShowForm(prevState => !prevState);
+        console.log(showForm);
+    }
 
 
     useEffect(() => {
@@ -39,7 +55,8 @@ function CompanyPage() {
         handleMount();
     }, [id]);
 
-    
+   
+
     return (
         <Container>
             <Row className="h-100">
@@ -51,12 +68,28 @@ function CompanyPage() {
                     <Credentials
                         company={id}
                     />
-                    {/* ADD VERIFICATION HERE TO CHECK IF OWNER */}
-                    <div className="mx-3">
+                    {/* Checks if user = company owner and uses onClick to display CredentialSelectForm */}
+                    {is_owner ? (
+                        <button 
+                            className={`${btnStyles.Button} ${btnStyles.Green} align-items-center`}
+                            onClick={displayForm}
+                        >
+                            Add / Edit Credentials   
+                        </button>
+                    ) : (null)}
+                    {showForm && is_owner && (
+                        <div className="d-flex justify-content-center">
+                        <CredentialSelectForm
+                            company={id}
+                            className="mx-3 mt-0 pt-0"
+                        />
+                        </div>
+                    )}
+                    {/* <div className="mx-3">
                     <CredentialSelectForm
                         company={id}
                     />
-                    </div>
+                    </div> */}
                     <Container className={appStyles.Content}>
                         Comments
                     </Container>
