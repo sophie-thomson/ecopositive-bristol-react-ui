@@ -30,8 +30,8 @@ function Credentials({ company }) {
                     const companyCredentials = (companyData.data.credentials);
                     setCompanyCredentials(companyCredentials);
                     setCredentials(data.results);
-                    console.log(companyCredentials);
-                    console.log(data.results);
+                    // console.log(companyCredentials);
+                    // console.log(data.results);
     
                     const credentialsList = companyCredentials.map(id => {
                         return data.results.find(credential => credential.id === id);    

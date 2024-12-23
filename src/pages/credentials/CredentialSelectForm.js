@@ -19,7 +19,7 @@ import btnStyles from "../../styles/Button.module.css";
 
 
 
-function CredentialSelectForm({ company, currentCredentials }) {
+function CredentialSelectForm({ company }) {
     
     useRedirect("loggedOut");
 
@@ -28,7 +28,7 @@ function CredentialSelectForm({ company, currentCredentials }) {
     const [credentialsOptions, setCredentialsOptions] = useState({ results: [] });
     // sets the state of selected credentials data
     const [credentialsData, setCredentialsData] = useState([]);
-    const [selectedCredentials, setSelectedCredentials] = ([1, 3, 5]);
+    const [companyCredentials, setCompanyCredentials] = useState ([]);
 
     const history = useHistory();
 
@@ -36,8 +36,12 @@ function CredentialSelectForm({ company, currentCredentials }) {
         const fetchCredentials = async () => {
             try {
                 const { data } = await axiosReq.get(`/credentials/`);
+                const companyData = await axiosReq.get(`/companies/${company}/`);
+                const companyCredentials = (companyData.data.credentials);
                 setCredentialsOptions(data);
-                console.log(data)
+                setCompanyCredentials(companyCredentials);
+                console.log(data);
+                console.log(companyCredentials);
             } catch (err) {
                 console.log(err);
             }   
@@ -58,10 +62,10 @@ function CredentialSelectForm({ company, currentCredentials }) {
         event.preventDefault();
 
         try {
-            // creates array to get the current credentials and append new credentials
+            // creates array to get the company credentials and append new credentials
             const selectedCredentials = [
-                ...currentCredentials,
-                credentialsData
+                ...companyCredentials,
+                credentialsData   
             ]
             const response = await axios.patch(`/companies/${company}/`, {
                 credentials: selectedCredentials,
@@ -120,7 +124,7 @@ function CredentialSelectForm({ company, currentCredentials }) {
                                 aria-placeholder="Select credentials"
                                 value={ecoList.value}
                                 onChange={(event) => handleChange(event)}>
-                                    <option value="null"></option>
+                                    <option value={(null)}></option>
                                     {ecoList.map((credential) => (
                                         <option
                                             value={credential.id}

@@ -81,6 +81,7 @@ function CompanyPage(props) {
                         <div className="d-flex justify-content-center">
                         <CredentialSelectForm
                             company={id}
+                            currentCredentials={company.credentials}
                             className="mx-3 mt-0 pt-0"
                         />
                         </div>
