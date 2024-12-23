@@ -57,7 +57,8 @@ function Credentials({ company }) {
                 group={credential.group}
                 className="list-unstyled"
             >
-                <i className="fa-brands fa-envira" />{credential.name}
+                <i className="fa-brands fa-envira" />
+                {credential.name}
             </li>
         );
 
@@ -71,7 +72,8 @@ function Credentials({ company }) {
                 group={credential.group}
                 className="list-unstyled"
             >
-                <i className="fa-brands fa-envira" />{credential.name}
+                <i className="fa-brands fa-envira" />
+                {credential.name}
             </li>
         );
 
@@ -85,7 +87,8 @@ function Credentials({ company }) {
                 group={credential.group}
                 className="list-unstyled"
             >
-                <i className="fa-brands fa-envira" />{credential.name}
+                <i className="fa-brands fa-envira" />
+                {credential.name}
             </li>
         );
 
