@@ -20,10 +20,11 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function CompanyEditForm() {
     
-
+    
     const [errors, setErrors] = useState({});
 
     const [companyData, setCompanyData] = useState({
@@ -38,7 +39,7 @@ function CompanyEditForm() {
         contact_email: "",
         role: "",
       });
-      console.log(companyData);
+      
 
     const {
         name,
@@ -46,13 +47,14 @@ function CompanyEditForm() {
         website_url,
         excerpt,
         description,
-        credentials,
         key_words,
         contact_name,
         contact_email,
         role,
     } = companyData;
 
+    const companyCredentials = companyData.credentials;
+    // console.log(companyCredentials)
     const imageInput = useRef(null);
 
     const history = useHistory();
@@ -122,7 +124,6 @@ function CompanyEditForm() {
         formData.append("website_url", website_url);
         formData.append("excerpt", excerpt);
         formData.append("description", description);
-        formData.append(["credentials"], credentials);
         formData.append("key_words", key_words);
         formData.append("contact_name", contact_name);
         formData.append("contact_email", contact_email);
@@ -134,6 +135,10 @@ function CompanyEditForm() {
     
         try {
             await axiosReq.put(`/companies/${id}/`, formData);
+            // replaces formData.append to add unchanged companyCredentials data
+            await axios.patch(`/companies/${id}/`, {
+                credentials: companyCredentials,
+            });
             history.push(`/companies/${id}/`);
         } catch (err) {
             console.log(err);
