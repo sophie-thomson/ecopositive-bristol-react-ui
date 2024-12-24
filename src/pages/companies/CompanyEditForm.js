@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
-import { useRedirect } from "../../hooks/useRedirect";
+// import { useRedirect } from "../../hooks/useRedirect";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -19,9 +19,10 @@ import styles from "../../styles/CompanyCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
+import { useParams } from "react-router-dom";
 
 function CompanyEditForm() {
-    useRedirect("loggedOut");
+    
 
     const [errors, setErrors] = useState({});
 
@@ -31,11 +32,13 @@ function CompanyEditForm() {
         website_url: "",
         excerpt: "",
         description: "",
+        credentials: [],
         key_words: "",
         contact_name: "",
         contact_email: "",
         role: "",
       });
+      console.log(companyData);
 
     const {
         name,
@@ -43,6 +46,7 @@ function CompanyEditForm() {
         website_url,
         excerpt,
         description,
+        credentials,
         key_words,
         contact_name,
         contact_email,
@@ -52,6 +56,45 @@ function CompanyEditForm() {
     const imageInput = useRef(null);
 
     const history = useHistory();
+    const { id } = useParams();
+
+    useEffect(() => {
+        const handleMount = async () => {
+            try {
+                const {data} = await axiosReq.get(`/companies/${id}/`)
+                const {
+                    name,
+                    logo,
+                    website_url,
+                    excerpt,
+                    description,
+                    credentials,
+                    key_words,
+                    contact_name,
+                    contact_email,
+                    role,
+                    is_owner,
+                } = data;
+
+                is_owner ? setCompanyData({
+                    name,
+                    logo,
+                    website_url,
+                    excerpt,
+                    description,
+                    credentials,
+                    key_words,
+                    contact_name,
+                    contact_email,
+                    role,
+                }) : history.push("/");
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        handleMount();
+    }, [history, id]);
 
     const handleChange = (event) => {
         setCompanyData({
@@ -76,19 +119,22 @@ function CompanyEditForm() {
         const formData = new FormData();
     
         formData.append("name", name);
-        formData.append("logo", imageInput.current.files[0]);
         formData.append("website_url", website_url);
         formData.append("excerpt", excerpt);
         formData.append("description", description);
+        formData.append(["credentials"], credentials);
         formData.append("key_words", key_words);
         formData.append("contact_name", contact_name);
         formData.append("contact_email", contact_email);
         formData.append("role", role);
+
+        if (imageInput?.current?.files[0]) {
+            formData.append("logo", imageInput.current.files[0]);
+        }
     
         try {
-            const { data } = await axiosReq.post("/companies/", formData);
-            history.push(`/companies/${data.id}`);
-            console.log(data);
+            await axiosReq.put(`/companies/${id}/`, formData);
+            history.push(`/companies/${id}/`);
         } catch (err) {
             console.log(err);
             if (err.response?.status !== 401) {
