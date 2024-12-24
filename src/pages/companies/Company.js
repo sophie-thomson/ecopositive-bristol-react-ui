@@ -34,7 +34,7 @@ const Company = (props) => {
     const handleEdit = () => {
         history.push(`/companies/${id}/edit`);
     };
-
+    
     const handleDelete = async () => {
         try {
           await axiosRes.delete(`/companies/${id}/`);

@@ -70,8 +70,8 @@ function CredentialSelectForm({ company }) {
                 ...prevCredentialsData,
                 response.data.credentials[0]
             ]);
-
-            setCredentialsData([]);
+            
+            setCredentialsData(null);
             window.location.reload();
             
 
@@ -84,9 +84,22 @@ function CredentialSelectForm({ company }) {
         }
     };
 
-    const handleDelete = (event) => {
-        
-    }
+    const handleDelete = async (event) => {
+        try {
+            setCredentialsData(event.target.value);
+            const updatedCredentials = companyCredentials.filter(
+                credential => credential !== parseInt(credentialsData)
+            );
+            const response = await axios.patch(`/companies/${company}/`, {
+                credentials: updatedCredentials,
+            });
+            setCredentialsData(null);
+
+            window.location.reload();
+        } catch (err) {
+            console.log(err)
+        }    
+    };
 
     const handleCancel = () => {
         window.location.reload();
@@ -95,13 +108,15 @@ function CredentialSelectForm({ company }) {
     const ecoList = credentialsOptions.results.filter(credential =>
         credential.group === "Eco-Conscious Approach"
     );
-    console.log(ecoList)
+
     const memberList = credentialsOptions.results.filter(credential =>
         credential.group === "Membership / Accreditation"
     );
+
     const socialList = credentialsOptions.results.filter(credential =>
         credential.group === "Socially Responsible"
     );
+
     const sustainableList = credentialsOptions.results.filter(credential =>
         credential.group === "Sustainable Production / Materials"
     );
