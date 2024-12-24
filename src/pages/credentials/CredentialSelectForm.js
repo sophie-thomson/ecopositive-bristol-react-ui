@@ -51,12 +51,8 @@ function CredentialSelectForm({ company }) {
 
     const handleChange = (event) => {
         setCredentialsData(event.target.value);
-        console.log(event.target.value)
+        // console.log(event.target.value)
     };
-
-    const handleDelete = (event) => {
-        
-    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -74,7 +70,9 @@ function CredentialSelectForm({ company }) {
                 ...prevCredentialsData,
                 response.data.credentials[0]
             ]);
-            setCredentialsData(null);
+            setCredentialsData([]);
+            history.push(`/companies/${company}/`);
+            
 
         } catch (err) {
             console.log(err);
@@ -84,6 +82,10 @@ function CredentialSelectForm({ company }) {
             
         }
     };
+
+    const handleDelete = (event) => {
+        
+    }
 
     const ecoList = credentialsOptions.results.filter(credential =>
         credential.group === "Eco-Conscious Approach"
@@ -152,7 +154,10 @@ function CredentialSelectForm({ company }) {
                                 </Alert>
                             ))}
                             <div className="d-flex justify-content-around">
-                            <Button className={`${btnStyles.Button} ${btnStyles.Green} m-2`} type="submit">
+                            <Button
+                                className={`${btnStyles.Button} ${btnStyles.Green} m-2`}
+                                type="submit"
+                            >
                                 Add Credential
                             </Button>
                             <Button 
