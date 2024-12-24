@@ -18,9 +18,8 @@ import Credentials from "../credentials/Credentials";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 
-
-
 function CompanyPage(props) {
+    
     const {
         owner,
     } = props;
@@ -69,14 +68,14 @@ function CompanyPage(props) {
                         company={id}
                     />
                     {/* Checks if user = company owner and uses onClick to display CredentialSelectForm */}
-                    {is_owner ? (
+                    {is_owner && (
                         <button 
                             className={`${btnStyles.Button} ${btnStyles.Green} align-items-center`}
                             onClick={displayForm}
                         >
                             Add / Edit Credentials   
                         </button>
-                    ) : (null)}
+                    )}
                     <Container fluid className="d-flex justify-content-center">
                     {showForm && is_owner && (
                         <div className="d-flex justify-content-center">
@@ -88,11 +87,6 @@ function CompanyPage(props) {
                         </div>
                     )}
                     </Container>
-                    {/* <div className="mx-3">
-                    <CredentialSelectForm
-                        company={id}
-                    />
-                    </div> */}
                     <Container className={appStyles.Content}>
                         Comments
                     </Container>

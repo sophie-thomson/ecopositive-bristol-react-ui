@@ -70,8 +70,9 @@ function CredentialSelectForm({ company }) {
                 ...prevCredentialsData,
                 response.data.credentials[0]
             ]);
+
             setCredentialsData([]);
-            history.push(`/companies/${company}/`);
+            window.location.reload();
             
 
         } catch (err) {
@@ -86,6 +87,10 @@ function CredentialSelectForm({ company }) {
     const handleDelete = (event) => {
         
     }
+
+    const handleCancel = () => {
+        window.location.reload();
+    };
 
     const ecoList = credentialsOptions.results.filter(credential =>
         credential.group === "Eco-Conscious Approach"
@@ -313,7 +318,7 @@ function CredentialSelectForm({ company }) {
                         </div>
                         <Button
                             className={`${btnStyles.Button} ${btnStyles.Bright}`}
-                            onClick={() => history.goBack()}
+                            onClick={handleCancel}
                         >
                             X Cancel
                         </Button>
