@@ -18,27 +18,38 @@ import Credentials from "../credentials/Credentials";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 
-function CompanyPage(props) {
+function CompanyPage() {
     
-    const {
-        owner,
-    } = props;
     const { id } = useParams();
+    const [companyOwner, setCompanyOwner] = useState("");
     const [company, setCompany] = useState({ results: [] });
     const [showForm, setShowForm] = useState(false);
   
+
     const currentUser = useCurrentUser();
-    const is_owner = currentUser?.id === company.owner;
-    // const currentUser = useCurrentUser();
+    const is_owner = currentUser?.username === companyOwner;
+
     // const profile_image = currentUser?.profile_image;
 
      // Code adapted from Stack Overflow thread
     const displayForm = (event) => {
         event.preventDefault();
         setShowForm(prevState => !prevState);
-        console.log(showForm);
     }
 
+    useEffect(() => {
+        const fetchCompanyOwner = async () => {
+            try {
+                const companyData = await axiosReq.get(`/companies/${id}/`);
+                const companyOwner = (companyData.data.owner);
+                setCompanyOwner(companyOwner);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchCompanyOwner();
+    });
 
     useEffect(() => {
         const handleMount = async () => {
@@ -54,8 +65,6 @@ function CompanyPage(props) {
         handleMount();
     }, [id]);
 
-   
-
     return (
         <Container>
             <Row className="h-100">
@@ -68,6 +77,7 @@ function CompanyPage(props) {
                         company={id}
                     />
                     {/* Checks if user = company owner and uses onClick to display CredentialSelectForm */}
+                    
                     {is_owner && (
                         <button 
                             className={`${btnStyles.Button} ${btnStyles.Green} align-items-center`}
@@ -81,7 +91,7 @@ function CompanyPage(props) {
                         <div className="d-flex justify-content-center">
                         <CredentialSelectForm
                             company={id}
-                            currentCredentials={company.credentials}
+                            // currentCredentials={company.credentials}
                             className="mx-3 mt-0 pt-0"
                         />
                         </div>
