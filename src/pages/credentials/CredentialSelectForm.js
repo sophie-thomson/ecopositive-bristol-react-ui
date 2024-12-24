@@ -105,7 +105,7 @@ function CredentialSelectForm({ company }) {
             <Row>
                 <Col className="py-2 p-0 p-md-2">
                     <Container
-                        className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
+                        className={`${appStyles.Content} d-flex flex-column justify-content-center`}
                     >
                         <>
                         <Form.Text 

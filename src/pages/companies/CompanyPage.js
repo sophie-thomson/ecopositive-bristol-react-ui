@@ -77,6 +77,7 @@ function CompanyPage(props) {
                             Add / Edit Credentials   
                         </button>
                     ) : (null)}
+                    <Container fluid className="d-flex justify-content-center">
                     {showForm && is_owner && (
                         <div className="d-flex justify-content-center">
                         <CredentialSelectForm
@@ -86,6 +87,7 @@ function CompanyPage(props) {
                         />
                         </div>
                     )}
+                    </Container>
                     {/* <div className="mx-3">
                     <CredentialSelectForm
                         company={id}
