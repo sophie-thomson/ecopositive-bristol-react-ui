@@ -47,11 +47,10 @@ function CredentialSelectForm({ company }) {
             }   
         };
         fetchCredentials();
-    }, []);
+    }, [company]);
 
     const handleChange = (event) => {
         setCredentialsData(event.target.value);
-        // console.log(event.target.value)
     };
 
     const handleSubmit = async (event) => {
