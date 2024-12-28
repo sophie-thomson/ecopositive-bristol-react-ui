@@ -72,9 +72,11 @@ function CompanyPage() {
             <Row className="h-100">
                 
                 <Col className="py-2 p-0 p-lg-2" lg={8}>
-                    Popular profiles for mobile
                     <div className={`${styles.Main}`}>
                     <Company {...company.results[0]} setCompany={setCompany} companyPage />
+                    <div className="d-lg-none">
+                        <CompanyContact {...company.results[0]} setCompany={setCompany} companyPage />
+                    </div>
                     <Credentials
                         company={id}
                     />

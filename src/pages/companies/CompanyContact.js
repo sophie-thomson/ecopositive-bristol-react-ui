@@ -1,14 +1,13 @@
 import React from "react";
+import { Card, CardGroup, Col } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { axiosRes } from "../../api/axiosDefaults";
+
+import { DotsDropdown } from "../../components/DotsDropdown";
+import CompanyPage from "./CompanyPage";
 import styles from "../../styles/CompanyContact.module.css";
 import appStyles from "../../App.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Button, Card, Col } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
-// import Avatar from "../../components/Avatar";
-import { axiosRes } from "../../api/axiosDefaults";
-import { DotsDropdown } from "../../components/DotsDropdown";
-import CompanyPage from "./CompanyPage";
-// import btnStyles from "../../styles/Button.module.css";
 
 
 const CompanyContact = (props) => {
@@ -41,7 +40,50 @@ const CompanyContact = (props) => {
 
     return (
         <Card className={styles.Company}>
-            <Card.Body>
+            <Card.Body className={`${styles.Contact} d-lg-none py-1`}>
+                <CardGroup>
+                <Card className={`${styles.Address} ${styles.Card} py-2 pb-xs-0`}>
+                    <Card.Body className="py-0 ">
+                        {street && city && postcode && 
+                            <Card.Text className="mb-0">
+                                <i className="fa-solid fa-location-dot" />
+                                {street},<br />
+                                {city},<br />
+                                <span
+                                    className={`${styles.Postcode}`}
+                                >
+                                    {postcode}
+                                </span>
+                            </Card.Text>
+                        }
+                    
+                    </Card.Body>
+                </Card>
+                <Card className={`${styles.Address} ${styles.Card} pt-xs-0`}>
+                    <Card.Body className="py-1">
+                    <div>
+                        {phone && 
+                            <Card.Text className={`${styles.Phone}`}>
+                                <i className="fa-solid fa-phone" />
+                                {phone}
+                            </Card.Text>
+                        }
+                    </div>
+                    <div>
+                        
+                        {website_url && 
+                            <Card.Text className={`${styles.Website}`}>
+                                <i className="fa-solid fa-globe" />
+                                <a href={website_url} target="_blank">Visit website</a>
+                            </Card.Text>
+                        }
+                    </div>
+                    </Card.Body>
+                </Card>
+                </CardGroup>
+                   
+            </Card.Body>
+            <Card.Body className="d-none d-lg-block">
                 <div className="d-flex align-items-center justify-content-center">
                         <Card.Title className={`${styles.Header} m-auto py-4`}>
                                 Contact

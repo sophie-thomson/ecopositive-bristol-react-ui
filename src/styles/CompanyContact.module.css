@@ -15,6 +15,16 @@
     color: #195829;
 }
 
+.Contact {
+    background-color: #dfdfdf;
+}
+
+.Card {
+    border: none;
+    font-size: 0.9em;
+    background-color: #dfdfdf;
+}
+
 .Postcode {
     text-transform: uppercase;
 }
@@ -32,9 +42,5 @@
 .Website {
     padding-top: 5px;
     padding-left: 0;
+    margin-bottom: 2px;
 }
-
-/* .Website {
-    padding-top: 5px;
-    padding-left: 0;
-} */
