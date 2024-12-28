@@ -20,9 +20,6 @@ const Company = (props) => {
         website_url,
         excerpt,
         description,
-        // created_on,
-        // updated_on,
-        // endorsing_users,
         endorsements_count,
         comments_count,
     } = props;
@@ -122,7 +119,7 @@ const Company = (props) => {
                         {comments_count}
                     </Link>
                 </div>
-                <div className="d-flex justify-content-center justify-content-md-start">
+                <div className="d-flex justify-content-center">
                     <a 
                         href={website_url} 
                         target="_blank" 
@@ -131,13 +128,9 @@ const Company = (props) => {
                     > 
                         <Card.Img className={`${styles.Logo}`} src={logo} alt={name} />
                     </a>
-                <span className="d-none d-md-inline mx-3 mt-2 text-left">
-                    {excerpt && <Card.Text>{excerpt}</Card.Text>}
-                    {description && <Card.Text>{description}</Card.Text>}
-                </span>
                 
               </div>
-              <div className="d-md-none my-3 text-left">
+              <div className=" my-3 text-left">
                   {excerpt && <Card.Text>{excerpt}</Card.Text>}
                   {description && <Card.Text>{description}</Card.Text>}
               </div>
