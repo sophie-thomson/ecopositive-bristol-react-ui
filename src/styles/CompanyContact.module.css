@@ -1,0 +1,40 @@
+.Company {
+    background-color: #fafafa;
+    border: none;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.Header {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #195829;
+}
+
+.Postcode {
+    text-transform: uppercase;
+}
+
+.Address {
+    text-transform: capitalize;
+}
+
+.Address i {
+    color: #679cb1;
+    font-size:1.3em;
+}
+
+.Phone,
+.Website {
+    padding-top: 5px;
+    padding-left: 0;
+}
+
+/* .Website {
+    padding-top: 5px;
+    padding-left: 0;
+} */
