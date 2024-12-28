@@ -80,9 +80,9 @@ const Company = (props) => {
         <Card className={styles.Company}>
             <Card.Body>
                 <div className={`${styles.Endorse} d-flex align-items-center`}>
-                <div><i className="fa-solid fa-award" />
-                        {endorsements_count}
-                        <span className="d-none d-sm-inline text-muted"> endorsements</span>
+                    <div><i className="fa-solid fa-award" />
+                            {endorsements_count}
+                            <span className="d-none d-sm-inline text-muted"> endorsements</span>
                     </div>
                     {is_owner ? (
                         null
@@ -95,7 +95,7 @@ const Company = (props) => {
                             Endorse <span className="d-none d-sm-inline">This Company</span>
                         </Button>)}
                 </div>
-                <Card.Text className="d-flex align-items-center justify-content-center">
+                <Card.Text as="div" className="d-flex align-items-center justify-content-center">
                     <a 
                         href={website_url} 
                         target="_blank" 
