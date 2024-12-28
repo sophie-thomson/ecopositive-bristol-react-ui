@@ -12,8 +12,18 @@
     font-size: 1.5em;
     text-align: center;
     color: #195829;
-    /* margin-top: 15px; */
     text-align: center;
+}
+
+.Subheader {
+    font-style: normal;
+    font-weight: bold;
+    /* font-size: 16px; */
+    /* line-height: 19px; */
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #195829;
 }
 
 .Card {
@@ -42,4 +52,23 @@
 .Comment i {
     color: #679cb1;
     font-size:1.3em;
+}
+
+.Credentials {
+    font-size: 0.9em;
+    color: #2b2b2b;
+    
+}
+
+.Credentials i {
+    color: #195829;
+}
+
+.List {
+    border: none;
+    max-width: 500px;
+    background-color: #d0eee3;
+    border-radius: 35px;
+    margin-top: 5px;
+    padding: 15px;
 }

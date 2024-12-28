@@ -17,95 +17,95 @@ import { useState } from "react";
 function Credentials({ company }) {
 
     const [errors, setErrors] = useState({});
-    const [companyCredentials, setCompanyCredentials] = useState ([]);
-    const [credentials, setCredentials] = useState ([]);
+    // const [companyCredentials, setCompanyCredentials] = useState ([]);
+    // const [credentials, setCredentials] = useState ([]);
     const [credentialsList, setCredentialsList] = useState ([]);
     
 
-        useEffect(() => {
-            const fetchCredentials = async () => {
-                try {
-                    const { data } = await axiosReq.get(`/credentials/`);
-                    const companyData = await axiosReq.get(`/companies/${company}/`);
-                    const companyCredentials = (companyData.data.credentials);
-                    setCompanyCredentials(companyCredentials);
-                    setCredentials(data.results);
+    useEffect(() => {
+        const fetchCredentials = async () => {
+            try {
+                const { data } = await axiosReq.get(`/credentials/`);
+                const companyData = await axiosReq.get(`/companies/${company}/`);
+                const companyCredentials = (companyData.data.credentials);
+                    // setCompanyCredentials(companyCredentials);
+                    // setCredentials(data.results);
                     // console.log(companyCredentials);
                     // console.log(data.results);
     
-                    const credentialsList = companyCredentials.map(id => {
-                        return data.results.find(credential => credential.id === id);    
-                    });
-                    setCredentialsList(credentialsList);
-                    console.log(credentialsList);
+                const credentialsList = companyCredentials.map(id => {
+                    return data.results.find(credential => credential.id === id);    
+                });
+                setCredentialsList(credentialsList);
+                console.log(credentialsList);
                         
-                } catch (err) {
-                    console.log(err);
-                }   
-            };
+            } catch (err) {
+                console.log(err);
+            }   
+        };
         
-            fetchCredentials();
-        }, [company]);
+        fetchCredentials();
+    }, [company]);
 
-        const ecoList = credentialsList.filter(credential =>
-            credential.group === "Eco-Conscious Approach"
-        );
+    const ecoList = credentialsList.filter(credential =>
+        credential.group === "Eco-Conscious Approach"
+    );
 
-        const companyEcoList = ecoList.map((credential) =>
-            <li 
-                key={credential.id}
-                group={credential.group}
-                className="list-unstyled"
-            >
-                <i className="fa-brands fa-envira" />
-                {credential.name}
-            </li>
-        );
+    const companyEcoList = ecoList.map((credential) =>
+        <li
+            key={credential.id}
+            group={credential.group}
+            className="list-unstyled"
+        >
+            <i className="fa-brands fa-envira" />
+            {credential.name}
+        </li>
+    );
 
-        const memberList = credentialsList.filter(credential =>
-            credential.group === "Membership / Accreditation"
-        );
-        
-        const companyMemberList = memberList.map((credential) =>
-            <li 
-                key={credential.id}
-                group={credential.group}
-                className="list-unstyled"
-            >
-                <i className="fa-brands fa-envira" />
-                {credential.name}
-            </li>
-        );
+    const memberList = credentialsList.filter(credential =>
+        credential.group === "Membership / Accreditation"
+    );
 
-        const socialList = credentialsList.filter(credential =>
-            credential.group === "Socially Responsible"
-        );
-        
-        const companySocialList = socialList.map((credential) =>
-            <li 
-                key={credential.id}
-                group={credential.group}
-                className="list-unstyled"
-            >
-                <i className="fa-brands fa-envira" />
-                {credential.name}
-            </li>
-        );
+    const companyMemberList = memberList.map((credential) =>
+        <li
+            key={credential.id}
+            group={credential.group}
+            className="list-unstyled"
+        >
+            <i className="fa-brands fa-envira" />
+            {credential.name}
+        </li>
+    );
 
-        const sustainableList = credentialsList.filter(credential =>
-            credential.group === "Sustainable Production / Materials"
-        );
-        
-        const companySustainableList = sustainableList.map((credential) =>
-            <li 
-                key={credential.id}
-                group={credential.group}
-                className="list-unstyled"
-            >
-                <i className="fa-brands fa-envira" />
-                {credential.name}
-            </li>
-        );
+    const socialList = credentialsList.filter(credential =>
+        credential.group === "Socially Responsible"
+    );
+
+    const companySocialList = socialList.map((credential) =>
+        <li
+            key={credential.id}
+            group={credential.group}
+            className="list-unstyled"
+        >
+            <i className="fa-brands fa-envira" />
+            {credential.name}
+        </li>
+    );
+
+    const sustainableList = credentialsList.filter(credential =>
+        credential.group === "Sustainable Production / Materials"
+    );
+
+    const companySustainableList = sustainableList.map((credential) =>
+        <li
+            key={credential.id}
+            group={credential.group}
+            className="list-unstyled"
+        >
+            <i className="fa-brands fa-envira" />
+            {credential.name}
+        </li>
+    );
 
     return (
         <Container>
