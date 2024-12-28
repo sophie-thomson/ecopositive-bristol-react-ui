@@ -121,7 +121,14 @@ function Credentials({ company }) {
                         <Card.Title className={`${styles.ListTitle} px-1`}>
                             Eco-Conscious Approach
                         </Card.Title>
-                        <Card.Text className={`${styles.ListText}`}><ul className="pl-0">{companyEcoList}</ul></Card.Text>
+                        <Card.Text
+                            as="div"
+                            className={`${styles.ListText}`}
+                        >
+                            <ul className="pl-0">
+                                {companyEcoList}
+                            </ul>
+                        </Card.Text>
                     </Card.Body>
                 </Card>
                 <Card className={`${styles.List}`}>
@@ -129,7 +136,14 @@ function Credentials({ company }) {
                         <Card.Title className={`${styles.ListTitle}`}>
                             Membership / Accreditation
                         </Card.Title>
-                        <Card.Text className={`${styles.ListText}`}><ul className="pl-0">{companyMemberList}</ul></Card.Text>
+                        <Card.Text
+                            as="div"
+                            className={`${styles.ListText}`}
+                        >
+                            <ul className="pl-0">
+                                {companyMemberList}
+                            </ul>
+                        </Card.Text>
                     </Card.Body>
                 </Card>
                 <Card className={`${styles.List}`}>
@@ -137,7 +151,14 @@ function Credentials({ company }) {
                         <Card.Title className={`${styles.ListTitle}`}>
                             Socially Responsible
                         </Card.Title>
-                        <Card.Text className={`${styles.ListText}`}><ul className="pl-0">{companySocialList}</ul></Card.Text>
+                        <Card.Text
+                            as="div"
+                            className={`${styles.ListText}`}
+                        >
+                            <ul className="pl-0">
+                                {companySocialList}
+                            </ul>
+                        </Card.Text>
                     </Card.Body>
                 </Card>
                 <Card className={`${styles.List}`}>
@@ -145,7 +166,14 @@ function Credentials({ company }) {
                         <Card.Title className={`${styles.ListTitle} px-2`}>
                             Sustainable Production / Materials
                         </Card.Title>
-                        <Card.Text className={`${styles.ListText}`}><ul className="pl-0">{companySustainableList}</ul></Card.Text>
+                        <Card.Text
+                            as="div"
+                            className={`${styles.ListText}`}
+                        >
+                            <ul className="pl-0">
+                                {companySustainableList}
+                            </ul>
+                        </Card.Text>
                     </Card.Body>
                 </Card>
                 </div>
