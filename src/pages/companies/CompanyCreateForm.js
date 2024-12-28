@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
+import { InputGroup } from "react-bootstrap";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -20,6 +21,7 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 
+
 function CompanyCreateForm() {
     useRedirect("loggedOut");
 
@@ -29,6 +31,10 @@ function CompanyCreateForm() {
         name: "",
         logo: "",
         website_url: "",
+        street: "",
+        city: "",
+        postcode: "",
+        phone: "",
         excerpt: "",
         description: "",
         key_words: "",
@@ -41,6 +47,10 @@ function CompanyCreateForm() {
         name,
         logo,
         website_url,
+        street,
+        city,
+        postcode,
+        phone,
         excerpt,
         description,
         key_words,
@@ -78,6 +88,10 @@ function CompanyCreateForm() {
         formData.append("name", name);
         formData.append("logo", imageInput.current.files[0]);
         formData.append("website_url", website_url);
+        formData.append("street", street);
+        formData.append("city", city);
+        formData.append("postcode", postcode);
+        formData.append("phone", phone);
         formData.append("excerpt", excerpt);
         formData.append("description", description);
         formData.append("key_words", key_words);
@@ -102,9 +116,87 @@ function CompanyCreateForm() {
         <div className="text-center">
             <p className={`${styles.Header}`}>
                 <i className="fa-regular fa-pen-to-square"></i>
-                Contact Details
+                Contact
             </p>
-            <hr className={`${styles.Rule}`} />
+            <hr className={`${appStyles.Rule}`} />
+
+            <Form.Group>
+                <Form.Label className={`${styles.Field}`}>Company Address</Form.Label>
+                <Form.Control
+                className={`${styles.Input}`}
+                type="text"
+                name="street"
+                value={street}
+                onChange={handleChange}
+                placeholder="Building number and street name"
+                />
+            </Form.Group>
+            {errors?.street?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                {message}
+                </Alert>
+            ))}
+
+            <Form.Group>
+                <Form.Control
+                className={`${styles.Input}`}
+                type="text"
+                name="city"
+                value={city}
+                onChange={handleChange}
+                placeholder="City"
+                />
+            </Form.Group>
+            {errors?.city?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                {message}
+                </Alert>
+            ))}
+
+            <Form.Group>
+                <Form.Control
+                className={`${styles.Input} ${styles.Postcode}`}
+                type="text"
+                name="postcode"
+                value={postcode}
+                onChange={handleChange}
+                placeholder="Postcode"
+                />
+            </Form.Group>
+            {errors?.postcode?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                {message}
+                </Alert>
+            ))}
+
+            <Form.Group>
+                <InputGroup>
+                    <InputGroup.Prepend>
+                        <InputGroup.Text
+                            className={`${styles.Phone} mb-2`}
+                        >
+                            (+44)
+                        </InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <Form.Control
+                    className={`${styles.Input} mb-2`}
+                    type="number"
+                    name="phone"
+                    value={phone}
+                    onChange={handleChange}
+                    placeholder="Telephone"
+                    inputMode="numeric"
+                    />
+                </InputGroup>
+            </Form.Group>
+            {errors?.phone?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                {message}
+                </Alert>
+            ))}
+
+            <hr className={`${appStyles.Rule} mt-4`} />
+            
             <Form.Group>
                 <Form.Label className={`${styles.Field}`}>Company Contact Name</Form.Label>
                 <Form.Control
