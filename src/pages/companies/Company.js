@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../styles/Company.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 // import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
@@ -21,7 +21,9 @@ const Company = (props) => {
         excerpt,
         description,
         endorsements_count,
+        endorsement_id,
         comments_count,
+        setCompanies,
     } = props;
 
     const currentUser = useCurrentUser();
@@ -41,37 +43,37 @@ const Company = (props) => {
         }
     };
 
-//   const handleLike = async () => {
-//     try {
-//       const { data } = await axiosRes.post("/likes/", { post: id });
-//       setPosts((prevPosts) => ({
-//         ...prevPosts,
-//         results: prevPosts.results.map((post) => {
-//           return post.id === id
-//             ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
-//             : post;
-//         }),
-//       }));
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
+  const handleEndorse = async () => {
+    try {
+      const { data } = await axiosRes.post("/endorsements/", { company: id });
+      setCompanies((prevCompanies) => ({
+        ...prevCompanies,
+        results: prevCompanies.results.map((company) => {
+          return company.id === id
+            ? { ...company, endorsement_count: company.endorsements_count + 1, endorsement_id: data.id }
+            : company;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-//   const handleUnlike = async () => {
-//     try {
-//       await axiosRes.delete(`/likes/${like_id}/`);
-//       setPosts((prevPosts) => ({
-//         ...prevPosts,
-//         results: prevPosts.results.map((post) => {
-//           return post.id === id
-//             ? { ...post, likes_count: post.likes_count - 1, like_id: null }
-//             : post;
-//         }),
-//       }));
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
+  const handleUnendorse = async () => {
+    try {
+      await axiosRes.delete(`/endorsements/${endorsement_id}/`);
+      setCompanies((prevCompanies) => ({
+        ...prevCompanies,
+        results: prevCompanies.results.map((company) => {
+          return company.id === id
+            ? { ...company, endorsements_count: company.endorsement_count - 1, endorsement_id: null }
+            : company;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
     return (
         <Card className={styles.Company}>
@@ -81,16 +83,33 @@ const Company = (props) => {
                             {endorsements_count}
                             <span className="d-none d-sm-inline text-muted"> endorsements</span>
                     </div>
+            
                     {is_owner ? (
                         null
-                    ) : (
+                    ) : endorsement_id ? (
                         <Button 
                             className={`${btnStyles.Button} ${btnStyles.Green} ${styles.Endorse} ml-auto`} 
-                            type="submit"
+                            onClick={handleUnendorse}
                         >
                             <i className="fa-solid fa-award" />
-                            Endorse <span className="d-none d-sm-inline">This Company</span>
-                        </Button>)}
+                            Remove Endorsement
+                        </Button>
+                    ) : currentUser ?(
+                      <Button 
+                      className={`${btnStyles.Button} ${btnStyles.Green} ${styles.Endorse} ml-auto`} 
+                      onClick={handleEndorse}
+                  >
+                      <i className="fa-solid fa-award" />
+                      Endorse Company
+                  </Button>
+                    ) : (
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip>Log in to endorse companies!</Tooltip>}
+                      >
+                        <i className="fa-solid fa-award" />
+                      </OverlayTrigger>
+                      )}
                 </div>
                 <Card.Text as="div" className="d-flex align-items-center justify-content-center">
                     <a 
@@ -145,12 +164,12 @@ const Company = (props) => {
             >
               <i className="far fa-heart" />
             </OverlayTrigger>
-          ) : like_id ? (
-            <span onClick={handleUnlike}>
+          ) : endorsement_id ? (
+            <span onClick={handleUnendorse}>
               <i className={`fas fa-heart ${styles.Heart}`} />
             </span>
           ) : currentUser ? (
-            <span onClick={handleLike}>
+            <span onClick={handleEndorse}>
               <i className={`far fa-heart ${styles.HeartOutline}`} />
             </span>
           ) : (
@@ -161,7 +180,7 @@ const Company = (props) => {
               <i className="far fa-heart" />
             </OverlayTrigger>
           )}
-          {likes_count} */}
+          {endorsements_count} */}
           
           {/* <Link to={`/companies/${id}`}>
             <i className="far fa-comments" />
