@@ -1,4 +1,4 @@
-# EcoPositive Bristol (Django REST API)
+# EcoPositive Bristol (REACT UI)
 
 [EcoPositive Bristol](https://tastesensation-pp4-54d01fbc1628.herokuapp.com/) is a one stop business listing championing Bristol’s eco-conscious and socially responsible companies.
 
