@@ -148,39 +148,15 @@ const Company = (props) => {
                         <Card.Img className={`${styles.Logo}`} src={logo} alt={name} />
                     </a>
                 
-              </div>
-              <div className=" my-3 text-left">
-                  {excerpt && <Card.Text>{excerpt}</Card.Text>}
-                  {description && <Card.Text>{description}</Card.Text>}
-              </div>
+                </div>
+                <div className=" my-3 text-left">
+                    {excerpt && <Card.Text>{excerpt}</Card.Text>}
+                    {description && <Card.Text>{description}</Card.Text>}
+                </div>
           {/* <Link to={`/profiles/${owner_profile_id}`}>
                       <Avatar src={owner_profile_image} height={55} />
                       {owner}
                     </Link> */}
-          {/* {is_owner ? (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>You can't like your own post!</Tooltip>}
-            >
-              <i className="far fa-heart" />
-            </OverlayTrigger>
-          ) : endorsement_id ? (
-            <span onClick={handleUnendorse}>
-              <i className={`fas fa-heart ${styles.Heart}`} />
-            </span>
-          ) : currentUser ? (
-            <span onClick={handleEndorse}>
-              <i className={`far fa-heart ${styles.HeartOutline}`} />
-            </span>
-          ) : (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>Log in to like posts!</Tooltip>}
-            >
-              <i className="far fa-heart" />
-            </OverlayTrigger>
-          )}
-          {endorsements_count} */}
           
           {/* <Link to={`/companies/${id}`}>
             <i className="far fa-comments" />

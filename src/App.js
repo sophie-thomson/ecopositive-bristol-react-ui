@@ -11,9 +11,14 @@ import CompanyCreateForm from './pages/companies/CompanyCreateForm';
 import CompanyPage from './pages/companies/CompanyPage';
 import CompanyEditForm from './pages/companies/CompanyEditForm';
 import CredentialSelectForm from './pages/credentials/CredentialSelectForm';
+import { useCurrentUser } from './contexts/CurrentUserContext';
+import CompanyListPage from './pages/companies/CompanyListPage';
 
 
 function App() {
+
+    const currentUser = useCurrentUser();
+    const profile_id = currentUser?.profile_id || "";
 
     return (
         
@@ -23,6 +28,13 @@ function App() {
                         <AddCompany />
                         <Container className={styles.Main}>
                             <Switch>
+                            <Route 
+                                exact 
+                                path="/" 
+                                render={() => (
+                                <CompanyListPage message="No results found. Try searching for something else." />
+                                )}
+                            />
                                 <Route exact path="/" render={() => <h1>Directory</h1>} />
                                 <Route exact path="/signin" render={() => <SignInForm />} />
                                 <Route exact path="/signup" render={() => <SignUpForm />} />
