@@ -10,9 +10,8 @@
     font-style: normal;
     font-weight: 700;
     font-size: 1.5em;
-    text-align: center;
+    /* text-align: sm-left; */
     color: #195829;
-    text-align: center;
 }
 
 .Subheader {
@@ -35,9 +34,9 @@
 }
 
 .Logo {
-    max-width:200px;
+    max-width:150px;
     height: auto;
-    align-self: flex-start;
+    /* align-self: flex-start; */
     margin-bottom: 10px;
 }
 
@@ -59,7 +58,7 @@
 .Credentials {
     font-size: 0.9em;
     color: #2b2b2b;
-    /* display: flex; */
+    display: flex;
     margin:auto;
 }
 

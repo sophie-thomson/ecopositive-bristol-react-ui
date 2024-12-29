@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
 
 import styles from "../../styles/CompanyList.module.css";
@@ -74,17 +74,28 @@ function CompanyList (props) {
                     </span>
 
                 </div>
-                <Link to={`/companies/${id}`}>
-                <div className="d-flex flex-wrap">
+                <Row className="d-flex justify-content-center">
+                <Col sm={3} className="d-flex justify-content-center">
+                    <Link to={`/companies/${id}`}>
                     <Card.Img className={`${styles.Logo} mr-3`} src={logo} alt={name} />
-                    {name && <Card.Text className={`${styles.Header}`}>{name}</Card.Text>}
-                </div>
+                    </Link>
+                </Col>
+                <Col className={`${styles.Company}`}>
+                <Link to={`/companies/${id}`}>
+                {name && 
+                    <Card.Text className={`${styles.Header} d-sm-flex`}>
+                        {name}
+                    </Card.Text>   
+                }
                 </Link>
                 {excerpt &&
-                    <Card.Text className="mb-0 text-left">
+                    <Card.Text className="mb-0 text-sm-left">
                         {excerpt}
                     </Card.Text>
                 }
+                </Col>
+                </Row>
+                
                 <Row className={`${styles.List} d-flex justify-content-center`}>
                     <div className="my-2 w-100">
                         <p className={`${styles.Subheader}`}>Eco-Credentials</p>
@@ -94,8 +105,7 @@ function CompanyList (props) {
                                 `${styles.Credentials} 
                                 list-unstyled 
                                 d-flex 
-                                justify-content-center 
-                                justify-content-sm-around 
+                                justify-content-center
                                 flex-wrap`
                         }>  
                             <li>{ecoList.length > 0 ? (
@@ -124,7 +134,7 @@ function CompanyList (props) {
                             <li>{sustainableList.length > 0 ? (
                                 <>
                                     <i className="fa-brands fa-envira" />
-                                    Sustainable Production / Materials
+                                    Sustainable Materials
                                 </>
                             ) : (null)
                             }</li>

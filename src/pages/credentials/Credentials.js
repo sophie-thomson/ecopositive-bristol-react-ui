@@ -98,75 +98,90 @@ function Credentials({ company }) {
 
     return (
         <Container>
-            
-            <div className="d-flex align-items-center">
+            <Card>
+                <Card.Body className={`${styles.Credentials}`}>
+            <div className="d-flex align-items-center pt-3">
                 <p className={`${styles.Header} mx-auto`}>Eco-Credentials</p>    
             </div>
-            <hr className={`${appStyles.Rule}`} />
+            <hr className={`${appStyles.Rule} mb-0`} />
             <Col className="py-2 p-0 p-md-2" >
                 <div className="d-flex justify-content-around flex-wrap mb-3">
-                <Card className={`${styles.List}`}>
-                    <Card.Body className="pb-1 pt-4">
-                        <Card.Title className={`${styles.ListTitle} px-1`}>
-                            Eco-Conscious Approach
-                        </Card.Title>
-                        <Card.Text
-                            as="div"
-                            className={`${styles.ListText}`}
-                        >
-                            <ul className="pl-0">
-                                {companyEcoList}
-                            </ul>
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-                <Card className={`${styles.List}`}>
-                    <Card.Body className="pb-1 pt-4">
-                        <Card.Title className={`${styles.ListTitle}`}>
-                            Membership / Accreditation
-                        </Card.Title>
-                        <Card.Text
-                            as="div"
-                            className={`${styles.ListText}`}
-                        >
-                            <ul className="pl-0">
-                                {companyMemberList}
-                            </ul>
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-                <Card className={`${styles.List}`}>
-                    <Card.Body className="pb-1 pt-4">
-                        <Card.Title className={`${styles.ListTitle}`}>
-                            Socially Responsible
-                        </Card.Title>
-                        <Card.Text
-                            as="div"
-                            className={`${styles.ListText}`}
-                        >
-                            <ul className="pl-0">
-                                {companySocialList}
-                            </ul>
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-                <Card className={`${styles.List}`}>
-                    <Card.Body className="pb-1 pt-4">
-                        <Card.Title className={`${styles.ListTitle} px-2`}>
-                            Sustainable Production / Materials
-                        </Card.Title>
-                        <Card.Text
-                            as="div"
-                            className={`${styles.ListText}`}
-                        >
-                            <ul className="pl-0">
-                                {companySustainableList}
-                            </ul>
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                    {companyEcoList.length > 0 ? (
+                        <Card className={`${styles.List}`}>
+                            <Card.Body className={`${styles.Credentials}`}>
+                                <Card.Title 
+                                    className={`${styles.ListTitle} px-1`}
+                                >
+                                    Eco-Conscious Approach
+                                </Card.Title>
+                                <Card.Text
+                                    as="div"
+                                    className={`${styles.ListText}`}
+                                >
+                                    <ul className="pl-0">
+                                        {companyEcoList}
+                                    </ul>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    ) : (null)}
+                    {companyMemberList.length > 0 ? (
+                        <Card className={`${styles.List}`}>
+                            <Card.Body className={`${styles.Credentials}`}>
+                                <Card.Title className={`${styles.ListTitle}`}>
+                                    Membership / Accreditation
+                                </Card.Title>
+                                <Card.Text
+                                    as="div"
+                                    className={`${styles.ListText}`}
+                                >
+                                    <ul className="pl-0">
+                                        {companyMemberList}
+                                    </ul>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    ) : (null)}
+                    {companySocialList.length > 0 ? (
+                        <Card className={`${styles.List}`}>
+                            <Card.Body className={`${styles.Credentials}`}>
+                                <Card.Title className={`${styles.ListTitle}`}>
+                                    Socially Responsible
+                                </Card.Title>
+                                <Card.Text
+                                    as="div"
+                                    className={`${styles.ListText}`}
+                                >
+                                    <ul className="pl-0">
+                                        {companySocialList}
+                                    </ul>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    ) : (null)}
+                    {companySocialList.length > 0 ? (
+                        <Card className={`${styles.List}`}>
+                            <Card.Body className={`${styles.Credentials}`}>
+                                <Card.Title 
+                                    className={`${styles.ListTitle} px-2`}
+                                >
+                                    Sustainable Materials
+                                </Card.Title>
+                                <Card.Text
+                                    as="div"
+                                    className={`${styles.ListText}`}
+                                >
+                                    <ul className="pl-0">
+                                        {companySustainableList}
+                                    </ul>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    ) : (null)}
                 </div>
             </Col>
+            </Card.Body>
+            </Card>
         </Container>
     );
 };
