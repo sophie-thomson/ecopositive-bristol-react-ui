@@ -54,7 +54,8 @@ const Company = (props) => {
                 endorsements_count: prevCompany.endorsements_count + 1,
                 endorsement_id: data.id,
             }));
-            console.log(endorsement_id);
+            
+            window.location.reload();
         } catch (err) {
             console.log(err);
         }
@@ -68,6 +69,8 @@ const Company = (props) => {
                 endorsements_count: prevCompany.endorsements_count - 1,
                 endorsement_id: null,
             }));
+
+            window.location.reload();
         } catch (err) {
             console.log(err);
         }
