@@ -1,14 +1,10 @@
 import React from "react";
 import styles from "../../styles/Credentials.module.css";
 import appStyles from "../../App.module.css";
-import { DotsDropdown } from "../../components/DotsDropdown";
-// import { useCurrentUser } from "../../contexts/CurrentUserContext";
-// import { useHistory } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 
-// import axios from "axios";
 import { useEffect } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useState } from "react";
@@ -16,7 +12,6 @@ import { useState } from "react";
 
 function Credentials({ company }) {
 
-    const [errors, setErrors] = useState({});
     const [credentialsList, setCredentialsList] = useState ([]);
     
 
@@ -32,7 +27,6 @@ function Credentials({ company }) {
                 });
                 
                 setCredentialsList(credentialsList);
-                console.log(credentialsList);
                         
             } catch (err) {
                 console.log(err);

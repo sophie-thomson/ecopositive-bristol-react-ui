@@ -7,7 +7,6 @@ import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
-import { useHistory } from "react-router";
 import { useEffect } from "react";
 import axios from "axios";
 
@@ -29,8 +28,6 @@ function CredentialSelectForm({ company }) {
     // sets the state of selected credentials data
     const [credentialsData, setCredentialsData] = useState([1, 3, 5]);
     const [companyCredentials, setCompanyCredentials] = useState ([]);
-
-    const history = useHistory();
 
     useEffect(() => {
         const fetchCredentials = async () => {
@@ -89,7 +86,7 @@ function CredentialSelectForm({ company }) {
             const updatedCredentials = companyCredentials.filter(
                 credential => credential !== parseInt(credentialsData)
             );
-            const response = await axios.patch(`/companies/${company}/`, {
+            await axios.patch(`/companies/${company}/`, {
                 credentials: updatedCredentials,
             });
             setCredentialsData(null);

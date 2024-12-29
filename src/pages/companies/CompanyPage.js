@@ -26,7 +26,6 @@ function CompanyPage() {
     const [companyOwner, setCompanyOwner] = useState("");
     const [company, setCompany] = useState({ results: [] });
     const [showForm, setShowForm] = useState(false);
-  
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === companyOwner;
@@ -95,7 +94,6 @@ function CompanyPage() {
                         <div className="d-flex justify-content-center">
                         <CredentialSelectForm
                             company={id}
-                            // currentCredentials={company.credentials}
                             className="mx-3 mt-0 pt-0"
                         />
                         </div>

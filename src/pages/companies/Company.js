@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../../styles/Company.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Alert, Button, Card, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 // import Avatar from "../../components/Avatar";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
@@ -22,7 +22,6 @@ const Company = (props) => {
         description,
         endorsements_count,
         endorsement_id,
-        endorsing_users,
         comments_count,
         setCompany,
     } = props;
@@ -86,7 +85,7 @@ const Company = (props) => {
                         >    
                             {endorsements_count > 1 ? (
                                 <span> endorsements</span>
-                            ) : endorsements_count == 1 ? (
+                            ) : endorsements_count === 1 ? (
                                 <span> endorsement</span>
                             ) : (
                                 <span> endorsements yet</span>

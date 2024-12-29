@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardGroup, Col, Row } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import { axiosReq, axiosRes } from "../../api/axiosDefaults";
+import { Card, Row } from "react-bootstrap";
+import { axiosReq } from "../../api/axiosDefaults";
 
-import { DotsDropdown } from "../../components/DotsDropdown";
-import CompanyPage from "./CompanyPage";
 import styles from "../../styles/CompanyList.module.css";
 import appStyles from "../../App.module.css";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Link } from "react-router-dom";
 
 function CompanyList (props) {
@@ -78,7 +74,7 @@ function CompanyList (props) {
                     </span>
 
                 </div>
-                <Link to={`/companies/${id}/`}>
+                <Link to={`/companies/${id}`}>
                 <div className="d-flex flex-wrap">
                     <Card.Img className={`${styles.Logo} mr-3`} src={logo} alt={name} />
                     {name && <Card.Text className={`${styles.Header}`}>{name}</Card.Text>}
@@ -99,7 +95,7 @@ function CompanyList (props) {
                                 list-unstyled 
                                 d-flex 
                                 justify-content-center 
-                                justify-content-sm-between 
+                                justify-content-sm-around 
                                 flex-wrap`
                         }>  
                             <li>{ecoList.length > 0 ? (

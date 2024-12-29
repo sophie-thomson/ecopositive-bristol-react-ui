@@ -74,7 +74,14 @@ const CompanyContact = (props) => {
                         {website_url && 
                             <Card.Text className={`${styles.Website}`}>
                                 <i className="fa-solid fa-globe" />
-                                <a href={website_url} target="_blank">Visit website</a>
+                                <a 
+                                    href={website_url} 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`Visit company website`}
+                                >
+                                    Visit website
+                                </a>
                             </Card.Text>
                         }
                     </div>
@@ -135,7 +142,14 @@ const CompanyContact = (props) => {
                     <Col xs={10}>
                         {website_url && 
                             <Card.Text className={`${styles.Website}`}>
-                                <a href={website_url} target="_blank">Visit website</a>
+                                <a 
+                                    href={website_url} 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`Visit company website`}
+                                >
+                                    Visit website
+                                </a>
                             </Card.Text>
                         }
                     </Col>
