@@ -18,12 +18,14 @@
 .Subheader {
     font-style: normal;
     font-weight: bold;
-    /* font-size: 16px; */
-    /* line-height: 19px; */
+    font-size: 0.9em;
+    line-height: 19px;
     text-align: center;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #195829;
+    padding: 0px, 0px;
+    margin: 0 2px 8px 2px;
 }
 
 .Card {
@@ -57,18 +59,23 @@
 .Credentials {
     font-size: 0.9em;
     color: #2b2b2b;
-    
+    /* display: flex; */
+    margin:auto;
 }
 
 .Credentials i {
     color: #195829;
+    margin-left: 3px;
+}
+
+.Credentials li {
+    margin-left: 3px;
 }
 
 .List {
     border: none;
-    max-width: 500px;
     background-color: #d0eee3;
-    border-radius: 35px;
+    border-radius: 5px;
     margin-top: 5px;
-    padding: 15px;
+    padding: 5px 5px 0 5px;
 }

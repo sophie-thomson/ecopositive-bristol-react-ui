@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardGroup, Col } from "react-bootstrap";
+import { Card, CardGroup, Col, Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 
@@ -65,7 +65,7 @@ function CompanyList (props) {
 
     return (
         <Card className={`${styles.Company}`}>
-            <Card.Body>
+            <Card.Body className="pb-1 pt-2">
                 <div className={`${styles.Counts} d-flex justify-content-end`}>
                     <span className={`${styles.Comment} mr-3`}>
                         <i className="far fa-comments" />
@@ -86,45 +86,52 @@ function CompanyList (props) {
                         {excerpt}
                     </Card.Text>
                 }
-                <div className="d-flex justify-content-center">
-                <div className={`${styles.List} px-3 pt-3 pb-0`}>
-                    
-                    <ul className={`${styles.Credentials} list-unstyled`}>
+                <Row className={`${styles.List} d-flex justify-content-center`}>
+                    <div className="my-2 w-100">
                         <p className={`${styles.Subheader}`}>Eco-Credentials</p>
-                        <hr className={` ${appStyles.Rule} py-0`} />
-                        <li>{ecoList.length > 0 ? (
-                            <>
-                                <i className="fa-brands fa-envira" />
-                                Eco-Conscious Approach
-                            </>
-                        ) : (null)
-                        }</li>
+                        <hr className={` ${appStyles.Rule} py-0 mb-2`} />
+                        <ul 
+                            className={
+                                `${styles.Credentials} 
+                                list-unstyled 
+                                d-flex 
+                                justify-content-center 
+                                justify-content-sm-between 
+                                flex-wrap`
+                        }>  
+                            <li>{ecoList.length > 0 ? (
+                                <>
+                                    <i className="fa-brands fa-envira" />
+                                    Eco-Conscious Approach
+                                </>
+                            ) : (null)
+                            }</li>
 
-                        <li>{memberList.length > 0 ? (
-                            <>
-                                <i className="fa-brands fa-envira" />
-                                Membership / Accreditation
-                            </>
-                        ) : (null)
-                        }</li>
+                            <li>{memberList.length > 0 ? (
+                                <>
+                                    <i className="fa-brands fa-envira" />
+                                    Membership / Accreditation
+                                </>
+                            ) : (null)
+                            }</li>
 
-                        <li>{socialList.length > 0 ? (
-                            <>
-                                <i className="fa-brands fa-envira" />
-                                Socially Responsible
-                            </>
-                        ) : (null)
-                        }</li>
-                        <li>{sustainableList.length > 0 ? (
-                            <>
-                                <i className="fa-brands fa-envira" />
-                                Sustainable Production / Materials
-                            </>
-                        ) : (null)
-                        }</li>
-                    </ul>
-                </div>
-                </div>
+                            <li>{socialList.length > 0 ? (
+                                <>
+                                    <i className="fa-brands fa-envira" />
+                                    Socially Responsible
+                                </>
+                            ) : (null)
+                            }</li>
+                            <li>{sustainableList.length > 0 ? (
+                                <>
+                                    <i className="fa-brands fa-envira" />
+                                    Sustainable Production / Materials
+                                </>
+                            ) : (null)
+                            }</li>
+                        </ul>
+                    </div>
+                </Row>
             </Card.Body>
         </Card>
     );
