@@ -39,10 +39,6 @@
     color: #d69303;
 }
 
-/* .Endorse p {
-    font-size: 0.9em;
-} */
-
 .Header {
     font-family: "Roboto Flex";
     font-style: normal;
@@ -64,4 +60,23 @@
 .Comment i {
     color: #679cb1;
     font-size:1.3em;
+}
+
+.Link,
+.Link i {
+    color: grey;
+}
+
+.Link:hover,
+.Link i:hover {
+    color:grey;
+}
+
+.Bold {
+    font-weight: bold;
+    color:#d69303;
+}
+
+.Bold:hover {
+    color:#679cb1;
 }

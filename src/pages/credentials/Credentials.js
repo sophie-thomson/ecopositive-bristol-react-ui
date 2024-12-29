@@ -17,8 +17,6 @@ import { useState } from "react";
 function Credentials({ company }) {
 
     const [errors, setErrors] = useState({});
-    // const [companyCredentials, setCompanyCredentials] = useState ([]);
-    // const [credentials, setCredentials] = useState ([]);
     const [credentialsList, setCredentialsList] = useState ([]);
     
 
@@ -28,14 +26,11 @@ function Credentials({ company }) {
                 const { data } = await axiosReq.get(`/credentials/`);
                 const companyData = await axiosReq.get(`/companies/${company}/`);
                 const companyCredentials = (companyData.data.credentials);
-                    // setCompanyCredentials(companyCredentials);
-                    // setCredentials(data.results);
-                    // console.log(companyCredentials);
-                    // console.log(data.results);
-    
+
                 const credentialsList = companyCredentials.map(id => {
                     return data.results.find(credential => credential.id === id);    
                 });
+                
                 setCredentialsList(credentialsList);
                 console.log(credentialsList);
                         
