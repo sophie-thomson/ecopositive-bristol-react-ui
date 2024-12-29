@@ -78,13 +78,19 @@ const Company = (props) => {
         <Card className={styles.Company}>
             <Card.Body>
                 <div className={`${styles.Endorse} d-flex align-items-center`}>
-                    <div>
+                    <div className="text-muted">
                         <i className="fa-solid fa-award" />
                         {endorsements_count}
                         <span 
-                            className="d-none d-sm-inline text-muted"
-                        > 
-                            endorsements
+                            className="d-none d-sm-inline"
+                        >    
+                            {endorsements_count > 1 ? (
+                                <span> endorsements</span>
+                            ) : endorsements_count == 1 ? (
+                                <span> endorsement</span>
+                            ) : (
+                                <span> endorsements yet</span>
+                            )}
                         </span>
                     </div>
             
@@ -94,13 +100,13 @@ const Company = (props) => {
                         <Button 
                             className={
                                 `${btnStyles.Button} 
-                                ${btnStyles.Red} 
-                                ${styles.Endorse} 
+                                ${btnStyles.Remove} 
+                                ${styles.Remove} 
                                 ml-auto`
                             } 
                             onClick={handleUnendorse}
                         >
-                            <i className="fa-solid fa-award" />
+                            <i className="fa-solid fa-circle-minus" />
                             Remove Endorsement
                         </Button>
                     ) : currentUser ? (

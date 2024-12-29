@@ -82,3 +82,17 @@
     background-color: #ecb7b7;
     color: #1d1c1a;
   }
+
+  .RemoveOutline,
+  .Remove:hover {
+    /* border: 1px solid #2142b2; */
+    background-color: #e7aa25;
+    color: #1d1c1a;
+  }
+  
+  .Remove,
+  .RemoveOutline:hover {
+    border: 1px solid #d69303;
+    background-color: #f3e8ab;
+    color: #1d1c1a;
+  }

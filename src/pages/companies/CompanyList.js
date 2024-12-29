@@ -8,6 +8,7 @@ import CompanyPage from "./CompanyPage";
 import styles from "../../styles/CompanyList.module.css";
 import appStyles from "../../App.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { Link } from "react-router-dom";
 
 function CompanyList (props) {
 
@@ -16,7 +17,7 @@ function CompanyList (props) {
     
     const {
         id,
-        owner,
+        // owner,
         // owner_profile_id,
         // owner_profile_image,
         name,
@@ -24,7 +25,7 @@ function CompanyList (props) {
         excerpt,
         endorsements_count,
         comments_count,
-        credentials,
+        // credentials,
     } = props;
 
     useEffect(() => {
@@ -77,10 +78,12 @@ function CompanyList (props) {
                     </span>
 
                 </div>
+                <Link to={`/companies/${id}/`}>
                 <div className="d-flex flex-wrap">
                     <Card.Img className={`${styles.Logo} mr-3`} src={logo} alt={name} />
                     {name && <Card.Text className={`${styles.Header}`}>{name}</Card.Text>}
                 </div>
+                </Link>
                 {excerpt &&
                     <Card.Text className="mb-0 text-left">
                         {excerpt}
