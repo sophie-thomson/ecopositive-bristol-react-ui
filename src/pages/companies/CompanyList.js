@@ -100,45 +100,58 @@ function CompanyList (props) {
                     <div className="my-2 w-100">
                         <p className={`${styles.Subheader}`}>Eco-Credentials</p>
                         <hr className={` ${appStyles.Rule} py-0 mb-2`} />
-                        <ul 
-                            className={
-                                `${styles.Credentials} 
-                                list-unstyled 
-                                d-flex 
-                                justify-content-center
-                                flex-wrap`
-                        }>  
-                            <li>{ecoList.length > 0 ? (
-                                <>
-                                    <i className="fa-brands fa-envira" />
-                                    Eco-Conscious Approach
-                                </>
-                            ) : (null)
-                            }</li>
+                        {
+                            ecoList.length || 
+                            memberList.length || 
+                            socialList.length || 
+                            sustainableList.length > 0 ? (
+                                <ul 
+                                    className={
+                                        `${styles.Credentials} 
+                                        list-unstyled 
+                                        d-flex 
+                                        justify-content-center
+                                        flex-wrap`
+                                }>  
+                                    <li>{ecoList.length > 0 ? (
+                                        <>
+                                            <i className="fa-brands fa-envira" />
+                                            Eco-Conscious Approach
+                                        </>
+                                    ) : (null)
+                                    }</li>
 
-                            <li>{memberList.length > 0 ? (
-                                <>
-                                    <i className="fa-brands fa-envira" />
-                                    Membership / Accreditation
-                                </>
-                            ) : (null)
-                            }</li>
+                                    <li>{memberList.length > 0 ? (
+                                        <>
+                                            <i className="fa-brands fa-envira" />
+                                            Membership / Accreditation
+                                        </>
+                                    ) : (null)
+                                    }</li>
 
-                            <li>{socialList.length > 0 ? (
-                                <>
-                                    <i className="fa-brands fa-envira" />
-                                    Socially Responsible
-                                </>
-                            ) : (null)
-                            }</li>
-                            <li>{sustainableList.length > 0 ? (
-                                <>
-                                    <i className="fa-brands fa-envira" />
-                                    Sustainable Materials
-                                </>
-                            ) : (null)
-                            }</li>
-                        </ul>
+                                    <li>{socialList.length > 0 ? (
+                                        <>
+                                            <i className="fa-brands fa-envira" />
+                                            Socially Responsible
+                                        </>
+                                    ) : (null)
+                                    }</li>
+                                    <li>{sustainableList.length > 0 ? (
+                                        <>
+                                            <i className="fa-brands fa-envira" />
+                                            Sustainable Materials
+                                        </>
+                                    ) : (null)
+                                    }</li>
+                                </ul>
+                        ) : (
+                                <p 
+                                    className="text-muted small"
+                                >
+                                    No eco-credentials added for this company yet.
+                                </p>
+                            )
+                        }
                     </div>
                 </Row>
             </Card.Body>
