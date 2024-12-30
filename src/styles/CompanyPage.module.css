@@ -3,13 +3,16 @@
     border-radius: 10px;
 }
 
-.Link,
-.Link i {
+.Link {
     color: grey;
 }
 
-.Link:hover,
-.Link i:hover {
+.Link i {
+    color:#679cb1;
+    font-size: 1.2em;
+}
+
+.Link:hover {
     color:grey;
 }
 
