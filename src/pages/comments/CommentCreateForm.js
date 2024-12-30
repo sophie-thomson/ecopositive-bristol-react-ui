@@ -15,7 +15,6 @@ function CommentCreateForm(props) {
         setComments,
         profileImage,
         profile_id,
-        reported, 
     } = props;
   
     const [content, setContent] = useState("");
@@ -58,7 +57,7 @@ function CommentCreateForm(props) {
                   </Link>
                   <Form.Control
                       className={styles.Form}
-                      placeholder="my comment..."
+                      placeholder="Comment..."
                       as="textarea"
                       value={content}
                       onChange={handleChange}

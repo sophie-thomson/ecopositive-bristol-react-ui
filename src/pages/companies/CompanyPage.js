@@ -104,39 +104,39 @@ function CompanyPage() {
                             </div>
                         )}
                         </Container>
-                    <Container className={appStyles.Content}>
-                    {currentUser ? (
-            <CommentCreateForm
-              profile_id={currentUser.profile_id}
-              profileImage={profile_image}
-              company={id}
-              setCompany={setCompany}
-              setComments={setComments}
-            />
-          ) : comments.results.length ? (
-            "Comments"
-          ) : null}
-          {comments.results.length ? (
-            <div
-              children={comments.results.map((comment) => (
-                <Comment
-                  key={comment.id}
-                  {...comment}
-                  setCompany={setCompany}
-                  setComments={setComments}
-                />
-              ))}
-              dataLength={comments.results.length}
-              loader={<Asset spinner />}
-              hasMore={!!comments.next}
-        //       next={() => fetchMoreData(comments, setComments)}
-            />
-          ) : currentUser ? (
-            <span>No comments yet, be the first to comment!</span>
-          ) : (
-            <span>No comments... yet</span>
-          )}
-                    </Container>
+                        <Container className={appStyles.Content}>
+                            {currentUser ? (
+                                <CommentCreateForm
+                                    profile_id={currentUser.profile_id}
+                                    profileImage={profile_image}
+                                    company={id}
+                                    setCompany={setCompany}
+                                    setComments={setComments}
+                                />
+                            ) : comments.results.length ? (
+                                    "Comments"
+                                ) : null}
+                            {comments.results.length ? (
+                                <div
+                                    children={comments.results.map((comment) => (
+                                        <Comment
+                                            key={comment.id}
+                                            {...comment}
+                                            setCompany={setCompany}
+                                            setComments={setComments}
+                                        />
+                                    ))}
+                                    dataLength={comments.results.length}
+                                    loader={<Asset spinner />}
+                                    hasMore={!!comments.next}
+                                    //  next={() => fetchMoreData(comments, setComments)}
+                                />
+                            ) : currentUser ? (
+                                <span>No comments yet, be the first to comment!</span>
+                            ) : (
+                                <span>No comments... yet</span>
+                            )}
+                        </Container>
                     </div>
                 </Col>
                 <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">

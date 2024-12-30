@@ -65,7 +65,8 @@
   
   .Bright {
     background-color: #fceea2;
-    color: #195829;
+    color: #1d1c1a;
+    border: 1px solid #d69303;
   }
 
   .RedOutline,

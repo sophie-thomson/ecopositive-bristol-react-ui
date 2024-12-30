@@ -13,12 +13,11 @@ const Comment = (props) => {
         profile_id,
         profile_image,
         owner,
-        updated_at,
+        updated_on,
         content,
         id,
         setCompany,
         setComments,
-        reported,
     } = props;
 
     const [showEditForm, setShowEditForm] = useState(false);
@@ -53,7 +52,7 @@ const Comment = (props) => {
                 </Link>
                 <Media.Body className="align-self-center ml-2">
                     <span className={styles.Owner}>{owner}</span>
-                    <span className={styles.Date}>{updated_at}</span>
+                    <span className={`${styles.Date} small`}>{updated_on}</span>
                     {showEditForm ? (
                         <CommentEditForm
                             id={id}
@@ -64,7 +63,11 @@ const Comment = (props) => {
                             setShowEditForm={setShowEditForm}
                         />
                     ) : (
-                        <p>{content}</p>
+                        <p className="smaller font-italic">
+                            <i className="fa-solid fa-quote-left"></i>
+                            {content}
+                            <i className="fa-solid fa-quote-right"></i>
+                        </p>
                     )}
                 </Media.Body>
                 {is_owner && !showEditForm && (

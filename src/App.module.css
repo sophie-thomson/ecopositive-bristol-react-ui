@@ -57,11 +57,11 @@ i {
     vertical-align: middle;
 }
 
-i:hover {
+/* i:hover {
     cursor: pointer;
     transition: color ease-in-out 0.3s;
     color: #d69303;
-}
+} */
 
 figure {
     text-align: center;
