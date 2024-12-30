@@ -113,35 +113,31 @@ function CompanyList (props) {
                                         justify-content-center
                                         flex-wrap`
                                 }>  
-                                    <li>{ecoList.length > 0 ? (
+                                    <li>{ecoList.length > 0 &&
                                         <>
                                             <i className="fa-brands fa-envira" />
                                             Eco-Conscious Approach
                                         </>
-                                    ) : (null)
                                     }</li>
 
-                                    <li>{memberList.length > 0 ? (
+                                    <li>{memberList.length > 0 &&
                                         <>
                                             <i className="fa-brands fa-envira" />
                                             Membership / Accreditation
                                         </>
-                                    ) : (null)
                                     }</li>
 
-                                    <li>{socialList.length > 0 ? (
+                                    <li>{socialList.length > 0 &&
                                         <>
                                             <i className="fa-brands fa-envira" />
                                             Socially Responsible
                                         </>
-                                    ) : (null)
                                     }</li>
-                                    <li>{sustainableList.length > 0 ? (
+                                    <li>{sustainableList.length > 0 &&
                                         <>
                                             <i className="fa-brands fa-envira" />
                                             Sustainable Materials
                                         </>
-                                    ) : (null)
                                     }</li>
                                 </ul>
                         ) : (

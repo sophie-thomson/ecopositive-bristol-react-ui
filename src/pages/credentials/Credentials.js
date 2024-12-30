@@ -105,8 +105,13 @@ function Credentials({ company }) {
             </div>
             <hr className={`${appStyles.Rule} mb-0`} />
             <Col className="py-2 p-0 p-md-2" >
+            {
+                            ecoList.length || 
+                            memberList.length || 
+                            socialList.length || 
+                            sustainableList.length > 0 ? (
                 <div className="d-flex justify-content-around flex-wrap mb-3">
-                    {companyEcoList.length > 0 ? (
+                    {companyEcoList.length > 0 &&
                         <Card className={`${styles.List}`}>
                             <Card.Body className={`${styles.Credentials}`}>
                                 <Card.Title 
@@ -124,8 +129,8 @@ function Credentials({ company }) {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
-                    ) : (null)}
-                    {companyMemberList.length > 0 ? (
+                    }
+                    {companyMemberList.length > 0 &&
                         <Card className={`${styles.List}`}>
                             <Card.Body className={`${styles.Credentials}`}>
                                 <Card.Title className={`${styles.ListTitle}`}>
@@ -141,8 +146,8 @@ function Credentials({ company }) {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
-                    ) : (null)}
-                    {companySocialList.length > 0 ? (
+                    }
+                    {companySocialList.length > 0 &&
                         <Card className={`${styles.List}`}>
                             <Card.Body className={`${styles.Credentials}`}>
                                 <Card.Title className={`${styles.ListTitle}`}>
@@ -158,8 +163,8 @@ function Credentials({ company }) {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
-                    ) : (null)}
-                    {companySocialList.length > 0 ? (
+                    }
+                    {companySocialList.length > 0 &&
                         <Card className={`${styles.List}`}>
                             <Card.Body className={`${styles.Credentials}`}>
                                 <Card.Title 
@@ -177,8 +182,16 @@ function Credentials({ company }) {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
-                    ) : (null)}
+                    }
                 </div>
+                ) : (
+                    <p 
+                        className="text-muted small text-center"
+                    >
+                        No eco-credentials added for this company yet.
+                    </p>
+                )
+            }
             </Col>
             </Card.Body>
             </Card>
