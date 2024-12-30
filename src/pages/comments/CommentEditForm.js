@@ -6,67 +6,67 @@ import { axiosRes } from "../../api/axiosDefaults";
 import styles from "../../styles/CommentCreateEditForm.module.css";
 
 function CommentEditForm(props) {
-        const { id, content, setShowEditForm, setComments } = props;
+    const { id, content, setShowEditForm, setComments } = props;
 
-        const [formContent, setFormContent] = useState(content);
+    const [formContent, setFormContent] = useState(content);
 
-        const handleChange = (event) => {
+    const handleChange = (event) => {
         setFormContent(event.target.value);
-        };
+    };
 
-        const handleSubmit = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-        await axiosRes.put(`/comments/${id}/`, {
-                content: formContent.trim(),
-        });
-        setComments((prevComments) => ({
+            await axiosRes.put(`/comments/${id}/`, {
+            content: formContent.trim(),
+            });
+            setComments((prevComments) => ({
                 ...prevComments,
                 results: prevComments.results.map((comment) => {
-                return comment.id === id
-                ? {
-                        ...comment,
-                        content: formContent.trim(),
-                        updated_at: "now",
-                }
-                : comment;
+                    return comment.id === id
+                        ? {
+                            ...comment,
+                            content: formContent.trim(),
+                            updated_at: "now",
+                          }
+                        : comment;
                 }),
-        }));
-        setShowEditForm(false);
+            }));
+            setShowEditForm(false);
         } catch (err) {
-        console.log(err);
+            console.log(err);
         }
-        };
+    };
 
-        return (
+    return (
         <Form onSubmit={handleSubmit}>
-        <Form.Group className="pr-1">
+            <Form.Group className="pr-1">
                 <Form.Control
-                className={styles.Form}
-                as="textarea"
-                value={formContent}
-                onChange={handleChange}
-                rows={2}
+                    className={styles.Form}
+                    as="textarea"
+                    value={formContent}
+                    onChange={handleChange}
+                    rows={2}
                 />
-        </Form.Group>
-        <div className="text-right">
+            </Form.Group>
+            <div className="text-right">
                 <button
-                className={styles.Button}
-                onClick={() => setShowEditForm(false)}
-                type="button"
+                    className={styles.Button}
+                    onClick={() => setShowEditForm(false)}
+                    type="button"
                 >
-                X Cancel
+                    X Cancel
                 </button>
                 <button
-                className={styles.Button}
-                disabled={!content.trim()}
-                type="submit"
+                    className={styles.Button}
+                    disabled={!content.trim()}
+                    type="submit"
                 >
-                Save
+                    Save
                 </button>
-        </div>
+            </div>
         </Form>
-        );
+    );
 }
 
 export default CommentEditForm;
