@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-
+import { Link } from "react-router-dom";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -21,6 +21,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Comment from "../comments/Comment";
 import CommentCreateForm from "../comments/CommentCreateForm";
 import Asset from "../../components/Asset";
+
 // import { fetchMoreData } from "../../utils/utils";
 
 function CompanyPage() {
@@ -132,9 +133,18 @@ function CompanyPage() {
                                     //  next={() => fetchMoreData(comments, setComments)}
                                 />
                             ) : currentUser ? (
-                                <span>No comments yet, be the first to comment!</span>
+                                <div className={`${styles.Link} ml-auto mt-2 p-2`}>
+                                    <i className="far fa-comments mr-2" />
+                                    No comments yet, be the first to comment!
+                                </div>
+                                // <span>No comments yet, be the first to comment!</span>
                             ) : (
-                                <span>No comments... yet</span>
+                                <div className={`${styles.Link} ml-auto mt-2 p-2`}>
+                                    <i className="far fa-comments mr-2" />
+                                    <Link className={styles.Link} to="/signin">
+                                        No comments... yet. <span className={`${styles.Bold}`}>Sign in</span> to comment.
+                                    </Link>
+                                </div>
                             )}
                         </Container>
                     </div>

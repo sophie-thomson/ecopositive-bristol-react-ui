@@ -2,3 +2,22 @@
     background-color: #fafafa;
     border-radius: 10px;
 }
+
+.Link,
+.Link i {
+    color: grey;
+}
+
+.Link:hover,
+.Link i:hover {
+    color:grey;
+}
+
+.Bold {
+    font-weight: bold;
+    color:#d69303;
+}
+
+.Bold:hover {
+    color:#679cb1;
+}
