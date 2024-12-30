@@ -20,6 +20,8 @@ import Credentials from "../credentials/Credentials";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Comment from "../comments/Comment";
 import CommentCreateForm from "../comments/CommentCreateForm";
+import Asset from "../../components/Asset";
+// import { fetchMoreData } from "../../utils/utils";
 
 function CompanyPage() {
     
@@ -32,8 +34,6 @@ function CompanyPage() {
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === companyOwner;
     const profile_image = currentUser?.profile_image;
-
-    // const profile_image = currentUser?.profile_image;
 
      // Code adapted from Stack Overflow thread
     const displayForm = (event) => {
@@ -116,26 +116,26 @@ function CompanyPage() {
           ) : comments.results.length ? (
             "Comments"
           ) : null}
-          {/* {comments.results.length ? (
-            <InfiniteScroll
+          {comments.results.length ? (
+            <div
               children={comments.results.map((comment) => (
                 <Comment
                   key={comment.id}
                   {...comment}
-                  setPost={setPost}
+                  setCompany={setCompany}
                   setComments={setComments}
                 />
               ))}
               dataLength={comments.results.length}
               loader={<Asset spinner />}
               hasMore={!!comments.next}
-              next={() => fetchMoreData(comments, setComments)}
+        //       next={() => fetchMoreData(comments, setComments)}
             />
           ) : currentUser ? (
             <span>No comments yet, be the first to comment!</span>
           ) : (
             <span>No comments... yet</span>
-          )} */}
+          )}
                     </Container>
                     </div>
                 </Col>
