@@ -18,7 +18,8 @@ import CompanyContact from "./CompanyContact";
 import CredentialSelectForm from "../credentials/CredentialSelectForm";
 import Credentials from "../credentials/Credentials";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-
+import Comment from "../comments/Comment";
+import CommentCreateForm from "../comments/CommentCreateForm";
 
 function CompanyPage() {
     
@@ -26,9 +27,11 @@ function CompanyPage() {
     const [companyOwner, setCompanyOwner] = useState("");
     const [company, setCompany] = useState({ results: [] });
     const [showForm, setShowForm] = useState(false);
-
+    const [comments, setComments] = useState({ results: [] });
+    
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === companyOwner;
+    const profile_image = currentUser?.profile_image;
 
     // const profile_image = currentUser?.profile_image;
 
@@ -55,10 +58,12 @@ function CompanyPage() {
     useEffect(() => {
         const handleMount = async () => {
             try {
-                const [{ data: company }] = await Promise.all([
+                const [{ data: company }, { data: comments }] = await Promise.all([
                     axiosReq.get(`/companies/${id}`),
+                    axiosReq.get(`/comments/?company=${id}`),
                 ]);
                 setCompany({ results: [company] });
+                setComments(comments);
             } catch (err) {
                 console.log(err);
             }
@@ -72,35 +77,65 @@ function CompanyPage() {
                 
                 <Col className="py-2 p-0 p-lg-2" lg={8}>
                     <div className={`${styles.Main}`}>
-                    <Company {...company.results[0]} setCompany={setCompany} companyPage />
-                    <div className="d-lg-none">
-                        <CompanyContact {...company.results[0]} setCompany={setCompany} companyPage />
-                    </div>
-                    <Credentials
-                        company={id}
-                    />
-                    {/* Checks if user = company owner and uses onClick to display CredentialSelectForm */}
-                    
-                    {is_owner && (
-                        <button 
-                            className={`${btnStyles.Button} ${btnStyles.Green} align-items-center`}
-                            onClick={displayForm}
-                        >
-                            Add / Edit Credentials   
-                        </button>
-                    )}
-                    <Container fluid className="d-flex justify-content-center">
-                    {showForm && is_owner && (
-                        <div className="d-flex justify-content-center">
-                        <CredentialSelectForm
-                            company={id}
-                            className="mx-3 mt-0 pt-0"
-                        />
+                        <Company {...company.results[0]} setCompany={setCompany} companyPage />
+                        <div className="d-lg-none">
+                            <CompanyContact {...company.results[0]} setCompany={setCompany} companyPage />
                         </div>
-                    )}
-                    </Container>
+                        <Credentials
+                            company={id}
+                        />
+                        {/* Checks if user = company owner and uses onClick to display CredentialSelectForm */}
+                        
+                        {is_owner && (
+                            <button 
+                                className={`${btnStyles.Button} ${btnStyles.Green} align-items-center`}
+                                onClick={displayForm}
+                            >
+                                Add / Edit Credentials   
+                            </button>
+                        )}
+                        <Container fluid className="d-flex justify-content-center">
+                        {showForm && is_owner && (
+                            <div className="d-flex justify-content-center">
+                            <CredentialSelectForm
+                                company={id}
+                                className="mx-3 mt-0 pt-0"
+                            />
+                            </div>
+                        )}
+                        </Container>
                     <Container className={appStyles.Content}>
-                        Comments
+                    {currentUser ? (
+            <CommentCreateForm
+              profile_id={currentUser.profile_id}
+              profileImage={profile_image}
+              company={id}
+              setCompany={setCompany}
+              setComments={setComments}
+            />
+          ) : comments.results.length ? (
+            "Comments"
+          ) : null}
+          {/* {comments.results.length ? (
+            <InfiniteScroll
+              children={comments.results.map((comment) => (
+                <Comment
+                  key={comment.id}
+                  {...comment}
+                  setPost={setPost}
+                  setComments={setComments}
+                />
+              ))}
+              dataLength={comments.results.length}
+              loader={<Asset spinner />}
+              hasMore={!!comments.next}
+              next={() => fetchMoreData(comments, setComments)}
+            />
+          ) : currentUser ? (
+            <span>No comments yet, be the first to comment!</span>
+          ) : (
+            <span>No comments... yet</span>
+          )} */}
                     </Container>
                     </div>
                 </Col>

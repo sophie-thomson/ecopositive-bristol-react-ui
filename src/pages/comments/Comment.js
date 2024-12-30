@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import styles from "../../styles/Comment.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { MoreDropdown } from "../../components/MoreDropdown";
+import { DotsDropdown } from "../../components/DotsDropdown";
 import { axiosRes } from "../../api/axiosDefaults";
-import CommentEditForm from "./CommentEditForm";
+// import CommentEditForm from "./CommentEditForm";
 
 const Comment = (props) => {
     const { 
@@ -56,7 +56,7 @@ const Comment = (props) => {
             <Media.Body className="align-self-center ml-2">
               <span className={styles.Owner}>{owner}</span>
               <span className={styles.Date}>{updated_at}</span>
-              {showEditForm ? (
+              {/* {showEditForm ? (
                 <CommentEditForm
                     id={id}
                     profile_id={profile_id}
@@ -67,10 +67,10 @@ const Comment = (props) => {
                 />
               ) : (
                 <p>{content}</p>
-              )}
+              )} */}
             </Media.Body>
             {is_owner && !showEditForm && (
-              <MoreDropdown
+              <DotsDropdown
                 handleEdit={() => setShowEditForm(true)}
                 handleDelete={handleDelete}
               />
