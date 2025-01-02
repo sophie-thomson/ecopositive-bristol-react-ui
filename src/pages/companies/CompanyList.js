@@ -13,9 +13,6 @@ function CompanyList (props) {
     
     const {
         id,
-        // owner,
-        // owner_profile_id,
-        // owner_profile_image,
         name,
         logo,
         excerpt,
@@ -34,8 +31,9 @@ function CompanyList (props) {
                 const credentialsList = companyCredentials.map(id => {
                     return data.results.find(credential => credential.id === id);    
                 });
+
                 setCredentialsList(credentialsList);
-                // console.log(credentialsList);            
+                         
             } catch (err) {
                 console.log(err);
             }   

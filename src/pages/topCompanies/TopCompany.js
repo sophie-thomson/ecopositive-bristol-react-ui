@@ -2,19 +2,30 @@ import React from "react";
 import styles from "../../styles/TopCompanies.module.css";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
+import TopCompanies from "./TopCompanies";
 
 
 const TopCompany = (props) => {
-    const { company, mobile, imageSize = 55 } = props;
-    const { id, logo, name, endorsements_count } = company;
+    // const { 
+    //     company, 
+    //     mobile, 
+    //     imageSize = 55,
+    // } = props;
+    
+    const { 
+        id, 
+        logo, 
+        name, 
+        endorsements_count, 
+    } = props;
 
     return (
         <div
-            className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}
+            className={`my-3 d-flex align-items-center`}
         >
         <div>
             <Link className="align-self-center" to={`/companies/${id}`}>
-                <Avatar src={logo} height={imageSize} />
+                <Avatar src={logo} />
             </Link>
         </div>
         <div className={`mx-2 ${styles.WordBreak}`}>

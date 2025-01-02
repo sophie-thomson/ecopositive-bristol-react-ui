@@ -97,7 +97,7 @@ function CompanyListPage({ message, filter = "" }) {
                 )}
             </Col>
             <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-                {/* <TopCompanies /> */}
+                <TopCompanies />
             </Col>
         </Row>
     );
