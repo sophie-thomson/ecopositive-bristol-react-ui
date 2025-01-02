@@ -1,35 +1,35 @@
 import React from "react";
 import styles from "../../styles/TopCompanies.module.css";
 import { Link } from "react-router-dom";
-import Avatar from "../../components/Avatar";
-import TopCompanies from "./TopCompanies";
 
 
 const TopCompany = (props) => {
-    // const { 
-    //     company, 
-    //     mobile, 
-    //     imageSize = 55,
-    // } = props;
+    const { 
+        company, 
+        mobile, 
+        imageSize = 45,
+    } = props;
     
     const { 
         id, 
         logo, 
         name, 
         endorsements_count, 
-    } = props;
+    } = company;
 
     return (
         <div
-            className={`my-3 d-flex align-items-center`}
+        className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}
         >
         <div>
             <Link className="align-self-center" to={`/companies/${id}`}>
-                <Avatar src={logo} />
+                <img src={logo} height={imageSize} alt="{name} logo" />
             </Link>
         </div>
-        <div className={`mx-2 ${styles.WordBreak}`}>
-            <strong>{name}</strong>
+        <div className={`mx-2 ${styles.Name}`}>
+            <Link className="align-self-center" to={`/companies/${id}`}>
+                <strong>{name}</strong>
+            </Link>
             <i className="fa-solid fa-award" />
             ({endorsements_count})
         </div>

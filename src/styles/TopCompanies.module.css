@@ -1,3 +1,26 @@
-.WordBreak {
-        word-break: break-all;
-      }
+.Name {
+  color: #195829;
+  font-weight: 400;
+}
+
+.Name i {
+  font-size: 1.2em;
+  color: #d69303; 
+}
+
+.Header {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.9em;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #195829;
+  padding: 0px, 0px;
+  margin: 0 2px 8px 2px;
+}
+
+.Border {
+  border: solid 5px #977baa;
+}
