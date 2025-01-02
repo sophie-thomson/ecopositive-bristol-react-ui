@@ -18,6 +18,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 // import { fetchMoreData } from "../../utils/utils";
 // import PopularProfiles from "../profiles/PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import TopCompanies from "../topCompanies/TopCompanies";
 
 function CompanyListPage({ message, filter = "" }) {
     const [companies, setCompanies] = useState({ results: [] });
@@ -96,7 +97,7 @@ function CompanyListPage({ message, filter = "" }) {
                 )}
             </Col>
             <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-                <p>PopularProfiles desktop</p>
+                {/* <TopCompanies /> */}
             </Col>
         </Row>
     );
