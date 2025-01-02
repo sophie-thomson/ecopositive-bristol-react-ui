@@ -164,7 +164,7 @@ function Credentials({ company }) {
                             </Card.Body>
                         </Card>
                     }
-                    {companySocialList.length > 0 &&
+                    {companySustainableList.length > 0 ? (
                         <Card className={`${styles.List}`}>
                             <Card.Body className={`${styles.Credentials}`}>
                                 <Card.Title 
@@ -182,6 +182,7 @@ function Credentials({ company }) {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
+                    ): (null)
                     }
                 </div>
                 ) : (
