@@ -88,12 +88,14 @@ function CompanyPage() {
                         {/* Checks if user = company owner and uses onClick to display CredentialSelectForm */}
                         
                         {is_owner && (
+                            <div className="d-flex justify-content-center mt-3">
                             <button 
-                                className={`${btnStyles.Button} ${btnStyles.Green} align-items-center`}
+                                className={`${btnStyles.Button} ${btnStyles.Credbtn} align-items-center`}
                                 onClick={displayForm}
                             >
                                 Add / Edit Credentials   
                             </button>
+                            </div>
                         )}
                         <Container fluid className="d-flex justify-content-center">
                         {showForm && is_owner && (

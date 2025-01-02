@@ -97,3 +97,15 @@
     background-color: #f3e8ab;
     color: #1d1c1a;
   }
+
+  .Credbtn {
+    border: 1px solid #2b1f30;
+    background-color: #e0c2ee;
+    color: #1d1c1a;
+  }
+
+  .Credbtn:hover {
+    border: 1px solid #e2a6fd;
+    background-color: #2b1f30;
+    color: #fff;
+  }
