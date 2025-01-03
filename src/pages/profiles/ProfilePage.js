@@ -22,6 +22,7 @@ import NoResults from "../../assets/no-results.png";
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
     const [profileCompanies, setProfileCompanies] = useState({ results: [] });
+    const [endorsedCompanies, setEndorsedCompanies] = useState({ results: [] });
       
     const currentUser = useCurrentUser();
     const { id } = useParams();
@@ -45,10 +46,20 @@ function ProfilePage() {
                 
                 setProfileData(profileData);
                 setHasLoaded(true);
+
                 const profileCompanies = companies.results.filter(
                     company => company.owner === profileData.data.owner
                 );
                 setProfileCompanies(profileCompanies);
+
+                const endorsedCompanies = companies.results.filter(
+                    company => company.endorsing_users.some(
+                        user => user.username === profileData.data.owner
+                    ) 
+                );
+                setEndorsedCompanies(endorsedCompanies);
+                console.log(companies.results[1].endorsing_users[1].username);
+                console.log(endorsedCompanies);
                     
             } catch (err) {
                 console.log(err);
@@ -57,6 +68,7 @@ function ProfilePage() {
         fetchData();
         
     }, [id, setProfileData]);
+    console.log(profile);
 
     const mainProfile = (
         <>
@@ -80,7 +92,7 @@ function ProfilePage() {
                             <div>companies</div>
                         </Col>
                         <Col className="my-2">
-                            <div>{profile?.endorsement_count}</div>
+                            <div>{profile?.endorsements_count}</div>
                             <div>endorsed</div>
                         </Col>   
                     </Row>
@@ -108,7 +120,7 @@ function ProfilePage() {
             ) : (
                 <Asset
                 src={NoResults}
-                message={`No results found, ${profile?.owner} hasn't posted yet.`}
+                message={`No results found, ${profile?.owner} doesn't own any companies.`}
                 />
             )}
         </>
@@ -118,6 +130,23 @@ function ProfilePage() {
         <div>
             <p className={`${styles.Subheader} text-center my-2`}>companies you endorse</p>
             <hr className={appStyles.Rule}/>
+            {endorsedCompanies.length ? (
+                <InfiniteScroll
+                children={endorsedCompanies.map((company) => (
+                    
+                    <CompanyList key={company.id} {...company} setCompanies={setEndorsedCompanies} />
+                ))}
+                dataLength={endorsedCompanies.length}
+                loader={<Asset spinner />}
+                hasMore={!!endorsedCompanies.next}
+                // next={() => fetchMoreData(endorsedCompanies, setEndorsedCompanies)}
+                />
+            ) : (
+                <Asset
+                src={NoResults}
+                message={`No results found, ${profile?.owner} hasn't endorsed any companies yet.`}
+                />
+            )}
         </div>
     );
 
