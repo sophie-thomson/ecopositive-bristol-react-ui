@@ -44,7 +44,7 @@ function ProfilePage() {
 
                 const companies = companiesData.data;
                 setProfileData(profileData);
-                
+
                 const profileCompanies = companies.results.filter(
                     company => company.owner === profileData.data.owner
                 );
@@ -64,7 +64,6 @@ function ProfilePage() {
         fetchData();
         
     }, [id, setProfileData]);
-    console.log(profile);
 
     const mainProfile = (
         <>
@@ -106,7 +105,11 @@ function ProfilePage() {
                 <InfiniteScroll
                 children={profileCompanies.map((company) => (
                     
-                    <CompanyList key={company.id} {...company} setCompanies={setProfileCompanies} />
+                    <CompanyList 
+                        key={company.id}
+                        {...company}
+                        setCompanies={setProfileCompanies}
+                    />
                 ))}
                 dataLength={profileCompanies.length}
                 loader={<Asset spinner />}
@@ -144,7 +147,7 @@ function ProfilePage() {
             ) : (
                 <Asset
                 src={NoResults}
-                message={`No results found, ${profile?.owner} hasn't endorsed any companies yet.`}
+                message={`No results found, you haven't endorsed any companies yet.`}
                 />
             )}
         </div>
@@ -155,19 +158,21 @@ function ProfilePage() {
             {/* {is_owner && <Alert variant="success"> Welcome Back!</Alert>} */}
             <Col className="py-2 p-0 p-lg-2" lg={8}>
             <TopCompanies mobile/>
-                <Container className={styles.Frame}>
+                
+                <Container className={appStyles.Content}>
+                    {mainProfile}
+                </Container>
+                <Container className={`${styles.Frame} ${styles.BorderProfile} mt-3`}>
                 {hasLoaded ? (
                     <>
-                    <Container className={styles.Banner}>
-                    {mainProfile}
-                    </Container>
+                    
                     {mainProfileCompanies}
                     </>
                 ) : (
                     <Asset spinner />
                 )}
                 </Container>
-                <Container className={`${styles.Frame} my-4 pt-3`}>
+                <Container className={`${styles.Frame} ${styles.BorderEndorse} my-4 pt-3`}>
                     {mainProfileEndorsed}
                 </Container>
             </Col>
