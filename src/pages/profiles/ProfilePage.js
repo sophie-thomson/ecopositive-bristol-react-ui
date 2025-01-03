@@ -11,6 +11,7 @@ import appStyles from "../../App.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import CompanyList from "../companies/CompanyList";
+import TopCompanies from "../topCompanies/TopCompanies";
 import { DotsDropdown } from "../../components/DotsDropdown";
 import { useParams } from "react-router";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -26,46 +27,42 @@ function ProfilePage() {
     const { id } = useParams();
       
 
-    const [profileData, setProfileData] = useState({        
-        // pageProfile: { results: [] },    
-    });
-        
-    // const { pageProfile } = useProfileData();
+    const [profileData, setProfileData] = useState([]);
       
     const profile = profileData.data;
-    const is_owner = currentUser?.username === profile?.owner;
-    const is_company_owner = currentUser?.username === profileCompanies?.results.owner;
+    const is_owner = currentUser?.username === profileData.owner;
+    
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const profileData = await axiosReq.get(`/profiles/${id}/`);
-                const companies = await axiosReq.get(`/companies/`);
-                // const [ profileCompanies ] = companies.data.results.filter(
-                //     company => company.owner === profileData.data.owner
-                // );
-                // const profileCompanies = await axiosReq.get(`/companies/?owner__profile=${id}`);
-                const [{ data: profileCompanies }] =
-                    await Promise.all([
-                        // axiosReq.get(`/profiles/${id}/`),
-                        axiosReq.get(`/companies/?owner__profile=${profile}`),
-                    ]);
-                    setProfileData(profileData);
-                    setProfileCompanies(profileCompanies);
-                    setHasLoaded(true);
-                    console.log(profileCompanies);
-                    console.log(profileData.data.owner)
+                const [profileData, companiesData] = await Promise.all ([
+                    axiosReq.get(`/profiles/${id}/`),
+                    axiosReq.get(`/companies/`)
+                ]);
+
+                const companies = companiesData.data;
+                
+                setProfileData(profileData);
+                setHasLoaded(true);
+                const profileCompanies = companies.results.filter(
+                    company => company.owner === profileData.data.owner
+                );
+                setProfileCompanies(profileCompanies);
+                    
             } catch (err) {
                 console.log(err);
             }
         };
         fetchData();
+        
     }, [id, setProfileData]);
-    console.log(profile);
 
     const mainProfile = (
         <>
-            {profile?.is_owner && <DotsDropdown id={profile?.id} />}
+            <span className="d-flex justify-content-end">
+                {profile?.is_owner && <DotsDropdown id={profile?.id} />}
+                </span>
                 <Row noGutters className="px-3 text-center">
                     <Col lg={3} className="text-lg-left">
                         <Image
@@ -97,13 +94,13 @@ function ProfilePage() {
             <hr />
             <p className="text-center">{profile?.owner}'s own companies</p>
             <hr />
-            {profileCompanies.results.length ? (
+            {profileCompanies.length ? (
                 <InfiniteScroll
-                children={profileCompanies.results.map((company) => (
+                children={profileCompanies.map((company) => (
                     
                     <CompanyList key={company.id} {...company} setCompanies={setProfileCompanies} />
                 ))}
-                dataLength={profileCompanies.results.length}
+                dataLength={profileCompanies.length}
                 loader={<Asset spinner />}
                 hasMore={!!profileCompanies.next}
                 // next={() => fetchMoreData(profileCompanies, setProfileCompanies)}
@@ -119,7 +116,7 @@ function ProfilePage() {
       return (
         <Row>
             <Col className="py-2 p-0 p-lg-2" lg={8}>
-                {/* <PopularProfiles mobile /> */}
+            <TopCompanies mobile/>
                 <Container className={appStyles.Content}>
                 {hasLoaded ? (
                     <>
@@ -132,7 +129,7 @@ function ProfilePage() {
                 </Container>
             </Col>
             <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-                {/* <PopularProfiles /> */}
+            <TopCompanies />
             </Col>
         </Row>
       );
