@@ -16,7 +16,7 @@ import { DotsDropdown } from "../../components/DotsDropdown";
 import { useParams } from "react-router";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Image } from "react-bootstrap";
+import { Alert, Image } from "react-bootstrap";
 import NoResults from "../../assets/no-results.png";
 
 function ProfilePage() {
@@ -60,40 +60,40 @@ function ProfilePage() {
 
     const mainProfile = (
         <>
-            <span className="d-flex justify-content-end">
-                {profile?.is_owner && <DotsDropdown id={profile?.id} />}
-                </span>
-                <Row noGutters className="px-3 text-center">
-                    <Col lg={3} className="text-lg-left">
-                        <Image
-                            className={styles.ProfileImage}
-                            roundedCircle
-                            src={profile?.image}
-                        />
-                    </Col>
-                    <Col lg={6}>
-                      <h3 className="m-2">{profile?.owner}</h3>
-                      <Row className="justify-content-center no-gutters">
+            <span className={`${styles.Dots} d-flex justify-content-end`}>
+                {profile?.is_owner && <DotsDropdown id={profile?.id} className={styles.Dots} />}
+            </span>
+            <Row noGutters className="px-3 text-center">
+                <Col lg={3} className="text-lg-left">
+                    <Image
+                        className={styles.ProfileImage}
+                        roundedCircle
+                        src={profile?.image}
+                        fluid
+                    />
+                </Col>
+                <Col lg={6}>
+                    <div className={styles.Name}> {profile?.owner}</div>
+                    <Row className="justify-content-center no-gutters">
                         <Col className="my-2">
-                          <div>{profile?.posts_count}</div>
-                          <div>companies</div>
+                            <div>{profileCompanies.length}</div>
+                            <div>companies</div>
                         </Col>
                         <Col className="my-2">
-                          <div>{profile?.followers_count}</div>
-                          <div>endorsed</div>
-                        </Col>
-                        
-                      </Row>
-                    </Col>
+                            <div>{profile?.endorsement_count}</div>
+                            <div>endorsed</div>
+                        </Col>   
+                    </Row>
+                </Col>
                     {profile?.content && <Col className="p-3">{profile.content}</Col>}
-      </Row>
-    </>
-  );
-  const mainProfilePosts = (
+            </Row>
+        </>
+    );
+    const mainProfileCompanies = (
         <>
-            <hr />
-            <p className="text-center">{profile?.owner}'s own companies</p>
-            <hr />
+            {/* <hr /> */}
+            <p className={`${styles.Subheader} text-center mb-2`}>Your companies</p>
+            <hr className={appStyles.Rule}/>
             {profileCompanies.length ? (
                 <InfiniteScroll
                 children={profileCompanies.map((company) => (
@@ -112,27 +112,41 @@ function ProfilePage() {
                 />
             )}
         </>
-      );
-      return (
+    );
+
+    const mainProfileEndorsed = (
+        <div>
+            <p className={`${styles.Subheader} text-center my-2`}>companies you endorse</p>
+            <hr className={appStyles.Rule}/>
+        </div>
+    );
+
+    return (
         <Row>
+            {/* {is_owner && <Alert variant="success"> Welcome Back!</Alert>} */}
             <Col className="py-2 p-0 p-lg-2" lg={8}>
             <TopCompanies mobile/>
                 <Container className={appStyles.Content}>
                 {hasLoaded ? (
                     <>
+                    <Container className={styles.Banner}>
                     {mainProfile}
-                    {mainProfilePosts}
+                    </Container>
+                    {mainProfileCompanies}
                     </>
                 ) : (
                     <Asset spinner />
                 )}
+                </Container>
+                <Container className={`${appStyles.Content} my-4`}>
+                    {mainProfileEndorsed}
                 </Container>
             </Col>
             <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
             <TopCompanies />
             </Col>
         </Row>
-      );
-    }
+    );
+}
     
-    export default ProfilePage;
+export default ProfilePage;

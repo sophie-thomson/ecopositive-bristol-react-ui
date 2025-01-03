@@ -1,13 +1,49 @@
 .ProfileImage {
-        object-fit: cover;
-        height: 120px;
-        width: 120px;
-        margin: 4px;
-      }
+    object-fit: cover;
+    max-height: 120px;
+    max-width: 120px;
+    margin: 4px;
+}
+
+.Banner {
+    background-color: #eeedee;
+    padding-bottom: 10px;
+    padding-top: 0;
+    border-radius: 8px;
+    box-shadow: #454546;
+}
+
+.Dots i {
+    color:#454546;
+    margin-top: 10px;
+}
+
+.Dots i:hover {
+    color:#679cb1;
+}
+
+.Name {
+    font-weight: bold;
+    color: #7e4aa1;
+    /* margin-right: 8px; */
+    font-size: 1.5em;
+}
+
+.Subheader {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #195829;
+    padding: 0px, 0px;
+    margin: 15px 2px 8px 2px;
+}
       
-      @media screen and (max-width: 991px) {
-        .ProfileImage {
-          width: 250px;
-          height: 250px;
-        }
-      }
+@media screen and (max-width: 991px) {
+    .ProfileImage {
+        width: 250px;
+        height: 250px;
+    }
+}
