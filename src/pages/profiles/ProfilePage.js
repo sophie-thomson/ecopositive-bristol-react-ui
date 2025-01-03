@@ -43,10 +43,8 @@ function ProfilePage() {
                 ]);
 
                 const companies = companiesData.data;
-                
                 setProfileData(profileData);
-                setHasLoaded(true);
-
+                
                 const profileCompanies = companies.results.filter(
                     company => company.owner === profileData.data.owner
                 );
@@ -58,9 +56,7 @@ function ProfilePage() {
                     ) 
                 );
                 setEndorsedCompanies(endorsedCompanies);
-                console.log(companies.results[1].endorsing_users[1].username);
-                console.log(endorsedCompanies);
-                    
+                setHasLoaded(true);    
             } catch (err) {
                 console.log(err);
             }
@@ -134,7 +130,11 @@ function ProfilePage() {
                 <InfiniteScroll
                 children={endorsedCompanies.map((company) => (
                     
-                    <CompanyList key={company.id} {...company} setCompanies={setEndorsedCompanies} />
+                    <CompanyList 
+                        key={company.id} 
+                        {...company} 
+                        setCompanies={setEndorsedCompanies}
+                    />
                 ))}
                 dataLength={endorsedCompanies.length}
                 loader={<Asset spinner />}
@@ -155,7 +155,7 @@ function ProfilePage() {
             {/* {is_owner && <Alert variant="success"> Welcome Back!</Alert>} */}
             <Col className="py-2 p-0 p-lg-2" lg={8}>
             <TopCompanies mobile/>
-                <Container className={appStyles.Content}>
+                <Container className={styles.Frame}>
                 {hasLoaded ? (
                     <>
                     <Container className={styles.Banner}>
@@ -167,7 +167,7 @@ function ProfilePage() {
                     <Asset spinner />
                 )}
                 </Container>
-                <Container className={`${appStyles.Content} my-4`}>
+                <Container className={`${styles.Frame} my-4 pt-3`}>
                     {mainProfileEndorsed}
                 </Container>
             </Col>

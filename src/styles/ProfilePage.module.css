@@ -1,3 +1,15 @@
+.Frame {
+    background-color: #e4e3e4;
+}
+
+.BorderProfile {
+    border: 2px solid #7e4aa1;
+}
+
+.BorderEndorse {
+    border: 2px solid #d69303;
+}
+
 .ProfileImage {
     object-fit: cover;
     max-height: 120px;
