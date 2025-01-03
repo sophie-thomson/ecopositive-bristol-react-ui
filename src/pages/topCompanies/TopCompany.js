@@ -7,7 +7,7 @@ const TopCompany = (props) => {
     const { 
         company, 
         mobile, 
-        imageSize = 45,
+        imageSize = 50,
     } = props;
     
     const { 
@@ -23,7 +23,7 @@ const TopCompany = (props) => {
         >
         <div>
             <Link className="align-self-center" to={`/companies/${id}`}>
-                <img src={logo} height={imageSize} alt="{name} logo" />
+                <img src={logo} width={imageSize} alt="{name} logo" />
             </Link>
         </div>
         <div className={`mx-2 ${styles.Name}`}>

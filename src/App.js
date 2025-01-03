@@ -10,15 +10,15 @@ import SignInForm from './pages/auth/SignInForm';
 import CompanyCreateForm from './pages/companies/CompanyCreateForm';
 import CompanyPage from './pages/companies/CompanyPage';
 import CompanyEditForm from './pages/companies/CompanyEditForm';
-import CredentialSelectForm from './pages/credentials/CredentialSelectForm';
-// import { useCurrentUser } from './contexts/CurrentUserContext';
+import ProfilePage from "./pages/profiles/ProfilePage";
+import { useCurrentUser } from './contexts/CurrentUserContext';
 import CompanyListPage from './pages/companies/CompanyListPage';
 
 
 function App() {
 
-    // const currentUser = useCurrentUser();
-    // const profile_id = currentUser?.profile_id || "";
+    const currentUser = useCurrentUser();
+    const profile_id = currentUser?.profile_id || "";
 
     return (
         
@@ -53,11 +53,7 @@ function App() {
                                     path="/companies/:id"
                                     render={() => <CompanyPage />}
                                 />
-                                <Route
-                                    exact
-                                    path="/credentials/"
-                                    render={() => <CredentialSelectForm />}
-                                />
+                                <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
                                 <Route render={() => <p>Page not Found!</p>} />
                             </Switch>
                         </Container>
