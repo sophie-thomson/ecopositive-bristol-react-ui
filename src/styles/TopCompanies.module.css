@@ -1,26 +1,50 @@
 .Name {
-  color: #195829;
-  font-weight: 400;
+    color: #195829;
 }
 
 .Name i {
-  font-size: 1.2em;
-  color: #d69303; 
+    font-size: 1.2em;
+    color: #d69303; 
 }
 
 .Header {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 0.9em;
-  line-height: 19px;
-  text-align: center;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #195829;
-  padding: 0px, 0px;
-  margin: 0 2px 8px 2px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.9em;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #195829;
+    padding: 0px, 0px;
+    margin: 0 2px 8px 2px;
 }
 
 .Border {
-  border: solid 5px #977baa;
+    border: solid 5px #977baa;
+    background-color: #f5f4f5;
+    padding: 8px;
+}
+
+.Company {
+    min-width: 200px;
+}
+
+.Logo {
+    height: 50px;
+    width: auto;
+    margin-bottom: 5px;
+    align-self: center;
+}
+
+.Card {
+    border: 2px solid #d69303;
+    width:200px;
+}
+
+.CardLg {
+  border: 2px solid #d69303;
+  width: auto;
+  justify-content: center;
+  
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { Card, Col, Container } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import styles from "../../styles/TopCompanies.module.css"
 
@@ -36,38 +36,55 @@ const TopCompanies = ({mobile}) => {
     return (
         
         <Container
-        className={`${styles.Border} ${appStyles.Content} ${
+        className={`${styles.Border}  ${
             mobile && "d-lg-none text-center mb-3"
           }`}
         >
                 <>
-                    <p className={`${styles.Header} m-2 pb-2`}>Highly recommended</p>
+                    <p className={`${styles.Header} m-2 pb-2`}>
+                        <span className={styles.Name}>
+                    <i className="fa-solid fa-award" />
+                        Highly recommended
+                        </span>
+                    </p>
                     <hr className={`${appStyles.Rule} mt-2`} />
                     <div>
                         {mobile ? (
-                            <div className="d-flex justify-content-around">
+                            <Col className="col-flex">
+                            <div className="d-flex justify-content-around flex-wrap flex-md-nowrap">
                                 {topCompanies.map ((company) => (
+                                    <Card key={company.id} className={`${styles.Card} align-items-center m-1`}>
                                     <TopCompany 
                                         key={company.id} 
                                         company={company} 
                                         name={company.name}
                                         logo={company.logo}
-                                        endorsements_count={company.endorsements_count}
                                         mobile
                                     />
+                                    </Card>
                                 ))}
                             </div>
-                        ) : (topCompanies.map ((company) => (
-                            <TopCompany 
-                                key={company.id} 
-                                company={company} 
-                                name={company.name}
-                                logo={company.logo}
-                                endorsements_count={company.endorsements_count}
-                            />
-                        )))
-                    }  
-                </div>    
+                            </Col>
+                        ) : (
+                            <Col className="col-flex align-items-center">    
+                                {topCompanies.map ((company) => (
+                                    <Card 
+                                        key={company.id} 
+                                        className={`${styles.CardLg} 
+                                            d-flex align-items-center flex-wrap m-1`
+                                        }
+                                    >
+                                        <TopCompany 
+                                            key={company.id}
+                                            company={company} 
+                                            name={company.name}
+                                            logo={company.logo}
+                                        />
+                                    </Card>
+                                ))}
+                            </Col>
+                        )}
+                    </div>    
                 </>
             
                 

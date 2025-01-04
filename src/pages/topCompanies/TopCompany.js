@@ -13,27 +13,31 @@ const TopCompany = (props) => {
     const { 
         id, 
         logo, 
-        name, 
-        endorsements_count, 
+        name,
     } = company;
 
     return (
         <div
-        className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}
+            className={`${styles.Company} 
+                my-3 d-flex align-items-center flex-wrap 
+                ${mobile && "flex-column"}`
+            }
         >
-        <div>
-            <Link className="align-self-center" to={`/companies/${id}`}>
-                <img src={logo} width={imageSize} alt="{name} logo" />
-            </Link>
-        </div>
-        <div className={`mx-2 ${styles.Name}`}>
-            <Link className="align-self-center" to={`/companies/${id}`}>
-                <strong>{name}</strong>
-            </Link>
-            <i className="fa-solid fa-award" />
-            ({endorsements_count})
-        </div>
-      
+            
+            <div>
+                <Link className="align-self-center" to={`/companies/${id}`}>
+                    <img 
+                        src={logo} 
+                        className={`${mobile ? styles.Logo : ''}`}
+                        width={imageSize} alt="{name} logo" 
+                    />
+                </Link>
+            </div>
+            <div className={`mx-2 ${styles.Name}`}>
+                <Link className="align-self-end ml-2 text-wrap" to={`/companies/${id}`}>
+                    <strong>{name}</strong>
+                </Link>
+            </div>
         </div>
     );
 };
