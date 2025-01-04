@@ -10,11 +10,33 @@ import styles from "../styles/NavBar.module.css"
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import Avatar from "./Avatar";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+import { useEffect } from 'react';
+import { axiosReq } from '../api/axiosDefaults';
+import { useState } from 'react';
 
 
 const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
+    const [profileData, setProfileData] = useState([]);
+    const id = currentUser?.profile_id;
+    const profile = profileData.data;
+    console.log(id);
+
+    useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    const profileData = await axiosReq.get(`/profiles/${id}/`)
+                    setProfileData(profileData);
+
+                } catch (err) {
+                    console.log(err)    
+                }
+            }
+        
+            fetchData();
+        }, [id])
+    
 
     const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
@@ -39,6 +61,16 @@ const NavBar = () => {
             />
             My ecoPositive
         </NavLink>
+        {profile?.admin_access ? (
+            <NavLink
+                className={styles.NavLink}
+                to={`/admin/${currentUser?.profile_id}`}
+            >
+                
+                <i className="fa-solid fa-unlock-keyhole" />
+                Staff Only
+            </NavLink>
+        ) : (null)}
         <NavLink
             className={styles.NavLink}
             activeClassName={styles.Active}
@@ -71,6 +103,16 @@ const NavBar = () => {
                 Sign Up
             </NavLink>
         </>
+    );
+
+    const adminIcons = (
+        <NavLink
+            className={styles.NavLink}
+            to={`/admin/${currentUser?.profile_id}`}
+        >
+            <i className="fas fa-user-plus"></i>
+            ADMIN
+        </NavLink>
     );
 
     return (
