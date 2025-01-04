@@ -23,3 +23,20 @@ a:hover i {
 .Active i {
     color: #fde661;
 }
+
+.Bold {
+    font-weight: bold;
+    color:#d69303;
+}
+
+.Bold:hover {
+    color:#679cb1;
+}
+
+.Link {
+    color: #fafafa;
+}
+
+.Link:hover {
+    color: #fafafa;
+}
