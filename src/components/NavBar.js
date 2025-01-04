@@ -44,9 +44,10 @@ const NavBar = () => {
       >
         <Avatar
             src={currentUser?.profile_image}
-            text="My Profile"
-            height={40}
+            // text="My Profile"
+            height={30}
         />
+        My ecoPositive
       </NavLink>
 
     </>
