@@ -30,26 +30,24 @@ const NavBar = () => {
     const loggedInIcons = (
     <>
         <NavLink
-                className={styles.NavLink}
-                activeClassName={styles.Active}
-                to="/signin"
-                onClick={handleSignOut}
-            >
-                <i className="fa-solid fa-arrow-right-to-bracket"></i>
-                Sign Out
+            className={styles.NavLink}
+            to={`/profiles/${currentUser?.profile_id}`}
+        >
+            <Avatar
+                src={currentUser?.profile_image}
+                height={30}
+            />
+            My ecoPositive
         </NavLink>
         <NavLink
-        className={styles.NavLink}
-        to={`/profiles/${currentUser?.profile_id}`}
-      >
-        <Avatar
-            src={currentUser?.profile_image}
-            // text="My Profile"
-            height={30}
-        />
-        My ecoPositive
-      </NavLink>
-
+            className={styles.NavLink}
+            activeClassName={styles.Active}
+            to="/signin"
+            onClick={handleSignOut}
+        >
+            <i className="fa-solid fa-arrow-right-to-bracket" />
+            Sign Out
+        </NavLink>
     </>
     );
 
@@ -106,13 +104,9 @@ const NavBar = () => {
                         Browse
                     </NavLink>
                     {currentUser ? loggedInIcons : loggedOutIcons}
-                    </Nav>
-                    
-                </Navbar.Collapse>
-                
-                
-            </Container>
-            
+                    </Nav>   
+                </Navbar.Collapse>   
+            </Container>    
         </Navbar>
     );
 };
