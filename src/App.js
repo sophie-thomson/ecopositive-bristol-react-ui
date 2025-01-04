@@ -13,6 +13,7 @@ import CompanyEditForm from './pages/companies/CompanyEditForm';
 import ProfilePage from "./pages/profiles/ProfilePage";
 import { useCurrentUser } from './contexts/CurrentUserContext';
 import CompanyListPage from './pages/companies/CompanyListPage';
+import AdminPage from './pages/admin/AdminPage';
 
 
 function App() {
@@ -53,7 +54,16 @@ function App() {
                                     path="/companies/:id"
                                     render={() => <CompanyPage />}
                                 />
-                                <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+                                <Route 
+                                    exact 
+                                    path="/profiles/:id" 
+                                    render={() => <ProfilePage />} 
+                                />
+                                <Route 
+                                    exact 
+                                    path="/admin/:id" 
+                                    render={() => <AdminPage />} 
+                                />
                                 <Route render={() => <p>Page not Found!</p>} />
                             </Switch>
                         </Container>

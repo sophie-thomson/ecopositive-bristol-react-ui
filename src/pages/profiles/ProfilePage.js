@@ -8,7 +8,7 @@ import Asset from "../../components/Asset";
 
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
+// import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import CompanyList from "../companies/CompanyList";
 import TopCompanies from "../topCompanies/TopCompanies";
@@ -24,14 +24,14 @@ function ProfilePage() {
     const [profileCompanies, setProfileCompanies] = useState({ results: [] });
     const [endorsedCompanies, setEndorsedCompanies] = useState({ results: [] });
       
-    const currentUser = useCurrentUser();
+    // const currentUser = useCurrentUser();
     const { id } = useParams();
       
 
     const [profileData, setProfileData] = useState([]);
       
     const profile = profileData.data;
-    const is_owner = currentUser?.username === profileData.owner;
+    // const is_owner = currentUser?.username === profileData.owner;
     
 
     useEffect(() => {
