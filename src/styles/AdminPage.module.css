@@ -1,0 +1,23 @@
+.Frame {
+    background-color: #e4e3e4;
+}
+    
+.BorderProfile {
+    border: 3px solid #195829;
+}
+    
+.BorderEndorse {
+    border: 3px solid #d69303;
+}
+
+.Subheader {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #195829;
+    padding: 0px, 0px;
+    margin: 15px 2px 8px 2px;
+}
