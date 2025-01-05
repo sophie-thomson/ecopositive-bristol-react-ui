@@ -3,11 +3,10 @@ import Asset from "../../components/Asset";
 
 import styles from "../../styles/AdminPage.module.css";
 import appStyles from "../../App.module.css";
+import NewCompany from "./newCompany";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-import CompanyList from "../companies/CompanyList";
 import { useParams } from "react-router";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { Alert, Col, Container, Image, Row } from "react-bootstrap";
 import NoResults from "../../assets/no-results.png";
@@ -26,10 +25,6 @@ function AdminPage () {
     const [profileData, setProfileData] = useState([]);
     const profile = profileData.data;
     console.log(profile);
-    
-    
-    // const isAdmin = profile.data.admin_access === true;
-    // console.log(isAdmin);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -64,7 +59,7 @@ function AdminPage () {
         }
     
         fetchData();
-    }, [id, setProfileData]);
+    }, [id, setProfileData, setNewCompanies]);
 
     const approveCompanies = (
         <>
@@ -72,7 +67,20 @@ function AdminPage () {
                 <Col>
                     <p className={`${styles.Subheader} text-center mb-2`}>New companies</p>
                     <hr className={appStyles.Rule}/>
-                    <p>List of New Companies</p>
+                    <div>
+                    {newCompanies.length ? (
+                        <>{newCompanies.map((company) => (
+                            <NewCompany
+                                key={company.id}
+                                {...company}
+                                setNewCompanies={setNewCompanies}
+                            />
+                        ))}
+                        </>
+                    ):(
+                        <p className="text-center">There are no new companies to approve at the moment.</p>
+                    )}
+                    </div>
                 </Col>
             </Row>
         </>

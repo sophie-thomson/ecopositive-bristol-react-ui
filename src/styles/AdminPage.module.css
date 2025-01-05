@@ -21,3 +21,21 @@
     padding: 0px, 0px;
     margin: 15px 2px 8px 2px;
 }
+
+.Name {
+    color: #195829;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.Logo {
+    height: auto;
+    width: 75px;
+    margin-bottom: 5px;
+}
+
+.ListItem {
+    background-color: #fafafa;
+    margin: 15px 5px;
+    padding: 5px;
+}
