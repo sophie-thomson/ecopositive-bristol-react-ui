@@ -37,10 +37,13 @@ const NewCompany = (props) => {
         <div>
             <li className={`${styles.ListItem} d-flex justify-content-between px-2`}>
                 <Link to={`/companies/${id}`}>
-                    <Image className={`${styles.Logo} mr-3 d-none d-sm-inline`} src={logo} alt={name} />
+                    <Image className={`${styles.Logo} mr-3 d-none d-md-inline`} src={logo} alt={name} />
                     <span className={`${styles.Name}`}>{name}</span>
                 </Link>
-                <span className="d-flex align-items-center text-muted">Added: {created_on}</span>
+                <span className="d-flex align-items-center text-muted small"
+                >
+                    Added: {created_on}
+                </span>
                 <Button
                     className={
                         `${btnStyles.Button} 
