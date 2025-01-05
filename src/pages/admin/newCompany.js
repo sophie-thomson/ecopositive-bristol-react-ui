@@ -12,6 +12,7 @@ const NewCompany = (props) => {
         id,
         name,
         logo,
+        created_on,
     } = props;
     
     const history = useHistory();
@@ -39,6 +40,7 @@ const NewCompany = (props) => {
                     <Image className={`${styles.Logo} mr-3 d-none d-sm-inline`} src={logo} alt={name} />
                     <span className={`${styles.Name}`}>{name}</span>
                 </Link>
+                <span className="d-flex align-items-center text-muted">Added: {created_on}</span>
                 <Button
                     className={
                         `${btnStyles.Button} 
