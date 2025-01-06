@@ -4,7 +4,7 @@ import Asset from "../../components/Asset";
 import styles from "../../styles/AdminPage.module.css";
 import appStyles from "../../App.module.css";
 import NewCompany from "./NewCompany";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
+// import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import { useParams } from "react-router";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
@@ -18,14 +18,12 @@ function AdminPage () {
     const [newCompanies, setNewCompanies] = useState({ results: [] });
     const [reportedComments, setReportedComments] = useState({ results: [] });
 
-    const currentUser = useCurrentUser();
+    // const currentUser = useCurrentUser();
     const { id } = useParams();
-
-    console.log()
 
     const [profileData, setProfileData] = useState([]);
     const profile = profileData.data;
-    console.log(profile);
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,19 +37,19 @@ function AdminPage () {
                 const companies = companiesData.data;
                 const comments = commentsData.data;
                 setProfileData(profileData);
-                console.log(profileData);
+                // console.log(profileData);
 
                 const newCompanies = companies.results.filter(
                     company => company.approved === false
                 );
                 setNewCompanies(newCompanies);
-                console.log(newCompanies);
+                // console.log(newCompanies);
 
                 const reportedComments = comments.results.filter(
                     comment => comment.reported === true
                 );
                 setReportedComments(reportedComments);
-                console.log(reportedComments);
+                // console.log(reportedComments);
                 setHasLoaded(true);
                 
             } catch (err) {
@@ -108,20 +106,23 @@ function AdminPage () {
                         <p className="text-center">There are no reported comments to review at the moment.</p>
                     )}
                     </div>
-                    <p>List of Comments to Review</p>
                 </Col>
             </Row>
         </>
     );
     
     return (
-        <Container className={`${styles.Frame} mb-3`}>
+        <Container className="mb-5">
             <div>
-                {profile?.admin_access ? (<p>Has admin access</p>) : (<p>Doesn't have admin access</p>)}
+                {profile?.is_staff ? (<p>Has admin access</p>) : (<p>Doesn't have admin access</p>)}
                 {hasLoaded ? (
                     <>
+                    <Container className={`${styles.Frame} mb-3`}>
                     {approveCompanies}
+                    </Container>
+                    <Container className={`${styles.Frame} mb-3`}>
                     {reviewComments}
+                    </Container>
                     </>
                 ) : (
                     <Asset spinner />
