@@ -60,7 +60,7 @@ function AdminPage () {
         }
     
         fetchData();
-    }, [id, setProfileData, setNewCompanies]);
+    }, [id, setProfileData, setNewCompanies, setReportedComments]);
 
     const approveCompanies = (
         <>
@@ -100,6 +100,7 @@ function AdminPage () {
                                 key={comment.id}
                                 {...comment}
                                 setReportedComments={setReportedComments}
+                                reportedComments={reportedComments}
                             />
                         ))}
                         </>

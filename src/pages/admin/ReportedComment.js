@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Alert, Button, Media } from "react-bootstrap";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { useHistory } from "react-router-dom";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 
 const ReportedComment = (props) => {
@@ -26,6 +27,8 @@ const ReportedComment = (props) => {
     const history = useHistory();
     const [errors, setErrors] = useState({});
     const [companyInfo, setCompanyInfo] = useState({});
+    const currentUser = useCurrentUser();
+
 
     useEffect(() => {
             const fetchData = async () => {
@@ -42,23 +45,18 @@ const ReportedComment = (props) => {
             }
         
             fetchData();
-        }, [id, companyInfo]);
+        }, [id, setCompanyInfo]);
     
     const handleApprove = async (event) => {
         event.preventDefault();
 
-        const approved = { approved: true };
-        const reported = { reported: false };
         try {
             await axiosReq.patch(`/comments/${id}/`, {
-                approved,
-                reported
+                approved: true,
+                reported: false,
             });
-            setReportedComments((prevComments) => ({
-                ...prevComments,
-                results: [{approved, reported}, ...prevComments.results],
-            }));
-            history.push(`/comments/${id}`);
+            
+            history.push(`/companies/${company}`);
         } catch (err) {
             console.log(err);
             if (err.response?.status !== 401) {
@@ -70,21 +68,10 @@ const ReportedComment = (props) => {
     const handleDelete = async () => {
             try {
                 await axiosRes.delete(`/comments/${id}/`)
-                // await axiosReq.patch(`/companies/${company}/`, {
-                //     comments_count: companyData.comments_count - 1
-                // });
-
-                setCompanyInfo(prevCompanyInfo => ({
-                    results: [{
-                        ...prevCompanyInfo.results[0],
-                        comments_count: prevCompanyInfo.results[0].comments_count - 1
-                    }]
-                }));
-    
-                setReportedComments(prevComments => ({
-                    ...prevComments,
-                    results: prevComments.results.filter(comment => comment.id !== id),
-                }));
+                await axiosReq.patch(`/companies/${company}/`, {
+                    comments_count: companyInfo.comments_count - 1
+                });
+                window.location.reload();
             } catch (err) {
             
             }
@@ -112,7 +99,6 @@ const ReportedComment = (props) => {
                             {content}
                             <i className="fa-solid fa-quote-right"></i>
                         </p>
-                    <span className={styles.Company}>{company}</span>
                 </Media.Body>
                 <Button
                     className={
