@@ -63,7 +63,17 @@ const Comment = (props) => {
                 reported: true,
             });
             setShowReportBtn();
-            // setReportedStatus();
+            setComments(prevComments => ({
+                ...prevComments,
+                results: prevComments.results.map((comment) => {
+                    return comment.id === id
+                        ? {
+                            ...comment,
+                            reported: true,
+                          }
+                        : comment;
+                }),
+            }));
                 
         } catch (err) {
             console.log(err);
@@ -117,6 +127,13 @@ const Comment = (props) => {
                     />
                     {reported && <span className="small text-muted">Comment Reported</span>}
                     </span>
+                        {showReportBtn && reported && 
+                            <div>
+                                <p>
+                                    This comment has already been reported.
+                                </p>
+                            </div>    
+                        }
                         {showReportBtn ? (
                             <>
                             <p>Report this comment?</p>
