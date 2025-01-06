@@ -8,3 +8,11 @@
     font-weight: lighter;
     color: #c1c1c5;
 }
+
+.Reported i {
+    color:#c55c1e;
+}
+
+.NotReported i {
+    color: grey;
+}

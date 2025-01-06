@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { Media } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Media } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import styles from "../../styles/Comment.module.css";
+import btnStyles from "../../styles/Button.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { DotsDropdown } from "../../components/DotsDropdown";
-import { axiosRes } from "../../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import CommentEditForm from "./CommentEditForm";
 
 const Comment = (props) => {
@@ -18,13 +19,22 @@ const Comment = (props) => {
         id,
         setCompany,
         setComments,
+        reported,
     } = props;
 
     const [showEditForm, setShowEditForm] = useState(false);
+    const [showReportBtn, setShowReportBtn] = useState(false);
+    const [reportedStatus, setReportedStatus] = useState(false);
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
+    const [errors, setErrors] = useState({});
 
+    const displayButtons = (event) => {
+        event.preventDefault();
+        setShowReportBtn(prevState => !prevState);
+    };
+    
     const handleDelete = async () => {
         try {
             await axiosRes.delete(`/comments/${id}/`)
@@ -42,11 +52,31 @@ const Comment = (props) => {
         } catch (err) {
         
         }
-    }
+    };
+
+    const handleReport = async (event) => {
+        event.preventDefault();
+    
+        try {
+            await axiosReq.patch(`/comments/${id}/`, {
+                approved: false,
+                reported: true,
+            });
+            setShowReportBtn();
+            // setReportedStatus();
+                
+        } catch (err) {
+            console.log(err);
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data);
+            }
+        }
+    };
+
     return (
         <>
             <hr />
-            <Media>
+            <Media className="d-flex">
                 <Link to={`/profiles/${profile_id}`}>
                     <Avatar src={profile_image} />
                 </Link>
@@ -70,6 +100,7 @@ const Comment = (props) => {
                         </p>
                     )}
                 </Media.Body>
+                
                 {is_owner && !showEditForm && (
                     <DotsDropdown
                       handleEdit={() => setShowEditForm(true)}
@@ -77,6 +108,35 @@ const Comment = (props) => {
                     />
                 )}
             </Media>
+            {currentUser && (
+                    <>
+                    <span className={`${reported ? styles.Reported : styles.NotReported}`}>
+                    <i 
+                        className="fa-solid fa-flag"
+                        onClick={displayButtons} 
+                    />
+                    {reported && <span className="small text-muted">Comment Reported</span>}
+                    </span>
+                        {showReportBtn ? (
+                            <>
+                            <p>Report this comment?</p>
+                            <Button
+                                className={`${btnStyles.Button} ${btnStyles.Red} btn`}
+                                onClick={handleReport}
+                            >
+                                Yes
+                            </Button>
+                            <Button
+                                className={`${btnStyles.Button} ${btnStyles.Bright} btn`}
+                                onClick={displayButtons}
+                            >
+                                No
+                            </Button>
+                        </>
+                        ) : (null)
+                    }
+                    </>
+                )}
         </>
     );
 };
