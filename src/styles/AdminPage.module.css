@@ -38,4 +38,16 @@
     background-color: #fafafa;
     margin: 15px 5px;
     padding: 5px;
+    list-style-type: none;
+}
+
+.Owner {
+    font-weight: bold;
+    color: #195829;
+    margin-right: 8px;
+}
+      
+.Date {
+    font-weight: lighter;
+    color: #c1c1c5;
 }

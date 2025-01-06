@@ -21,7 +21,7 @@ const NewCompany = (props) => {
     const handleApprove = async (event) => {
         event.preventDefault();
 
-        const approved = { approved: true }
+        const approved = { approved: true };
         try {
             await axiosReq.patch(`/companies/${id}/`, approved);
             history.push(`/companies/${id}`);

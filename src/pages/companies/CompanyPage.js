@@ -129,9 +129,9 @@ function CompanyPage() {
                                             setComments={setComments}
                                         />
                                     ))}
-                                    dataLength={comments.results.length}
+                                    // dataLength={comments.results.length}
                                     loader={<Asset spinner />}
-                                    hasMore={!!comments.next}
+                                    // hasMore={!!comments.next}
                                     //  next={() => fetchMoreData(comments, setComments)}
                                 />
                             ) : currentUser ? (

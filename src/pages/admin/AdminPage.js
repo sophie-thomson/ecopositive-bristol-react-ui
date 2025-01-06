@@ -3,13 +3,14 @@ import Asset from "../../components/Asset";
 
 import styles from "../../styles/AdminPage.module.css";
 import appStyles from "../../App.module.css";
-import NewCompany from "./newCompany";
+import NewCompany from "./NewCompany";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import { useParams } from "react-router";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { Alert, Col, Container, Image, Row } from "react-bootstrap";
 import NoResults from "../../assets/no-results.png";
+import ReportedComment from "./ReportedComment";
 
 function AdminPage () {
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -92,6 +93,20 @@ function AdminPage () {
                 <Col>
                     <p className={`${styles.Subheader} text-center mb-2`}>Review Comments</p>
                     <hr className={appStyles.Rule}/>
+                    <div>
+                    {reportedComments.length ? (
+                        <>{reportedComments.map((comment) => (
+                            <ReportedComment
+                                key={comment.id}
+                                {...comment}
+                                setReportedComments={setReportedComments}
+                            />
+                        ))}
+                        </>
+                    ):(
+                        <p className="text-center">There are no reported comments to review at the moment.</p>
+                    )}
+                    </div>
                     <p>List of Comments to Review</p>
                 </Col>
             </Row>
