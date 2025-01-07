@@ -5,11 +5,13 @@ import styles from "../../styles/TopCompanies.module.css"
 
 import TopCompany from "./TopCompany";
 import { axiosReq } from "../../api/axiosDefaults";
+import Asset from "../../components/Asset";
 
 
 const TopCompanies = ({mobile}) => {
-    
+    const [hasLoaded, setHasLoaded] = useState(false);
     const [topCompanies, setTopCompanies] = useState([]);
+    const [topFive, setTopFive] = useState([]);
 
     useEffect(() => {
         const handleMount = async () => {
@@ -24,6 +26,10 @@ const TopCompanies = ({mobile}) => {
                 
                 const topCompanies = sortedCompanies.slice(0, 3);
                 setTopCompanies(topCompanies);
+
+                const topFive = sortedCompanies.slice(0, 5);
+                setTopFive(topFive);
+                setHasLoaded(true);
          
             } catch (err) {
                 console.log(err);
@@ -49,6 +55,9 @@ const TopCompanies = ({mobile}) => {
                     </p>
                     <hr className={`${appStyles.Rule} mt-2`} />
                     <div>
+                    {hasLoaded ? (
+                    
+                <>
                         {mobile ? (
                             <Col className="col-flex">
                             <div className="d-flex justify-content-around flex-wrap flex-md-nowrap">
@@ -66,12 +75,12 @@ const TopCompanies = ({mobile}) => {
                             </div>
                             </Col>
                         ) : (
-                            <Col className="col-flex align-items-center">    
-                                {topCompanies.map ((company) => (
+                            <Col className="col-flex align-items-center">
+                                {topFive.map ((company) => (
                                     <Card 
                                         key={company.id} 
                                         className={`${styles.CardLg} 
-                                            d-flex align-items-center flex-wrap m-1`
+                                            d-flex justify-content-center text-center flex-wrap m-1`
                                         }
                                     >
                                         <TopCompany 
@@ -84,6 +93,10 @@ const TopCompanies = ({mobile}) => {
                                 ))}
                             </Col>
                         )}
+                        </>
+                    ) : (
+                        <Asset spinner />
+                    )}
                     </div>    
                 </>
             

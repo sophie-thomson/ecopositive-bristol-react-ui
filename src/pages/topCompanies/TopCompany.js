@@ -19,8 +19,7 @@ const TopCompany = (props) => {
     return (
         <div
             className={`${styles.Company} 
-                my-3 d-flex align-items-center flex-wrap 
-                ${mobile && "flex-column"}`
+                my-3 d-flex align-items-center flex-wrap flex-column`
             }
         >
             
@@ -29,12 +28,13 @@ const TopCompany = (props) => {
                     <img 
                         src={logo} 
                         className={`${mobile ? styles.Logo : ''}`}
-                        width={imageSize} alt="{name} logo" 
+                        width={imageSize} 
+                        alt="{name} logo" 
                     />
                 </Link>
             </div>
             <div className={`mx-2 ${styles.Name}`}>
-                <Link className="align-self-end ml-2 text-wrap" to={`/companies/${id}`}>
+                <Link className="text-center ml-2 text-wrap" to={`/companies/${id}`}>
                     <strong>{name}</strong>
                 </Link>
             </div>
