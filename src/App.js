@@ -15,6 +15,7 @@ import { useCurrentUser } from './contexts/CurrentUserContext';
 import CompanyListPage from './pages/companies/CompanyListPage';
 import AdminPage from './pages/admin/AdminPage';
 import PageNotFound from './pages/notfound/PageNotFound';
+import ProfileEditForm from './pages/profiles/ProfileEditForm';
 
 
 function App() {
@@ -60,6 +61,12 @@ function App() {
                                     path="/profiles/:id" 
                                     render={() => <ProfilePage />} 
                                 />
+                                <Route 
+                                    exact 
+                                    path="/profiles/:id/edit" 
+                                    render={() => <ProfileEditForm />} 
+                                />
+                                
                                 <Route 
                                     exact 
                                     path="/admin/:id" 

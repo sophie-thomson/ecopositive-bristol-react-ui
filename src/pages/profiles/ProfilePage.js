@@ -15,9 +15,10 @@ import TopCompanies from "../topCompanies/TopCompanies";
 import { DotsDropdown } from "../../components/DotsDropdown";
 import { useParams } from "react-router";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { axiosReq } from "../../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { Alert, Image } from "react-bootstrap";
 import NoResults from "../../assets/no-results.png";
+import { useHistory } from "react-router-dom";
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -26,7 +27,7 @@ function ProfilePage() {
       
     // const currentUser = useCurrentUser();
     const { id } = useParams();
-      
+    const history = useHistory();  
 
     const [profileData, setProfileData] = useState([]);
       
@@ -65,10 +66,31 @@ function ProfilePage() {
         
     }, [id, setProfileData]);
 
+
+    const handleEdit = () => {
+        history.push(`/profiles/${id}/edit`);     
+    };
+
+
+    const handleDelete = async () => {
+        try {
+            await axiosRes.delete(`/profiles/${id}/`);
+            history.goBack();
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    
     const mainProfile = (
         <>
             <span className={`${styles.Dots} d-flex justify-content-end`}>
-                {profile?.is_owner && <DotsDropdown id={profile?.id} className={styles.Dots} />}
+                {profile?.is_owner && 
+                    <DotsDropdown 
+                        id={profile?.id} 
+                        className={styles.Dots}
+                        handleEdit={handleEdit}
+                        handleDelete={handleDelete}
+                    />}
             </span>
             <Row noGutters className="px-3 text-center">
                 <Col lg={3} className="text-lg-left">
