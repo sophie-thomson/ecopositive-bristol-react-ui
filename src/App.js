@@ -14,6 +14,7 @@ import ProfilePage from "./pages/profiles/ProfilePage";
 import { useCurrentUser } from './contexts/CurrentUserContext';
 import CompanyListPage from './pages/companies/CompanyListPage';
 import AdminPage from './pages/admin/AdminPage';
+import PageNotFound from './pages/notfound/PageNotFound';
 
 
 function App() {
@@ -64,7 +65,7 @@ function App() {
                                     path="/admin/:id" 
                                     render={() => <AdminPage />} 
                                 />
-                                <Route render={() => <p>Page not Found!</p>} />
+                                <Route render={() => <PageNotFound />} />
                             </Switch>
                         </Container>
                     </div>        
