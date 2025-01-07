@@ -53,6 +53,7 @@ const NavBar = () => {
     <>
         <NavLink
             className={styles.NavLink}
+            activeClassName={styles.Active}
             to={`/profiles/${currentUser?.profile_id}`}
         >
             <Avatar
@@ -64,6 +65,7 @@ const NavBar = () => {
         {profile?.admin_access ? (
             <NavLink
                 className={styles.NavLink}
+                activeClassName={styles.Active}
                 to={`/admin/${currentUser?.profile_id}`}
             >
                 
@@ -105,15 +107,16 @@ const NavBar = () => {
         </>
     );
 
-    const adminIcons = (
-        <NavLink
-            className={styles.NavLink}
-            to={`/admin/${currentUser?.profile_id}`}
-        >
-            <i className="fas fa-user-plus"></i>
-            ADMIN
-        </NavLink>
-    );
+    // const adminIcons = (
+    //     <NavLink
+    //         className={styles.NavLink}
+    //         activeClassName={styles.Active}
+    //         to={`/admin/${currentUser?.profile_id}`}
+    //     >
+    //         <i className="fas fa-user-plus"></i>
+    //         ADMIN
+    //     </NavLink>
+    // );
 
     return (
         <Navbar

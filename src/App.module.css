@@ -44,7 +44,7 @@ a:hover {
 }
   
 a:hover i {
-    color: #d69303;
+    color: #679cb1;
     transition: color ease-in-out 0.3s;
 }
 
@@ -59,11 +59,11 @@ i {
     vertical-align: middle;
 }
 
-/* i:hover {
+i:hover {
     cursor: pointer;
     transition: color ease-in-out 0.3s;
-    color: #d69303;
-} */
+    color: #679cb1;
+}
 
 figure {
     text-align: center;

@@ -16,12 +16,16 @@
 
 a:hover,
 a:hover i {
-    color: #fde661;
+    color: #ebba50;
     transition: color ease-in-out 0.3s;
 }
 
 .Active i {
-    color: #fde661;
+    color: #ebba50;
+}
+
+.Active {
+    color: #ebba50;
 }
 
 .Bold {
