@@ -11,15 +11,18 @@
 
 .bg {
     background-image: url(./assets/bgimage.png);
-    width: 100%;
-    height: auto;
+    /* width: 100%; */
+    min-height: 100%;
     background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    position: relative;
 }
 
 .Content {
     background-color: #fafafa;
     padding: 10px;
-    border-radius: 2px;
+    border-radius: 8px;
   }
 
 .Image {

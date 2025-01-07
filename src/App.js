@@ -24,10 +24,10 @@ function App() {
     return (
         
                 <div className={styles.App}>
-                    <div className={`fluid ${styles.bg}`}>
+                    <div className={`${styles.bg}`}>
                         <NavBar />
                         <AddCompany />
-                        <Container className={styles.Main}>
+                        <Container className={`${styles.Main}`}>
                             <Switch>
                             <Route 
                                 exact 
