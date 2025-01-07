@@ -2,7 +2,19 @@
     background-color: #e4e3e4;
 }
 
-.BorderProfile {
+.Company {
+    color: #195829;
+    font-size: 1.8em;
+    font-weight: Bold;
+}
+
+.Endorse {
+    color: #d69303;
+    font-size: 1.8em;
+    font-weight: Bold;
+}
+
+.BorderCompany {
     border: 3px solid #195829;
 }
 
@@ -31,13 +43,12 @@
 }
 
 .Dots i:hover {
-    color:#679cb1;
+    color:#d69303;
 }
 
 .Name {
     font-weight: bold;
     color: #7e4aa1;
-    /* margin-right: 8px; */
     font-size: 1.5em;
 }
 

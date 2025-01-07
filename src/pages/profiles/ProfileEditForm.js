@@ -110,7 +110,6 @@ const ProfileEditForm = () => {
                   value={first_name}
                   onChange={handleChange}
                   name="first_name"
-                //   rows={7}
                 />
             </Form.Group>
             {errors?.first_name?.map((message, idx) => (
@@ -126,7 +125,6 @@ const ProfileEditForm = () => {
                     value={last_name}
                     onChange={handleChange}
                     name="last_name"
-                //   rows={7}
                 />
             </Form.Group>
             {errors?.first_name?.map((message, idx) => (

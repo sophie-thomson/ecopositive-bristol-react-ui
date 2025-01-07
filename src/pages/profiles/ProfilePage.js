@@ -57,12 +57,21 @@ function ProfilePage() {
                     ) 
                 );
                 setEndorsedCompanies(endorsedCompanies);
-                setHasLoaded(true);    
+                setHasLoaded(true);
+                
             } catch (err) {
                 console.log(err);
             }
         };
-        fetchData();
+        setHasLoaded(false);
+        const timer = setTimeout(() => {
+            fetchData();
+          }, 1000);
+      
+          return () => {
+            clearTimeout(timer);
+          };   
+        // fetchData();
         
     }, [id, setProfileData]);
 
@@ -102,15 +111,61 @@ function ProfilePage() {
                     />
                 </Col>
                 <Col lg={6}>
-                    <div className={styles.Name}> {profile?.owner}</div>
+                    <div className={styles.Name}> 
+                        {profile?.first_name ? (
+                            `Hello ${profile?.first_name}!`
+                        ) : (
+                            `Hello ${profile?.owner}!`
+                        )}
+                    </div>
                     <Row className="justify-content-center no-gutters">
                         <Col className="my-2">
-                            <div>{profileCompanies.length}</div>
-                            <div>companies</div>
-                        </Col>
-                        <Col className="my-2">
-                            <div>{profile?.endorsements_count}</div>
-                            <div>endorsed</div>
+                            <div>
+                                {profileCompanies.length > 1 ? (
+                                    <p>
+                                        You have
+                                        <span className={styles.Company}> 
+                                            &nbsp;{profileCompanies.length}&nbsp;
+                                        </span> 
+                                        companies listed.
+                                    </p>
+                                ) : profileCompanies.length === 1 ? (
+                                    <p>
+                                        You have 
+                                        <span className={styles.Company}> 
+                                            &nbsp;{profileCompanies.length}&nbsp;
+                                        </span> 
+                                        company listed.
+                                    </p>
+                                ) : (
+                                    <p>You haven't submitted any companies of your own.</p>
+                                )}
+                            </div>
+                            <div>
+                                {profile?.endorsements_count > 1 ? (
+                                    <p>
+                                        You have endorsed 
+                                        <span className={styles.Endorse}>
+                                            &nbsp;{profile?.endorsements_count}&nbsp;
+                                        </span> 
+                                        companies.
+                                    </p>
+                                ) : profile?.endorsements_count === 1 ? (
+                                    <p>
+                                        You have endorsed 
+                                        <span className={styles.Endorse}>
+                                            &nbsp;{profile?.endorsements_count}&nbsp;
+                                        </span> 
+                                        company.
+                                    </p>
+                                ) : (
+                                    <p>
+                                        You haven't endorsed any companies yet.<br />
+                                        View a company page to add your own endorsement and support your favourites.
+                                    </p>
+                                )}
+                            </div>
+                            
                         </Col>   
                     </Row>
                 </Col>
@@ -120,7 +175,6 @@ function ProfilePage() {
     );
     const mainProfileCompanies = (
         <>
-            {/* <hr /> */}
             <p className={`${styles.Subheader} text-center mb-2`}>Your companies</p>
             <hr className={appStyles.Rule}/>
             {profileCompanies.length ? (
@@ -177,25 +231,36 @@ function ProfilePage() {
 
     return (
         <Row>
-            {/* {is_owner && <Alert variant="success"> Welcome Back!</Alert>} */}
             <Col className="py-2 p-0 p-lg-2" lg={8}>
             <TopCompanies mobile/>
                 
                 <Container className={appStyles.Content}>
-                    {mainProfile}
-                </Container>
-                <Container className={`${styles.Frame} ${styles.BorderProfile} mt-3`}>
                 {hasLoaded ? (
                     <>
+                        {mainProfile}
+                    </>
+                ) : (
+                    <Asset spinner />
+                )}
                     
-                    {mainProfileCompanies}
+                </Container>
+                <Container className={`${styles.Frame} ${styles.BorderCompany} mt-3`}>
+                {hasLoaded ? (
+                    <>
+                        {mainProfileCompanies}
                     </>
                 ) : (
                     <Asset spinner />
                 )}
                 </Container>
                 <Container className={`${styles.Frame} ${styles.BorderEndorse} my-4 pt-3`}>
-                    {mainProfileEndorsed}
+                {hasLoaded ? (
+                    <>
+                        {mainProfileEndorsed}
+                    </>
+                ) : (
+                    <Asset spinner />
+                )}
                 </Container>
             </Col>
             <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
