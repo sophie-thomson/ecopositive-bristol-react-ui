@@ -23,8 +23,8 @@ function App() {
 
     return (
         
-                <div className={styles.App}>
-                    <div className={`${styles.bg}`}>
+                <div className={`${styles.bg} ${styles.App}`}>
+                    <div>
                         <NavBar />
                         <AddCompany />
                         <Container className={`${styles.Main}`}>
