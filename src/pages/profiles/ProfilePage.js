@@ -144,7 +144,7 @@ function ProfilePage() {
                             <div>
                                 {profile?.endorsements_count > 1 ? (
                                     <p>
-                                        You have endorsed 
+                                        Great work! You have endorsed 
                                         <span className={styles.Endorse}>
                                             &nbsp;{profile?.endorsements_count}&nbsp;
                                         </span> 
@@ -156,13 +156,18 @@ function ProfilePage() {
                                         <span className={styles.Endorse}>
                                             &nbsp;{profile?.endorsements_count}&nbsp;
                                         </span> 
-                                        company.
+                                        company. Keep going!
+                                    </p>
+                                ) : profile?.endorsements_count === 0 ? (
+                                    <p>
+                                        You have endorsed 
+                                        <span className={styles.Endorse}>
+                                            &nbsp;{profile?.endorsements_count}&nbsp;
+                                        </span>
+                                        companies.
                                     </p>
                                 ) : (
-                                    <p>
-                                        You haven't endorsed any companies yet.<br />
-                                        View a company page to add your own endorsement and support your favourites.
-                                    </p>
+                                    <p>You don't appear to have endorsed any companies.</p>
                                 )}
                             </div>
                             
@@ -244,16 +249,22 @@ function ProfilePage() {
                 )}
                     
                 </Container>
-                <Container className={`${styles.Frame} ${styles.BorderCompany} mt-3`}>
-                {hasLoaded ? (
-                    <>
-                        {mainProfileCompanies}
-                    </>
-                ) : (
-                    <Asset spinner />
-                )}
-                </Container>
-                <Container className={`${styles.Frame} ${styles.BorderEndorse} my-4 pt-3`}>
+                {profileCompanies.length ?(
+                    <Container 
+                        className={`${styles.Frame} ${styles.BorderCompany} mt-3`}
+                    >
+                    {hasLoaded ? (
+                        <>
+                            {mainProfileCompanies}
+                        </>
+                    ) : (
+                        <Asset spinner />
+                    )}
+                    </Container>
+                ) : (null)}
+                <Container 
+                    className={`${styles.Frame} ${styles.BorderEndorse} my-4 pt-3`}
+                >
                 {hasLoaded ? (
                     <>
                         {mainProfileEndorsed}
