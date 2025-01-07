@@ -44,3 +44,7 @@
     padding-left: 0;
     margin-bottom: 2px;
 }
+
+.Website i {
+    cursor: pointer;
+}

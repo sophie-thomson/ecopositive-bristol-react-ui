@@ -5,6 +5,7 @@ import styles from "../styles/DotsDropdown.module.css";
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
 const ThreeDots = React.forwardRef(({ onClick }, ref) => (
+    <span className={styles.Dots}>
     <i
         className="fas fa-ellipsis-v"
         ref={ref}
@@ -13,6 +14,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
             onClick(e);
         }}
     />
+    </span>
 ));
 
 export const DotsDropdown = ({ handleEdit, handleDelete }) => {

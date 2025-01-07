@@ -13,8 +13,6 @@ const Company = (props) => {
     const {
         id,
         owner,
-        // owner_profile_id,
-        // owner_profile_image,
         name,
         logo,
         website_url,
@@ -150,10 +148,10 @@ const Company = (props) => {
                 <div 
                     className={`${styles.Endorse} text-muted d-flex align-items-center justify-content-end`}
                 >
-                    <Link to={`/companies/${id}`} className={` ${styles.Comment} mr-2 text-muted`}>
+                    <div className={` ${styles.Comment} mr-2 text-muted`}>
                         <i className="far fa-comments" />
                         {comments_count}
-                    </Link>
+                    </div>
                 </div>
                 <div className="d-flex justify-content-center">
                     <a 

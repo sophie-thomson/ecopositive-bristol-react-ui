@@ -11,8 +11,10 @@
 
 .Reported i {
     color:#c55c1e;
+    cursor: pointer;
 }
 
 .NotReported i {
     color: grey;
+    cursor: pointer;
 }

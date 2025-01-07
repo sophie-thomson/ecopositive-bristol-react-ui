@@ -9,18 +9,6 @@
   h5 {
     margin: 0 0;
 }
-  
-.Heart {
-    color: #8f272c;
-}
-  
-.Heart:hover {
-    color: #facedd;
-}
-  
-.HeartOutline:hover {
-    color: #8f272c;
-}
 
 .Logo {
     max-width:275px;
