@@ -90,7 +90,7 @@ function CompanyPage() {
                         {is_owner && (
                             <div className="d-flex justify-content-center mt-3">
                             <button 
-                                className={`${btnStyles.Button} ${btnStyles.Credbtn} align-items-center`}
+                                className={`${btnStyles.Button} ${styles.Credbtn} align-items-center`}
                                 onClick={displayForm}
                             >
                                 Add / Edit Credentials   
