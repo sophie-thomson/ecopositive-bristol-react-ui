@@ -91,9 +91,13 @@ const Comment = (props) => {
                     <Avatar src={profile_image} />
                 </Link>
                 <Media.Body className="align-self-center ml-2">
-                    <span className={styles.Owner}>{owner}</span>
-                    <span className={`${styles.Date} small`}>{updated_on}</span>
-                    {showEditForm ? (
+                    <span className={styles.Owner}>
+                        {owner}
+                    </span>
+                    <span className={`${styles.Date} small`}>
+                        {updated_on}
+                    </span>
+                    {showEditForm && is_owner ? (
                         <CommentEditForm
                             id={id}
                             profile_id={profile_id}
@@ -127,14 +131,19 @@ const Comment = (props) => {
                     />
                     {reported && <span className="small text-muted">Comment Reported</span>}
                     </span>
-                        {showReportBtn && reported && 
-                            <div>
-                                <p>
-                                    This comment has already been reported.
-                                </p>
-                            </div>    
-                        }
-                        {showReportBtn ? (
+                        {showReportBtn && reported && is_owner ? (
+                            <p>
+                                Your comment has been reported, you may wish to edit or delete this comment.
+                            </p>
+                        ) : showReportBtn && reported && !is_owner ? (
+                            <p>
+                                This comment is being reviewed by ecoPositive staff.
+                            </p>
+                        ) : showReportBtn && is_owner ? (
+                            <p>
+                                You cannot report your own comment.
+                            </p>
+                        ) : showReportBtn ? (
                             <>
                             <p>Report this comment?</p>
                             <Button
@@ -150,7 +159,7 @@ const Comment = (props) => {
                                 No
                             </Button>
                         </>
-                        ) : (null)
+                        ) : null
                     }
                     </>
                 )}
