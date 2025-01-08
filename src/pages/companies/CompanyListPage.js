@@ -21,8 +21,11 @@ import TopCompanies from "../topCompanies/TopCompanies";
 
 function CompanyListPage({ message, filter = "" }) {
     const [companies, setCompanies] = useState({ results: [] });
+    const [approvedCompanies, setApprovedCompanies] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
     const { pathname } = useLocation();
+    console.log(companies);
+    console.log(approvedCompanies);
 
     const [query, setQuery] = useState("");
     const currentUser = useCurrentUser();
@@ -33,6 +36,11 @@ function CompanyListPage({ message, filter = "" }) {
                 const { data } = 
                     await axiosReq.get(`/companies/?${filter}search=${query}`);
                 setCompanies(data);
+
+                const approvedCompanies = data.results.filter(
+                    company => company.approved
+                );
+                setApprovedCompanies(approvedCompanies);
                 setHasLoaded(true);
             } catch (err) {
                 console.log(err);
@@ -69,16 +77,16 @@ function CompanyListPage({ message, filter = "" }) {
 
                 {hasLoaded ? (
                     <>
-                        {companies.results.length ? (
+                        {approvedCompanies.length ? (
                             <InfiniteScroll
-                                children={companies.results.map((company) => (
+                                children={approvedCompanies.map((company) => (
                                     <CompanyList 
                                         key={company.id} 
                                         {...company} 
                                         setCompanies={setCompanies}
                                     />
                                 ))}
-                                dataLength={companies.results.length}
+                                dataLength={approvedCompanies.length}
                                 loader={<Asset spinner />}
                                 hasMore={!!companies.next}
                                 // next={() => fetchMoreData(companies, setCompanies)}

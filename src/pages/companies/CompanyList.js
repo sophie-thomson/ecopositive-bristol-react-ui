@@ -22,6 +22,7 @@ function CompanyList (props) {
         excerpt,
         endorsements_count,
         comments_count,
+        approved,
     } = props;
 
     useEffect(() => {
