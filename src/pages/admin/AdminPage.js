@@ -6,11 +6,12 @@ import appStyles from "../../App.module.css";
 import NewCompany from "./NewCompany";
 // import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-import { useParams } from "react-router";
+// import { useParams } from "react-router";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { Alert, Col, Container, Image, Row } from "react-bootstrap";
 import NoResults from "../../assets/no-results.png";
 import ReportedComment from "./ReportedComment";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 function AdminPage () {
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -18,11 +19,13 @@ function AdminPage () {
     const [newCompanies, setNewCompanies] = useState({ results: [] });
     const [reportedComments, setReportedComments] = useState({ results: [] });
 
-    // const currentUser = useCurrentUser();
-    const { id } = useParams();
+    const currentUser = useCurrentUser();
+    const id = currentUser?.profile_id;
 
     const [profileData, setProfileData] = useState([]);
     const profile = profileData.data;
+    const is_admin = profile?.is_staff === true;
+    console.log(is_admin);
     
 
     useEffect(() => {
@@ -67,7 +70,7 @@ function AdminPage () {
                     <p className={`${appStyles.Subheader} text-center mb-2`}>New companies</p>
                     <hr className={appStyles.Rule}/>
                     <div>
-                    {newCompanies.length ? (
+                    {newCompanies.length && is_admin ? (
                         <>{newCompanies.map((company) => (
                             <NewCompany
                                 key={company.id}
@@ -76,8 +79,14 @@ function AdminPage () {
                             />
                         ))}
                         </>
-                    ):(
-                        <p className="text-center">There are no new companies to approve at the moment.</p>
+                    ) : is_admin ? (
+                        <p className="text-center">
+                            There are no new companies to approve at the moment.
+                        </p>
+                    ) : (
+                        <p className="text-center">
+                            Sorry, only members of admin staff can view these items.
+                        </p>
                     )}
                     </div>
                 </Col>
@@ -89,10 +98,12 @@ function AdminPage () {
         <>
             <Row>
                 <Col>
-                    <p className={`${appStyles.Subheader} text-center mb-2`}>Review Comments</p>
+                    <p className={`${appStyles.Subheader} text-center mb-2`}>
+                        Review Comments
+                    </p>
                     <hr className={appStyles.Rule}/>
                     <div>
-                    {reportedComments.length ? (
+                    {reportedComments.length && is_admin ? (
                         <>{reportedComments.map((comment) => (
                             <ReportedComment
                                 key={comment.id}
@@ -102,8 +113,14 @@ function AdminPage () {
                             />
                         ))}
                         </>
-                    ):(
-                        <p className="text-center">There are no reported comments to review at the moment.</p>
+                    ) : is_admin ? (
+                        <p className="text-center">
+                            There are no reported comments to review at the moment.
+                        </p>
+                    ) : (
+                        <p className="text-center">
+                            Sorry, only members of admin staff can view these items.
+                        </p>
                     )}
                     </div>
                 </Col>
@@ -114,7 +131,7 @@ function AdminPage () {
     return (
         <Container className="mb-5">
             <div>
-                {profile?.is_staff ? (<p>Has admin access</p>) : (<p>Doesn't have admin access</p>)}
+                {is_admin ? (<p>Has admin access</p>) : (<p>Doesn't have admin access</p>)}
                 {hasLoaded ? (
                     <>
                     <Container className={`${styles.Frame} mb-3`}>
