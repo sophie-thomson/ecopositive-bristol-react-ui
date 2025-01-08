@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Media } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
@@ -24,11 +24,9 @@ const Comment = (props) => {
 
     const [showEditForm, setShowEditForm] = useState(false);
     const [showReportBtn, setShowReportBtn] = useState(false);
-    const [reportedStatus, setReportedStatus] = useState(false);
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
-    const [errors, setErrors] = useState({});
 
     const displayButtons = (event) => {
         event.preventDefault();
@@ -77,9 +75,6 @@ const Comment = (props) => {
                 
         } catch (err) {
             console.log(err);
-            if (err.response?.status !== 401) {
-                setErrors(err.response?.data);
-            }
         }
     };
 
@@ -133,7 +128,8 @@ const Comment = (props) => {
                     </span>
                         {showReportBtn && reported && is_owner ? (
                             <p>
-                                Your comment has been reported, you may wish to edit or delete this comment.
+                                Your comment has been reported,&nbsp;
+                                you may wish to edit or delete this comment.
                             </p>
                         ) : showReportBtn && reported && !is_owner ? (
                             <p>
