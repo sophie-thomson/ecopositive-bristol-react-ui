@@ -131,7 +131,7 @@ function AdminPage () {
     return (
         <Container className="mb-5">
             <div>
-                {is_admin ? (<p>Has admin access</p>) : (<p>Doesn't have admin access</p>)}
+                {is_admin ? (null) : (<p>This page requires admin access</p>)}
                 {hasLoaded ? (
                     <>
                     <Container className={`${styles.Frame} mb-3`}>
