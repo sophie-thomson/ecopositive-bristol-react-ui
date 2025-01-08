@@ -90,12 +90,22 @@ function CompanyPage() {
                     <div className={`${styles.Main}`}>
                         {hasLoaded ? (
                             <>
-                                <Company {...company.results[0]} setCompany={setCompany} companyPage />
-                                <div className="d-lg-none">
-                                    <CompanyContact {...company.results[0]} setCompany={setCompany} companyPage />
-                                </div>
+                                <Company {
+                                    ...company.results[0]} 
+                                    setCompany={setCompany} 
+                                    companyPage 
+                                />
+                                    <div className="d-lg-none">
+                                        <CompanyContact {
+                                            ...company.results[0]} 
+                                            setCompany={setCompany} 
+                                            companyPage 
+                                        />
+                                    </div>
                                 <Credentials
                                     company={id}
+                                    setCompany={setCompany}
+                                    companyPage
                                 />
                                 {/* Checks if user = company owner and uses onClick to display CredentialSelectForm */}
                                 
@@ -164,7 +174,11 @@ function CompanyPage() {
                                 <div className={`${styles.Link} ml-auto mt-2 p-2`}>
                                     <i className="far fa-comments mr-2" />
                                     <Link className={styles.Link} to="/signin">
-                                        No comments... yet. <span className={`${styles.Bold}`}>Sign in</span> to comment.
+                                        No comments... yet. 
+                                        <span className={`${styles.Bold}`}>
+                                            &nbsp;Sign in&nbsp;
+                                        </span>
+                                        to comment.
                                     </Link>
                                 </div>
                             )}
@@ -176,7 +190,11 @@ function CompanyPage() {
                     </div>
                 </Col>
                 <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-                    <CompanyContact {...company.results[0]} setCompany={setCompany} companyPage />
+                    <CompanyContact 
+                        {...company.results[0]} 
+                        setCompany={setCompany} 
+                        companyPage 
+                    />
                 </Col>
             </Row>
         </Container>
