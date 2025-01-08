@@ -11,7 +11,8 @@ import { useState } from "react";
 import Asset from "../../components/Asset";
 
 
-function Credentials({ company, ecoListData, memberListData, socialListData, sustainableListData }) {
+function Credentials({company}) {
+    
     const [hasLoaded, setHasLoaded] = useState(false);
     const [ecoList, setEcoList] = useState ([]);
     const [memberList, setMemberList] = useState ([]);
@@ -49,18 +50,16 @@ function Credentials({ company, ecoListData, memberListData, socialListData, sus
                 );
                 setSustainableList(sustainableList);
                 setHasLoaded(true);
-                // Create local versions of list data to pass back to parent
-                ecoListData(ecoList);
-                memberListData(memberList);
-                socialListData(socialList);
-                sustainableListData(sustainableList);        
+                        
             } catch (err) {
                 console.log(err);
             }   
         };
         
         fetchCredentials();
-    }, [company, setEcoList, setMemberList, setSocialList, setSustainableList]);
+        
+       
+    }, [company]);
 
     const companyEcoList = ecoList.map((credential) =>
         <li
