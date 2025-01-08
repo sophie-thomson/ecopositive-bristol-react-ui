@@ -126,6 +126,10 @@ function CompanyPage() {
                         )}
                         </Container>
                         <Container className={appStyles.Content}>
+                            <div className="d-flex align-items-center pt-3">
+                                <p className={`${styles.Subheader} mx-auto`}>Comments</p>    
+                            </div>
+                            <hr className={`${appStyles.Rule} mb-0`} />
                             {currentUser ? (
                                 <CommentCreateForm
                                     profile_id={currentUser.profile_id}
@@ -134,9 +138,7 @@ function CompanyPage() {
                                     setCompany={setCompany}
                                     setComments={setComments}
                                 />
-                            ) : comments.results.length ? (
-                                    "Comments"
-                                ) : null}
+                            ) : null}
                             {comments.results.length ? (
                                 <div
                                     children={comments.results.map((comment) => (
