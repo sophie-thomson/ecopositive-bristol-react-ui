@@ -25,7 +25,7 @@ import Asset from "../../components/Asset";
 // import { fetchMoreData } from "../../utils/utils";
 
 function CompanyPage() {
-    
+    const [hasLoaded, setHasLoaded] = useState(false);
     const { id } = useParams();
     const [companyOwner, setCompanyOwner] = useState("");
     const [company, setCompany] = useState({ results: [] });
@@ -65,38 +65,56 @@ function CompanyPage() {
                 ]);
                 setCompany({ results: [company] });
                 setComments(comments);
+                setHasLoaded(true);
             } catch (err) {
                 console.log(err);
             }
         };
-        handleMount();
-    }, [id]);
+        setHasLoaded(false);
+        const timer = setTimeout(() => {
+            handleMount();
+          }, 1000);
+      
+          return () => {
+            clearTimeout(timer);
+          };   
+        // handleMount();
+    }, [id, setCompany]);
 
     return (
         <Container>
             <Row className="h-100">
                 
                 <Col className="py-2 p-0 p-lg-2" lg={8}>
+
                     <div className={`${styles.Main}`}>
-                        <Company {...company.results[0]} setCompany={setCompany} companyPage />
-                        <div className="d-lg-none">
-                            <CompanyContact {...company.results[0]} setCompany={setCompany} companyPage />
-                        </div>
-                        <Credentials
-                            company={id}
-                        />
-                        {/* Checks if user = company owner and uses onClick to display CredentialSelectForm */}
-                        
-                        {is_owner && (
-                            <div className="d-flex justify-content-center mt-3">
-                            <button 
-                                className={`${btnStyles.Button} ${styles.Credbtn} align-items-center`}
-                                onClick={displayForm}
-                            >
-                                Add / Edit Credentials   
-                            </button>
-                            </div>
-                        )}
+                        {hasLoaded ? (
+                            <>
+                                <Company {...company.results[0]} setCompany={setCompany} companyPage />
+                                <div className="d-lg-none">
+                                    <CompanyContact {...company.results[0]} setCompany={setCompany} companyPage />
+                                </div>
+                                <Credentials
+                                    company={id}
+                                />
+                                {/* Checks if user = company owner and uses onClick to display CredentialSelectForm */}
+                                
+                                {is_owner && (
+                                    <div className="d-flex justify-content-center mt-3">
+                                    <button 
+                                        className={`
+                                            ${btnStyles.Button} 
+                                            ${styles.Credbtn} 
+                                            align-items-center
+                                        `}
+                                        onClick={displayForm}
+                                    >
+                                        Add / Edit Credentials   
+                                    </button>
+                                    </div>
+                                )}
+                            
+
                         <Container fluid className="d-flex justify-content-center">
                         {showForm && is_owner && (
                             <div className="d-flex justify-content-center">
@@ -149,6 +167,10 @@ function CompanyPage() {
                                 </div>
                             )}
                         </Container>
+                        </>
+                        ) : (
+                            <Asset spinner />
+                        )}
                     </div>
                 </Col>
                 <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">

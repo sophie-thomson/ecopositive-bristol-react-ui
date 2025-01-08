@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../styles/Company.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Button, Card } from "react-bootstrap";
@@ -168,18 +168,6 @@ const Company = (props) => {
                     {excerpt && <Card.Text>{excerpt}</Card.Text>}
                     {description && <Card.Text>{description}</Card.Text>}
                 </div>
-                  {/* <Link to={`/profiles/${owner_profile_id}`}>
-                              <Avatar src={owner_profile_image} height={55} />
-                              {owner}
-                            </Link> */}
-                  
-                  {/* <Link to={`/companies/${id}`}>
-                    <i className="far fa-comments" />
-                    {comments_count}
-                  </Link> */}
-                  
-                
-                {/* <span className="text-muted text-small">Last updated: {updated_on}</span> */}
             </Card.Body>
         </Card>
     );
