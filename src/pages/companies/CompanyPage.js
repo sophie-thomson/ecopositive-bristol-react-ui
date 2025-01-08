@@ -137,7 +137,7 @@ function CompanyPage() {
                         </Container>
                         <Container className={appStyles.Content}>
                             <div className="d-flex align-items-center pt-3">
-                                <p className={`${styles.Subheader} mx-auto`}>Comments</p>    
+                                <p className={`${appStyles.Subheader} mx-auto`}>Comments</p>    
                             </div>
                             <hr className={`${appStyles.Rule} mb-0`} />
                             {currentUser ? (

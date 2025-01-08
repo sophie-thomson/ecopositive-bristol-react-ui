@@ -64,7 +64,7 @@ function AdminPage () {
         <>
             <Row>
                 <Col>
-                    <p className={`${styles.Subheader} text-center mb-2`}>New companies</p>
+                    <p className={`${appStyles.Subheader} text-center mb-2`}>New companies</p>
                     <hr className={appStyles.Rule}/>
                     <div>
                     {newCompanies.length ? (
@@ -89,7 +89,7 @@ function AdminPage () {
         <>
             <Row>
                 <Col>
-                    <p className={`${styles.Subheader} text-center mb-2`}>Review Comments</p>
+                    <p className={`${appStyles.Subheader} text-center mb-2`}>Review Comments</p>
                     <hr className={appStyles.Rule}/>
                     <div>
                     {reportedComments.length ? (

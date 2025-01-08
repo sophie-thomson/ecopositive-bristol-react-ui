@@ -180,7 +180,7 @@ function ProfilePage() {
     );
     const mainProfileCompanies = (
         <>
-            <p className={`${styles.Subheader} text-center mb-2`}>Your companies</p>
+            <p className={`${appStyles.Subheader} text-center mb-2`}>Your companies</p>
             <hr className={appStyles.Rule}/>
             {profileCompanies.length ? (
                 <InfiniteScroll
@@ -208,7 +208,7 @@ function ProfilePage() {
 
     const mainProfileEndorsed = (
         <div>
-            <p className={`${styles.Subheader} text-center my-2`}>companies you endorse</p>
+            <p className={`${appStyles.Subheader} text-center my-2`}>companies you endorse</p>
             <hr className={appStyles.Rule}/>
             {endorsedCompanies.length ? (
                 <InfiniteScroll

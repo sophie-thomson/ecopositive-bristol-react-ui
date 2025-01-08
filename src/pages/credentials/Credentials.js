@@ -11,8 +11,12 @@ import { useState } from "react";
 
 
 function Credentials({ company }) {
-
-    const [credentialsList, setCredentialsList] = useState ([]);
+    const [hasLoaded, setHasLoaded] = useState(false);
+    // const [credentialsList, setCredentialsList] = useState ([]);
+    const [ecoList, setEcoList] = useState ([]);
+    const [memberList, setMemberList] = useState ([]);
+    const [socialList, setSocialList] = useState ([]);
+    const [sustainableList, setSustainableList] = useState ([]);
     
 
     useEffect(() => {
@@ -25,8 +29,27 @@ function Credentials({ company }) {
                 const credentialsList = companyCredentials.map(id => {
                     return data.results.find(credential => credential.id === id);    
                 });
+                const ecoList = credentialsList.filter(credential =>
+                    credential.group === "Eco-Conscious Approach"
+                );
+                setEcoList(ecoList);
                 
-                setCredentialsList(credentialsList);
+                const memberList = credentialsList.filter(credential =>
+                    credential.group === "Membership / Accreditation"
+                );
+                setMemberList(memberList);
+
+                const socialList = credentialsList.filter(credential =>
+                    credential.group === "Socially Responsible"
+                );
+                setSocialList(socialList);
+
+                const sustainableList = credentialsList.filter(credential =>
+                    credential.group === "Sustainable Production / Materials"
+                );
+                setSustainableList(sustainableList);
+                setHasLoaded(true);
+                // setCredentialsList(credentialsList);
                         
             } catch (err) {
                 console.log(err);
@@ -36,9 +59,9 @@ function Credentials({ company }) {
         fetchCredentials();
     }, [company]);
 
-    const ecoList = credentialsList.filter(credential =>
-        credential.group === "Eco-Conscious Approach"
-    );
+    // const ecoList = credentialsList.filter(credential =>
+    //     credential.group === "Eco-Conscious Approach"
+    // );
 
     const companyEcoList = ecoList.map((credential) =>
         <li
@@ -51,9 +74,9 @@ function Credentials({ company }) {
         </li>
     );
 
-    const memberList = credentialsList.filter(credential =>
-        credential.group === "Membership / Accreditation"
-    );
+    // const memberList = credentialsList.filter(credential =>
+    //     credential.group === "Membership / Accreditation"
+    // );
 
     const companyMemberList = memberList.map((credential) =>
         <li
@@ -66,9 +89,9 @@ function Credentials({ company }) {
         </li>
     );
 
-    const socialList = credentialsList.filter(credential =>
-        credential.group === "Socially Responsible"
-    );
+    // const socialList = credentialsList.filter(credential =>
+    //     credential.group === "Socially Responsible"
+    // );
 
     const companySocialList = socialList.map((credential) =>
         <li
@@ -81,9 +104,9 @@ function Credentials({ company }) {
         </li>
     );
 
-    const sustainableList = credentialsList.filter(credential =>
-        credential.group === "Sustainable Production / Materials"
-    );
+    // const sustainableList = credentialsList.filter(credential =>
+    //     credential.group === "Sustainable Production / Materials"
+    // );
 
     const companySustainableList = sustainableList.map((credential) =>
         <li
@@ -101,7 +124,7 @@ function Credentials({ company }) {
             <Card>
                 <Card.Body className={`${styles.Credentials}`}>
             <div className="d-flex align-items-center pt-3">
-                <p className={`${styles.Header} mx-auto`}>Eco-Credentials</p>    
+                <p className={`${appStyles.Subheader} mx-auto`}>Eco-Credentials</p>    
             </div>
             <hr className={`${appStyles.Rule} mb-0`} />
             <Col className="py-2 p-0 p-md-2" >

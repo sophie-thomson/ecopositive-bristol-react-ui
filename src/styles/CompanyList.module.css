@@ -14,19 +14,6 @@
     color: #195829;
 }
 
-.Subheader {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 0.9em;
-    line-height: 19px;
-    text-align: center;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #195829;
-    padding: 0px, 0px;
-    margin: 0 2px 8px 2px;
-}
-
 .Card {
     border: none;
     font-size: 0.9em;

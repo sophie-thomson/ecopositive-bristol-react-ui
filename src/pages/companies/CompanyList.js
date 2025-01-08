@@ -104,7 +104,7 @@ function CompanyList (props) {
                         
                         <Row className={`${styles.List} d-flex justify-content-center`}>
                             <div className="my-2 w-100">
-                                <p className={`${styles.Subheader}`}>Eco-Credentials</p>
+                                <p className={`${appStyles.Subheader}`}>Eco-Credentials</p>
                                 <hr className={` ${appStyles.Rule} py-0 mb-2`} />
                                 {
                                     ecoList.length || 
