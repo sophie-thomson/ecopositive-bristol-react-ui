@@ -15,7 +15,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 
 import NoResults from "../../assets/no-results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
-// import { fetchMoreData } from "../../utils/utils";
+import { fetchMoreData } from "../../utils/utils";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import TopCompanies from "../topCompanies/TopCompanies";
 
@@ -89,7 +89,7 @@ function CompanyListPage({ message, filter = "" }) {
                                 dataLength={approvedCompanies.length}
                                 loader={<Asset spinner />}
                                 hasMore={!!companies.next}
-                                // next={() => fetchMoreData(companies, setCompanies)}
+                                next={() => fetchMoreData(companies, setCompanies)}
                             />
                         ) : (
                             <Container className={appStyles.Content}>

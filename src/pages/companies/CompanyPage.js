@@ -22,8 +22,8 @@ import Comment from "../comments/Comment";
 import CommentCreateForm from "../comments/CommentCreateForm";
 import Asset from "../../components/Asset";
 import { Alert } from "react-bootstrap";
-
-// import { fetchMoreData } from "../../utils/utils";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
 
 function CompanyPage() {
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -162,8 +162,9 @@ function CompanyPage() {
                                     setComments={setComments}
                                 />
                             ) : null}
+                            
                             {comments.results.length ? (
-                                <div
+                                <InfiniteScroll
                                     children={comments.results.map((comment) => (
                                         <Comment
                                             key={comment.id}
@@ -172,10 +173,10 @@ function CompanyPage() {
                                             setComments={setComments}
                                         />
                                     ))}
-                                    // dataLength={comments.results.length}
+                                    dataLength={comments.results.length}
                                     loader={<Asset spinner />}
-                                    // hasMore={!!comments.next}
-                                    //  next={() => fetchMoreData(comments, setComments)}
+                                    hasMore={!!comments.next}
+                                     next={() => fetchMoreData(comments, setComments)}
                                 />
                             ) : currentUser ? (
                                 <div className={`${styles.Link} ml-auto mt-2 p-2`}>
