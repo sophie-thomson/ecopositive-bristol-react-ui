@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../../styles/Company.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Button, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-// import Avatar from "../../components/Avatar";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { DotsDropdown } from "../../components/DotsDropdown";
 import CompanyPage from "./CompanyPage";
