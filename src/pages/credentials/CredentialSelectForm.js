@@ -28,7 +28,9 @@ function CredentialSelectForm({ company }) {
     // sets the state of selected credentials data
     const [credentialsData, setCredentialsData] = useState([1, 3, 5]);
     const [companyCredentials, setCompanyCredentials] = useState ([]);
+    const [selectedCredentials, setSelectedCredentials] = useState ([]);
 
+    
     useEffect(() => {
         const fetchCredentials = async () => {
             try {
@@ -37,8 +39,8 @@ function CredentialSelectForm({ company }) {
                 const companyCredentials = (companyData.data.credentials);
                 setCredentialsOptions(data);
                 setCompanyCredentials(companyCredentials);
-                console.log(data);
-                console.log(companyCredentials);
+                // console.log(data);
+                // console.log(companyCredentials);
             } catch (err) {
                 console.log(err);
             }   
@@ -46,6 +48,17 @@ function CredentialSelectForm({ company }) {
         fetchCredentials();
     }, [company]);
 
+    
+    const handleSelect = function(selectedItems) {
+        const selectedCredentials = Array.from(selectedItems).map(
+            item => parseInt(item.value)
+        );
+        setCredentialsData(selectedCredentials);
+        console.log(selectedCredentials);
+        // ['1', '2', '3'] 
+    };
+    
+    
     const handleChange = (event) => {
         setCredentialsData(event.target.value);
     };
@@ -55,20 +68,23 @@ function CredentialSelectForm({ company }) {
 
         try {
             // creates array to get the company credentials and append new credentials
-            const selectedCredentials = [
+            const submittedCredentials = [
                 ...companyCredentials,
-                credentialsData   
+                ...credentialsData   
             ]
+            console.log(submittedCredentials);
             const response = await axios.patch(`/companies/${company}/`, {
-                credentials: selectedCredentials,
+                credentials: submittedCredentials,
             });
             setCredentialsData((prevCredentialsData) => [
                 ...prevCredentialsData,
-                response.data.credentials[0]
+                ...response.data.credentials
             ]);
             
             setCredentialsData(null);
-            window.location.reload();
+            // setCompanyCredentials(null);
+            
+            // window.location.reload();
             
 
         } catch (err) {
@@ -143,10 +159,11 @@ function CredentialSelectForm({ company }) {
                                 <Form.Control
                                     className={`${styles.Input}`}
                                     as="select"
+                                    multiple
                                     name="ecoListCredentials"
                                     aria-placeholder="Select credentials"
                                     value={ecoList.value}
-                                    onChange={(event) => handleChange(event)}>
+                                    onChange={(event) => {handleSelect(event.target.selectedOptions)}}>
                                         <option 
                                             value={(null)} 
                                             className="text-muted">

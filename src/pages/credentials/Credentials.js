@@ -59,7 +59,7 @@ function Credentials({company}) {
         fetchCredentials();
         
        
-    }, [company]);
+    }, [company, setEcoList]);
 
     const companyEcoList = ecoList.map((credential) =>
         <li
