@@ -12,14 +12,19 @@ const TopCompanies = ({mobile}) => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const [topCompanies, setTopCompanies] = useState([]);
     const [topFive, setTopFive] = useState([]);
+    // const [approvedCompanies, setApprovedCompanies] = useState({ results: [] });
 
     useEffect(() => {
         const handleMount = async () => {
             try {
                 const companyData = await axiosReq.get(`/companies/`);
+
                 const endorsedCompanies = companyData.data.results.filter(
-                    company => company.endorsements_count > 0
+                    company => 
+                        company.endorsements_count > 0 
+                        && company.approved === true
                 );
+
                 const sortedCompanies = endorsedCompanies.sort(
                     (a, b) => b.endorsements_count - a.endorsements_count
                 );
