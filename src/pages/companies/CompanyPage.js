@@ -40,33 +40,14 @@ function CompanyPage() {
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === companyOwner;
     const profile_image = currentUser?.profile_image;
-    const user_id = currentUser?.profile_id;
     const approved = approvedStatus === true;
+    const user_id = currentUser?.profile_id;
 
      // Code adapted from Stack Overflow thread
     const displayForm = (event) => {
         event.preventDefault();
         setShowForm(prevState => !prevState);
     }
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const companyData = await axiosReq.get(`/companies/${id}/`);
-                const profileData = await axiosReq.get(`/profiles/${user_id}/`);
-                const companyOwner = (companyData.data.owner);
-                const approvedStatus = (companyData.data.approved);
-                setApprovedStatus(approvedStatus);
-                setCompanyOwner(companyOwner);
-                setProfileData(profileData);
-
-            } catch (err) {
-                console.log(err);
-            }
-        };
-
-        fetchData();
-    });
 
     useEffect(() => {
         const handleMount = async () => {
@@ -92,6 +73,28 @@ function CompanyPage() {
             };
 
     }, [id, setCompany]);
+
+    useEffect(() => {
+        if (!user_id) return;
+        const fetchData = async () => {
+            try {
+                const companyData = await axiosReq.get(`/companies/${id}/`);
+                const profileData = await axiosReq.get(`/profiles/${user_id}/`);
+                const companyOwner = (companyData.data.owner);
+                const approvedStatus = (companyData.data.approved);
+                setApprovedStatus(approvedStatus);
+                setCompanyOwner(companyOwner);
+                setProfileData(profileData);
+
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        
+        fetchData();
+    });
+
+    
 
     return (
         <Container>
