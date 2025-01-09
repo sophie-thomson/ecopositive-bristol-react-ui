@@ -20,12 +20,13 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import TopCompanies from "../topCompanies/TopCompanies";
 
 function CompanyListPage({ message, filter = "" }) {
+    const [hasLoaded, setHasLoaded] = useState(false);
     const [companies, setCompanies] = useState({ results: [] });
     const [approvedCompanies, setApprovedCompanies] = useState({ results: [] });
-    const [hasLoaded, setHasLoaded] = useState(false);
+    
     const { pathname } = useLocation();
-    console.log(companies);
-    console.log(approvedCompanies);
+    // console.log(companies);
+    // console.log(approvedCompanies);
 
     const [query, setQuery] = useState("");
     const currentUser = useCurrentUser();
@@ -50,7 +51,7 @@ function CompanyListPage({ message, filter = "" }) {
         setHasLoaded(false);
         const timer = setTimeout(() => {
             fetchCompanies();
-        }, 1000);
+        }, 3000);
 
         return () => {
             clearTimeout(timer);
