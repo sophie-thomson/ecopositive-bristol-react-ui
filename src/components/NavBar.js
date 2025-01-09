@@ -29,6 +29,7 @@ const NavBar = () => {
     
 
     useEffect(() => {
+        if (!id) return;
         const fetchData = async () => {
             try {
                 const profileData = await axiosReq.get(`/profiles/${id}/`)
