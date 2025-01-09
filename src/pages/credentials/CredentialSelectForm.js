@@ -27,8 +27,12 @@ function CredentialSelectForm({ company }) {
     const [credentialsOptions, setCredentialsOptions] = useState({ results: [] });
     // sets the state of selected credentials data
     const [credentialsData, setCredentialsData] = useState([1, 3, 5]);
+    const [ecoCredentials, setEcoCredentials] = useState([1, 3, 5]);
+    const [memberCredentials, setMemberCredentials] = useState([1, 3, 5]);
+    const [socialCredentials, setSocialCredentials] = useState([1, 3, 5]);
+    const [sustainableCredentials, setSustainableCredentials] = useState([1, 3, 5]); 
     const [companyCredentials, setCompanyCredentials] = useState ([]);
-    const [selectedCredentials, setSelectedCredentials] = useState ([]);
+    // const [selectedCredentials, setSelectedCredentials] = useState ([]);
 
     
     useEffect(() => {
@@ -49,19 +53,40 @@ function CredentialSelectForm({ company }) {
     }, [company]);
 
     
-    const handleSelect = function(selectedItems) {
+    // handlers adapted from StackOverflow discussion using map() instead of for loop
+    // https://stackoverflow.com/questions/50090335/how-handle-multiple-select-form-in-reactjs
+    const handleEcoSelect = function(selectedItems) {
         const selectedCredentials = Array.from(selectedItems).map(
             item => parseInt(item.value)
         );
-        setCredentialsData(selectedCredentials);
+        setEcoCredentials(selectedCredentials);
         console.log(selectedCredentials);
-        // ['1', '2', '3'] 
+    };
+
+    const handleMemberSelect = function(selectedItems) {
+        const selectedCredentials = Array.from(selectedItems).map(
+            item => parseInt(item.value)
+        );
+        setMemberCredentials(selectedCredentials);
+        console.log(selectedCredentials);
+    };
+
+    const handleSocialSelect = function(selectedItems) {
+        const selectedCredentials = Array.from(selectedItems).map(
+            item => parseInt(item.value)
+        );
+        setSocialCredentials(selectedCredentials);
+        console.log(selectedCredentials);
+    };
+
+    const handleSustainableSelect = function(selectedItems) {
+        const selectedCredentials = Array.from(selectedItems).map(
+            item => parseInt(item.value)
+        );
+        setSustainableCredentials(selectedCredentials);
+        console.log(selectedCredentials);
     };
     
-    
-    const handleChange = (event) => {
-        setCredentialsData(event.target.value);
-    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -70,18 +95,21 @@ function CredentialSelectForm({ company }) {
             // creates array to get the company credentials and append new credentials
             const submittedCredentials = [
                 ...companyCredentials,
-                ...credentialsData   
+                ...ecoCredentials,
+                ...memberCredentials,
+                ...socialCredentials,
+                ...sustainableCredentials,   
             ]
             console.log(submittedCredentials);
             const response = await axios.patch(`/companies/${company}/`, {
                 credentials: submittedCredentials,
             });
-            setCredentialsData((prevCredentialsData) => [
-                ...prevCredentialsData,
-                ...response.data.credentials
-            ]);
+            // setEcoCredentials((prevEcoCredentials) => [
+            //     ...prevEcoCredentials,
+            //     ...response.data.ecoCredentials
+            // ]);
             
-            setCredentialsData(null);
+            setEcoCredentials(null);
             // setCompanyCredentials(null);
             
             // window.location.reload();
@@ -163,7 +191,10 @@ function CredentialSelectForm({ company }) {
                                     name="ecoListCredentials"
                                     aria-placeholder="Select credentials"
                                     value={ecoList.value}
-                                    onChange={(event) => {handleSelect(event.target.selectedOptions)}}>
+                                    onChange={(event) => {
+                                        handleEcoSelect(event.target.selectedOptions)
+                                    }}
+                                >
                                         <option 
                                             value={(null)} 
                                             className="text-muted">
@@ -211,10 +242,14 @@ function CredentialSelectForm({ company }) {
                                 <Form.Control
                                     className={`${styles.Input}`}
                                     as="select"
+                                    multiple
                                     name="memberListCredentials"
                                     aria-placeholder="Select credentials"
                                     value={memberList.value}
-                                    onChange={(event) => handleChange(event)}>
+                                    onChange={(event) => {
+                                        handleMemberSelect(event.target.selectedOptions)
+                                    }}
+                                >
                                         <option 
                                             value={(null)} 
                                             className="text-muted">
@@ -258,10 +293,14 @@ function CredentialSelectForm({ company }) {
                                 <Form.Control
                                     className={`${styles.Input}`}
                                     as="select"
+                                    multiple
                                     name="socialListCredentials"
                                     aria-placeholder="Select credentials"
                                     value={socialList.value}
-                                    onChange={(event) => handleChange(event)}>
+                                    onChange={(event) => {
+                                        handleSocialSelect(event.target.selectedOptions)
+                                    }}
+                                >
                                         <option 
                                             value={(null)} 
                                             className="text-muted">
@@ -306,10 +345,14 @@ function CredentialSelectForm({ company }) {
                                 <Form.Control
                                     className={`${styles.Input}`}
                                     as="select"
+                                    multiple
                                     name="sustainableListCredentials"
                                     aria-placeholder="Select credentials"
                                     value={sustainableList.value}
-                                    onChange={(event) => handleChange(event)}>
+                                    onChange={(event) => {
+                                        handleSustainableSelect(event.target.selectedOptions)
+                                    }}
+                                >
                                         <option 
                                             value={(null)} 
                                             className="text-muted">
