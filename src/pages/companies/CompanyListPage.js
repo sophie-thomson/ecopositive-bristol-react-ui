@@ -25,8 +25,6 @@ function CompanyListPage({ message, filter = "" }) {
     const [approvedCompanies, setApprovedCompanies] = useState({ results: [] });
     
     const { pathname } = useLocation();
-    // console.log(companies);
-    // console.log(approvedCompanies);
 
     const [query, setQuery] = useState("");
     const currentUser = useCurrentUser();
