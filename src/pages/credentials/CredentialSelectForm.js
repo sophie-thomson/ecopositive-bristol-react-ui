@@ -171,7 +171,7 @@ function CredentialSelectForm({ company }) {
         console.log(selectedCredentials);
     };
 
-    const handleRemove = async (event) => {
+    const handleRemove = async () => {
         try {
             const updatedCredentials = companyCredentials.filter(
                 credential => credential !== parseInt(removeCredentials)
@@ -214,8 +214,10 @@ function CredentialSelectForm({ company }) {
                         </Form.Text>
                         </>
                         <hr className={`${appStyles.Rule}`} />
+                        <p className="small text-center">Hold Ctrl to select multiple credentials to add to your company profile.</p>
                         <div className={`${styles.Field} my-3 p-3`}>
-                            <Form.Group>
+                            
+                            <Form.Group className="mb-4">
                                 <Form.Label
                                     className={`${styles.ListTitle}`}
                                 >
@@ -234,9 +236,7 @@ function CredentialSelectForm({ company }) {
                                 >
                                         <option 
                                             value={(null)} 
-                                            className="text-muted">
-                                                Select credential
-                                        </option>
+                                        ></option>
                                         {ecoList.map((credential) => (
                                             <option
                                                 value={credential.id}
@@ -255,7 +255,7 @@ function CredentialSelectForm({ company }) {
                                 </Alert>
                             ))}
 
-                            <Form.Group>
+                            <Form.Group className="mb-4">
                                 <Form.Label
                                     className={`${styles.ListTitle}`}
                                 >
@@ -274,9 +274,7 @@ function CredentialSelectForm({ company }) {
                                 >
                                         <option 
                                             value={(null)} 
-                                            className="text-muted">
-                                                Select credential
-                                        </option>
+                                        ></option>
                                         {memberList.map((credential) => (
                                             <option
                                                 value={credential.id}
@@ -294,7 +292,7 @@ function CredentialSelectForm({ company }) {
                                 </Alert>
                             ))}
                             
-                            <Form.Group>
+                            <Form.Group className="mb-4">
                                 <Form.Label
                                     className={`${styles.ListTitle}`}
                                 >
@@ -313,9 +311,7 @@ function CredentialSelectForm({ company }) {
                                 >
                                         <option 
                                             value={(null)} 
-                                            className="text-muted">
-                                                Select credential
-                                        </option>
+                                        ></option>
                                         {socialList.map((credential) => (
                                             <option
                                                 value={credential.id}
@@ -353,9 +349,7 @@ function CredentialSelectForm({ company }) {
                                 >
                                         <option 
                                             value={(null)} 
-                                            className="text-muted">
-                                                Select credential
-                                        </option>
+                                        ></option>
                                         {sustainableList.map((credential) => (
                                             <option
                                                 value={credential.id}
@@ -396,9 +390,9 @@ function CredentialSelectForm({ company }) {
                 </Col>
             </Row>
         </Form>
-            <div className={`${styles.Field} my-3 p-3`}>
+            <div className={`${styles.Remove} my-3 p-3`}>
                 <Form>
-                        <Form.Group>
+                        <Form.Group className="mb-3">
 
                             <Form.Label
                                 className={`${styles.ListTitle}`}
@@ -416,11 +410,9 @@ function CredentialSelectForm({ company }) {
                                     handleRemoveSelect(event.target.selectedOptions)
                                 }}
                             >
-                                <option
-                                    value={(null)}
-                                    className="text-muted">
-                                    Select credential
-                                </option>
+                                <option 
+                                            value={(null)} 
+                                        ></option>
                                 {companyCredentialsList.map((credential) => (
                                     <option
                                         value={credential.id}
