@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import appStyles from "../../App.module.css";
 import NoResults from "../../assets/no-results.png";
 import { Link } from "react-router-dom";
