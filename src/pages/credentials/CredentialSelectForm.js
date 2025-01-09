@@ -26,13 +26,15 @@ function CredentialSelectForm({ company }) {
     // sets the state of items to fetch from credentials api
     const [credentialsOptions, setCredentialsOptions] = useState({ results: [] });
     // sets the state of selected credentials data
-    const [credentialsData, setCredentialsData] = useState([1, 3, 5]);
-    const [ecoCredentials, setEcoCredentials] = useState([1, 3, 5]);
-    const [memberCredentials, setMemberCredentials] = useState([1, 3, 5]);
-    const [socialCredentials, setSocialCredentials] = useState([1, 3, 5]);
-    const [sustainableCredentials, setSustainableCredentials] = useState([1, 3, 5]); 
+    const [credentialsData, setCredentialsData] = useState([]);
+    const [submittedCredentials, setSubmittedCredentials] = useState([]);
+    const [ecoCredentials, setEcoCredentials] = useState([]);
+    const [memberCredentials, setMemberCredentials] = useState([]);
+    const [socialCredentials, setSocialCredentials] = useState([]);
+    const [sustainableCredentials, setSustainableCredentials] = useState([]);
     const [companyCredentials, setCompanyCredentials] = useState ([]);
-    // const [selectedCredentials, setSelectedCredentials] = useState ([]);
+    const [removeCredentials, setRemoveCredentials] = useState ([]);
+    
 
     
     useEffect(() => {
@@ -86,7 +88,6 @@ function CredentialSelectForm({ company }) {
         setSustainableCredentials(selectedCredentials);
         console.log(selectedCredentials);
     };
-    
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -104,13 +105,15 @@ function CredentialSelectForm({ company }) {
             const response = await axios.patch(`/companies/${company}/`, {
                 credentials: submittedCredentials,
             });
-            // setEcoCredentials((prevEcoCredentials) => [
-            //     ...prevEcoCredentials,
-            //     ...response.data.ecoCredentials
-            // ]);
+            setSubmittedCredentials((prevSubmittedCredentials) =>
+            [
+                ...prevSubmittedCredentials,
+                response.data.credentials
+            ])
+            console.log(response.data.credentials)
             
-            setEcoCredentials(null);
-            // setCompanyCredentials(null);
+            setCompanyCredentials(null);
+            setSubmittedCredentials(null);
             
             // window.location.reload();
             
@@ -124,16 +127,25 @@ function CredentialSelectForm({ company }) {
         }
     };
 
-    const handleDelete = async (event) => {
+    const handleRemoveSelect = function(selectedItems) {
+        const selectedCredentials = Array.from(selectedItems).map(
+            item => parseInt(item.value)
+        );
+        setRemoveCredentials(selectedCredentials);
+        console.log(selectedCredentials);
+    };
+
+    const handleRemove = async (event) => {
         try {
-            setCredentialsData(event.target.value);
+            // setCredentialsData(event.target.value);
             const updatedCredentials = companyCredentials.filter(
-                credential => credential !== parseInt(credentialsData)
+                credential => credential !== parseInt(removeCredentials)
             );
+            console.log(updatedCredentials);
             await axios.patch(`/companies/${company}/`, {
                 credentials: updatedCredentials,
             });
-            setCredentialsData(null);
+            // setCredentialsData(null);
 
             window.location.reload();
         } catch (err) {
@@ -163,11 +175,15 @@ function CredentialSelectForm({ company }) {
     
 
     return (
+        <Container>
         <Form onSubmit={handleSubmit}>
             <Row>
                 <Col className="py-2 p-0 p-md-2">
                     <Container
-                        className={`${appStyles.Content} d-flex flex-column justify-content-center`}
+                        className={
+                            `${appStyles.Content} 
+                            d-flex flex-column justify-content-center`
+                        }
                     >
                         <>
                         <Form.Text 
@@ -217,22 +233,7 @@ function CredentialSelectForm({ company }) {
                                     {message}
                                 </Alert>
                             ))}
-                            <div className="d-flex justify-content-around">
-                            <Button
-                                className={`${btnStyles.Button} ${btnStyles.Green} m-2`}
-                                type="submit"
-                            >
-                                Add Credential
-                            </Button>
-                            <Button 
-                                className={`${btnStyles.Button} ${btnStyles.Red} m-2`}
-                                onClick={handleDelete}
-                            >
-                                Remove Credential
-                            </Button>
-                            </div>
-                        </div>
-                        <div className={`${styles.Field} my-3 p-3`}>
+
                             <Form.Group>
                                 <Form.Label
                                     className={`${styles.ListTitle}`}
@@ -271,19 +272,7 @@ function CredentialSelectForm({ company }) {
                                     {message}
                                 </Alert>
                             ))}
-                            <div className="d-flex justify-content-around">
-                            <Button className={`${btnStyles.Button} ${btnStyles.Green} m-2`} type="submit">
-                                Add Credential
-                            </Button>
-                            <Button 
-                                className={`${btnStyles.Button} ${btnStyles.Red} m-2`}
-                                onClick={handleDelete}
-                            >
-                                Remove Credential
-                            </Button>
-                            </div>
-                        </div>
-                        <div className={`${styles.Field} my-3 p-3`}>
+                            
                             <Form.Group>
                                 <Form.Label
                                     className={`${styles.ListTitle}`}
@@ -323,19 +312,7 @@ function CredentialSelectForm({ company }) {
                                     {message}
                                 </Alert>
                             ))}
-                            <div className="d-flex justify-content-around">
-                            <Button className={`${btnStyles.Button} ${btnStyles.Green} m-2`} type="submit">
-                                Add Credential
-                            </Button>
-                            <Button 
-                                className={`${btnStyles.Button} ${btnStyles.Red} m-2`}
-                                onClick={handleDelete}
-                            >
-                                Remove Credential
-                            </Button>
-                            </div>
-                        </div>
-                        <div className={`${styles.Field} my-3 p-3`}>
+                            
                             <Form.Group>
                                 <Form.Label
                                 className={`${styles.ListTitle}`}
@@ -376,29 +353,89 @@ function CredentialSelectForm({ company }) {
                                 </Alert>
                             ))}
                             <div className="d-flex justify-content-around">
-                                <Button className={`${btnStyles.Button} ${btnStyles.Green} m-2`} type="submit">
-                                    Add Credential
+                                <Button
+                                    className={`${btnStyles.Button} ${btnStyles.Bright}`}
+                                    onClick={handleCancel}
+                                >
+                                    X Cancel
                                 </Button>
                                 <Button 
-                                    className={`${btnStyles.Button} ${btnStyles.Red} m-2`}
-                                    onClick={handleDelete}
+                                    className={
+                                        `${btnStyles.Button} 
+                                        ${btnStyles.Green} 
+                                        m-2`
+                                    } 
+                                    type="submit"
                                 >
-                                    Remove Credential
+                                    Add Credentials
                                 </Button>
+                                
                             </div>
                         </div>
-                        <Button
-                            className={`${btnStyles.Button} ${btnStyles.Bright}`}
-                            onClick={handleCancel}
-                        >
-                            X Cancel
-                        </Button>
+                        
                         
                     </Container>
                 </Col>
             </Row>
         </Form>
-    )
+        <div className={`${styles.Field} d-flex justify-content-around my-3 p-3`}>
+        <Form>
+        <Form.Group>
+        
+                                <Form.Label
+                                    className={`${styles.ListTitle}`}
+                                >
+                                    Remove Credentials
+                                </Form.Label>
+                                <Form.Control
+                                    className={`${styles.Input}`}
+                                    as="select"
+                                    multiple
+                                    name="memberListCredentials"
+                                    aria-placeholder="Select credentials"
+                                    value={memberList.value}
+                                    onChange={(event) => {
+                                        handleRemoveSelect(event.target.selectedOptions)
+                                    }}
+                                >
+                                        <option 
+                                            value={(null)} 
+                                            className="text-muted">
+                                                Select credential
+                                        </option>
+                                        {memberList.map((credential) => (
+                                            <option
+                                                value={credential.id}
+                                                key={credential.id}
+                                                {...credential}
+                                            >
+                                                {credential.name}
+                                            </option>
+                                        ))}
+                                </Form.Control>
+                            </Form.Group>
+                            {errors?.memberListCredentials?.map((message, idx) => (
+                                <Alert variant="warning" key={idx}>
+                                    {message}
+                                </Alert>
+                            ))}
+                            <Button
+                            className={`${btnStyles.Button} ${btnStyles.Bright}`}
+                            onClick={handleCancel}
+                        >
+                            X Cancel
+                        </Button>
+                            <Button 
+                                    className={`${btnStyles.Button} ${btnStyles.Red} m-2`}
+                                    onClick={handleRemove}
+                                >
+                                    Remove Credentials
+                                </Button>
+                            
+        </Form>
+        </div>
+        </Container>
+    );
 
 };
 
