@@ -23,10 +23,7 @@ function CredentialSelectForm({ company }) {
     useRedirect("loggedOut");
 
     const [errors, setErrors] = useState({});
-    // sets the state of items to fetch from credentials api
     const [credentialsOptions, setCredentialsOptions] = useState({ results: [] });
-    // sets the state of selected credentials data
-    const [credentialsData, setCredentialsData] = useState([]);
     const [submittedCredentials, setSubmittedCredentials] = useState([]);
     const [ecoCredentials, setEcoCredentials] = useState([]);
     const [memberCredentials, setMemberCredentials] = useState([]);
@@ -34,6 +31,7 @@ function CredentialSelectForm({ company }) {
     const [sustainableCredentials, setSustainableCredentials] = useState([]);
     const [companyCredentials, setCompanyCredentials] = useState ([]);
     const [removeCredentials, setRemoveCredentials] = useState ([]);
+    const [companyCredentialsList, setCompanyCredentialsList] = useState ([]);
     
 
     
@@ -45,6 +43,11 @@ function CredentialSelectForm({ company }) {
                 const companyCredentials = (companyData.data.credentials);
                 setCredentialsOptions(data);
                 setCompanyCredentials(companyCredentials);
+
+                const companyCredentialsList = companyCredentials.map(id => {
+                    return data.results.find(credential => credential.id === id);    
+                });
+                setCompanyCredentialsList(companyCredentialsList);
                 // console.log(data);
                 // console.log(companyCredentials);
             } catch (err) {
@@ -53,7 +56,7 @@ function CredentialSelectForm({ company }) {
         };
         fetchCredentials();
     }, [company]);
-
+    console.log(companyCredentials);
     
     // handlers adapted from StackOverflow discussion using map() instead of for loop
     // https://stackoverflow.com/questions/50090335/how-handle-multiple-select-form-in-reactjs
@@ -93,7 +96,7 @@ function CredentialSelectForm({ company }) {
         event.preventDefault();
 
         try {
-            // creates array to get the company credentials and append new credentials
+            // creates array to get the company credentials and append selected credentials
             const submittedCredentials = [
                 ...companyCredentials,
                 ...ecoCredentials,
@@ -160,6 +163,7 @@ function CredentialSelectForm({ company }) {
     const ecoList = credentialsOptions.results.filter(credential =>
         credential.group === "Eco-Conscious Approach"
     );
+    console.log(ecoList);
 
     const memberList = credentialsOptions.results.filter(credential =>
         credential.group === "Membership / Accreditation"
@@ -368,72 +372,69 @@ function CredentialSelectForm({ company }) {
                                     type="submit"
                                 >
                                     Add Credentials
-                                </Button>
-                                
+                                </Button>   
                             </div>
-                        </div>
-                        
-                        
+                        </div>   
                     </Container>
                 </Col>
             </Row>
         </Form>
         <div className={`${styles.Field} d-flex justify-content-around my-3 p-3`}>
-        <Form>
-        <Form.Group>
-        
-                                <Form.Label
-                                    className={`${styles.ListTitle}`}
-                                >
-                                    Remove Credentials
-                                </Form.Label>
-                                <Form.Control
-                                    className={`${styles.Input}`}
-                                    as="select"
-                                    multiple
-                                    name="memberListCredentials"
-                                    aria-placeholder="Select credentials"
-                                    value={memberList.value}
-                                    onChange={(event) => {
-                                        handleRemoveSelect(event.target.selectedOptions)
-                                    }}
-                                >
-                                        <option 
-                                            value={(null)} 
-                                            className="text-muted">
-                                                Select credential
-                                        </option>
-                                        {memberList.map((credential) => (
-                                            <option
-                                                value={credential.id}
-                                                key={credential.id}
-                                                {...credential}
-                                            >
-                                                {credential.name}
-                                            </option>
-                                        ))}
-                                </Form.Control>
-                            </Form.Group>
-                            {errors?.memberListCredentials?.map((message, idx) => (
-                                <Alert variant="warning" key={idx}>
-                                    {message}
-                                </Alert>
-                            ))}
-                            <Button
-                            className={`${btnStyles.Button} ${btnStyles.Bright}`}
-                            onClick={handleCancel}
+            <Form>
+                    <Form.Group>
+
+                        <Form.Label
+                            className={`${styles.ListTitle}`}
                         >
-                            X Cancel
-                        </Button>
-                            <Button 
-                                    className={`${btnStyles.Button} ${btnStyles.Red} m-2`}
-                                    onClick={handleRemove}
+                            Remove Credentials
+                        </Form.Label>
+                        <Form.Control
+                            className={`${styles.Input}`}
+                            as="select"
+                            multiple
+                            name="companyCredentials"
+                            aria-placeholder="Select credentials"
+                            value={companyCredentialsList.value}
+                            onChange={(event) => {
+                                handleRemoveSelect(event.target.selectedOptions)
+                            }}
+                        >
+                            <option
+                                value={(null)}
+                                className="text-muted">
+                                Select credential
+                            </option>
+                            {companyCredentialsList.map((credential) => (
+                                <option
+                                    value={credential.id}
+                                    key={credential.id}
+                                    {...credential}
                                 >
-                                    Remove Credentials
-                                </Button>
-                            
-        </Form>
-        </div>
+                                    {credential.name}
+                                </option>
+                            ))}
+                        </Form.Control>
+                    </Form.Group>
+                    {errors?.companyCredentials?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
+                    <Button
+                        className={`${btnStyles.Button} ${btnStyles.Bright}`}
+                        onClick={handleCancel}
+                    >
+                        X Cancel
+                    </Button>
+                    <Button
+                        className={`${btnStyles.Button} ${btnStyles.Red} m-2`}
+                        onClick={handleRemove}
+                    >
+                        Remove Credentials
+                    </Button>
+
+                </Form>
+            </div>
         </Container>
     );
 
