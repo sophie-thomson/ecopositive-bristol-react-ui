@@ -11,7 +11,6 @@ import CompanyCreateForm from './pages/companies/CompanyCreateForm';
 import CompanyPage from './pages/companies/CompanyPage';
 import CompanyEditForm from './pages/companies/CompanyEditForm';
 import ProfilePage from "./pages/profiles/ProfilePage";
-import { useCurrentUser } from './contexts/CurrentUserContext';
 import CompanyListPage from './pages/companies/CompanyListPage';
 import AdminPage from './pages/admin/AdminPage';
 import PageNotFound from './pages/notfound/PageNotFound';
@@ -19,9 +18,6 @@ import ProfileEditForm from './pages/profiles/ProfileEditForm';
 
 
 function App() {
-
-    const currentUser = useCurrentUser();
-    const profile_id = currentUser?.profile_id || "";
 
     return (
         
