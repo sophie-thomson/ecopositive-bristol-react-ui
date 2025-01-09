@@ -96,15 +96,13 @@ function CompanyPage() {
     return (
         <Container>
             <Row className="h-100">
-                
+            {hasLoaded ? (
+                <>
                 <Col className="py-2 p-0 p-lg-2" lg={8}>
                     {approved ? (
                     <div className={`${styles.Main}`}>
                     
-                        {hasLoaded ? (
-                            
-                            
-                            <>
+                        
                                 <Company {
                                     ...company.results[0]} 
                                     setCompany={setCompany} 
@@ -198,18 +196,11 @@ function CompanyPage() {
                                 </div>
                             )}
                         </Container>
-                        </>
-                        ) : (
-                            <Asset spinner />
-                        )}
+                        
                     </div>
                     ) : is_owner || is_admin ? (
                         <div className={`${styles.Main}`}>
-                    
-                        {hasLoaded ? (
-                            
-                            
-                            <>
+
                                 <Company {
                                     ...company.results[0]} 
                                     setCompany={setCompany} 
@@ -303,10 +294,8 @@ function CompanyPage() {
                                 </div>
                             )}
                         </Container>
-                        </>
-                        ) : (
-                            <Asset spinner />
-                        )}
+
+
                     </div>
                     ) : (
                         <Container className={`${appStyles.Content} text-center`}>
@@ -317,6 +306,7 @@ function CompanyPage() {
                         
                     )}
                 </Col>
+            
                 <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
                     <CompanyContact 
                         {...company.results[0]} 
@@ -324,6 +314,12 @@ function CompanyPage() {
                         companyPage 
                     />
                 </Col>
+                </>
+                ) : (
+                    <Col>
+                    <Asset spinner message="Loading..." />
+                    </Col>
+                )}
             </Row>
         </Container>
     );
