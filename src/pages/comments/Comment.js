@@ -8,6 +8,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { DotsDropdown } from "../../components/DotsDropdown";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import CommentEditForm from "./CommentEditForm";
+import { toast } from "react-toastify";
 
 const Comment = (props) => {
     const { 
@@ -47,6 +48,7 @@ const Comment = (props) => {
                 ...prevComments,
                 results: prevComments.results.filter(comment => comment.id !== id),
             }));
+            toast.error("Comment deleted")
         } catch (err) {
         
         }

@@ -7,6 +7,8 @@ import InputGroup from "react-bootstrap/InputGroup";
 import styles from "../../styles/CommentCreateEditForm.module.css";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function CommentCreateForm(props) {
     const { 
@@ -43,8 +45,10 @@ function CommentCreateForm(props) {
                 ],
             }));
             setContent("");
+            toast.success("Comment created successfully!");
         } catch (err) {
             console.log(err);
+            toast.error("Something went wrong while adding your comment")
         }
     };
 

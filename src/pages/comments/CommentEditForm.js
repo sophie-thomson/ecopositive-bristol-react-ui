@@ -5,6 +5,7 @@ import { axiosRes } from "../../api/axiosDefaults";
 
 import styles from "../../styles/CommentCreateEditForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
+import { toast } from "react-toastify";
 
 function CommentEditForm(props) {
     const { 
@@ -38,9 +39,11 @@ function CommentEditForm(props) {
                         : comment;
                 }),
             }));
+            toast.success("Comment updated successfully!");
             setShowEditForm(false);
         } catch (err) {
             console.log(err);
+            toast.error("Something went wrong while updating your comment")
         }
     };
 

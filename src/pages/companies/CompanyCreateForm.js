@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
 import { InputGroup } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -102,9 +103,11 @@ function CompanyCreateForm() {
         try {
             const { data } = await axiosReq.post("/companies/", formData);
             history.push(`/companies/${data.id}`);
-            console.log(data);
+
+            toast.success("Company created successfully!");
         } catch (err) {
             console.log(err);
+            toast.error("Oops! Something went wrong while adding your company.")
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }

@@ -22,7 +22,7 @@
     background-color: #fafafa;
     padding: 10px;
     border-radius: 8px;
-  }
+}
 
 .Image {
     max-height: 40vh;
@@ -59,9 +59,14 @@ i {
 }
 
 i:hover {
-    /* cursor: pointer; */
     transition: color ease-in-out 0.3s;
     color: #d69303;
+}
+
+.Toast {
+    width: 400px;
+    font-size: 16px;
+    padding: 20px;
 }
 
 figure {

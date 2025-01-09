@@ -21,6 +21,7 @@ import styles from "../../styles/CompanyCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
+import { toast } from "react-toastify";
 
 
 
@@ -160,8 +161,10 @@ function CompanyEditForm() {
                 credentials: companyCredentials,
             });
             history.push(`/companies/${id}/`);
+            toast.success("Company updated successfully!");
         } catch (err) {
             console.log(err);
+            toast.error("Oops! Something went wrong while updating your company")
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }
