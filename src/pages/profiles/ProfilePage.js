@@ -19,6 +19,7 @@ import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { Alert, Image } from "react-bootstrap";
 import NoResults from "../../assets/no-results.png";
 import { useHistory } from "react-router-dom";
+import { fetchMoreData } from "../../utils/utils";
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -195,7 +196,7 @@ function ProfilePage() {
                 dataLength={profileCompanies.length}
                 loader={<Asset spinner />}
                 hasMore={!!profileCompanies.next}
-                // next={() => fetchMoreData(profileCompanies, setProfileCompanies)}
+                next={() => fetchMoreData(profileCompanies, setProfileCompanies)}
                 />
             ) : (
                 <Asset
@@ -223,7 +224,7 @@ function ProfilePage() {
                 dataLength={endorsedCompanies.length}
                 loader={<Asset spinner />}
                 hasMore={!!endorsedCompanies.next}
-                // next={() => fetchMoreData(endorsedCompanies, setEndorsedCompanies)}
+                next={() => fetchMoreData(endorsedCompanies, setEndorsedCompanies)}
                 />
             ) : (
                 <Asset
