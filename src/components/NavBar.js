@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar } from 'react-bootstrap';
+import { Col, Navbar } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
@@ -13,29 +13,41 @@ import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { useEffect } from 'react';
 import { axiosReq } from '../api/axiosDefaults';
 import { useState } from 'react';
+import { removeTokenTimestamp } from "../utils/utils";
+import Asset from './Asset';
 
 
 const NavBar = () => {
+    const [hasLoaded, setHasLoaded] = useState(false);
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
-    const [profileData, setProfileData] = useState([]);
     const id = currentUser?.profile_id;
+
+    const [profileData, setProfileData] = useState([]);
     const profile = profileData.data;
-    console.log(id);
+    const is_admin = profile?.is_staff === true;
+    
 
     useEffect(() => {
-            const fetchData = async () => {
-                try {
-                    const profileData = await axiosReq.get(`/profiles/${id}/`)
-                    setProfileData(profileData);
-
-                } catch (err) {
-                    console.log(err)    
-                }
+        const fetchData = async () => {
+            try {
+                const profileData = await axiosReq.get(`/profiles/${id}/`)
+                setProfileData(profileData);
+                setHasLoaded(true);
+            } catch (err) {
+                console.log(err)    
             }
-        
+        }
+        setHasLoaded(false);
+        const timer = setTimeout(() => {
             fetchData();
-        }, [id])
+            }, 1000);
+        
+            return () => {
+                clearTimeout(timer);
+            };
+        
+    }, [id, setProfileData]);
     
 
     const { expanded, setExpanded, ref } = useClickOutsideToggle();
@@ -44,6 +56,7 @@ const NavBar = () => {
         try {
           await axios.post("dj-rest-auth/logout/");
           setCurrentUser(null);
+          removeTokenTimestamp();
         } catch (err) {
           console.log(err);
         }
@@ -62,11 +75,11 @@ const NavBar = () => {
             />
             My ecoPositive
         </NavLink>
-        {profile?.admin_access ? (
+        {is_admin ? (
             <NavLink
                 className={styles.NavLink}
                 activeClassName={styles.Active}
-                to={`/admin/${currentUser?.profile_id}`}
+                to={`/staff/`}
             >
                 
                 <i className="fa-solid fa-unlock-keyhole" />
@@ -107,18 +120,10 @@ const NavBar = () => {
         </>
     );
 
-    // const adminIcons = (
-    //     <NavLink
-    //         className={styles.NavLink}
-    //         activeClassName={styles.Active}
-    //         to={`/admin/${currentUser?.profile_id}`}
-    //     >
-    //         <i className="fas fa-user-plus"></i>
-    //         ADMIN
-    //     </NavLink>
-    // );
-
     return (
+        <>
+        {hasLoaded ? (
+            
         <Navbar
             expanded={expanded}
             className={styles.NavBar}
@@ -153,6 +158,13 @@ const NavBar = () => {
                 </Navbar.Collapse>   
             </Container>    
         </Navbar>
+        
+                ) : (
+                    <Col>
+                    <Asset spinner message="Loading..." />
+                    </Col>
+                )}
+                </>
     );
 };
 

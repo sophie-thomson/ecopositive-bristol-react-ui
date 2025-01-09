@@ -69,7 +69,7 @@ function App() {
                                 
                                 <Route 
                                     exact 
-                                    path="/admin/:id" 
+                                    path="/staff" 
                                     render={() => <AdminPage />} 
                                 />
                                 <Route render={() => <PageNotFound />} />
