@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "../../styles/AdminPage.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { Link } from "react-router-dom";
-import { Alert, Button, Card, Col, Image } from "react-bootstrap";
+import { Alert, Button, Image } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useHistory } from "react-router-dom";
 

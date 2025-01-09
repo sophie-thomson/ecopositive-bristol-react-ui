@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Avatar from "../../components/Avatar";
-// import styles from "../../styles/Comment.module.css";
 import styles from "../../styles/AdminPage.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { Link } from "react-router-dom";
 import { Alert, Button, Media } from "react-bootstrap";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
-import { useHistory } from "react-router-dom";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 
 const ReportedComment = (props) => {
@@ -16,19 +13,13 @@ const ReportedComment = (props) => {
         owner,
         content,
         company,
-        reported,
-        approved,
         created_on,
         profile_id,
         profile_image,
-        setReportedComments,
     } = props;
 
-    const history = useHistory();
     const [errors, setErrors] = useState({});
     const [companyInfo, setCompanyInfo] = useState({});
-    const currentUser = useCurrentUser();
-
 
     useEffect(() => {
             const fetchData = async () => {
@@ -37,7 +28,7 @@ const ReportedComment = (props) => {
                         `/companies/${company}/`
                     );
                     setCompanyInfo(data);
-                    console.log(data);
+                    
 
                 } catch (err) {
                     console.log(err)    
@@ -45,7 +36,7 @@ const ReportedComment = (props) => {
             }
         
             fetchData();
-        }, [id, setCompanyInfo]);
+        }, [id, setCompanyInfo, company]);
     
     const handleApprove = async (event) => {
         event.preventDefault();
@@ -56,7 +47,7 @@ const ReportedComment = (props) => {
                 reported: false,
             });
             
-            history.push(`/companies/${company}`);
+            window.location.reload();
         } catch (err) {
             console.log(err);
             if (err.response?.status !== 401) {
@@ -79,7 +70,6 @@ const ReportedComment = (props) => {
 
     return(
         <>
-            <hr />
             <li className={`${styles.ListItem}`}>
             <Link to={`/companies/${company}`}>
                     <span className={`${styles.Name} m-2 pb-3`}>{companyInfo.name}</span>

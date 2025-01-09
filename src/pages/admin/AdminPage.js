@@ -4,11 +4,9 @@ import Asset from "../../components/Asset";
 import styles from "../../styles/AdminPage.module.css";
 import appStyles from "../../App.module.css";
 import NewCompany from "./NewCompany";
-// import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-// import { useParams } from "react-router";
-import { axiosReq, axiosRes } from "../../api/axiosDefaults";
-import { Alert, Col, Container, Image, Row } from "react-bootstrap";
+import { axiosReq } from "../../api/axiosDefaults";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import NoResults from "../../assets/no-results.png";
 import ReportedComment from "./ReportedComment";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
@@ -25,7 +23,6 @@ function AdminPage () {
     const [profileData, setProfileData] = useState([]);
     const profile = profileData.data;
     const is_admin = profile?.is_staff === true;
-    console.log(is_admin);
     
 
     useEffect(() => {
@@ -40,27 +37,32 @@ function AdminPage () {
                 const companies = companiesData.data;
                 const comments = commentsData.data;
                 setProfileData(profileData);
-                // console.log(profileData);
 
                 const newCompanies = companies.results.filter(
                     company => company.approved === false
                 );
                 setNewCompanies(newCompanies);
-                // console.log(newCompanies);
 
                 const reportedComments = comments.results.filter(
                     comment => comment.reported === true
                 );
                 setReportedComments(reportedComments);
-                // console.log(reportedComments);
+                
                 setHasLoaded(true);
                 
             } catch (err) {
                 console.log(err)    
             }
-        }
+        };
+        setHasLoaded(false);
+        const timer = setTimeout(() => {
+                fetchData();
+            }, 1000);
+        
+            return () => {
+                clearTimeout(timer);
+            };
     
-        fetchData();
     }, [id, setProfileData, setNewCompanies, setReportedComments]);
 
     const approveCompanies = (
@@ -80,9 +82,12 @@ function AdminPage () {
                         ))}
                         </>
                     ) : is_admin ? (
-                        <p className="text-center">
-                            There are no new companies to approve at the moment.
-                        </p>
+                        <>
+                            <Asset
+                                src={NoResults}
+                                message={`All done! No new companies to approve.`}
+                            />
+                        </>
                     ) : (
                         <p className="text-center">
                             Sorry, only members of admin staff can view these items.
@@ -114,9 +119,12 @@ function AdminPage () {
                         ))}
                         </>
                     ) : is_admin ? (
-                        <p className="text-center">
-                            There are no reported comments to review at the moment.
-                        </p>
+                        <>
+                            <Asset
+                                src={NoResults}
+                                message={`All done! No reported comments to review.`}
+                            />
+                        </>
                     ) : (
                         <p className="text-center">
                             Sorry, only members of admin staff can view these items.
