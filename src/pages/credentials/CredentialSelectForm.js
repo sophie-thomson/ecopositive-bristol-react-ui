@@ -128,21 +128,30 @@ function CredentialSelectForm({ company }) {
                 ...socialCredentials,
                 ...sustainableCredentials,   
             ]
-            // console.log(submittedCredentials);
+            
             const response = await axios.patch(`/companies/${company}/`, {
                 credentials: submittedCredentials,
             });
+
             setCompanyCredentials((prevCompanyCredentials) =>
             [
                 ...prevCompanyCredentials,
                 response.data.credentials
             ])
+            
+            setEcoCredentials((prevEcoCredentials) =>
+            [
+                ...prevEcoCredentials,
+                response.data.credentials
+            ]);
+
+            // setMemberCredentials([]);
+            // setSocialCredentials([]);
+            // setSustainableCredentials([]);
             console.log(response.data.credentials)
             
-            setCompanyCredentials(null);
             
-            
-            // window.location.reload();
+            window.location.reload();
             
 
         } catch (err) {
@@ -164,7 +173,6 @@ function CredentialSelectForm({ company }) {
 
     const handleRemove = async (event) => {
         try {
-            // setCredentialsData(event.target.value);
             const updatedCredentials = companyCredentials.filter(
                 credential => credential !== parseInt(removeCredentials)
             );
@@ -172,7 +180,6 @@ function CredentialSelectForm({ company }) {
             await axios.patch(`/companies/${company}/`, {
                 credentials: updatedCredentials,
             });
-            // setCredentialsData(null);
 
             window.location.reload();
         } catch (err) {
