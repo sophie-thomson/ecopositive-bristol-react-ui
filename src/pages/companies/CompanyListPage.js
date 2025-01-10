@@ -16,7 +16,6 @@ import { axiosReq } from "../../api/axiosDefaults";
 import NoResults from "../../assets/no-results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import TopCompanies from "../topCompanies/TopCompanies";
 
 function CompanyListPage({ message, filter = "" }) {
@@ -25,9 +24,7 @@ function CompanyListPage({ message, filter = "" }) {
     const [approvedCompanies, setApprovedCompanies] = useState({ results: [] });
     
     const { pathname } = useLocation();
-
     const [query, setQuery] = useState("");
-    const currentUser = useCurrentUser();
 
     useEffect(() => {
         const fetchCompanies = async () => {
@@ -54,7 +51,7 @@ function CompanyListPage({ message, filter = "" }) {
         return () => {
             clearTimeout(timer);
         };
-    }, [filter, query, pathname, currentUser]);
+    }, [filter, query, pathname]);
 
     return (
         <Row className="h-100">

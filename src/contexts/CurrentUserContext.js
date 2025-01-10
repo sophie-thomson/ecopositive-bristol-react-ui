@@ -4,7 +4,6 @@ import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useHistory } from "react-router";
 import { removeTokenTimestamp, shouldRefreshToken } from "../utils/utils";
 
-
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
 
@@ -27,7 +26,6 @@ export const CurrentUserProvider = ({ children }) => {
   useEffect(() => {
     handleMount();
   }, []);
-
 //  useMemo() Launches interceptors before children are rendered
   useMemo(() => {
     // sets request interceptor logic

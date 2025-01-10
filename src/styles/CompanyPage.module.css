@@ -40,3 +40,13 @@
 .Credbtn:active {
     background-color: #2b1f30;
 }
+
+.Attention {
+    border: 2px solid #f35438;
+}
+
+.Attention i {
+    color:#f35438;
+    font-size: 1.5em;
+    
+}
