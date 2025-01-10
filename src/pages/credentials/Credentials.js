@@ -196,8 +196,9 @@ function Credentials({company}) {
                                 </div>
                             ) : (
                                 <p 
-                                    className="text-muted small text-center"
+                                    className="small text-center"
                                 >
+                                    <i className="fa-brands fa-envira" />
                                     No eco-credentials added for this company yet.
                                 </p>
                             )}
