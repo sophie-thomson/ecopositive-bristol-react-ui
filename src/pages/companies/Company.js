@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../styles/Company.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Modal } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { DotsDropdown } from "../../components/DotsDropdown";
@@ -27,6 +27,10 @@ const Company = (props) => {
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
     const history = useHistory();
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const handleEdit = () => {
         history.push(`/companies/${id}/edit`);
@@ -144,10 +148,28 @@ const Company = (props) => {
                     {is_owner && CompanyPage && (
                         <DotsDropdown
                             handleEdit={handleEdit}
-                            handleDelete={handleDelete}
+                            handleDelete={handleShow}
                         />
                     )}
                 </Card.Text>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Delete Company?</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Are you sure you want to delete this company? 
+                        This action cannot be undone, and all endorsements and 
+                        comments will be deleted.
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            X Cancel
+                        </Button>
+                        <Button variant="danger" onClick={handleDelete}>
+                            Confirm Delete
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
                 <hr className={`${styles.Rule}`} />
                 <div 
                     className={`${styles.Endorse} text-muted d-flex align-items-center justify-content-end`}
