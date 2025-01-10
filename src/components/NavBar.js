@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Navbar } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
@@ -14,11 +14,10 @@ import { useEffect } from 'react';
 import { axiosReq } from '../api/axiosDefaults';
 import { useState } from 'react';
 import { removeTokenTimestamp } from "../utils/utils";
-import Asset from './Asset';
+
 
 
 const NavBar = () => {
-    const [hasLoaded, setHasLoaded] = useState(false);
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
     const id = currentUser?.profile_id;
@@ -34,19 +33,11 @@ const NavBar = () => {
             try {
                 const profileData = await axiosReq.get(`/profiles/${id}/`)
                 setProfileData(profileData);
-                setHasLoaded(true);
             } catch (err) {
                 console.log(err)    
             }
         }
-        setHasLoaded(false);
-        const timer = setTimeout(() => {
-            fetchData();
-            }, 1000);
-        
-            return () => {
-                clearTimeout(timer);
-            };
+        fetchData();
         
     }, [id, setProfileData]);
     
@@ -122,9 +113,6 @@ const NavBar = () => {
     );
 
     return (
-        <>
-        {hasLoaded ? (
-            
         <Navbar
             expanded={expanded}
             className={styles.NavBar}
@@ -159,13 +147,6 @@ const NavBar = () => {
                 </Navbar.Collapse>   
             </Container>    
         </Navbar>
-        
-                ) : (
-                    <Col>
-                    <Asset spinner message="Loading..." />
-                    </Col>
-                )}
-                </>
     );
 };
 
