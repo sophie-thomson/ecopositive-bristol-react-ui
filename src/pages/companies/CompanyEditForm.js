@@ -164,7 +164,7 @@ function CompanyEditForm() {
             toast.success("Company updated successfully!");
         } catch (err) {
             console.log(err);
-            toast.error("Oops! Something went wrong while updating your company")
+            toast.error("Oops! Something went wrong while adding your company. Is your logo less than 800 x 800px?")
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }
@@ -257,7 +257,7 @@ function CompanyEditForm() {
 
             <hr className={`${appStyles.Rule} mt-4`} />
             <Form.Group>
-                <Form.Label className={`${styles.Field}`}>Company Contact Name</Form.Label>
+                <Form.Label className={`${styles.Field}`}>Company Contact Name *</Form.Label>
                 <Form.Control
                 className={`${styles.Input}`}
                 type="text"
@@ -273,7 +273,7 @@ function CompanyEditForm() {
             ))}
 
             <Form.Group>
-                <Form.Label className={`${styles.Field}`}>Role in Company</Form.Label>
+                <Form.Label className={`${styles.Field}`}>Role in Company *</Form.Label>
                 <Form.Control
                 className={`${styles.Input}`}
                 type="text"
@@ -289,7 +289,7 @@ function CompanyEditForm() {
             ))}
 
             <Form.Group>
-                <Form.Label className={`${styles.Field}`}>Contact Email</Form.Label>
+                <Form.Label className={`${styles.Field}`}>Contact Email *</Form.Label>
                 <Form.Control
                 className={`${styles.Input}`}
                 type="email"
@@ -336,7 +336,7 @@ function CompanyEditForm() {
                         
                         <Form.Group>
                             
-                            <Form.Label className={`${styles.Field}`}>Company Name</Form.Label>
+                            <Form.Label className={`${styles.Field}`}>Company Name *</Form.Label>
                             <Form.Control
                             className={`${styles.Input}`}
                             type="text"
@@ -353,7 +353,7 @@ function CompanyEditForm() {
                         ))}
 
                         <Form.Label className={`${styles.Field}`}>
-                            Logo / Branding Image
+                            Logo *
                         </Form.Label>
                         <Form.Group className={`${styles.Logo}`}>
                             
@@ -425,7 +425,7 @@ function CompanyEditForm() {
                         ))}
                         
                         <Form.Group>
-                            <Form.Label className={`${styles.Field}`}>Brief Description</Form.Label>
+                            <Form.Label className={`${styles.Field}`}>Brief Description *</Form.Label>
                             <Form.Control
                             className={`${styles.Input}`}
                             as="textarea"
@@ -443,7 +443,7 @@ function CompanyEditForm() {
                         ))}
 
                         <Form.Group>
-                            <Form.Label className={`${styles.Field}`}>Further Information</Form.Label>
+                            <Form.Label className={`${styles.Field}`}>Further Information *</Form.Label>
                             <Form.Control
                             className={`${styles.Input}`}
                             as="textarea"
@@ -480,6 +480,7 @@ function CompanyEditForm() {
                             {message}
                             </Alert>
                         ))}
+                        <p className="small text-muted ml-auto pr-3">* Required Information</p>
                         <div className="d-md-none">{textFields}</div>
                     </Container>
                 </Col>
