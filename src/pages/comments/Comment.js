@@ -63,6 +63,7 @@ const Comment = (props) => {
                 reported: true,
             });
             setShowReportBtn();
+            toast.success("Comment successfully reported for review by staff.")
             setComments(prevComments => ({
                 ...prevComments,
                 results: prevComments.results.map((comment) => {
@@ -77,6 +78,7 @@ const Comment = (props) => {
                 
         } catch (err) {
             console.log(err);
+            toast.error("Oops! Something went wrong when reporting this comment. Please try again.")
         }
     };
 
