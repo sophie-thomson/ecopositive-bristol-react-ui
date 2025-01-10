@@ -33,16 +33,15 @@ function CompanyPage() {
     const [company, setCompany] = useState({ results: [] });
     const [showForm, setShowForm] = useState(false);
     const [comments, setComments] = useState({ results: [] });
-    const [profileData, setProfileData] = useState([]);
+    const [adminStatus, setAdminStatus] = useState([]);
     
-    const profile = profileData.data;
-    const is_admin = profile?.is_staff === true;
     const currentUser = useCurrentUser();
+    const user_id = currentUser?.profile_id;
     const is_owner = currentUser?.username === companyOwner;
+    const is_admin = adminStatus === true;
     const profile_image = currentUser?.profile_image;
     const approved = approvedStatus === true;
-    const user_id = currentUser?.profile_id;
-
+    
      // Code adapted from Stack Overflow thread
     const displayForm = (event) => {
         event.preventDefault();
@@ -52,49 +51,32 @@ function CompanyPage() {
     useEffect(() => {
         const handleMount = async () => {
             try {
-                const [{ data: company }, { data: comments }] = await Promise.all([
+                const [
+                    { data: company }, 
+                    { data: comments }, 
+                    { data: profileData },
+                ] = await Promise.all([
                     axiosReq.get(`/companies/${id}`),
                     axiosReq.get(`/comments/?company=${id}`),
+                    axiosReq.get(`/profiles/${user_id}/`),
                 ]);
                 setCompany({ results: [company] });
-                setComments(comments);
-                setHasLoaded(true);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        setHasLoaded(false);
-        const timer = setTimeout(() => {
-                handleMount();
-            }, 1000);
-        
-            return () => {
-                clearTimeout(timer);
-            };
-
-    }, [id, setCompany]);
-
-    useEffect(() => {
-        if (!user_id) return;
-        const fetchData = async () => {
-            try {
-                const companyData = await axiosReq.get(`/companies/${id}/`);
-                const profileData = await axiosReq.get(`/profiles/${user_id}/`);
-                const companyOwner = (companyData.data.owner);
-                const approvedStatus = (companyData.data.approved);
+                const companyOwner = (company.owner);
+                const approvedStatus = (company.approved);
+                const adminStatus = (profileData.is_staff)
                 setApprovedStatus(approvedStatus);
                 setCompanyOwner(companyOwner);
-                setProfileData(profileData);
+                setComments(comments);
+                setAdminStatus(adminStatus);
+                setHasLoaded(true);
 
             } catch (err) {
                 console.log(err);
             }
         };
         
-        fetchData();
-    });
-
-    
+        handleMount();
+    }, [id, user_id]);
 
     return (
         <Container>

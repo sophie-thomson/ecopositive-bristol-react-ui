@@ -8,6 +8,7 @@ import CompanyPage from "./CompanyPage";
 import styles from "../../styles/CompanyContact.module.css";
 import appStyles from "../../App.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { toast } from "react-toastify";
 
 
 const CompanyContact = (props) => {
@@ -33,9 +34,11 @@ const CompanyContact = (props) => {
         try {
             await axiosRes.delete(`/companies/${id}/`);
             history.goBack();
+            toast.success("Contact details deleted successfully!")
         } catch (err) {
             console.log(err);
-            }
+            toast.error("Oops! Something went wrong when deleting your contact details.")
+        }
     };
 
     return (
@@ -44,7 +47,7 @@ const CompanyContact = (props) => {
                 <CardGroup>
                 <Card className={`${styles.Address} ${styles.Card} py-2 pb-xs-0`}>
                     <Card.Body className="py-0 ">
-                        {street && city && postcode && 
+                        {street && city && postcode ? (
                             <Card.Text className="mb-0">
                                 <i className="fa-solid fa-location-dot" />
                                 {street},<br />
@@ -55,23 +58,27 @@ const CompanyContact = (props) => {
                                     {postcode}
                                 </span>
                             </Card.Text>
-                        }
+                        ) : (
+                            <p className="small">No address details provided</p>
+                        )}
                     
                     </Card.Body>
                 </Card>
                 <Card className={`${styles.Address} ${styles.Card} pt-xs-0`}>
                     <Card.Body className="py-1">
                     <div>
-                        {phone && 
+                        {phone ? (
                             <Card.Text className={`${styles.Phone}`}>
                                 <i className="fa-solid fa-phone" />
                                 {phone}
                             </Card.Text>
-                        }
+                        ) : (
+                            <p className="small">No phone details provided</p>
+                        )}
                     </div>
                     <div>
                         
-                        {website_url && 
+                        {website_url ? (
                             <Card.Text className={`${styles.Website}`}>
                                 <i className="fa-solid fa-globe" />
                                 <a 
@@ -83,7 +90,9 @@ const CompanyContact = (props) => {
                                     Visit website
                                 </a>
                             </Card.Text>
-                        }
+                        ) : (
+                            <p></p>
+                        )}
                     </div>
                     </Card.Body>
                 </Card>
