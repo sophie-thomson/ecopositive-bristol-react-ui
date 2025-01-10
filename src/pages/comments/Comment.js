@@ -145,7 +145,8 @@ const Comment = (props) => {
                         className="fa-solid fa-flag"
                         onClick={displayButtons} 
                     />
-                    {reported && <span className="small text-muted">Comment Reported</span>}
+                    {reported ? (<span className="small text-muted">Comment Reported</span>
+                    ) : (<span className="small text-muted">Report?</span>)}
                     </span>
                         {showReportBtn && reported && is_owner ? (
                             <p>
