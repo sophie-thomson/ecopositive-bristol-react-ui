@@ -65,6 +65,7 @@ function CommentCreateForm(props) {
                       value={content}
                       onChange={handleChange}
                       rows={2}
+                      name="content"
                   />
                 </InputGroup>
             </Form.Group>
