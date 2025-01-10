@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Media } from "react-bootstrap";
+import { Button, Media, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import styles from "../../styles/Comment.module.css";
@@ -25,9 +25,13 @@ const Comment = (props) => {
 
     const [showEditForm, setShowEditForm] = useState(false);
     const [showReportBtn, setShowReportBtn] = useState(false);
+    const [show, setShow] = useState(false);
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const displayButtons = (event) => {
         event.preventDefault();
@@ -117,10 +121,23 @@ const Comment = (props) => {
                 {is_owner && !showEditForm && (
                     <DotsDropdown
                       handleEdit={() => setShowEditForm(true)}
-                      handleDelete={handleDelete}
+                      handleDelete={handleShow}
                     />
                 )}
             </Media>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Body closeButton>
+                    Confirm delete?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        X Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDelete}>
+                        Confirm Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
             {currentUser && (
                     <>
                     <span className={`${reported ? styles.Reported : styles.NotReported}`}>
