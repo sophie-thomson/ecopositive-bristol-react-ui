@@ -63,6 +63,7 @@ const NavBar = () => {
             <Avatar
                 src={currentUser?.profile_image}
                 height={30}
+                id="myProfileAvatar"
             />
             My ecoPositive
         </NavLink>
