@@ -292,12 +292,18 @@ function CompanyPage() {
                         </Container>   
                     )}
                 </Col>
-                
                 ) : (
                     <Col>
                     <Asset spinner message="Loading..." />
                     </Col>
                 )}
+                {approved || is_owner || is_admin ? (<Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
+                    <CompanyContact 
+                        {...company.results[0]} 
+                        setCompany={setCompany} 
+                        companyPage 
+                    />
+                </Col>): null}
             </Row>
         </Container>
     );
