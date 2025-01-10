@@ -7,6 +7,7 @@ import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { DotsDropdown } from "../../components/DotsDropdown";
 import CompanyPage from "./CompanyPage";
 import btnStyles from "../../styles/Button.module.css";
+import { toast } from "react-toastify";
 
 const Company = (props) => {
     const {
@@ -35,8 +36,10 @@ const Company = (props) => {
         try {
           await axiosRes.delete(`/companies/${id}/`);
           history.goBack();
+          toast.success("Company deleted successfully!")
         } catch (err) {
           console.log(err);
+          toast.error("Oops! Something went wrong when deleting your company.")
         }
     };
     
@@ -51,10 +54,11 @@ const Company = (props) => {
                 endorsements_count: prevCompany.endorsements_count + 1,
                 endorsement_id: data.id,
             }));
-            
             window.location.reload();
+            toast.success("Company endorsed successfully!")
         } catch (err) {
             console.log(err);
+            toast.error("Oops! Something went wrong when endorsing this company. Please try again.")
         }
     };
 
@@ -66,10 +70,11 @@ const Company = (props) => {
                 endorsements_count: prevCompany.endorsements_count - 1,
                 endorsement_id: null,
             }));
-
             window.location.reload();
+            toast.success("Endorsement removed successfully!")
         } catch (err) {
             console.log(err);
+            toast.error("Oops! Something went wrong when removing your endorsement. Please try again.")
         }
     };
     
