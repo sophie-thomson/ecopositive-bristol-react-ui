@@ -103,15 +103,13 @@ function CompanyCreateForm() {
         try {
             const { data } = await axiosReq.post("/companies/", formData);
             history.push(`/companies/${data.id}`);
-
             toast.success("Company created successfully!");
         } catch (err) {
             console.log(err);
-            toast.error("Oops! Something went wrong while adding your company.")
+            toast.error("Oops! Something went wrong while adding your company. Is your logo less than 800 x 800px?")
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }
-            
         }
       };
 
@@ -287,7 +285,6 @@ function CompanyCreateForm() {
                             name="name"
                             value={name}
                             onChange={handleChange}
-                            // placeholder="Add your company name"
                             />
                         </Form.Group>
                         {errors?.name?.map((message, idx) => (
@@ -300,7 +297,6 @@ function CompanyCreateForm() {
                             Logo / Branding Image
                         </Form.Label>
                         <Form.Group className={`${styles.Logo}`}>
-                            
                             {logo ? (
                                 <>
                                 <figure>
@@ -312,10 +308,10 @@ function CompanyCreateForm() {
                                 </figure>
                                 <div>
                                     <Form.Label
-                                    className={`${btnStyles.Button} ${btnStyles.Green} btn`}
-                                    htmlFor="image-upload"
+                                        className={`${btnStyles.Button} ${btnStyles.Green} btn`}
+                                        htmlFor="image-upload"
                                     >
-                                    Change the image
+                                        Change the image
                                     </Form.Label>
                                 </div>
                                 </>
@@ -346,8 +342,6 @@ function CompanyCreateForm() {
                                     {message}
                                 </Alert>
                             ))}
-
-
 
                         <Form.Group>
                             <Form.Label className={`${styles.Field}`}>
