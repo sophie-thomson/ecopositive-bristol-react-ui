@@ -15,6 +15,7 @@ const CompanyContact = (props) => {
     const {
         id,
         owner,
+        name,
         street,
         city,
         postcode,
@@ -47,9 +48,10 @@ const CompanyContact = (props) => {
                 <CardGroup>
                 <Card className={`${styles.Address} ${styles.Card} py-2 pb-xs-0`}>
                     <Card.Body className="py-0 ">
-                        {street && city && postcode ? (
+                        {street && city && postcode && (
                             <Card.Text className="mb-0">
                                 <i className="fa-solid fa-location-dot" />
+                                {name},<br />
                                 {street},<br />
                                 {city},<br />
                                 <span
@@ -58,8 +60,6 @@ const CompanyContact = (props) => {
                                     {postcode}
                                 </span>
                             </Card.Text>
-                        ) : (
-                            <p className="small">No address details provided</p>
                         )}
                     
                     </Card.Body>
@@ -67,18 +67,16 @@ const CompanyContact = (props) => {
                 <Card className={`${styles.Address} ${styles.Card} pt-xs-0`}>
                     <Card.Body className="py-1">
                     <div>
-                        {phone ? (
+                        {phone && (
                             <Card.Text className={`${styles.Phone}`}>
                                 <i className="fa-solid fa-phone" />
                                 {phone}
                             </Card.Text>
-                        ) : (
-                            <p className="small">No phone details provided</p>
                         )}
                     </div>
                     <div>
                         
-                        {website_url ? (
+                        {website_url && (
                             <Card.Text className={`${styles.Website}`}>
                                 <i className="fa-solid fa-globe" />
                                 <a 
@@ -90,8 +88,6 @@ const CompanyContact = (props) => {
                                     Visit website
                                 </a>
                             </Card.Text>
-                        ) : (
-                            <p></p>
                         )}
                     </div>
                     </Card.Body>
@@ -119,8 +115,9 @@ const CompanyContact = (props) => {
                         <i className="fa-solid fa-location-dot" />
                     </Col>
                     <Col xs={10} className="mb-2">
-                    {street && city && postcode && 
+                    {street && city && postcode ? (
                         <Card.Text>
+                            {name},<br />
                             {street},<br />
                             {city},<br />
                             <span
@@ -129,7 +126,11 @@ const CompanyContact = (props) => {
                                 {postcode}
                             </span>
                         </Card.Text>
-                    }
+                    ) : (
+                        <Card.Text className="mb-0 small mt-2 text-muted">
+                            No address provided
+                        </Card.Text>
+                    )}
                     </Col>
                 </div>
                 <div className={`${styles.Address} d-flex text-left`}>
@@ -137,11 +138,15 @@ const CompanyContact = (props) => {
                         <i className="fa-solid fa-phone" />
                     </Col>
                     <Col xs={10}>
-                        {phone && 
+                        {phone ? (
                             <Card.Text className={`${styles.Phone}`}>
                                 {phone}
                             </Card.Text>
-                        }
+                        ) : (
+                            <Card.Text className="mb-0 small mt-2 text-muted">
+                                No phone provided
+                            </Card.Text>
+                        )}
                     </Col>
                 </div>
                 <div className={`${styles.Address} d-flex text-left mt-2`}>
@@ -149,7 +154,7 @@ const CompanyContact = (props) => {
                         <i className="fa-solid fa-globe" />
                     </Col>
                     <Col xs={10}>
-                        {website_url && 
+                        {website_url ? ( 
                             <Card.Text className={`${styles.Website}`}>
                                 <a 
                                     href={website_url} 
@@ -160,7 +165,11 @@ const CompanyContact = (props) => {
                                     Visit website
                                 </a>
                             </Card.Text>
-                        }
+                        ) : (
+                            <Card.Text className="mb-0 small mt-2 text-muted">
+                                No website provided
+                            </Card.Text>
+                        )}
                     </Col>
                 </div>
                 </Card.Text>   
