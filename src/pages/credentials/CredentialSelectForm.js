@@ -16,6 +16,7 @@ import Alert from "react-bootstrap/Alert";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
+import { toast } from "react-toastify";
 
 
 
@@ -89,7 +90,6 @@ function CredentialSelectForm({ company }) {
             item => parseInt(item.value)
         );
         setEcoCredentials(selectedCredentials);
-        console.log(selectedCredentials);
     };
 
     const handleMemberSelect = function(selectedItems) {
@@ -97,7 +97,6 @@ function CredentialSelectForm({ company }) {
             item => parseInt(item.value)
         );
         setMemberCredentials(selectedCredentials);
-        console.log(selectedCredentials);
     };
 
     const handleSocialSelect = function(selectedItems) {
@@ -105,7 +104,6 @@ function CredentialSelectForm({ company }) {
             item => parseInt(item.value)
         );
         setSocialCredentials(selectedCredentials);
-        console.log(selectedCredentials);
     };
 
     const handleSustainableSelect = function(selectedItems) {
@@ -113,7 +111,6 @@ function CredentialSelectForm({ company }) {
             item => parseInt(item.value)
         );
         setSustainableCredentials(selectedCredentials);
-        console.log(selectedCredentials);
     };
 
     const handleSubmit = async (event) => {
@@ -144,18 +141,11 @@ function CredentialSelectForm({ company }) {
                 ...prevEcoCredentials,
                 response.data.credentials
             ]);
-
-            // setMemberCredentials([]);
-            // setSocialCredentials([]);
-            // setSustainableCredentials([]);
-            console.log(response.data.credentials)
-            
-            
             window.location.reload();
-            
-
+            toast.success("Credentials added successfully!")
         } catch (err) {
             console.log(err);
+            toast.error("Oops! Something went wrong when adding your credentials. Please try again.")
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }    
@@ -168,7 +158,6 @@ function CredentialSelectForm({ company }) {
             item => parseInt(item.value)
         );
         setRemoveCredentials(selectedCredentials);
-        console.log(selectedCredentials);
     };
 
     const handleRemove = async () => {
@@ -176,14 +165,15 @@ function CredentialSelectForm({ company }) {
             const updatedCredentials = companyCredentials.filter(
                 credential => credential !== parseInt(removeCredentials)
             );
-            console.log(updatedCredentials);
             await axios.patch(`/companies/${company}/`, {
                 credentials: updatedCredentials,
             });
 
             window.location.reload();
+            toast.success("Credentials removed successfully!")
         } catch (err) {
             console.log(err)
+            toast.error("Oops! Something went wrong when removing your credentials. Please try again.")
         }    
     };
 
@@ -193,89 +183,225 @@ function CredentialSelectForm({ company }) {
 
     return (
         <Container>
-          {hasLoaded ? (
-                    <>
-                        
-                    
-        <Form onSubmit={handleSubmit}>
-            <Row>
-                <Col className="py-2 p-0 p-md-2">
-                    <Container
-                        className={
-                            `${appStyles.Content} 
-                            d-flex flex-column justify-content-center`
-                        }
-                    >
-                        <>
-                        <Form.Text 
-                            className={`${styles.Header} pb-3`}
-                        >
-                            Select Eco-Credentials
-                        </Form.Text>
-                        </>
-                        <hr className={`${appStyles.Rule}`} />
-                        <p className="small text-center">Hold Ctrl to select multiple credentials to add to your company profile.</p>
-                        <div className={`${styles.Field} my-3 p-3`}>
-                            
-                            <Form.Group className="mb-4">
-                                <Form.Label
-                                    className={`${styles.ListTitle}`}
+        {hasLoaded ? (
+            <>            
+                <Form onSubmit={handleSubmit}>
+                    <Row>
+                        <Col className="py-2 p-0 p-md-2">
+                            <Container
+                                className={
+                                    `${appStyles.Content} 
+                                    d-flex flex-column justify-content-center`
+                                }
+                            >
+                                <>
+                                <Form.Text 
+                                    className={`${styles.Header} pb-3`}
                                 >
-                                    Eco-Conscious Approach
-                                </Form.Label>
-                                <Form.Control
-                                    className={`${styles.Input}`}
-                                    as="select"
-                                    multiple
-                                    name="ecoListCredentials"
-                                    aria-placeholder="Select credentials"
-                                    value={ecoList.value}
-                                    onChange={(event) => {
-                                        handleEcoSelect(event.target.selectedOptions)
-                                    }}
-                                >
-                                        <option 
-                                            value={(null)} 
-                                        ></option>
-                                        {ecoList.map((credential) => (
-                                            <option
-                                                value={credential.id}
-                                                key={credential.id}
-                                                {...credential}
-                                            >
-                                                {credential.name}
-                                            </option>
-                                        ))}
-                                        
-                                </Form.Control>
-                            </Form.Group>
-                            {errors?.ecoListCredentials?.map((message, idx) => (
-                                <Alert variant="warning" key={idx}>
-                                    {message}
-                                </Alert>
-                            ))}
+                                    Select Eco-Credentials
+                                </Form.Text>
+                                </>
+                                <hr className={`${appStyles.Rule}`} />
+                                <p className="small text-center">Hold Ctrl to select multiple credentials to add to your company profile.</p>
+                                <div className={`${styles.Field} my-3 p-3`}>
+                                    
+                                    <Form.Group className="mb-4">
+                                        <Form.Label
+                                            className={`${styles.ListTitle}`}
+                                        >
+                                            Eco-Conscious Approach
+                                        </Form.Label>
+                                        <Form.Control
+                                            className={`${styles.Input}`}
+                                            as="select"
+                                            multiple
+                                            name="ecoListCredentials"
+                                            aria-placeholder="Select credentials"
+                                            value={ecoList.value}
+                                            onChange={(event) => {
+                                                handleEcoSelect(event.target.selectedOptions)
+                                            }}
+                                        >
+                                                <option 
+                                                    value={(null)} 
+                                                ></option>
+                                                {ecoList.map((credential) => (
+                                                    <option
+                                                        value={credential.id}
+                                                        key={credential.id}
+                                                        {...credential}
+                                                    >
+                                                        {credential.name}
+                                                    </option>
+                                                ))}
+                                                
+                                        </Form.Control>
+                                    </Form.Group>
+                                    {errors?.ecoListCredentials?.map((message, idx) => (
+                                        <Alert variant="warning" key={idx}>
+                                            {message}
+                                        </Alert>
+                                    ))}
 
-                            <Form.Group className="mb-4">
-                                <Form.Label
-                                    className={`${styles.ListTitle}`}
-                                >
-                                    Membership / Accreditation
-                                </Form.Label>
-                                <Form.Control
-                                    className={`${styles.Input}`}
-                                    as="select"
-                                    multiple
-                                    name="memberListCredentials"
-                                    aria-placeholder="Select credentials"
-                                    value={memberList.value}
-                                    onChange={(event) => {
-                                        handleMemberSelect(event.target.selectedOptions)
-                                    }}
-                                >
+                                    <Form.Group className="mb-4">
+                                        <Form.Label
+                                            className={`${styles.ListTitle}`}
+                                        >
+                                            Membership / Accreditation
+                                        </Form.Label>
+                                        <Form.Control
+                                            className={`${styles.Input}`}
+                                            as="select"
+                                            multiple
+                                            name="memberListCredentials"
+                                            aria-placeholder="Select credentials"
+                                            value={memberList.value}
+                                            onChange={(event) => {
+                                                handleMemberSelect(event.target.selectedOptions)
+                                            }}
+                                        >
+                                                <option 
+                                                    value={(null)} 
+                                                ></option>
+                                                {memberList.map((credential) => (
+                                                    <option
+                                                        value={credential.id}
+                                                        key={credential.id}
+                                                        {...credential}
+                                                    >
+                                                        {credential.name}
+                                                    </option>
+                                                ))}
+                                        </Form.Control>
+                                    </Form.Group>
+                                    {errors?.memberListCredentials?.map((message, idx) => (
+                                        <Alert variant="warning" key={idx}>
+                                            {message}
+                                        </Alert>
+                                    ))}
+                                    
+                                    <Form.Group className="mb-4">
+                                        <Form.Label
+                                            className={`${styles.ListTitle}`}
+                                        >
+                                            Socially Responsible
+                                        </Form.Label>
+                                        <Form.Control
+                                            className={`${styles.Input}`}
+                                            as="select"
+                                            multiple
+                                            name="socialListCredentials"
+                                            aria-placeholder="Select credentials"
+                                            value={socialList.value}
+                                            onChange={(event) => {
+                                                handleSocialSelect(event.target.selectedOptions)
+                                            }}
+                                        >
+                                                <option 
+                                                    value={(null)} 
+                                                ></option>
+                                                {socialList.map((credential) => (
+                                                    <option
+                                                        value={credential.id}
+                                                        key={credential.id}
+                                                        {...credential}
+                                                    >
+                                                        {credential.name}
+                                                    </option>
+                                                ))}
+                                                
+                                        </Form.Control>
+                                    </Form.Group>
+                                    {errors?.socialListCredentials?.map((message, idx) => (
+                                        <Alert variant="warning" key={idx}>
+                                            {message}
+                                        </Alert>
+                                    ))}
+                                    
+                                    <Form.Group>
+                                        <Form.Label
+                                        className={`${styles.ListTitle}`}
+                                        >
+                                            Sustainable Production / Materials
+                                        </Form.Label>
+                                        <Form.Control
+                                            className={`${styles.Input}`}
+                                            as="select"
+                                            multiple
+                                            name="sustainableListCredentials"
+                                            aria-placeholder="Select credentials"
+                                            value={sustainableList.value}
+                                            onChange={(event) => {
+                                                handleSustainableSelect(event.target.selectedOptions)
+                                            }}
+                                        >
+                                                <option 
+                                                    value={(null)} 
+                                                ></option>
+                                                {sustainableList.map((credential) => (
+                                                    <option
+                                                        value={credential.id}
+                                                        key={credential.id}
+                                                        {...credential}
+                                                    >
+                                                        {credential.name}
+                                                    </option>
+                                                ))}
+                                                
+                                        </Form.Control>
+                                    </Form.Group>
+                                    {errors?.sustainableListCredentials?.map((message, idx) => (
+                                        <Alert variant="warning" key={idx}>
+                                            {message}
+                                        </Alert>
+                                    ))}
+                                    <div className="d-flex justify-content-around">
+                                        <Button
+                                            className={`${btnStyles.Button} ${btnStyles.Bright}`}
+                                            onClick={handleCancel}
+                                        >
+                                            X Cancel
+                                        </Button>
+                                        <Button 
+                                            className={
+                                                `${btnStyles.Button} 
+                                                ${btnStyles.Green} 
+                                                m-2`
+                                            } 
+                                            type="submit"
+                                        >
+                                            Add Credentials
+                                        </Button>   
+                                    </div>
+                                </div>   
+                            </Container>
+                        </Col>
+                    </Row>
+                </Form>
+                <div className={`${styles.Remove} my-3 p-3`}>
+                        <Form>
+                                <Form.Group className="mb-3">
+
+                                    <Form.Label
+                                        className={`${styles.ListTitle}`}
+                                    >
+                                        Remove Credentials
+                                    </Form.Label>
+                                    <Form.Control
+                                        className={`${styles.Input}`}
+                                        as="select"
+                                        multiple
+                                        name="companyCredentials"
+                                        aria-placeholder="Select credentials"
+                                        value={companyCredentialsList.value}
+                                        onChange={(event) => {
+                                            handleRemoveSelect(event.target.selectedOptions)
+                                        }}
+                                    >
                                         <option 
-                                            value={(null)} 
-                                        ></option>
-                                        {memberList.map((credential) => (
+                                                    value={(null)} 
+                                                ></option>
+                                        {companyCredentialsList.map((credential) => (
                                             <option
                                                 value={credential.id}
                                                 key={credential.id}
@@ -284,174 +410,34 @@ function CredentialSelectForm({ company }) {
                                                 {credential.name}
                                             </option>
                                         ))}
-                                </Form.Control>
-                            </Form.Group>
-                            {errors?.memberListCredentials?.map((message, idx) => (
-                                <Alert variant="warning" key={idx}>
-                                    {message}
-                                </Alert>
-                            ))}
-                            
-                            <Form.Group className="mb-4">
-                                <Form.Label
-                                    className={`${styles.ListTitle}`}
-                                >
-                                    Socially Responsible
-                                </Form.Label>
-                                <Form.Control
-                                    className={`${styles.Input}`}
-                                    as="select"
-                                    multiple
-                                    name="socialListCredentials"
-                                    aria-placeholder="Select credentials"
-                                    value={socialList.value}
-                                    onChange={(event) => {
-                                        handleSocialSelect(event.target.selectedOptions)
-                                    }}
-                                >
-                                        <option 
-                                            value={(null)} 
-                                        ></option>
-                                        {socialList.map((credential) => (
-                                            <option
-                                                value={credential.id}
-                                                key={credential.id}
-                                                {...credential}
-                                            >
-                                                {credential.name}
-                                            </option>
-                                        ))}
-                                        
-                                </Form.Control>
-                            </Form.Group>
-                            {errors?.socialListCredentials?.map((message, idx) => (
-                                <Alert variant="warning" key={idx}>
-                                    {message}
-                                </Alert>
-                            ))}
-                            
-                            <Form.Group>
-                                <Form.Label
-                                className={`${styles.ListTitle}`}
-                                >
-                                    Sustainable Production / Materials
-                                </Form.Label>
-                                <Form.Control
-                                    className={`${styles.Input}`}
-                                    as="select"
-                                    multiple
-                                    name="sustainableListCredentials"
-                                    aria-placeholder="Select credentials"
-                                    value={sustainableList.value}
-                                    onChange={(event) => {
-                                        handleSustainableSelect(event.target.selectedOptions)
-                                    }}
-                                >
-                                        <option 
-                                            value={(null)} 
-                                        ></option>
-                                        {sustainableList.map((credential) => (
-                                            <option
-                                                value={credential.id}
-                                                key={credential.id}
-                                                {...credential}
-                                            >
-                                                {credential.name}
-                                            </option>
-                                        ))}
-                                        
-                                </Form.Control>
-                            </Form.Group>
-                            {errors?.sustainableListCredentials?.map((message, idx) => (
-                                <Alert variant="warning" key={idx}>
-                                    {message}
-                                </Alert>
-                            ))}
-                            <div className="d-flex justify-content-around">
+                                    </Form.Control>
+                                </Form.Group>
+                                {errors?.companyCredentials?.map((message, idx) => (
+                                    <Alert variant="warning" key={idx}>
+                                        {message}
+                                    </Alert>
+                                ))}
                                 <Button
                                     className={`${btnStyles.Button} ${btnStyles.Bright}`}
                                     onClick={handleCancel}
                                 >
                                     X Cancel
                                 </Button>
-                                <Button 
-                                    className={
-                                        `${btnStyles.Button} 
-                                        ${btnStyles.Green} 
-                                        m-2`
-                                    } 
-                                    type="submit"
+                                <Button
+                                    className={`${btnStyles.Button} ${btnStyles.Red} m-2`}
+                                    onClick={handleRemove}
                                 >
-                                    Add Credentials
-                                </Button>   
-                            </div>
-                        </div>   
-                    </Container>
-                </Col>
-            </Row>
-        </Form>
-            <div className={`${styles.Remove} my-3 p-3`}>
-                <Form>
-                        <Form.Group className="mb-3">
+                                    Remove Credentials
+                                </Button>
 
-                            <Form.Label
-                                className={`${styles.ListTitle}`}
-                            >
-                                Remove Credentials
-                            </Form.Label>
-                            <Form.Control
-                                className={`${styles.Input}`}
-                                as="select"
-                                multiple
-                                name="companyCredentials"
-                                aria-placeholder="Select credentials"
-                                value={companyCredentialsList.value}
-                                onChange={(event) => {
-                                    handleRemoveSelect(event.target.selectedOptions)
-                                }}
-                            >
-                                <option 
-                                            value={(null)} 
-                                        ></option>
-                                {companyCredentialsList.map((credential) => (
-                                    <option
-                                        value={credential.id}
-                                        key={credential.id}
-                                        {...credential}
-                                    >
-                                        {credential.name}
-                                    </option>
-                                ))}
-                            </Form.Control>
-                        </Form.Group>
-                        {errors?.companyCredentials?.map((message, idx) => (
-                            <Alert variant="warning" key={idx}>
-                                {message}
-                            </Alert>
-                        ))}
-                        <Button
-                            className={`${btnStyles.Button} ${btnStyles.Bright}`}
-                            onClick={handleCancel}
-                        >
-                            X Cancel
-                        </Button>
-                        <Button
-                            className={`${btnStyles.Button} ${btnStyles.Red} m-2`}
-                            onClick={handleRemove}
-                        >
-                            Remove Credentials
-                        </Button>
-
-                    </Form>
-            </div>
+                            </Form>
+                </div>
             </>
-                ) : (
-                    <Asset spinner />
-                )}  
+        ) : (
+            <Asset spinner />
+        )}  
         </Container>
     );
-
 };
-
 
 export default CredentialSelectForm;
