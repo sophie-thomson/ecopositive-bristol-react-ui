@@ -100,13 +100,6 @@ const CompanyContact = (props) => {
                         <Card.Title className={`${styles.Header} m-auto py-4`}>
                                 Contact
                         </Card.Title>
-                        
-                        {is_owner && CompanyPage && (
-                                <DotsDropdown
-                                    handleEdit={handleEdit}
-                                    handleDelete={handleDelete}
-                                />
-                        )}
                 </div>
                 <hr className={`${appStyles.Rule}`} />
                 <Card.Text as="div">
