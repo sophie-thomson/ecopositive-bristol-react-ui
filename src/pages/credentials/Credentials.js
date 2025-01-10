@@ -51,9 +51,7 @@ function Credentials({company}) {
                 setSustainableList(sustainableList);
                 setHasLoaded(true);
                         
-            } catch (err) {
-                console.log(err);
-            }   
+            } catch (err) {}   
         };
         
         fetchCredentials();

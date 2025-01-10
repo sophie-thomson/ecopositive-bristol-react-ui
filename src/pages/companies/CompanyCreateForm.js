@@ -105,7 +105,6 @@ function CompanyCreateForm() {
             history.push(`/companies/${data.id}`);
             toast.success("Company created successfully!");
         } catch (err) {
-            console.log(err);
             toast.error("Oops! Something went wrong while adding your company. Is your logo less than 800 x 800px?")
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);

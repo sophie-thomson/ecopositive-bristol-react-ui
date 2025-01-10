@@ -107,9 +107,7 @@ function CompanyEditForm() {
                     contact_email,
                     role,
                 }) : history.push("/");
-            } catch (err) {
-                console.log(err);
-            }
+            } catch (err) {}
         };
 
         handleMount();
@@ -163,7 +161,6 @@ function CompanyEditForm() {
             history.push(`/companies/${id}/`);
             toast.success("Company updated successfully!");
         } catch (err) {
-            console.log(err);
             toast.error("Oops! Something went wrong while adding your company. Is your logo less than 800 x 800px?")
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);

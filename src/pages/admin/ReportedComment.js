@@ -34,9 +34,7 @@ const ReportedComment = (props) => {
                     );
                     setCompanyInfo(data);
 
-                } catch (err) {
-                    console.log(err)    
-                }
+                } catch (err) {}
             }
         
             fetchData();
@@ -53,7 +51,6 @@ const ReportedComment = (props) => {
             window.location.reload();
             toast.success("Comment approved successfully!");
         } catch (err) {
-            console.log(err);
             toast.error("Oops! Something went wrong when approving this comment. Please refresh the page and try again.");
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
@@ -63,15 +60,14 @@ const ReportedComment = (props) => {
 
     const handleDelete = async () => {
         try {
-                await axiosRes.delete(`/comments/${id}/`)
-                await axiosReq.patch(`/companies/${company}/`, {
-                    comments_count: companyInfo.comments_count - 1
-                });
-                window.location.reload();
-                toast.success("Comment deleted successfully!");
+            await axiosRes.delete(`/comments/${id}/`)
+            await axiosReq.patch(`/companies/${company}/`, {
+                comments_count: companyInfo.comments_count - 1
+            });
+            window.location.reload();
+            toast.success("Comment deleted successfully!");
         } catch (err) {
-                console.log(err);
-                toast.error("Oops! Something went wrong when deleting this comment. Please refresh the page and try again.");
+            toast.error("Oops! Something went wrong when deleting this comment. Please refresh the page and try again.");
         }
     };
 

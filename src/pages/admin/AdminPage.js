@@ -50,9 +50,7 @@ function AdminPage () {
                 
                 setHasLoaded(true);
                 
-            } catch (err) {
-                console.log(err)    
-            }
+            } catch (err) {}
         };
         setHasLoaded(false);
         const timer = setTimeout(() => {

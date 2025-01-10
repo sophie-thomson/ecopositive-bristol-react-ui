@@ -81,7 +81,6 @@ const Comment = (props) => {
             }));
                 
         } catch (err) {
-            console.log(err);
             toast.error("Oops! Something went wrong when reporting this comment. Please try again.")
         }
     };

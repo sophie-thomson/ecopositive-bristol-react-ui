@@ -28,7 +28,6 @@ const NewCompany = (props) => {
             history.push(`/companies/${id}`);
             toast.success("Company successfully approved!")
         } catch (err) {
-            console.log(err);
             toast.error("Oops! Something went wrong when approving this company. Please refresh the page and try again.")
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);

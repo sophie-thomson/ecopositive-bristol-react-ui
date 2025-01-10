@@ -38,9 +38,7 @@ function CompanyListPage({ message, filter = "" }) {
                 );
                 setApprovedCompanies(approvedCompanies);
                 setHasLoaded(true);
-            } catch (err) {
-                console.log(err);
-            }
+            } catch (err) {}
         };
 
         setHasLoaded(false);

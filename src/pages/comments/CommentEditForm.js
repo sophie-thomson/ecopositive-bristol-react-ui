@@ -42,7 +42,6 @@ function CommentEditForm(props) {
             toast.success("Comment updated successfully!");
             setShowEditForm(false);
         } catch (err) {
-            console.log(err);
             toast.error("Something went wrong while updating your comment")
         }
     };

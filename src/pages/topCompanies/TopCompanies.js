@@ -35,9 +35,7 @@ const TopCompanies = ({mobile}) => {
                 setTopFive(topFive);
                 setHasLoaded(true);
          
-            } catch (err) {
-                console.log(err);
-            }
+            } catch (err) {}
         };
     
         handleMount();

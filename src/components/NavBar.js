@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { axiosReq } from '../api/axiosDefaults';
 import { useState } from 'react';
 import { removeTokenTimestamp } from "../utils/utils";
+import { toast } from 'react-toastify';
 
 
 
@@ -33,9 +34,7 @@ const NavBar = () => {
             try {
                 const profileData = await axiosReq.get(`/profiles/${id}/`)
                 setProfileData(profileData);
-            } catch (err) {
-                console.log(err)    
-            }
+            } catch (err) {}
         }
         fetchData();
         
@@ -50,7 +49,7 @@ const NavBar = () => {
           setCurrentUser(null);
           removeTokenTimestamp();
         } catch (err) {
-          console.log(err);
+          toast.error("Oh dear, there was a problem while logging you out. Please try refreshing the page.");
         }
       };
 

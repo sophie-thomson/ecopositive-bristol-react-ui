@@ -59,7 +59,6 @@ const ProfileEditForm = () => {
                         image,
                     });
                 } catch (err) {
-                    console.log(err);
                     history.push("/");
                 }
             } else {
@@ -98,7 +97,6 @@ const ProfileEditForm = () => {
             history.goBack();
             toast.success("Profile updated successfully!")
         } catch (err) {
-            console.log(err);
             toast.error("Oops! Something went wrong when updating your profile. Please refresh the page and try again.")
             setErrors(err.response?.data);
         }

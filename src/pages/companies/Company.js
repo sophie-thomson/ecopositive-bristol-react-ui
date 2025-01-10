@@ -60,7 +60,6 @@ const Company = (props) => {
             window.location.reload();
             toast.success("Company endorsed successfully!")
         } catch (err) {
-            console.log(err);
             toast.error("Oops! Something went wrong when endorsing this company. Please try again.")
         }
     };
