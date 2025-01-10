@@ -199,7 +199,7 @@ function CompanyCreateForm() {
             <hr className={`${appStyles.Rule} mt-4`} />
             
             <Form.Group>
-                <Form.Label className={`${styles.Field}`}>Company Contact Name</Form.Label>
+                <Form.Label className={`${styles.Field}`}>Company Contact Name *</Form.Label>
                 <Form.Control
                 className={`${styles.Input}`}
                 type="text"
@@ -215,7 +215,7 @@ function CompanyCreateForm() {
             ))}
 
             <Form.Group>
-                <Form.Label className={`${styles.Field}`}>Role in Company</Form.Label>
+                <Form.Label className={`${styles.Field}`}>Role in Company *</Form.Label>
                 <Form.Control
                 className={`${styles.Input}`}
                 type="text"
@@ -231,7 +231,7 @@ function CompanyCreateForm() {
             ))}
 
             <Form.Group>
-                <Form.Label className={`${styles.Field}`}>Contact Email</Form.Label>
+                <Form.Label className={`${styles.Field}`}>Contact Email *</Form.Label>
                 <Form.Control
                 className={`${styles.Input}`}
                 type="email"
@@ -269,7 +269,6 @@ function CompanyCreateForm() {
                     <Container
                         className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
                     >
-                        
                         <p className={`${styles.Header}`}>
                             <i className="fa-regular fa-pen-to-square"></i>
                             Company Details
@@ -278,7 +277,7 @@ function CompanyCreateForm() {
                         
                         <Form.Group>
                             
-                            <Form.Label className={`${styles.Field}`}>Company Name</Form.Label>
+                            <Form.Label className={`${styles.Field}`}>Company Name *</Form.Label>
                             <Form.Control
                             className={`${styles.Input}`}
                             type="text"
@@ -294,7 +293,7 @@ function CompanyCreateForm() {
                         ))}
 
                         <Form.Label className={`${styles.Field}`}>
-                            Logo / Branding Image
+                            Logo *
                         </Form.Label>
                         <Form.Group className={`${styles.Logo}`}>
                             {logo ? (
@@ -363,7 +362,7 @@ function CompanyCreateForm() {
                         ))}
                         
                         <Form.Group>
-                            <Form.Label className={`${styles.Field}`}>Brief Description</Form.Label>
+                            <Form.Label className={`${styles.Field}`}>Brief Description *</Form.Label>
                             <Form.Control
                             className={`${styles.Input}`}
                             as="textarea"
@@ -381,7 +380,7 @@ function CompanyCreateForm() {
                         ))}
 
                         <Form.Group>
-                            <Form.Label className={`${styles.Field}`}>Further Information</Form.Label>
+                            <Form.Label className={`${styles.Field}`}>Further Information *</Form.Label>
                             <Form.Control
                             className={`${styles.Input}`}
                             as="textarea"
@@ -418,6 +417,7 @@ function CompanyCreateForm() {
                             {message}
                             </Alert>
                         ))}
+                        <p className="small text-muted ml-auto pr-3">* Required Information</p>
                         <div className="d-md-none">{textFields}</div>
                     </Container>
                 </Col>
