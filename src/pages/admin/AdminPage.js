@@ -6,7 +6,7 @@ import appStyles from "../../App.module.css";
 import NewCompany from "./NewCompany";
 
 import { axiosReq } from "../../api/axiosDefaults";
-import { Alert, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import NoResults from "../../assets/no-results.png";
 import ReportedComment from "./ReportedComment";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
