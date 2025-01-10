@@ -1,41 +1,35 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useParams } from "react-router";
+import { toast } from "react-toastify";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
+import { Image } from "react-bootstrap";
 
 import Asset from "../../components/Asset";
-
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
-// import { useCurrentUser } from "../../contexts/CurrentUserContext";
-
 import CompanyList from "../companies/CompanyList";
 import TopCompanies from "../topCompanies/TopCompanies";
 import { DotsDropdown } from "../../components/DotsDropdown";
-import { useParams } from "react-router";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
-import { Alert, Image } from "react-bootstrap";
 import NoResults from "../../assets/no-results.png";
-import { useHistory } from "react-router-dom";
 import { fetchMoreData } from "../../utils/utils";
+
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
     const [profileCompanies, setProfileCompanies] = useState({ results: [] });
     const [endorsedCompanies, setEndorsedCompanies] = useState({ results: [] });
-      
-    // const currentUser = useCurrentUser();
+    
     const { id } = useParams();
     const history = useHistory();  
-
     const [profileData, setProfileData] = useState([]);
-      
     const profile = profileData.data;
-    // const is_owner = currentUser?.username === profileData.owner;
     
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -72,7 +66,6 @@ function ProfilePage() {
           return () => {
             clearTimeout(timer);
           };   
-        // fetchData();
         
     }, [id, setProfileData]);
 
@@ -86,8 +79,10 @@ function ProfilePage() {
         try {
             await axiosRes.delete(`/profiles/${id}/`);
             history.goBack();
+            toast.success("Profile deleted successfully!")
         } catch (err) {
             console.log(err);
+            toast.error("Oops! Something went wrong when deleting your profile. Please refresh the page and try again.")
         }
     };
     
