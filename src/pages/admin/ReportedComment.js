@@ -5,6 +5,7 @@ import btnStyles from "../../styles/Button.module.css";
 import { Link } from "react-router-dom";
 import { Alert, Button, Media } from "react-bootstrap";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
+import { toast } from "react-toastify";
 
 
 const ReportedComment = (props) => {
@@ -28,7 +29,6 @@ const ReportedComment = (props) => {
                         `/companies/${company}/`
                     );
                     setCompanyInfo(data);
-                    
 
                 } catch (err) {
                     console.log(err)    
@@ -46,10 +46,11 @@ const ReportedComment = (props) => {
                 approved: true,
                 reported: false,
             });
-            
             window.location.reload();
+            toast.success("Comment approved successfully!");
         } catch (err) {
             console.log(err);
+            toast.error("Oops! Something went wrong when approving this comment. Please refresh the page and try again.");
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }
@@ -57,16 +58,18 @@ const ReportedComment = (props) => {
     };
 
     const handleDelete = async () => {
-            try {
+        try {
                 await axiosRes.delete(`/comments/${id}/`)
                 await axiosReq.patch(`/companies/${company}/`, {
                     comments_count: companyInfo.comments_count - 1
                 });
                 window.location.reload();
-            } catch (err) {
-            
-            }
-        };
+                toast.success("Comment deleted successfully!");
+        } catch (err) {
+                console.log(err);
+                toast.error("Oops! Something went wrong when deleting this comment. Please refresh the page and try again.");
+        }
+    };
 
     return(
         <>
