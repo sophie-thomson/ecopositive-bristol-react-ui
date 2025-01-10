@@ -1,20 +1,12 @@
 import React from "react";
 import { Card, CardGroup, Col } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import { axiosRes } from "../../api/axiosDefaults";
 
-import { DotsDropdown } from "../../components/DotsDropdown";
-import CompanyPage from "./CompanyPage";
 import styles from "../../styles/CompanyContact.module.css";
 import appStyles from "../../App.module.css";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { toast } from "react-toastify";
 
 
 const CompanyContact = (props) => {
     const {
-        id,
-        owner,
         name,
         street,
         city,
@@ -22,25 +14,6 @@ const CompanyContact = (props) => {
         phone,
         website_url,
     } = props;
-
-    const currentUser = useCurrentUser();
-        const is_owner = currentUser?.username === owner;
-        const history = useHistory();
-    
-    const handleEdit = () => {
-        history.push(`/companies/${id}/edit`);
-    };
-        
-    const handleDelete = async () => {
-        try {
-            await axiosRes.delete(`/companies/${id}/`);
-            history.goBack();
-            toast.success("Contact details deleted successfully!")
-        } catch (err) {
-            console.log(err);
-            toast.error("Oops! Something went wrong when deleting your contact details.")
-        }
-    };
 
     return (
         <Card className={styles.Company}>
