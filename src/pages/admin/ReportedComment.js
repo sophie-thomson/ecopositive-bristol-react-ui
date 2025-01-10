@@ -3,7 +3,7 @@ import Avatar from "../../components/Avatar";
 import styles from "../../styles/AdminPage.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { Link } from "react-router-dom";
-import { Alert, Button, Media } from "react-bootstrap";
+import { Alert, Button, Media, Modal } from "react-bootstrap";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { toast } from "react-toastify";
 
@@ -21,6 +21,10 @@ const ReportedComment = (props) => {
 
     const [errors, setErrors] = useState({});
     const [companyInfo, setCompanyInfo] = useState({});
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
             const fetchData = async () => {
@@ -108,23 +112,37 @@ const ReportedComment = (props) => {
                         {message}
                     </Alert>
                 ))}
-                <Button
-                    className={
-                        `${btnStyles.Button} 
+                    <Button
+                        className={
+                            `${btnStyles.Button} 
                         ${btnStyles.Red}`
-                    }
-                    onClick={handleDelete}
-                    name="approved"
-                >
-                    Delete
-                </Button>
-                {errors?.approved?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>
-                        {message}
-                    </Alert>
-                ))}
-            </Media>
+                        }
+                        onClick={handleShow}
+                        name="delete"
+                    >
+                        Delete
+                    </Button>
+                    {errors?.delete?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
+                </Media>
             </li>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Body closeButton>
+                    Confirm delete?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        X Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDelete}>
+                        Confirm Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
         </>
     );
 };
