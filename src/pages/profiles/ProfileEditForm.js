@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -14,9 +15,9 @@ import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../../contexts/CurrentUserContext";
-
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+
 
 const ProfileEditForm = () => {
     const currentUser = useCurrentUser();
@@ -95,8 +96,10 @@ const ProfileEditForm = () => {
               profile_image: data.image,
             }));
             history.goBack();
+            toast.success("Profile updated successfully!")
         } catch (err) {
             console.log(err);
+            toast.error("Oops! Something went wrong when updating your profile. Please refresh the page and try again.")
             setErrors(err.response?.data);
         }
     };
