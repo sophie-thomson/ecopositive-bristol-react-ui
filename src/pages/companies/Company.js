@@ -38,12 +38,11 @@ const Company = (props) => {
     
     const handleDelete = async () => {
         try {
-          await axiosRes.delete(`/companies/${id}/`);
-          history.goBack();
-          toast.success("Company deleted successfully!")
+            await axiosRes.delete(`/companies/${id}/`);
+            history.goBack();
+            toast.success("Company deleted successfully!")
         } catch (err) {
-          console.log(err);
-          toast.error("Oops! Something went wrong when deleting your company.")
+            toast.error("Oops! Something went wrong when deleting your company.")
         }
     };
     
@@ -77,7 +76,6 @@ const Company = (props) => {
             window.location.reload();
             toast.success("Endorsement removed successfully!")
         } catch (err) {
-            console.log(err);
             toast.error("Oops! Something went wrong when removing your endorsement. Please try again.")
         }
     };

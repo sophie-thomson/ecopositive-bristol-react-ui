@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import { Image } from "react-bootstrap";
+import { Button, Image, Modal } from "react-bootstrap";
 
 import Asset from "../../components/Asset";
 import styles from "../../styles/ProfilePage.module.css";
@@ -24,11 +24,14 @@ function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
     const [profileCompanies, setProfileCompanies] = useState({ results: [] });
     const [endorsedCompanies, setEndorsedCompanies] = useState({ results: [] });
-    
+    const [show, setShow] = useState(false);
     const { id } = useParams();
     const history = useHistory();  
     const [profileData, setProfileData] = useState([]);
     const profile = profileData.data;
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -81,7 +84,6 @@ function ProfilePage() {
             history.goBack();
             toast.success("Profile deleted successfully!")
         } catch (err) {
-            console.log(err);
             toast.error("Oops! Something went wrong when deleting your profile. Please refresh the page and try again.")
         }
     };
@@ -94,9 +96,27 @@ function ProfilePage() {
                         id={profile?.id} 
                         className={styles.Dots}
                         handleEdit={handleEdit}
-                        handleDelete={handleDelete}
+                        handleDelete={handleShow}
                     />}
             </span>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Delete profile?</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to delete this profile? 
+                    This action cannot be undone, and all your owned companies, endorsements and 
+                    comments will also be deleted.
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        X Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDelete}>
+                        Confirm Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
             <Row noGutters className="px-3 text-center">
                 <Col lg={3} className="text-lg-left">
                     <Image
