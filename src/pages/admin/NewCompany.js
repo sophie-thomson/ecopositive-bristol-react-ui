@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Alert, Button, Image } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 const NewCompany = (props) => {
@@ -25,8 +26,10 @@ const NewCompany = (props) => {
         try {
             await axiosReq.patch(`/companies/${id}/`, approved);
             history.push(`/companies/${id}`);
+            toast.success("Company successfully approved!")
         } catch (err) {
             console.log(err);
+            toast.error("Oops! Something went wrong when approving this company. Please refresh the page and try again.")
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }
@@ -37,8 +40,13 @@ const NewCompany = (props) => {
         <div>
             <li className={`${styles.ListItem} d-flex justify-content-between px-2`}>
                 <Link to={`/companies/${id}`}>
-                    <Image className={`${styles.Logo} mr-3 d-none d-md-inline`} src={logo} alt={name} />
-                    <span className={`${styles.Name}`}>{name}</span>
+                    <Image 
+                        className={`${styles.Logo} mr-3 d-none d-md-inline`} 
+                        src={logo} 
+                        alt={name} />
+                    <span className={`${styles.Name}`}>
+                        {name}
+                    </span>
                 </Link>
                 <span className="d-flex align-items-center text-muted small"
                 >
