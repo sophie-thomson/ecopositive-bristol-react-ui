@@ -24,7 +24,7 @@ const TopCompany = (props) => {
         >
             
             <div>
-                <Link className="align-self-center" to={`/companies/${id}`}>
+                <Link to={`/companies/${id}`}>
                     <img 
                         src={logo} 
                         className={`${mobile ? styles.Logo : ''}`}
@@ -34,7 +34,7 @@ const TopCompany = (props) => {
                 </Link>
             </div>
             <div className={`mx-2 ${styles.Name}`}>
-                <Link className="text-center ml-2 text-wrap" to={`/companies/${id}`}>
+                <Link  to={`/companies/${id}`}>
                     <strong>{name}</strong>
                 </Link>
             </div>
