@@ -1,21 +1,11 @@
 .App {
     font-family: "DM Sans", sans-serif;
     color: #2b2b2b;
-    background-color: #fafafa;
     min-height: 100vh;
 }
 
 .Main {
     padding-top: 15px;
-}
-
-.bg {
-    background-image: url(./assets/bgimage.webp);
-    min-height: 100%;
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    position: relative;
 }
 
 .Content {
