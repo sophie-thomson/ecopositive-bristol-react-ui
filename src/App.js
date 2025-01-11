@@ -17,9 +17,13 @@ import CompanyListPage from './pages/companies/CompanyListPage';
 import AdminPage from './pages/admin/AdminPage';
 import PageNotFound from './pages/notfound/PageNotFound';
 import ProfileEditForm from './pages/profiles/ProfileEditForm';
+import { useCurrentUser } from "./contexts/CurrentUserContext";
 
 
 function App() {
+
+    const currentUser = useCurrentUser();
+    const profile_id = currentUser?.profile_id || "";
 
     return (
         <div className={`${styles.bg} ${styles.App}`}>
@@ -66,6 +70,7 @@ function App() {
                             exact
                             path="/profiles/:id"
                             render={() => <ProfilePage />}
+                            filter={`profile=${profile_id}&`}
                         />
                         <Route
                             exact

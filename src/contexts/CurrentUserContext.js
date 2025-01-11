@@ -16,8 +16,11 @@ export const CurrentUserProvider = ({ children }) => {
 
   const handleMount = async () => {
     try {
-      const { data } = await axiosRes.get("dj-rest-auth/user/");
-      setCurrentUser(data);
+      const isToken = localStorage.getItem("refreshTokenTimestamp");
+      if (isToken) {
+        const { data } = await axiosRes.get("dj-rest-auth/user/");
+        setCurrentUser(data);
+      }
     } catch (err) {}
   };
 
