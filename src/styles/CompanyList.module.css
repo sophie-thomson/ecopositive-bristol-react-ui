@@ -10,7 +10,6 @@
     font-style: normal;
     font-weight: 700;
     font-size: 1.5em;
-    /* text-align: sm-left; */
     color: #195829;
 }
 
@@ -23,7 +22,6 @@
 .Logo {
     max-width:150px;
     height: auto;
-    /* align-self: flex-start; */
     margin-bottom: 10px;
 }
 

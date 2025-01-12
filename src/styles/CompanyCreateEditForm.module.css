@@ -15,7 +15,7 @@
     padding: 10px;
     color: #195829;
     text-align: center;
-    font-weight: light;
+    font-weight: 300;
     font-size: 0.9em;
 }
 
@@ -37,14 +37,12 @@
     text-transform: uppercase;
     color: #195829;
     margin-top: 15px;
-    /* margin-bottom: 0px; */
 }
 
 .Field {
     color: #195829;
     text-align: center;
-    /* text-transform: uppercase; */
-    font-weight: light;
+    font-weight: 300;
     font-size: 0.9em;
     margin-top: 3px;
 }
