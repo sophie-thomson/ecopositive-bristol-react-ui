@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useParams } from "react-router";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -18,6 +20,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import NoResults from "../../assets/no-results.png";
 import { fetchMoreData } from "../../utils/utils";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 
 function ProfilePage() {
@@ -25,10 +28,15 @@ function ProfilePage() {
     const [profileCompanies, setProfileCompanies] = useState({ results: [] });
     const [endorsedCompanies, setEndorsedCompanies] = useState({ results: [] });
     const [show, setShow] = useState(false);
-    const { id } = useParams();
-    const history = useHistory();  
+
+    const currentUser = useCurrentUser();
+    const id = currentUser?.profile_id;
+     
     const [profileData, setProfileData] = useState([]);
     const profile = profileData.data;
+    const is_owner = currentUser?.username === profile?.owner;
+
+    const history = useHistory(); 
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -91,7 +99,7 @@ function ProfilePage() {
     const mainProfile = (
         <>
             <span className={`${styles.Dots} d-flex justify-content-end`}>
-                {profile?.is_owner && 
+                {is_owner && 
                     <DotsDropdown 
                         id={profile?.id} 
                         className={styles.Dots}
@@ -190,7 +198,6 @@ function ProfilePage() {
                         </Col>   
                     </Row>
                 </Col>
-                    {profile?.content && <Col className="p-3">{profile.content}</Col>}
             </Row>
         </>
     );
@@ -252,49 +259,72 @@ function ProfilePage() {
 
     return (
         <Row>
-            <Col className="py-2 p-0 p-lg-2" lg={8}>
-            <TopCompanies mobile/>
-                
-                <Container className={appStyles.Content}>
-                {hasLoaded ? (
-                    <>
-                        {mainProfile}
-                    </>
-                ) : (
-                    <Asset spinner />
-                )}
-                    
-                </Container>
-                {profileCompanies.length ?(
-                    <Container 
-                        className={`${styles.Frame} ${styles.BorderCompany} mt-3`}
-                    >
-                    {hasLoaded ? (
-                        <>
-                            {mainProfileCompanies}
-                        </>
-                    ) : (
-                        <Asset spinner />
+            {hasLoaded ? (
+                <Container>
+                    {currentUser && is_owner && (
+                        <div className="d-flex">
+                            <Col className="py-2 p-0 p-lg-2" lg={8}>
+                                <TopCompanies mobile />
+                                <Container className={appStyles.Content}>
+                                    <>
+                                        {mainProfile}
+                                    </>
+                                </Container>
+                                {profileCompanies.length ? (
+                                    <Container 
+                                        className={
+                                            `${styles.Frame} 
+                                            ${styles.BorderCompany} 
+                                            mt-3`
+                                        }
+                                    >
+                                        <>
+                                            {mainProfileCompanies}
+                                        </>
+                                    </Container>
+                                ) : (null)}
+                                <Container 
+                                    className={
+                                        `${styles.Frame} 
+                                        ${styles.BorderEndorse} 
+                                        my-4 pt-3`
+                                    }
+                                >
+                                    <>
+                                        {mainProfileEndorsed}
+                                    </>
+                                </Container>
+                            </Col>
+                            <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
+                                <TopCompanies />
+                            </Col>
+                        </div>
                     )}
-                    </Container>
-                ) : (null)}
-                <Container 
-                    className={`${styles.Frame} ${styles.BorderEndorse} my-4 pt-3`}
-                >
-                {hasLoaded ? (
-                    <>
-                        {mainProfileEndorsed}
-                    </>
-                ) : (
-                    <Asset spinner />
-                )}
+
                 </Container>
-            </Col>
-            <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-            <TopCompanies />
-            </Col>
+            ) : (
+                <Container>
+                    <Asset spinner />
+                </Container>
+            )}  
+            {!currentUser && ( 
+                <Container 
+                    className={`${appStyles.Content} ${styles.Attention} text-center`}
+                >
+                    <p>
+                        Only the profile owner can view this profile. 
+                    </p>
+                    <Link className={styles.Link} to="/signin">
+                        Please
+                        <span className={`${styles.Bold}`}>
+                                &nbsp;sign in&nbsp;
+                        </span>
+                        to view your profile.
+                    </Link>   
+                </Container>
+            )}
         </Row>
     );
-}
+};
     
 export default ProfilePage;

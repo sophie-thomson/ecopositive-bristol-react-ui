@@ -52,6 +52,10 @@
     font-size: 1.5em;
 }
 
+.Attention {
+    border: 2px solid #f35438;
+}
+
 @media screen and (max-width: 991px) {
     .ProfileImage {
         width: 250px;
