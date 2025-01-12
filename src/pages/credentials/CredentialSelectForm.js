@@ -140,9 +140,11 @@ function CredentialSelectForm({ company }) {
                 response.data.credentials
             ]);
             window.location.reload();
-            toast.success("Credentials added successfully!")
+            toast.success("Credentials added successfully!");
         } catch (err) {
-            toast.error("Oops! Something went wrong when adding your credentials. Please try again.")
+            toast.error(
+                "Oops! Something went wrong when adding your credentials. Please try again."
+            );
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }    
@@ -167,9 +169,11 @@ function CredentialSelectForm({ company }) {
             });
 
             window.location.reload();
-            toast.success("Credentials removed successfully!")
+            toast.success("Credentials removed successfully!");
         } catch (err) {
-            toast.error("Oops! Something went wrong when removing your credentials. Please try again.")
+            toast.error(
+                "Oops! Something went wrong when removing your credentials. Please try again."
+            );
         }    
     };
 

@@ -51,7 +51,9 @@ const ReportedComment = (props) => {
             window.location.reload();
             toast.success("Comment approved successfully!");
         } catch (err) {
-            toast.error("Oops! Something went wrong when approving this comment. Please refresh the page and try again.");
+            toast.error(
+                "Oops! Something went wrong when approving this comment. Please refresh the page and try again."
+            );
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }
@@ -67,7 +69,9 @@ const ReportedComment = (props) => {
             window.location.reload();
             toast.success("Comment deleted successfully!");
         } catch (err) {
-            toast.error("Oops! Something went wrong when deleting this comment. Please refresh the page and try again.");
+            toast.error(
+                "Oops! Something went wrong when deleting this comment. Please refresh the page and try again."
+            );
         }
     };
 

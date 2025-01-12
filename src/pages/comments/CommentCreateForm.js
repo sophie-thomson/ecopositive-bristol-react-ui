@@ -47,7 +47,7 @@ function CommentCreateForm(props) {
             setContent("");
             toast.success("Comment created successfully!");
         } catch (err) {
-            toast.error("Something went wrong while adding your comment")
+            toast.error("Something went wrong while adding your comment");
         }
     };
 

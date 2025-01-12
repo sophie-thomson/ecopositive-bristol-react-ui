@@ -52,7 +52,7 @@ const Comment = (props) => {
                 ...prevComments,
                 results: prevComments.results.filter(comment => comment.id !== id),
             }));
-            toast.error("Comment deleted")
+            toast.error("Comment deleted");
         } catch (err) {
         
         }
@@ -67,7 +67,7 @@ const Comment = (props) => {
                 reported: true,
             });
             setShowReportBtn();
-            toast.success("Comment successfully reported for review by staff.")
+            toast.success("Comment successfully reported for review by staff.");
             setComments(prevComments => ({
                 ...prevComments,
                 results: prevComments.results.map((comment) => {
@@ -81,7 +81,9 @@ const Comment = (props) => {
             }));
                 
         } catch (err) {
-            toast.error("Oops! Something went wrong when reporting this comment. Please try again.")
+            toast.error(
+                "Oops! Something went wrong when reporting this comment. Please try again."
+            );
         }
     };
 

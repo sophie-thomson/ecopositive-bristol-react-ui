@@ -80,9 +80,11 @@ function ProfilePage() {
         try {
             await axiosRes.delete(`/profiles/${id}/`);
             history.goBack();
-            toast.success("Profile deleted successfully!")
+            toast.success("Profile deleted successfully!");
         } catch (err) {
-            toast.error("Oops! Something went wrong when deleting your profile. Please refresh the page and try again.")
+            toast.error(
+                "Oops! Something went wrong when deleting your profile. Please refresh the page and try again."
+            );
         }
     };
     

@@ -26,9 +26,11 @@ const NewCompany = (props) => {
         try {
             await axiosReq.patch(`/companies/${id}/`, approved);
             history.push(`/companies/${id}`);
-            toast.success("Company successfully approved!")
+            toast.success("Company successfully approved!");
         } catch (err) {
-            toast.error("Oops! Something went wrong when approving this company. Please refresh the page and try again.")
+            toast.error(
+                "Oops! Something went wrong when approving this company. Please refresh the page and try again."
+            );
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }

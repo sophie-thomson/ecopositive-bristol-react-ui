@@ -95,9 +95,11 @@ const ProfileEditForm = () => {
               profile_image: data.image,
             }));
             history.goBack();
-            toast.success("Profile updated successfully!")
+            toast.success("Profile updated successfully!");
         } catch (err) {
-            toast.error("Oops! Something went wrong when updating your profile. Please refresh the page and try again.")
+            toast.error(
+                "Oops! Something went wrong when updating your profile. Please refresh the page and try again."
+            );
             setErrors(err.response?.data);
         }
     };
