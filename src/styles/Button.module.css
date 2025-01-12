@@ -7,80 +7,80 @@
     margin-left: 2px;
     margin-right: 2px;
     min-width: 75px;
-  }
+}
   
-  .Button:hover {
+.Button:hover {
     opacity: 0.8;
     border-color: transparent;
     cursor: pointer;
-  }
+}
   
-  .Button:hover:active {
+.Button:hover:active {
     background-color: #d69303 !important;
-  }
+}
   
-   .Button:active {
+.Button:active {
     background-color: #d69303 !important;
-  }
+}
   
-  .Button:focus {
+.Button:focus {
     background-color: #d69303;
-  }
+}
   
-  .Wide {
+.Wide {
     padding: 10px 50px;
     width: 100%;
-  }
+}
   
-  .Orange,
-  .OrangeOutline:hover,
-  .Bright:hover {
+.Orange,
+.OrangeOutline:hover,
+.Bright:hover {
     background-color: #d69303;
     color: #ffffff;
-  }
+}
   
-  .GreenOutline,
-  .Green:hover {
+.GreenOutline,
+.Green:hover {
     
     background-color: #286d1f;
     color: #ffffff;
-  }
+}
   
-  .Green,
-  .GreenOutline:hover {
+.Green,
+.GreenOutline:hover {
     border: 1px solid #286d1f;
     background-color: #b7ecd2;
     color: #1d1c1a;
-  }
+}
   
-  .Bright {
+.Bright {
     background-color: #fceea2;
     color: #1d1c1a;
     border: 1px solid #d69303;
-  }
+}
 
-  .RedOutline,
-  .Red:hover {
+.RedOutline,
+.Red:hover {
     background-color: #c5373e;
     color: #ffffff;
-  }
+}
   
-  .Red,
-  .RedOutline:hover {
+.Red,
+.RedOutline:hover {
     border: 1px solid #c5373e;
     background-color: #ecb7b7;
     color: #1d1c1a;
-  }
+}
 
-  .RemoveOutline,
-  .Remove:hover {
+.RemoveOutline,
+.Remove:hover {
     background-color: #e7aa25;
     color: #1d1c1a;
-  }
+}
   
-  .Remove,
-  .RemoveOutline:hover {
+.Remove,
+.RemoveOutline:hover {
     border: 1px solid #d69303;
     background-color: #f3e8ab;
     color: #1d1c1a;
-  }
+}
