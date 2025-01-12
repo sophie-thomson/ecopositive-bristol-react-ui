@@ -42,13 +42,15 @@ const NavBar = () => {
 
     const handleSignOut = async () => {
         try {
-          await axios.post("dj-rest-auth/logout/");
-          setCurrentUser(null);
-          removeTokenTimestamp();
+            await axios.post("dj-rest-auth/logout/");
+            setCurrentUser(null);
+            removeTokenTimestamp();
         } catch (err) {
-          toast.error("Oh dear, there was a problem while logging you out. Please try refreshing the page.");
+            toast.error(
+                "Oh dear, there was a problem while logging you out. Please try refreshing the page."
+            );
         }
-      };
+    };
 
     const loggedInIcons = (
     <>
@@ -146,4 +148,4 @@ const NavBar = () => {
     );
 };
 
-export default NavBar
+export default NavBar;
