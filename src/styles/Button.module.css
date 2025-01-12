@@ -23,9 +23,9 @@
     background-color: #d69303 !important;
   }
   
-  /* .Button:focus {
+  .Button:focus {
     background-color: #d69303;
-  } */
+  }
   
   .Wide {
     padding: 10px 50px;
@@ -41,25 +41,15 @@
   
   .GreenOutline,
   .Green:hover {
-    /* border: 1px solid #2142b2; */
+    
     background-color: #286d1f;
     color: #ffffff;
   }
   
   .Green,
   .GreenOutline:hover {
-    /* background-color: #242a3d;
-    color: white; */
+    border: 1px solid #286d1f;
     background-color: #b7ecd2;
-    color: #1d1c1a;
-  }
-  
-  .Black:hover,
-  .BlackOutline {
-    /* background-color: #dadadf;
-    color: #242a3d;
-    border-color: #242a3d; */
-    background-color: #fceea2;
     color: #1d1c1a;
   }
   
@@ -71,22 +61,19 @@
 
   .RedOutline,
   .Red:hover {
-    /* border: 1px solid #2142b2; */
     background-color: #c5373e;
     color: #ffffff;
   }
   
   .Red,
   .RedOutline:hover {
-    /* background-color: #242a3d;
-    color: white; */
+    border: 1px solid #c5373e;
     background-color: #ecb7b7;
     color: #1d1c1a;
   }
 
   .RemoveOutline,
   .Remove:hover {
-    /* border: 1px solid #2142b2; */
     background-color: #e7aa25;
     color: #1d1c1a;
   }
@@ -96,20 +83,4 @@
     border: 1px solid #d69303;
     background-color: #f3e8ab;
     color: #1d1c1a;
-  }
-
-  .Credbtn {
-    border: 1px solid #2b1f30;
-    background-color: #e0c2ee;
-    color: #1d1c1a;
-  }
-
-  .Credbtn:hover {
-    border: 1px solid #e2a6fd;
-    background-color: #2b1f30;
-    color: #fff;
-  }
-
-  .Credbtn:active {
-    background-color: #2b1f30;
   }
