@@ -10,19 +10,9 @@ test("renders NavBar", () => {
     </Router>
     );
 
-    screen.debug();
-
     const signInLink = screen.getByRole('link', {name: 'Sign In'})
     expect(signInLink).toBeInTheDocument();
-});
 
-test("renders NavBar", () => {
-    render(
-    <Router>
-        <NavBar />
-    </Router>
-    );
-    
     const browseLink = screen.getByRole('link', {name: 'Browse'})
     expect(browseLink).toBeInTheDocument();
 });

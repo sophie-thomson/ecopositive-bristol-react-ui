@@ -17,7 +17,6 @@ import { removeTokenTimestamp } from "../utils/utils";
 import { toast } from 'react-toastify';
 
 
-
 const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
@@ -26,7 +25,6 @@ const NavBar = () => {
     const [profileData, setProfileData] = useState([]);
     const profile = profileData.data;
     const is_admin = profile?.is_staff === true;
-    
 
     useEffect(() => {
         if (!id) return;
@@ -39,7 +37,6 @@ const NavBar = () => {
         fetchData();
         
     }, [id, setProfileData]);
-    
 
     const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
@@ -101,7 +98,6 @@ const NavBar = () => {
                 Sign In
             </NavLink>
             <NavLink
-                // exact
                 className={styles.NavLink}
                 activeClassName={styles.Active}
                 to="/signup"

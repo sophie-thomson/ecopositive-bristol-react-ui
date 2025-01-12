@@ -1,13 +1,17 @@
-import React, { useState } from "react";
-import styles from "../../styles/Company.module.css";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Button, Card, Modal } from "react-bootstrap";
+import React from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
 import { Link, useHistory } from "react-router-dom";
+
+import { Button, Card, Modal } from "react-bootstrap";
+import styles from "../../styles/Company.module.css";
+
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { DotsDropdown } from "../../components/DotsDropdown";
 import CompanyPage from "./CompanyPage";
 import btnStyles from "../../styles/Button.module.css";
-import { toast } from "react-toastify";
+
 
 const Company = (props) => {
     const {
@@ -40,9 +44,11 @@ const Company = (props) => {
         try {
             await axiosRes.delete(`/companies/${id}/`);
             history.goBack();
-            toast.success("Company deleted successfully!")
+            toast.success("Company deleted successfully!");
         } catch (err) {
-            toast.error("Oops! Something went wrong when deleting your company.")
+            toast.error(
+                "Oops! Something went wrong when deleting your company."
+            );
         }
     };
     
@@ -58,9 +64,11 @@ const Company = (props) => {
                 endorsement_id: data.id,
             }));
             window.location.reload();
-            toast.success("Company endorsed successfully!")
+            toast.success("Company endorsed successfully!");
         } catch (err) {
-            toast.error("Oops! Something went wrong when endorsing this company. Please try again.")
+            toast.error(
+                "Oops! Something went wrong when endorsing this company. Please try again."
+            );
         }
     };
 
@@ -73,9 +81,11 @@ const Company = (props) => {
                 endorsement_id: null,
             }));
             window.location.reload();
-            toast.success("Endorsement removed successfully!")
+            toast.success("Endorsement removed successfully!");
         } catch (err) {
-            toast.error("Oops! Something went wrong when removing your endorsement. Please try again.")
+            toast.error(
+                "Oops! Something went wrong when removing your endorsement. Please try again."
+            );
         }
     };
     
@@ -85,7 +95,7 @@ const Company = (props) => {
                 <div className={`${styles.Endorse} d-flex align-items-center`}>
                     <div className="text-muted">
                         <i className="fa-solid fa-award" />
-                        {endorsements_count}
+                        {endorsements_count} 
                         <span 
                             className="d-none d-sm-inline"
                         >    
@@ -98,7 +108,6 @@ const Company = (props) => {
                             )}
                         </span>
                     </div>
-            
                     {is_owner ? (
                         null
                     ) : endorsement_id ? (
