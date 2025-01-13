@@ -160,7 +160,7 @@ The Company Page provides a framework for a number of components:
         - Comments Count
     - The company name and logo both link directly to the company's own website in a new tab.
 
-    ![PLACEHOLDER Company details component](docs/readme-images/company-component.png)
+    ![Screenshot of Company details component](docs/readme-images/company-component.png)
 
 - ***Company Contact Details (CompanyContact.js)***
 
@@ -172,9 +172,9 @@ The Company Page provides a framework for a number of components:
     
     If there are no address / phone / website details conditional rendering displays a message to the user.
 
-    ![Company contact details component on desktop](docs/readme-images/contact-desktop.png)
+    ![Screenshot of company contact details component on desktop](docs/readme-images/contact-desktop.png)
 
-    ![Company contact details component on mobile](docs/readme-images/contact-mobile.png)
+    ![Screenshot of company contact details component on mobile](docs/readme-images/contact-mobile.png)
 
     
 - ***Credentials Component (Credentials.js)***
@@ -183,7 +183,7 @@ The Company Page provides a framework for a number of components:
     - Credentials are listed under the relevant credential group
     - Each credential features a leaf icon instead of a bullet point to reinforce environmental focus.
 
-    ![Company credentials component for an authenticated user](docs/readme-images/credentials-authenticated-not-owner.png)
+    ![Screenshot of company credentials component for an authenticated user](docs/readme-images/credentials-authenticated-not-owner.png)
 
 - ***Add/Edit Credentials Button***
 
@@ -191,7 +191,7 @@ The Company Page provides a framework for a number of components:
     - When clicked, the button updates a showForm state from the default 'false' to 'true', enabling a form to display.
     - When clicked again, the button updates the showForm state back to 'false' so that the form is no longer displayed.
 
-    ![Add/edit credentials button](docs/readme-images/credentials-owner.png)
+    ![Screenshot of Add/edit credentials button](docs/readme-images/credentials-owner.png)
 
 - ***Credential Select Form (CredentialSelectForm.js)***
 
@@ -203,7 +203,7 @@ The Company Page provides a framework for a number of components:
       - Once submitted, the company page refreshes so that the list of credentials is updated with the latest information and the owner can see that the selected credentials have been added.
       - Clicking 'X Cancel' closes the form again.
 
-    ![Select credentials form as owner](docs/readme-images/select-credentials-form.png)
+    ![Screenshot of select credentials form as owner](docs/readme-images/select-credentials-form.png)
 
   - **Remove Credentials**
       - The remove credentials form lists all of the credentials currently assigned to that company instance.
@@ -211,7 +211,7 @@ The Company Page provides a framework for a number of components:
       - Clicking on 'Remove Credentials' removed the credentials from the existing list of credentials.
       - Clicking 'X Cancel' closes the form again.    
 
-    ![Remove credentials form as company owner](docs/readme-images/remove-credentials-form.png)
+    ![Screenshot of remove credentials form as company owner](docs/readme-images/remove-credentials-form.png)
 
 - ***Add Comment Form (CommentCreateForm)***
 
@@ -219,21 +219,64 @@ The Company Page provides a framework for a number of components:
   - Company owners are allowed to comment on their own companies so that they can respond to other user comments.
   - Conditional rendering is used to only display the CommentCreateForm to authenticated users.
 
-  ![Comment Create Form with avatar](docs/readme-images/comment-create-form.png)
+  ![CScreenshot of comment Create Form with avatar](docs/readme-images/comment-create-form.png)
 
 - ***Comments***
 
-  - All users are able to view all comments left for a company. 
+  - All users are able to view all comments left for a company, however there are a few additional elements that are only rendered to users according to their authentication role.
+  - Infinite Scrolling ensures that users can view all comments made for a particular company if they wish to.
+  - Every user, regardless of authentication or logged in status will see:
+    - Username of commenter
+    - Avatar of the commenter (or default profile image if not updated)
+    - Comment content
+    - Time passed since the comment was created
 
-    - **Comment Owner**
-    When logged in as the owner of the comment ......
+- **Casual Users**
+    When viewing as a casual user who is not logged in, the user can see the list of comments and a message to prompt them to log in to leave a comment of their own.
 
-    ![PLACEHOLDER Comments list as comment owner ](#)
+    ![Screenshot of Comments list as casual user ](docs/readme-images/comments-casual.png)
 
-    - **Casual User**
-    When viewing as a casual user......
+- **Authenticated User**
+    - When logged in, authenticated users can see all of the above content, and the comment create form.
+    - In addition, they can see a flag icon and label enabling them to report that particular comment if they wish.
 
-    ![PLACEHOLDER Comments list as casual user ](#)
+    ![Comments list as authenticated user ](docs/readme-images/comments-authenticated.png)
+
+    - All comments are not reported by default. Clicking on the flag of an unreported comment displays two buttons to report the comment or not.
+
+    ![Screenshot of comment reporting buttons when flag clicked](docs/readme-images/comment-with-report-buttons.png)
+
+    - Once a comment is reported, the flag turns red and the message states 'Comment Reported'.
+    - Clicking on the flag of a reported comment displays the message: 'This comment is being reviewed by ecoPositive staff'.
+
+    ![Screenshot of already reported message when flag clicked](docs/readme-images/comment-already-reported.png)
+    
+- **Comment Owner**
+  - When logged in as the owner of the comment instance, the user sees all of the the above and the three dots dropdown menu which includes a handleEdit and handleDelete function.
+  - Clicking on the flag of an unreported comment as the owner displays the message: 'You cannot report your own comment' instead of rendering the report buttons.
+  - Clicking on the flag of a reported comment as the comment owner displays the message: 'Your comment has been reported, you may wish to edit or delete this comment'.
+
+  ![Screenshot of comment as owner with dropdown and report message](docs/readme-images/own-comment-flag-and-dots.png)
+
+  ![Screenshot of comment reported as owner](docs/readme-images/comment-reported-flag-owner.png)
+
+  - Clicking on the edit icon renders the CommentEditForm which is pre-populated with the comment content and two buttons to 'Save' or 'X Cancel'.
+
+  - Clicking on the save button updates the comment and a popup message confirms that the comment has been updated successfully.
+
+  - Clicking on the delete icon in the drop down renderd a modal asking the user to confirm that they definitely want to delete the message.
+
+  ![Screenshot of comment edit form with updated content](docs/readme-images/comment-edit-form.png)
+
+  ![Screenshot of comment updated message](docs/readme-images/comment-updated-message.png)
+
+  ![Screenshot of delete confirmation modal](docs/readme-images/comment-delete-confirm-modal.png)
+
+     
+
+    
+
+    
 
 ### Add Company Form (CompanyCreateForm.js)
 
