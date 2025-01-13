@@ -16,7 +16,35 @@ All listed companies and businesses are held accountable by the community / cust
 
 The goal of this REACT user interface is to provide an engaging and user-friendly front end website that users can interact wih in order to create, read, update and delete data in the [back end API](https://ecopositive-api-pp5-ba0d580957dc.herokuapp.com/admin/) and to ensure they get the most out of the site.
 
-![Placeholder mock up on multiple devices](placeholder image)
+![ecoPositive mock up on multiple devices](docs/readme-images/multi-screen-mock.png)
+
+## UX Design
+
+- Colour Palette
+  - The colour palette for this application was largely inspired by the colours of nature and the tones in the background image.
+    - These include:
+      - #195829 - Dark green used for company names and headings. Inspired by foliage and nature.
+      - #d69303 - Yellow/Orange consistently used to reference endorsements and other accents. A positive colour referencing sunshine.
+      - #fafafa - Content background colour - a softer white to complement the other strong tones 
+      - #679cb1 - teal blue - referencing back to the ecoPositive logo  
+      - #d0eee3 - Paler green to complement other stronger colours. Used for credentials.
+      - #e1e2e0 - Pale grey used to balance out the pages with a lot of content.
+      - #d9ecb7 - Pale citron colour to tie in with the brighter tones in the background image.
+
+    ![Colour Palette for the Application](docs/readme-images/colour-palette.png)
+
+- Background Image
+  - The background image was opensource and then adapted to be more abstract so it would not distract the user. The colour and brightness of this image give an impression of sunshine and green leaves or grasses which fit with the theme of environmentally friendly and positive businesses.
+  ![Background Image used throughout the application](docs/readme-images/bgimage.jpg)
+- Typography
+  - Consistent typography was used throughout the application. The fonts used were:
+    - DMSans - a clean and easy to read sans-serif font used for all general text
+    - Roboto Flex - A modern clean font which works well for bolder titels. Used for company names throughout the site.
+- Icons
+  - Consistent icons and colours were used throughout the application to represent certain elements:
+   - Endorsements were represented throughout by the [Fontawesome 'award' icon](https://fontawesome.com/icons/award?f=classic&s=solid)
+   - The Comments count was depicted using the [Fontawesome 'comments' icon](https://fontawesome.com/icons/comments?f=classic&s=regular)
+   - All other icons used in the navbar, Add company component and dropdown menu were also imported from the free fontawesome library.
 
 ## Features
 
@@ -140,7 +168,11 @@ Additional links that are visible to authenticated users with admin status when 
       - Group headings relating the the credentials assigned to the company
     - Logo and Company name link to the Company Page (CompanyPage.js) for further information.
 
-    ![PLACEHOLDER Company list viewable by all users](#)
+    ![Screenshot of a Company List component](docs/readme-images/company-list.png)
+    
+    ![Screenshot of Company list page viewable by all users](docs/readme-images/list-page.png)
+
+
 
 ### Company Page (CompanyPage.js)
 <hr>
@@ -416,12 +448,14 @@ The Company Page provides a framework for a number of components:
 ![Screenshot of page not found content](docs/readme-images/page-not-found.png)
 
 ### Future Features
+<hr>
 
-## UX Design
-    - Colour Palette
-    - Background Image
-    - Typography
-    - Icons
+- There are several future features that would enhance this application. If I had more time and knowledge I would like to:
+  - Embed a Google map for the company address -  This would enable users to find their way to a company location.
+  - Filter the home page list by credential group - the user can choose one of the four groups and see all companies listed with that credential group. The filter for this exists in the api, but I was unable to find suitable guidance resources to help me implement this in the time available.
+  - Nominate a company - Any user could nominate a company not included in the directory so that the admin can contact the company to tell them they have been nominated by a potential customer and invite them to join the ecoPositive revolution!
+  - Credentials Page - a page listing all of the credentials with some information on each and links to further information where available. The Credential model is already set up with this potential development in mind.
+
 
 ## Design Process
 
