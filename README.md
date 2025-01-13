@@ -301,7 +301,8 @@ The Company Page provides a framework for a number of components:
 ### Add Company Form (CompanyCreateForm.js)
 <hr>
 
-- Info
+- Any authenticated user can submit a company to be considered for addition to the ecoPositive directory.
+- Conditional rendering will only display the Add My Company link in the AddCompany banner if a user is logged in, and a useRedirect hook at the top of the function sends any user not authenticated back to the home page. 
 
 ### Edit Company Form (CompanyEditForm.js)
 <hr>

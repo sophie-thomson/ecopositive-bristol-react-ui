@@ -21,9 +21,11 @@ import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import NoResults from "../../assets/no-results.png";
 import { fetchMoreData } from "../../utils/utils";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { useRedirect } from "../../hooks/useRedirect";
 
 
 function ProfilePage() {
+    useRedirect("loggedOut");
     const [hasLoaded, setHasLoaded] = useState(false);
     const [profileCompanies, setProfileCompanies] = useState({ results: [] });
     const [endorsedCompanies, setEndorsedCompanies] = useState({ results: [] });
