@@ -315,15 +315,105 @@ The Company Page provides a framework for a number of components:
 ### Edit Company Form (CompanyEditForm.js)
 <hr>
 
-- Conditional rendering displays  
+- Conditional rendering displays the three dots dropdown menu to a comapny owner only.
+- Clicking on the edit icon in the company sends the owner to the CompanyEditForm which is already pre-populated with the company data.
+- Clicking on Submit Changes sends the updated company data to the api to be displayed in the firectory.
+- Companies are initially approved to ensure that they fit the profile and eco-conscious criteria for being included in the directory, and that they have provided authentic company contact details.
+- Company edits do not require approval so the company is listed with any new edits, but users are able to comment on any company to highlight any issues that they do not feel are correct.
 
-### My ecoPositive Profile ()
+![Screenshot of Edit Company Form as owner](docs/readme-images/edit-company-form.png)
 
-### Edit Profile Form ()
+### My ecoPositive Profile (ProfilePage.js)
+<hr>
 
-### Admin Page ()
+- Every authenticated user is automatically assigned a profile page accessible from the navbar.
+- The link to the user's My ecoPositive profile is conditionally rendered, so is only visible to the authenticated user.
+- Defensive authentication is built into the page with a redirect hook to send any casual user back to the home page if they try to access the page from a url link.
+- If another authenticated user tries to access the profile page from a url link, the profile data for the logged in user (and not the user id in the url) is used to render the page.
 
-### Page Not Found ()
+![Screenshot of a Profile Page](docs/readme-images/profile-page-robin.png)
+
+- The profile page includes four main sections:
+  - **The main profile**
+    - If a first name has been added to the profile data this is used as the greeting header
+    - The number of companies submitted and the number of companies endorsed is listed at the top of the page
+    - Conditional rendering is used to display appropriate messages to the user to encourage further engagement with the app
+
+  ![Screenshot of main user profile section](docs/readme-images/main-profile.png)
+
+  - **Own Companies**
+    - A list of companies that the profile owner has submitted to the directory.
+    - Conditional rendering is used to remove this section if there are no companies submitted.
+    - A dark green border is used to differentiate this list from the other sections and references the colour used for all company names throughout the site.
+
+  ![Screenshot of own companies section](docs/readme-images/own-companies.png)
+
+  - **Endorsed Companies**
+    - A list of companies that the profile owner has endorsed.
+    - This provides the equivalent of a 'liked or favourites' list and enables the user to quickly view all the companies that they support. Essentially their own ecoPostive Directory.
+    - When there are no endorsements to show, the container remains in place with a message to further encourage the user to endorse their first company.
+    - A bright orange border is used for this container to reference the same colour that is used to display endorsemenets information throughout the site.
+
+  ![Screenshot of endorsed companies section](docs/readme-images/endorsed-companies.png)
+
+  - **Highly Recommended**
+    - This is the same component that is displayed in the CompanyListPage which serves as the main directory.
+    - The top three endorsed companies are listed here if viewing on a mobile device, or if on a desktop the top 5 endorsed companies are listed.
+    - The top companies list is intended to provide inspiration for companies to have a look at.
+    - As users endorse different companies at all times, the TopCompanies component should display a range of different companies.   
+
+  ![Screenshot of highly recommended section](docs/readme-images/top-companies-mobile.png)
+
+### Edit Profile Form (ProfileEditForm.js)
+<hr>
+
+- As the only person who can access the profile page is the current authenticated user, they can always see the three dots dropdown menu to edit or delete their profile.
+- Clicking on the edit icon takes the user to the ProfileEditForm.
+- Clicking the delete icon renders a delete confirmation modal to confirm if they are sure that they want to delete the profile and all associated companies and endorsements.
+
+![Screenshot of edit profile form](docs/readme-images/edit-profile-form.png)
+
+![Screenshot of delete profile confirmation modal](docs/readme-images/delete-profile-modal.png)
+
+### Admin Page (AdminPage.js)
+<hr>
+
+- This page is only accessible by authenticated users with the is-staff status assigned to them.
+- The Staff Only link in the navbar is conditionally rendered to display only if the current user is_admin.
+- Further conditional rendering checks that the current user is_admin before rendering the content in the page.
+- The admin page is a parent component that has two child components nested within it.
+
+  - **New Companies (NewCompany.js)**
+    - The New Companies section fetches a list of all companies that are not yet approved and lists each one within a NewCompany component.
+    - If the company is not approved, the admin staff can contact the company owner outside of the admin page processed to discuss what is required to be approved.
+    - Each NewCompany component includes:
+      - Company Name - links to the company page to be reviewed for approval
+      - Data added - the date that the company was submitted
+      - Approve button - Clicking on this button updates the approved boolean for the company instance to true.
+ 
+  ![Screenshot of admin page](docs/readme-images/admin-page.png)
+
+  - **Reported Comments (ReportedComment.js)**
+    - The Reported Comments section fetches a list of all comments that have been reported so they can be reviewed by an admin.
+    - Clicking on the Approve button resets the reported boolean back to false so that the comment can be listed in the original location.
+    - Clicking on Delete renders a confirmation modal for the admin to confirm if the comment should be deleted.
+    - The handleDelete function also reduces the comment count for that company instance by 1.
+    - Each comment is rendered into a ReportedComment component which includes:
+      - Company Name - this links to the company page so the admin can view the context of the comment in relation to other comments.
+      - The commenter username and avatar. The avatar is not shown on small devices to ensure that the page is fully responsive.
+      - The comment content for review
+      - The period of time since the comment was made
+      - An approve button {handleApprove} and a delete button {handleDelete}.
+
+  ![Screenshot of delete confirmation modal](docs/readme-images/delete-comment-modal.png)
+
+### Page Not Found (PageNotFound.js)
+<hr>
+
+- This page is a catch-all route for any url configuration with the base url, but for an unrecognised page.
+- The home icon and text link back to the home page so the user has the option to go there or choose a different page.
+
+![Screenshot of page not found content](docs/readme-images/page-not-found.png)
 
 ### Future Features
 
