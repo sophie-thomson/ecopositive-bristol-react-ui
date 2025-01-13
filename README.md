@@ -21,6 +21,7 @@ The goal of this REACT user interface is to provide an engaging and user-friendl
 ## Features
 
 ### Site Wide & Reusable React Components
+<hr>
 
 This project leverages a modular approach by creating and reusing various React components to build the application's front-end efficiently. Below is a list of reusable components, along with descriptions and their usage within the application.
 
@@ -120,6 +121,7 @@ Additional links that are visible to authenticated users with admin status when 
 ![Avatar for logged in users](docs/readme-images/avatar-comment.png)
 
 ### Company Directory (CompanyListPage.js)
+<hr>
 
 - The main 'home' page listing all companies in the directory providing a brief snapshot of each company which links to the company details.
 - A search bar enables the user to search for companies by name, excerpt, key words or eco-credential group.
@@ -141,6 +143,7 @@ Additional links that are visible to authenticated users with admin status when 
     ![PLACEHOLDER Company list viewable by all users](#)
 
 ### Company Page (CompanyPage.js)
+<hr>
 
 - Parent page to display more information on a particular company.
 
@@ -150,8 +153,10 @@ The Company Page provides a framework for a number of components:
 
 - ***Company Component (Company.js)***
 
-    - Renders company information in responsive layout including:
-
+    - All casual users when not logged in can see the company details.
+    - Conditional rendering displays a message to not logged in users that they need to sign in to endorse a company.
+    - The Company component renders company information with fully reponsive styling. 
+    - All users can view:
         - Company name
         - Company logo
         - Brief description to describe what the company does
@@ -160,14 +165,20 @@ The Company Page provides a framework for a number of components:
         - Comments Count
     - The company name and logo both link directly to the company's own website in a new tab.
 
+    - **Company Component as Authenticated Users**
+      - When logged in, conditional rendering is used to display the 'Endorse Company' button to authenticated users who are not the company owner.
+
+      - When an authenticated user clicks on the Endorse Company button, the endorsement count increases by 1 and the button changes format to become the 'Remove Endorsement' button.
+
+      - Each authenticated user is only allowed to endorse a particular company instance once. This is also set as a unique_together contraint within the Endorsement data model.
+
     ![Screenshot of Company details component](docs/readme-images/company-component.png)
 
-- ***Endorsing a Company***
-  - 
+    ![Screenshot of endorsed company](docs/readme-images/endorsed-company.png)
 
 - **Company Component as Owner**
   - For each company page, conditional rendering is used to check if the current authenticated user is the owner of the comapny.
-  - The company owner will not see the 'Endorse Company' button as the owner is not allowed to endorse their own company. This is also set as a unique_together contraint within the Endorsement data model.
+  - The company owner will not see the 'Endorse Company' button as the owner is not allowed to endorse their own company.
   - If is_owner is true, the owner will see the three dots dropdown menu to enable them to edit or delete the company.
   - Clicking on the edit icon takes the owner to the ComapnyEditForm (see below section)
   - Clicking on the delete icon renders a modal asking the user to confirm that they want to delete the company.
@@ -175,7 +186,6 @@ The Company Page provides a framework for a number of components:
   ![Screenshot of Company component as the company owner](docs/readme-images/company-component-owner.png)
 
   ![Screenshot of delete company modal](docs/readme-images/delete-company-modal.png)
-
 
 - ***Company Contact Details (CompanyContact.js)***
 
@@ -286,19 +296,15 @@ The Company Page provides a framework for a number of components:
   ![Screenshot of comment updated message](docs/readme-images/comment-updated-message.png)
 
   ![Screenshot of delete confirmation modal](docs/readme-images/comment-delete-confirm-modal.png)
-
-     
-
-    
-
     
 
 ### Add Company Form (CompanyCreateForm.js)
+<hr>
 
 - Info
 
 ### Edit Company Form (CompanyEditForm.js)
-
+<hr>
 - Info
 
 ### My ecoPositive Profile ()
