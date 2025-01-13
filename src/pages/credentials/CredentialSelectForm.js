@@ -133,12 +133,7 @@ function CredentialSelectForm({ company, setShowForm }) {
                 ...prevCompanyCredentials,
                 response.data.credentials
             ])
-            
-            setEcoCredentials((prevEcoCredentials) =>
-            [
-                ...prevEcoCredentials,
-                response.data.credentials
-            ]);
+            setShowForm(false);
             window.location.reload();
             toast.success("Credentials added successfully!");
         } catch (err) {
@@ -167,7 +162,7 @@ function CredentialSelectForm({ company, setShowForm }) {
             await axios.patch(`/companies/${company}/`, {
                 credentials: updatedCredentials,
             });
-
+            setShowForm(false);
             window.location.reload();
             toast.success("Credentials removed successfully!");
         } catch (err) {
