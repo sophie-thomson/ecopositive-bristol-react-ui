@@ -225,7 +225,7 @@ function CompanyEditForm() {
                 {message}
                 </Alert>
             ))}
-
+            
             <Form.Group>
                 <InputGroup>
                     <InputGroup.Prepend>
@@ -340,7 +340,6 @@ function CompanyEditForm() {
                             name="name"
                             value={name}
                             onChange={handleChange}
-                            // placeholder="Add your company name"
                             />
                         </Form.Group>
                         {errors?.name?.map((message, idx) => (

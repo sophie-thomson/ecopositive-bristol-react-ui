@@ -1,14 +1,18 @@
-import React, { useState } from "react";
-import { Button, Media, Modal } from "react-bootstrap";
+import React from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import Avatar from "../../components/Avatar";
+
+import { Button, Media, Modal } from "react-bootstrap";
 import styles from "../../styles/Comment.module.css";
 import btnStyles from "../../styles/Button.module.css";
+
+import Avatar from "../../components/Avatar";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { DotsDropdown } from "../../components/DotsDropdown";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import CommentEditForm from "./CommentEditForm";
-import { toast } from "react-toastify";
+
 
 const Comment = (props) => {
     const { 
