@@ -147,7 +147,15 @@ function CompanyPage() {
                                         setCompany={setCompany}
                                         setComments={setComments}
                                     />
-                                ) : null}
+                                ) : (
+                                    <Link className={`${styles.Link} mt-3 pl-2`} to="/signin">
+                                        Please
+                                        <span className={`${styles.Bold}`}>
+                                            &nbsp;sign in&nbsp;
+                                        </span>
+                                        to leave a comment.
+                                    </Link>
+                                )}
                                 {comments.results.length ? (
                                     <InfiniteScroll
                                         children={comments.results.map((comment) => (
@@ -242,7 +250,15 @@ function CompanyPage() {
                                         setCompany={setCompany}
                                         setComments={setComments}
                                     />
-                                ) : null}
+                                ) : (
+                                    <Link className={`${styles.Link} mt-3 pl-2`} to="/signin">
+                                        Please
+                                        <span className={`${styles.Bold}`}>
+                                            &nbsp;sign in&nbsp;
+                                        </span>
+                                        to leave a comment.
+                                    </Link>
+                                )}
                                 {comments.results.length ? (
                                     <InfiniteScroll
                                         children={comments.results.map((comment) => (

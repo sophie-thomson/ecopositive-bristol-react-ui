@@ -138,13 +138,13 @@ Additional links that are visible to authenticated users with admin status when 
       - Group headings relating the the credentials assigned to the company
     - Logo and Company name link to the Company Page (CompanyPage.js) for further information.
 
-![PLACEHOLDER Company list viewable by all users](#)
+    ![PLACEHOLDER Company list viewable by all users](#)
 
 ### Company Page (CompanyPage.js)
 
 - Parent page to display more information on a particular company.
 
-![Screenshot of company page](docs/readme-images/company-page.png)
+    ![Screenshot of company page](docs/readme-images/company-page.png)
 
 The Company Page provides a framework for a number of components:
 
@@ -160,7 +160,7 @@ The Company Page provides a framework for a number of components:
         - Comments Count
     - The company name and logo both link directly to the company's own website in a new tab.
 
-![PLACEHOLDER Company details component](docs/readme-images/company-component.png)
+    ![PLACEHOLDER Company details component](docs/readme-images/company-component.png)
 
 - ***Company Contact Details (CompanyContact.js)***
 
@@ -172,9 +172,9 @@ The Company Page provides a framework for a number of components:
     
     If there are no address / phone / website details conditional rendering displays a message to the user.
 
-![Company contact details component on desktop](docs/readme-images/contact-desktop.png)
+    ![Company contact details component on desktop](docs/readme-images/contact-desktop.png)
 
-![Company contact details component on mobile](docs/readme-images/contact-mobile.png)
+    ![Company contact details component on mobile](docs/readme-images/contact-mobile.png)
 
     
 - ***Credentials Component (Credentials.js)***
@@ -183,7 +183,7 @@ The Company Page provides a framework for a number of components:
     - Credentials are listed under the relevant credential group
     - Each credential features a leaf icon instead of a bullet point to reinforce environmental focus.
 
-![Company credentials component for an authenticated user](docs/readme-images/credentials-authenticated-not-owner.png)
+    ![Company credentials component for an authenticated user](docs/readme-images/credentials-authenticated-not-owner.png)
 
 - ***Add/Edit Credentials Button***
 
@@ -191,31 +191,39 @@ The Company Page provides a framework for a number of components:
     - When clicked, the button updates a showForm state from the default 'false' to 'true', enabling a form to display.
     - When clicked again, the button updates the showForm state back to 'false' so that the form is no longer displayed.
 
-![Add/edit credentials button](docs/readme-images/credentials-owner.png)
+    ![Add/edit credentials button](docs/readme-images/credentials-owner.png)
 
 - ***Credential Select Form (CredentialSelectForm.js)***
 
-    - **Add Credentials**
+  - **Add Credentials**
       - If the current logged in user is also the company owner, they can click on the Add/Edit credentials button to display the form.
       - Credentials are listed in four separate drop down menu input fields under each of the four eco-credential groups.
       - The owner can select as many credentials from the groups lists as they wish by holding down Ctrl.
       - Clicking on 'Add Credentials' adds the credentials to their existing list of credentials.
       - Once submitted, the company page refreshes so that the list of credentials is updated with the latest information and the owner can see that the selected credentials have been added.
-    - **Remove Credentials**
+      - Clicking 'X Cancel' closes the form again.
+
+    ![Select credentials form as owner](docs/readme-images/select-credentials-form.png)
+
+  - **Remove Credentials**
       - The remove credentials form lists all of the credentials currently assigned to that company instance.
       - The company owner can select as many credentials as they wish my holding down Ctrl.
       - Clicking on 'Remove Credentials' removed the credentials from the existing list of credentials.
-      - Clicking 'X Cancel' 
-    
+      - Clicking 'X Cancel' closes the form again.    
 
-![Select credential form as owner](docs/readme-images/select-credentials-form.png)
-![Remove credentials form as company owner](docs/readme-images/remove-credentials-form.png)
+    ![Remove credentials form as company owner](docs/readme-images/remove-credentials-form.png)
 
-- ***Add Comment Form***
+- ***Add Comment Form (CommentCreateForm)***
 
-- ***Comment List***
+  - Authenticated users can comment on any company. 
+  - Company owners are allowed to comment on their own companies so that they can respond to other user comments.
+  - Conditional rendering is used to only display the CommentCreateForm to authenticated users.
 
-    Some information on the Comments List
+  ![Comment Create Form with avatar](docs/readme-images/comment-create-form.png)
+
+- ***Comments***
+
+  - All users are able to view all comments left for a company. 
 
     - **Comment Owner**
     When logged in as the owner of the comment ......
