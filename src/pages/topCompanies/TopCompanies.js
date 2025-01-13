@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+
 import { Card, Col, Container } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import styles from "../../styles/TopCompanies.module.css"
