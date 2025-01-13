@@ -304,11 +304,18 @@ The Company Page provides a framework for a number of components:
 - Any authenticated user can submit a company to be considered for addition to the ecoPositive directory.
 - Conditional rendering will only display the Add My Company link in the AddCompany banner if a user is logged in.
 - A useRedirect(loggedOut) hook at the top of the form function provides defensive authorisation sending unauthenticated users back to the home page if they try to access the from from the url.
-- Clicking on the 
+- Clicking on the Submit Company button creates the company in the api and redirects the user to the associated company detail page so they can add their company credentials.
+- New companies are not approved and so are not included in the home page listing which only displays companies that have been approved for listing.
+- Unapproved companies can be viewed by the company owner so they eco-credentials can be added without having to wait for the approval process to be completed. If they navigate away from the initial company page redirect, the new company will be accessible from their profile page.
+
+![Screenshot of the Add Company Form](docs/readme-images/add-company-form.png)
+
+![Screenshot of new company with no other details added](docs/readme-images/new-company.png)
 
 ### Edit Company Form (CompanyEditForm.js)
 <hr>
-- Info
+
+- Conditional rendering displays  
 
 ### My ecoPositive Profile ()
 

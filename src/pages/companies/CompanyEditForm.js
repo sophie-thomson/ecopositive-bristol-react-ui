@@ -6,7 +6,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { InputGroup } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-// import { useRedirect } from "../../hooks/useRedirect";
+import { useRedirect } from "../../hooks/useRedirect";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -24,10 +24,8 @@ import Asset from "../../components/Asset";
 import { toast } from "react-toastify";
 
 
-
 function CompanyEditForm() {
-    
-    
+    useRedirect("loggedOut");
     const [errors, setErrors] = useState({});
 
     const [companyData, setCompanyData] = useState({
