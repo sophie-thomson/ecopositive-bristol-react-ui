@@ -422,7 +422,9 @@ function CompanyCreateForm() {
                 </Col>
                 <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
                     <Container
-                        className={`${appStyles.Content} ${styles.Contact}`}>{textFields}
+                        className={`${appStyles.Content} ${styles.Contact}`}
+                    >
+                        {textFields}
                     </Container>
                 </Col>
             </Row>

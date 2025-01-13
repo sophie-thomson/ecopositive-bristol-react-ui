@@ -302,7 +302,9 @@ The Company Page provides a framework for a number of components:
 <hr>
 
 - Any authenticated user can submit a company to be considered for addition to the ecoPositive directory.
-- Conditional rendering will only display the Add My Company link in the AddCompany banner if a user is logged in, and a useRedirect hook at the top of the function sends any user not authenticated back to the home page. 
+- Conditional rendering will only display the Add My Company link in the AddCompany banner if a user is logged in.
+- A useRedirect(loggedOut) hook at the top of the form function provides defensive authorisation sending unauthenticated users back to the home page if they try to access the from from the url.
+- Clicking on the 
 
 ### Edit Company Form (CompanyEditForm.js)
 <hr>
