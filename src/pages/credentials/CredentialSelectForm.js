@@ -134,8 +134,10 @@ function CredentialSelectForm({ company, setShowForm }) {
                 response.data.credentials
             ])
             setShowForm(false);
-            window.location.reload();
+            
             toast.success("Credentials added successfully!");
+            window.location.reload();
+            
         } catch (err) {
             toast.error(
                 "Oops! Something went wrong when adding your credentials. Please try again."
@@ -157,14 +159,18 @@ function CredentialSelectForm({ company, setShowForm }) {
     const handleRemove = async () => {
         try {
             const updatedCredentials = companyCredentials.filter(
-                credential => credential !== parseInt(removeCredentials)
+                credential => !removeCredentials.includes(credential)
             );
             await axios.patch(`/companies/${company}/`, {
                 credentials: updatedCredentials,
             });
+
+            setCompanyCredentials(updatedCredentials);
             setShowForm(false);
-            window.location.reload();
+
             toast.success("Credentials removed successfully!");
+            window.location.reload();
+            
         } catch (err) {
             toast.error(
                 "Oops! Something went wrong when removing your credentials. Please try again."
