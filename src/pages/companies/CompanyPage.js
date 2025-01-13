@@ -46,7 +46,7 @@ function CompanyPage() {
     const displayForm = (event) => {
         event.preventDefault();
         setShowForm(prevState => !prevState);
-    }
+    };
 
     useEffect(() => {
         const handleMount = async () => {
@@ -124,6 +124,8 @@ function CompanyPage() {
                                 <div className="d-flex justify-content-center">
                                 <CredentialSelectForm
                                     company={id}
+                                    showForm={showForm}
+                                    setShowForm={setShowForm}
                                     className="mx-3 mt-0 pt-0"
                                 />
                                 </div>
@@ -218,6 +220,8 @@ function CompanyPage() {
                                     <div className="d-flex justify-content-center">
                                     <CredentialSelectForm
                                         company={id}
+                                        showForm={showForm}
+                                        setShowForm={setShowForm}
                                         className="mx-3 mt-0 pt-0"
                                     />
                                     </div>

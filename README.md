@@ -49,7 +49,7 @@ This project leverages a modular approach by creating and reusing various React 
 
     - Browse - Links to 'home' page where all users can view a list of companies with basic info.
     - Sign In - Links to the sign in form
-    - Sign Up - Links to the Sign up form
+    - Sign Up - Links to the sign up form
 
 ![ecoPositive nav bar for logged out users](docs/readme-images/logged-out-navbar.png)
 
@@ -121,21 +121,21 @@ Additional links that are visible to authenticated users with admin status when 
 
 ### Company Directory (CompanyListPage.js)
 
-- A page / view to list of all companies in the directory providing a brief overview of each company.
-- List can be filtered by:
-    - Eco-credentials groups
-    - Endorsed companies
-- A search bar enables the user to search for companies by key word, description or name.
-- Bottomless scrolling so users can view as many companies as they wish and encourages ongoing engagement.
+- The main 'home' page listing all companies in the directory providing a brief snapshot of each company which links to the company details.
+- A search bar enables the user to search for companies by name, excerpt, key words or eco-credential group.
+- Bottomless scrolling so users can view as many companies as they wish and encourages sustained engagement.
 
-![PLACEHOLDER Searchbar for Company Directory](#)
-![PLACEHOLDER Filters for Company Directory](#)
+![Searchbar for Company Directory](docs/readme-images/search-bar.png)
 
 - ***Company List Component (CompanyList.js)***
 
-    - Snapshot of company information including company name, logo and a brief description.
-    - Includes Endorsement Count and Comment Count to provide users with snapshot of company popularity and activity.
-    - Displays group headings for any eco-credentials assigned to that company.
+    - Bootstrap card rendered for each company providing a snapshot including: 
+      - Company name, 
+      - Company logo
+      - Brief description
+      - Endorsement count
+      - Comment count
+      - Group headings relating the the credentials assigned to the company
     - Logo and Company name link to the Company Page (CompanyPage.js) for further information.
 
 ![PLACEHOLDER Company list viewable by all users](#)
@@ -143,6 +143,8 @@ Additional links that are visible to authenticated users with admin status when 
 ### Company Page (CompanyPage.js)
 
 - Parent page to display more information on a particular company.
+
+![Screenshot of company page](docs/readme-images/company-page.png)
 
 The Company Page provides a framework for a number of components:
 
@@ -158,7 +160,7 @@ The Company Page provides a framework for a number of components:
         - Comments Count
     - The company name and logo both link directly to the company's own website in a new tab.
 
-![PLACEHOLDER Company details component](#)
+![PLACEHOLDER Company details component](docs/readme-images/company-component.png)
 
 - ***Company Contact Details (CompanyContact.js)***
 
@@ -170,13 +172,18 @@ The Company Page provides a framework for a number of components:
     
     If there are no address / phone / website details conditional rendering displays a message to the user.
 
+![Company contact details component on desktop](docs/readme-images/contact-desktop.png)
+
+![Company contact details component on mobile](docs/readme-images/contact-mobile.png)
+
+    
 - ***Credentials Component (Credentials.js)***
 
     - Displays any eco-credentials that have been assigned to the company.
     - Credentials are listed under the relevant credential group
     - Each credential features a leaf icon instead of a bullet point to reinforce environmental focus.
 
-![PLACEHOLDER Company credentials component](#)
+![Company credentials component for an authenticated user](docs/readme-images/credentials-authenticated-not-owner.png)
 
 - ***Add/Edit Credentials Button***
 
@@ -184,17 +191,25 @@ The Company Page provides a framework for a number of components:
     - When clicked, the button updates a showForm state from the default 'false' to 'true', enabling a form to display.
     - When clicked again, the button updates the showForm state back to 'false' so that the form is no longer displayed.
 
-![PLACEHOLDER Add/edit credentials button](#)
+![Add/edit credentials button](docs/readme-images/credentials-owner.png)
 
 - ***Credential Select Form (CredentialSelectForm.js)***
 
-    - If the current logged in user is also the company owner, they can click on the Add/Edit credentials button to display the form.
-    - Credentials are listed in four separate drop down menu input fields under each of the four eco-credential groups.
-    - Once a credential has been selected, the owner clicks on 'Add credential' to add the credential to their company. 
-    - A selected credential can also be removed from a company listing by clicking on the 'remove credential' button.
-    - Each time a credential is added / removed the company page refreshes so that the list of credentials is updated with the latest information and the owner can see that the selected credential has been added / removed.
+    - **Add Credentials**
+      - If the current logged in user is also the company owner, they can click on the Add/Edit credentials button to display the form.
+      - Credentials are listed in four separate drop down menu input fields under each of the four eco-credential groups.
+      - The owner can select as many credentials from the groups lists as they wish by holding down Ctrl.
+      - Clicking on 'Add Credentials' adds the credentials to their existing list of credentials.
+      - Once submitted, the company page refreshes so that the list of credentials is updated with the latest information and the owner can see that the selected credentials have been added.
+    - **Remove Credentials**
+      - The remove credentials form lists all of the credentials currently assigned to that company instance.
+      - The company owner can select as many credentials as they wish my holding down Ctrl.
+      - Clicking on 'Remove Credentials' removed the credentials from the existing list of credentials.
+      - Clicking 'X Cancel' 
+    
 
-![PLACEHOLDER Credential select form](#)
+![Select credential form as owner](docs/readme-images/select-credentials-form.png)
+![Remove credentials form as company owner](docs/readme-images/remove-credentials-form.png)
 
 - ***Add Comment Form***
 
@@ -205,7 +220,7 @@ The Company Page provides a framework for a number of components:
     - **Comment Owner**
     When logged in as the owner of the comment ......
 
-    ![PLACEHOLDER Comments list as casual user ](#)
+    ![PLACEHOLDER Comments list as comment owner ](#)
 
     - **Casual User**
     When viewing as a casual user......

@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 
 
 
-function CredentialSelectForm({ company }) {
+function CredentialSelectForm({ company, setShowForm }) {
     
     useRedirect("loggedOut");
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -178,7 +178,7 @@ function CredentialSelectForm({ company }) {
     };
 
     const handleCancel = () => {
-        window.location.reload();
+        setShowForm(false);
     };
 
     return (
