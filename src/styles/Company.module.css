@@ -22,9 +22,16 @@
     font-size: 0.9em;
 }
 
-.Endorse i {
-    font-size: 1.5em;
+.Count {
     color: #d69303;
+    font-size: 1.5em;
+    font-weight: Bold;
+}
+
+.Endorse i {
+    font-size: 1.6em;
+    color: #d69303;
+    margin-bottom: 5px;
 }
 
 .Remove i {

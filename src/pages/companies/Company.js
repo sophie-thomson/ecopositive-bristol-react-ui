@@ -95,7 +95,9 @@ const Company = (props) => {
                 <div className={`${styles.Endorse} d-flex align-items-center`}>
                     <div className="text-muted">
                         <i className="fa-solid fa-award" />
-                        {endorsements_count} 
+                        <span className={styles.Count}>
+                            {endorsements_count}
+                        </span> 
                         <span 
                             className="d-none d-sm-inline"
                         >    

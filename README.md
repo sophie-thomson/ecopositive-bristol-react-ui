@@ -162,6 +162,21 @@ The Company Page provides a framework for a number of components:
 
     ![Screenshot of Company details component](docs/readme-images/company-component.png)
 
+- ***Endorsing a Company***
+  - 
+
+- **Company Component as Owner**
+  - For each company page, conditional rendering is used to check if the current authenticated user is the owner of the comapny.
+  - The company owner will not see the 'Endorse Company' button as the owner is not allowed to endorse their own company. This is also set as a unique_together contraint within the Endorsement data model.
+  - If is_owner is true, the owner will see the three dots dropdown menu to enable them to edit or delete the company.
+  - Clicking on the edit icon takes the owner to the ComapnyEditForm (see below section)
+  - Clicking on the delete icon renders a modal asking the user to confirm that they want to delete the company.
+
+  ![Screenshot of Company component as the company owner](docs/readme-images/company-component-owner.png)
+
+  ![Screenshot of delete company modal](docs/readme-images/delete-company-modal.png)
+
+
 - ***Company Contact Details (CompanyContact.js)***
 
     - Renders company contact details in responsive layout including:
