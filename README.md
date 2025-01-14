@@ -62,12 +62,12 @@ This project leverages a modular approach by creating and reusing various React 
 
 ![ecoPositive favicon in use](docs/readme-images/favicon.png)
 
-***Nav Bar (components/NavBar.js)***
+***Navigation Bar (components/NavBar.js)***
 
 - Navigation bar with clear brand heading and logo for ecoPositive.
 - Includes links for easy navigation around the site. Only links that are accordante with user role and authentication are displayed for better user experience.
 - Fully responsive with navigation links collapsable into a burger 'Menu' icon on smaller deviced to keep layout clean and uncluttered.
-- Links are grey when not in use and coloured green when 'active' to help users identify where they currently are in the site.
+- Links are grey when not in use and coloured yellow when 'active' to help users identify where they currently are in the site.
 - Usage:
     - Used across the entire application at the top level
 
@@ -572,6 +572,11 @@ In addition to the above general authentication levels:
 - The deployed site was passed through [W3C HTML validation](https://validator.w3.org/#validate_by_input) with no errors. Some warning were raised due to the trailing slash used in JSX, so I did not try to resolve these. All other standard HTML code passed with no errors.
 
 ![Screenshot of HTML validation](docs/readme-images/html-validation.png)
+
+- The deployed site was inspected for pageload, SEO and performance using the Lighthouse festure in Google DevTools and received good scores when assessed using an  incognito browser. This indicated a high standard of accessibility, Performance, Best Practices and SEO.
+
+![Screenshot of Lighthouse Validation scores](docs/readme-images/lighthouse-validation.png)
+
 
 - The [Wave compatibility site](https://wave.webaim.org/) didn't seem to be able to view the site to assess it, but accessible design was present throughout the application with alt text and aria code used wherever applicable, and good contrast used for all text against the background. Clear intention and messaging for all buttons and calls to action were used to ensure that the site is easy to navigate and user friendly.
 
