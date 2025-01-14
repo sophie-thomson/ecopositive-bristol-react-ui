@@ -37,7 +37,8 @@ The goal of this REACT user interface is to provide an engaging and user-friendl
   - The background image was opensource and then adapted to be more abstract so it would not distract the user. The colour and brightness of this image give an impression of sunshine and green leaves or grasses which fit with the theme of environmentally friendly and positive businesses.
   ![Background Image used throughout the application](docs/readme-images/bgimage.jpg)
 - Typography
-  - Consistent typography was used throughout the application. The fonts used were:
+  - Consistent typography was used throughout the application. 
+  - [Google Fonts](https://fonts.google.com/) was used to import the font familes used:
     - DMSans - a clean and easy to read sans-serif font used for all general text
     - Roboto Flex - A modern clean font which works well for bolder titels. Used for company names throughout the site.
 - Icons
@@ -171,8 +172,6 @@ Additional links that are visible to authenticated users with admin status when 
     ![Screenshot of a Company List component](docs/readme-images/company-list.png)
     
     ![Screenshot of Company list page viewable by all users](docs/readme-images/list-page.png)
-
-
 
 ### Company Page (CompanyPage.js)
 <hr>
@@ -456,12 +455,51 @@ The Company Page provides a framework for a number of components:
   - Nominate a company - Any user could nominate a company not included in the directory so that the admin can contact the company to tell them they have been nominated by a potential customer and invite them to join the ecoPositive revolution!
   - Credentials Page - a page listing all of the credentials with some information on each and links to further information where available. The Credential model is already set up with this potential development in mind.
 
+### Other Features
+<hr>
+
+- **Infinite Scrolling** 
+  - Both the directory homepage and comments sections utilize infinite scrolling, providing users with a seamless browsing experience. As users scroll through companies or comments, additional content is dynamically loaded, eliminating the need for manual pagination and allowing for smooth navigation through extensive collections of content.
+
+- **Real-time Updates**
+  - The application incorporates real-time updates for various interactions such as comments and endorsements.
+
+- **Responsive Design** 
+  - ecoPositive is built with a responsive design approach, ensuring optimal performance and usability across a range of devices and screen sizes. Whether accessed from a desktop, tablet, or smartphone, users can enjoy a consistent and intuitive experience without sacrificing functionality.
+
+- **Enhanced Security** 
+  - The platform prioritizes user data security with robust encryption protocols and regular security audits. User authentication, data transmission, and storage are handled securely to protect sensitive information and ensure user privacy.
+
+- **Accessibility Features** 
+  - ecoPositive is designed with accessibility in mind, adhering to web accessibility standards to ensure inclusivity for users with disabilities. Features such as screen reader compatibility and alternative text for images are implemented to facilitate an accessible experience for all users.
 
 ## Design Process
 
+- The full process for planning and setting up the project is outlined in the README for the [ecoPositive REST API](https://github.com/sophie-thomson/ecopositive-bristol-drf/)
+
 ### User Stories
+<hr>
+
+- One of the first tasks was to map out user stories for the project which could be mapped against EPICS and broken down into tasks. These were initially worked through in an excel spreadsheet and worked into a rough working order based on the Moments walkthrough project build.
+
+- All user stories can be seen in the [user-stories pdf version of the spreadsheet](docs/readme-images/user-stories.pdf)
+
+![Screenshot of user-stories spreadsheet](docs/readme-images/userstories-screenshot.png)
 
 ### Agile Methodology
+
+- Following the principles outlined in the Code Institute Agile Working units, I created a GitHub Kanban Board and using Project Issues, Milestones and Labels I mapped out the ecoPositive Bristol user stories into:
+   - EPICS (Overarching blocks of work broken down into USER STORY Issues)
+   - To Do (USER STORY issues with acceptance criteria and tasks)
+   - In Progress (USER STORY Issues in progress during each Milestone or 'Sprint')
+   - Completed (USER STORY Issues that have been completed)
+   - BUGS (BUG issues that define a particular issue encountered during the project and how it was resolved)
+
+Full details of the kanban board and further working Agile Processes can be found in the README for the back end [ecoPositive REST API](https://github.com/sophie-thomson/ecopositive-bristol-drf/)
+
+![Screenshot of GitHub Kanban Board](docs/readme-images/kanban-board.png)
+
+- View the live [ecoPositive Bristol Project Kanban Board](https://github.com/users/sophie-thomson/projects/4/)
 
 ### Data
 
@@ -495,14 +533,177 @@ In addition to the above general authentication levels:
 
 ![Company Detail Wireframe Design](docs/readme-images/company-details-laptop.png)
 
-![Placeholder for Profile Page wireframe](#)
-
-![Placeholder for Admin Page wireframe](#)
-
-
-
 ## Testing
 
-### Automated Testing
+### Automated Testing (NavBar.tests.js)
+<hr>
+
+- Based on the guidance provided in the Moment walkthrough, a small number of automated tests using the REACT Testing Library were carries out to ensure that navigation links were rendered as expected for logged in and logged out users.
+- Tests include:
+  -  test 1 & 2 - "renders NavBar" - testing for Sign In and Browse Links being rendered
+  - test 3 - "renders link to the user profile for a logged in user" - testing for My Ecopositive profile link
+  - test 4 & 5 - "renders Sign In and Sign Up buttons again on log out" - testing that the Sign In and Sign Up links render when Sign Out is clicked.
+
+  - Testing was inconsistent and although I was able to pass all tests when first written, at a later date the tests failed. I was unable to discover the reason for this, but have left the tests in place as evidence of knowledge.
+
+  ![Screenshot of successful REACT Tests](docs/readme-images/terminal-react-test-library-navbar.png)
 
 ### Manual Testing
+<hr>
+
+- All aspects of the ecoPositive site were manually tested by walking through each of the features and actions outlined above and using screenshots to document the outcome to confirm it is as expected.
+
+- In addition to the above walkthrough evidence a more systematic approach to testing against each of the user stories in the original spreadsheet was used to check that all key functionality and links are working correctly with no significant errors displaying in the DevTools console.
+
+- Methodical User Story testing was carried out and the results recorded in a Testing spreadsheet. The full document is available 
+
+### Validation
+
+- All javaScript JSX code was built with ESLint installed in the IDE (GitPod) and tested at the end of the build with no errors.
+
+![Screenshot of ESLint results](docs/readme-images/ESLint-passed.png)
+
+- Each file / module of css code was passed through the [W3C Jigsaw CSS Vaidation](https://jigsaw.w3.org/css-validator/#validate_by_input) and all errors resolved so that all code passed with No Errors Found.
+
+![Screenshot of CSS Validation](docs/readme-images/css-validation.png)
+
+- The deployed site was passed through [W3C HTML validation](https://validator.w3.org/#validate_by_input) with no errors. Some warning were raised due to the trailing slash used in JSX, so I did not try to resolve these. All other standard HTML code passed with no errors.
+
+![Screenshot of HTML validation](docs/readme-images/html-validation.png)
+
+- The [Wave compatibility site](https://wave.webaim.org/) didn't seem to be able to view the site to assess it, but accessible design was present throughout the application with alt text and aria code used wherever applicable, and good contrast used for all text against the background. Clear intention and messaging for all buttons and calls to action were used to ensure that the site is easy to navigate and user friendly.
+
+## Technologies Used
+<hr>
+
+* React
+    * Main framework used to create the user interface
+* Node
+    * Package manager used to install dependencies
+* Eslint
+    * Linting tool used in order to check best practice coding standards
+* Heroku
+    * Used for application hosting
+* Git
+    * Version control software
+* Github
+    * Repository used to store base code and docs
+
+## Heroku Deployment
+<hr>
+
+Both the back end Django REST API and this front end REACT UI were deployed to Heroku to test as a published site. The steps to deploy the ecoPositive REST Api are detailed in the [project README](https://github.com/sophie-thomson/ecopositive-bristol-drf/). Deploying the front end UI is a similar process, but there are no ConfigVars required to be set as all the data is managed in the back end. 
+
+The finished program was initially hosted within a repository on Github, and then this Github repository was connected with Heroku, the site through which the program is deployed.
+
+***How to Deploy to Heroku***
+
+The steps to deploy to Heroku are as follows:
+
+- Ensure that all changed to the models have been migrated by typing the following command into the terminal: python3 manage.py makemigrations
+    - If there are migrations made, type the following command into the terminal: python3 manage.py migrate
+- Ensure that you have a file in your program file directory called: requirements.txt 
+- Ensure that all imported libraries that are used in your program are listed in the requirements.txt file.
+    - To add any new libraries, type the following command into the terminal: pip3 freeze > requirements.txt
+- Collect all static files for your project by typing the following command into the terminal: python3 manage.py collectstatic
+    - Type 'yes' if you have already collected static files before. This will overwrite previous files.
+- Ensure you have installed gunicorn and that you have a Procfile file (has no file extension) which includes a single line of code: web: gunicorn tastesensation_project.wsgi
+- Ensure that the DEBUG setting in settings.py is set to 'False'.
+- Use **git add .** then **git commit -m "Commit message."** and then **git push** to push all latest changes into the relevant repository on Github.
+- Go to the [Heroku Website](https://dashboard.heroku.com/) and log in by clicking on the link in the top right corner of the screen.
+    - Sign up for a new Heroku account if needed. 
+    - Please note you will need to add a payment card before Heroku will allow you to deploy any project. 
+    - To do this you will need to click on your account profile in the top right corner and click on Account Settings, then select the Billing tab and follow the instructions to add a credit card. 
+- Once logged in, click on the **'New'** drop down menu at the top of your dashboard and select **'Create new app'**
+- Choose a name for your app ideally using the same conventions as your project name in your Github repository
+- Select the region that you are located in from the options shown
+- Ignore the Add to pipeline... button and click on **'Create app'**
+- Select the **'Settings'** tab at the top of the screen and scroll to the Config Vars section
+- Click on **'Reveal Config Vars'** and if you have an env.py file with confidential information add these as Config Variables here. 
+- This front end project doesn't include any sensitive information as this is handled by the back end API project.
+- Once all Config Vars are in place scroll back to the top of the page and click on the 'Deploy' tab.
+- In the Deployment Method section, select Github and confirm that you want to connect to Github.
+- In the 'Search for a repository to connect to' type in the name of the repository that you want to deploy and click **'Search'**.
+- Click on the **'Connect'** button next to the correct Github repository in the search results
+- Scroll down to select whether you would like to deploy automatically (Heroku will build a new app every time you push new updates through to the Github repository), or whether you would like to deploy manually at less regular intervals when you wish to check or test something.
+- Click on **'Deploy Branch'** (ensure that the branch selected is 'main') to deploy manually when you want to.
+- Heroku will build your app and will then display a 'View' button at the bottom of the screen.
+- Click **'View'** to see your deployed project!
+
+The live link can be found here: [EcoPositive REACT UI](https://ecopositive-react-pp5-0012331e7023.herokuapp.com/)
+
+
+### Gitpod Version Control
+<hr>
+
+This site was created using the Gitpod cloud development environment before being pushed through to a dedicated repository on Github.
+
+The following commands were used througout development to push the code through to the Github repo:
+
+- **git add .** - This command was used to add any tracked files to the staging area.
+- **git commit -m "Commit message."** - This command was used to create a snapshot of the staged area with a short description.
+- **git push** - This command was used to push the committed changes from the current branch to the remote repository on Github.
+
+### Run Locally
+<hr>
+
+Navigate to the GitHub Repository you want to clone to use locally:
+
+- Click on the code drop down button
+- Click on HTTPS
+- Copy the repository link to the clipboard
+- Open your IDE of choice (git must be installed for the next steps)
+- Type git clone copied-git-url into the IDE terminal
+
+The project will now have been cloned on your local machine for use.
+
+Install Dependencies:
+
+```npm install```
+
+Run Application:
+
+```npm start```
+
+### Forking
+
+Most commonly, forks are used to either propose changes to someone else's project or to use someone else's project as a starting point for your own idea.
+
+- Navigate to the GitHub Repository you want to fork.
+
+- On the top right of the page under the header, click the fork button.
+
+- This will create a duplicate of the full project in your GitHub Repository.
+
+## Credits and References
+
+- The CI REACT Advanced Front End walkthrough project 'Moments' was used as a reference when building the inital project in django and the basis for the company, profile and comment pages. 
+- All other pages were built using the knowledge obtained in the walkthrough and many hours trawling through Slack, StackOverflow and a range of other resources.
+
+- In particular the below references were used to define and build this project:
+  - Slack CI Community discussion to use ```nvm install 16 && nvm use 16``` to fix digital envelope errors and enable ```npm start``` command to work.
+  - Some help on adding background images in REACT was found in [YouTube tutorial](https://youtu.be/-atkwqLq1js)
+  - [YouTube Video tutorial](https://youtu.be/56uAgCmf1hE) for mapping api results to drop down menu.
+  - [Bootstrap Docs](https://react-bootstrap-v4.netlify.app/components/forms/#forms-custom-select) for dropdown select styling.
+  - [RapidAPI Guide](https://rapidapi.com/guides/use-axios-put-patch-requests) used as reference to configure axios.patch for appending to Credentials field in CredentialSelectForm.
+  - [Axios Docs](https://axios-http.com/docs/api_intro) Used to inform configuration for patch request to update credentials field of Company model.
+  - [REACT Docs](https://legacy.reactjs.org/docs/lists-and-keys.html) Used to pass company credentials array to a list of names to display on CompanyPage.
+  - [REACT Docs](https://react.dev/learn#conditional-rendering) used as reference to check if credential group is included in the list.
+  - [Stack Overflow discussion](https://stackoverflow.com/questions/62240691/how-to-show-form-after-onclick-event-react) Code adapted for onclick to show form for selecting credentials.
+  - [React docs](https://react.dev/learn/responding-to-events#adding-event-handlers) used for buttons and handling events.
+  - [Stack Overflow discussion](https://react.dev/learn/responding-to-events#adding-event-handlers) on using window.location.reload(); to refresh the company page and view the added credentials in the CompanyPage.
+  - [W3Schools.com](https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp) for Removing spin arrows from number field.
+  - [REACT Docs](https://react.dev/learn/conditional-rendering#conditional-ternary-operator--) conditional rendering using AND && to display lists or message if no credentials set
+  - [MDN web docs_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) How to sort an array from highest to lowest (endorsement_count)
+  - [MDN web docs_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)Using slice() to create topCompaniesList to display.
+  - [Medium Article](https://medium.com/@rutikpanchal121/how-find-filter-and-some-methods-are-useful-in-react-989cd7ab6b89) Using some() to filter profile endorsedCompanies from nested array of objects.
+  - [Stack Overflow discussion](https://stackoverflow.com/questions/50090335/how-handle-multiple-select-form-in-reactjs) How to manage multiple selections in REACT forms with useState hook.
+  - Easy Alert messaging using [npm Toastify](https://www.npmjs.com/package/react-toastify/v/9.0.3).
+  - [React Bootstrap](https://react-bootstrap-v4.netlify.app/components/modal/) for Adding a Bootstrap modal for delete confirmation.
+  - [Codu Beta Tutorial](https://www.codu.co/articles/resizing-images-and-converting-formats-in-django-1rj9kdho) using django-resized to automate size and format of uploaded images.
+
+  ***Media***
+  - The ecoPositive Logo was created using [LogoDesign AI](https://logo.app/login)
+  - The background image was opensource from [pxhere](https://pxhere.com/en/photo/977871)
+  - The Sign in image of the [Sanctum artwork](https://aprb.co.uk/projects/sanctum/) in Bristol has the following licence Details: Creator: Max McClure | Credit: Photography © Max McClure
+  - The Sign up orchard image was open source. 
