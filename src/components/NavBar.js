@@ -70,7 +70,7 @@ const NavBar = () => {
             <NavLink
                 className={styles.NavLink}
                 activeClassName={styles.Active}
-                to={`/staff/`}
+                to="/staff"
             >
                 
                 <i className="fa-solid fa-unlock-keyhole" />

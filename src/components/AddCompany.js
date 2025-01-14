@@ -14,7 +14,7 @@ const AddCompany = () => {
         <Nav>
             <NavLink
                 className={styles.NavLink}
-                activeClassName={styles.Active}
+                activeClassName={styles.ActiveLink}
                 to="/companies/create"
             >
                 <i className="fa-solid fa-building-user" />

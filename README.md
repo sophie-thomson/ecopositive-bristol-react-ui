@@ -26,8 +26,8 @@ The goal of this REACT user interface is to provide an engaging and user-friendl
       - #195829 - Dark green used for company names and headings. Inspired by foliage and nature.
       - #d69303 - Yellow/Orange consistently used to reference endorsements and other accents. A positive colour referencing sunshine.
       - #fafafa - Content background colour - a softer white to complement the other strong tones 
-      - #679cb1 - teal blue - referencing back to the ecoPositive logo  
-      - #d0eee3 - Paler green to complement other stronger colours. Used for credentials.
+      - #679cb1 - Teal blue - referencing back to the ecoPositive logo  
+      - #d0eee3 - Pale green to complement other stronger colours. Used for credentials.
       - #e1e2e0 - Pale grey used to balance out the pages with a lot of content.
       - #d9ecb7 - Pale citron colour to tie in with the brighter tones in the background image.
 
@@ -45,14 +45,14 @@ The goal of this REACT user interface is to provide an engaging and user-friendl
   - Consistent icons and colours were used throughout the application to represent certain elements:
    - Endorsements were represented throughout by the [Fontawesome 'award' icon](https://fontawesome.com/icons/award?f=classic&s=solid)
    - The Comments count was depicted using the [Fontawesome 'comments' icon](https://fontawesome.com/icons/comments?f=classic&s=regular)
-   - All other icons used in the navbar, Add company component and dropdown menu were also imported from the free fontawesome library.
+   - All other icons used in the NavBar, AddCompany and DotsDropdown menu components were also imported from the free fontawesome library.
 
 ## Features
 
-### Site Wide & Reusable React Components
+### Reusable React Components
 <hr>
 
-This project leverages a modular approach by creating and reusing various React components to build the application's front-end efficiently. Below is a list of reusable components, along with descriptions and their usage within the application.
+This project leverages a modular approach by creating and reusing various React components to build the application's front-end efficiently. Below is a list of reusable components and sit wide features, along with descriptions and their usage within the application.
 
 ***Favicon (site wide)***
 
