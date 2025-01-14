@@ -555,7 +555,9 @@ In addition to the above general authentication levels:
 
 - In addition to the above walkthrough evidence a more systematic approach to testing against each of the user stories in the original spreadsheet was used to check that all key functionality and links are working correctly with no significant errors displaying in the DevTools console.
 
-- Methodical User Story testing was carried out and the results recorded in a Testing spreadsheet. The full document is available 
+- Methodical User Story testing was carried out and the results recorded in a Testing spreadsheet. [View the full document](docs/readme-images/user-story-TESTING.pdf) in the attached documents folder.
+
+![Screenshot of user testing spreadsheet](docs/readme-images/user-story-testing-screenshot.png)
 
 ### Validation
 
