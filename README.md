@@ -559,7 +559,24 @@ In addition to the above general authentication levels:
 
 ![Screenshot of user testing spreadsheet](docs/readme-images/user-story-testing-screenshot.png)
 
+### BUGS
+<hr>
+
+- During the build of this project I encountered a number of bugs or issues that required some time to resolve. All significant bugs are recorded in the Kanban Board for this project with full details. These include:
+  - [#60](https://github.com/sophie-thomson/ecopositive-bristol-drf/issues/60#issue-2757886248) Edit Company removing all credentials data during handleSubmit.
+  - [#61](https://github.com/sophie-thomson/ecopositive-bristol-drf/issues/61#issue-2763036434) Endorsement_id undefined and endorsement removal not working.
+  - [#63](https://github.com/sophie-thomson/ecopositive-bristol-drf/issues/63#issue-2781873796) 401 Errors in console log when not logged in.
+
+  ***Unresolved Bugs / Issues***
+  - At the time of deployment there are two known issues with the application that I have been unable to resolve in the available time:
+    - **Feedback Meesages for Endorsement**
+      - When endorsing a company the toast message to confirm endorsement success is not displaying. This appears to be due to re-render issues which have required the use of a full window reload as I was not able to trigger a local reload effectively using local states or useEffect hooks. I am confident that given more time I would be able to resolve this issue.
+    
+    - **Warning "Can't perform a React state update on an unmounted component."** 
+      - This error displays in the console log when the user navigates between pages while content is still being mounted. As this is a warning and does not affect the functionality or security of the application as far as I can tell, I have not resolved these warning message. I would try adding some kind of Cleanup function inside the function for the page causing the error if I had more time. 
+
 ### Validation
+<hr>
 
 - All javaScript JSX code was built with ESLint installed in the IDE (GitPod) and tested at the end of the build with no errors.
 
@@ -595,6 +612,8 @@ In addition to the above general authentication levels:
     * Version control software
 * Github
     * Repository used to store base code and docs
+* Toastify
+    * Library used to manage pop up feedback messages to user
 
 ## Heroku Deployment
 <hr>
